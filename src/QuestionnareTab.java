@@ -8,15 +8,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class QuestionnareTab extends Component {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7594299439504858239L;
 
 
 	public Component getView() {
 		JComponent questionnare = createPanel("My questions");
-		questionnare.setPreferredSize(new Dimension(100, 100));
+		questionnare.setPreferredSize(new Dimension(600, 600));
 		return questionnare;
 	}
 
