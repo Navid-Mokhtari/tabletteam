@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 
@@ -7,7 +8,7 @@ import javax.swing.JPanel;
 
 public class MeasurementTab extends Component {
 	public Component getView() {
-		JComponent measurements = makeTextPanel("My Measurements");
+		JComponent measurements = createPanel("My Measurements");
 		return measurements;
 	}
 
@@ -19,4 +20,10 @@ public class MeasurementTab extends Component {
 		panel.add(filler);
 		return panel;
 	}
+	public JPanel createPanel(String title) {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.add(new JLabel(title), BorderLayout.NORTH);
+        return panel;
+    }
 }
