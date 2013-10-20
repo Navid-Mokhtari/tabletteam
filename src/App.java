@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -17,7 +18,11 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 	private static final long serialVersionUID = 5430513214412853815L;
 	private int bigWeight = 1000;
 
-	private JPanel panel;
+	private JPanel tabPanel;
+	private ConferencePanel conferencePanel;
+	private Tabs tabs;
+	
+	private static JLabel pulseValue;
 
 	public App() {
 		super("eHealth monitoring");
@@ -28,12 +33,19 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 
-		panel = new JPanel(new GridBagLayout());
-		GridBagConstraints constrains = new GridBagConstraints();
-		constrains.insets = new Insets(5, 5, 5, 5);
+		
+		tabPanel = new JPanel(new GridBagLayout());
+		tabs = new Tabs();
+		tabPanel.add(tabs);
 		bigWeight = xSize - 200;
+		
+		//Part for adding conference panel
+		conferencePanel = new  ConferencePanel(new GridBagLayout());
+		
 
-		getContentPane().add(add(panel), BorderLayout.PAGE_START);
+		getContentPane().add(add(tabPanel), BorderLayout.WEST);
+		getContentPane().add(add(conferencePanel), BorderLayout.EAST);
+		
 	}
 
 	public static void main(String[] args) {
