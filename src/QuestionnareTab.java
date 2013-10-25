@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class QuestionnareTab extends Component {
 	private static final long serialVersionUID = -7594299439504858239L;
-
+	
 
 	public Component getView() {
 		JComponent questionnare = createPanel("My questions");
@@ -28,8 +28,7 @@ public class QuestionnareTab extends Component {
 	public JPanel createPanel(String title) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
-        panel.add(new JLabel(title), BorderLayout.NORTH);
+        panel.add(new JLabel(title), BorderLayout.NORTH);   
         return panel;
     }
-
 }
