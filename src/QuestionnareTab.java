@@ -41,7 +41,7 @@ public class QuestionnareTab extends JComponent {
         panel.setLayout(new BorderLayout());
         panel.add(new JLabel(title), BorderLayout.NORTH);   
         JLabel questionOne = new JLabel("Q1: How do you feel today?");
-        questionOne.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+		questionOne.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
         questionOne.add(new JLabel(title), BorderLayout.WEST);
         panel.add(questionOne);
         JButton answerOne = new JButton();
