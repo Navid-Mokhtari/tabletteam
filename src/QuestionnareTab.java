@@ -1,35 +1,51 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
 
-public class QuestionnareTab extends Component {
+public class QuestionnareTab extends JComponent {
 	private static final long serialVersionUID = -7594299439504858239L;
-
+	
 
 	public Component getView() {
 		JComponent questionnare = createPanel("My questions");
 		questionnare.setPreferredSize(new Dimension(600, 600));
 		return questionnare;
 	}
-
-	protected JComponent makeTextPanel(String text) {
-		JPanel panel = new JPanel(false);
-		JLabel filler = new JLabel(text);
-		filler.setHorizontalAlignment(JLabel.CENTER);
-		panel.setLayout(new GridLayout(1, 1));
-		panel.add(filler);
-		return panel;
-	}
+//
+//	protected JComponent makeTextPanel(String text) {
+//		JPanel panel = new JPanel(false);
+//		JLabel filler = new JLabel(text);
+//		filler.setHorizontalAlignment(JLabel.CENTER);
+//		panel.setLayout(new GridLayout(1, 1));
+//		panel.add(filler);
+//		return panel;
+//	}
 	public JPanel createPanel(String title) {
         JPanel panel = new JPanel();
+
+//        GridBagLayout gridBagLayout = new GridBagLayout();
+//        gridBagLayout.columnWidths = new int[]{0};
+//		gridBagLayout.rowHeights = new int[]{0};
+//		gridBagLayout.columnWeights = new double[]{Double.MIN_VALUE};
+//		gridBagLayout.rowWeights = new double[]{Double.MIN_VALUE};
+        
+        
         panel.setLayout(new BorderLayout());
-        panel.add(new JLabel(title), BorderLayout.NORTH);
+        panel.add(new JLabel(title), BorderLayout.NORTH);   
+        JLabel questionOne = new JLabel("Q1: How do you feel today?");
+        questionOne.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
+        questionOne.add(new JLabel(title), BorderLayout.WEST);
+        panel.add(questionOne);
+        JButton answerOne = new JButton();
+        panel.add(new JButton("Next question"), BorderLayout.SOUTH);
         return panel;
     }
-
 }
