@@ -1,3 +1,4 @@
+package app;
 import javax.swing.JTabbedPane;
 
 public class Tabs extends JTabbedPane {
