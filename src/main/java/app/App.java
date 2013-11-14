@@ -4,6 +4,7 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,7 +18,7 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 	private ConferencePanel conferencePanel;
 	private Tabs tabs;
 
-	public App() {
+	public App() throws IOException {
 		super("eHealth monitoring");
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
@@ -36,7 +37,7 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		App initializer = new App();
 		initializer.setVisible(true);
 	}
