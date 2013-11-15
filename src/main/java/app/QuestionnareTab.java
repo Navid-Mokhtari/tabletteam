@@ -8,6 +8,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
@@ -19,13 +24,13 @@ import javax.swing.JRadioButton;
 public class QuestionnareTab extends JComponent {
 	private static final long serialVersionUID = -7594299439504858239L;
 		
-	public Component getView() {
+	public Component getView() throws IOException {
 		JComponent questionnare = createPanel("My questions");
 		questionnare.setPreferredSize(new Dimension(1000, 600));
 		return questionnare;
 	}
 	
-	public JPanel createPanel(String title) {
+	public JPanel createPanel(String title) throws IOException {
         
 		//Panels
 		
@@ -70,8 +75,33 @@ public class QuestionnareTab extends JComponent {
         constrainsQuestionOne.fill = GridBagConstraints.HORIZONTAL;
         constrainsQuestionOne.anchor = GridBagConstraints.FIRST_LINE_START;
         
+        
+        File file = new File("./questions.txt");
+		FileReader fileReader = new FileReader(file);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		StringBuffer stringBuffer = new StringBuffer();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+			stringBuffer.append(line);
+		}
+		fileReader.close();
+		
+		String allquestions = stringBuffer.toString();
+		
+		String[] splitor = allquestions.split(",", 28);
+		
+		String nextQuestion = splitor[25];
+		String previousQuestion = splitor[26];
+		String submit = splitor[27];
+
+		String qOne = splitor[0];
+		String qOneAnsOne = splitor[1];
+		String qOneAnsTwo = splitor[2];
+		String qOneAnsThree = splitor[3];
+		String qOneAnsFour = splitor[4];
+        
         JLabel questionOne;
-        questionOne = new JLabel("Q1: How do you feel today?");
+        questionOne = new JLabel("Q1: " + qOne);
         questionOne.setFont(new Font("Lucida Grande", Font.BOLD, 20));
         constrainsQuestionOne.ipadx = 220;
         constrainsQuestionOne.gridx = 0;
@@ -79,51 +109,37 @@ public class QuestionnareTab extends JComponent {
         panelQuestionOne.add(questionOne, constrainsQuestionOne);
         
         JRadioButton questionOneSelectionOne;
-        questionOneSelectionOne = new JRadioButton("Much worse");
+        questionOneSelectionOne = new JRadioButton(qOneAnsOne);
         constrainsQuestionOne.gridx = 0;
         constrainsQuestionOne.gridy = 1;
         panelQuestionOne.add(questionOneSelectionOne, constrainsQuestionOne);
         
         JRadioButton questionOneSelectionTwo;
-        questionOneSelectionTwo = new JRadioButton("Worse");
+        questionOneSelectionTwo = new JRadioButton(qOneAnsTwo);
         constrainsQuestionOne.gridx = 0;
         constrainsQuestionOne.gridy = 2;
         panelQuestionOne.add(questionOneSelectionTwo, constrainsQuestionOne);
         
         JRadioButton questionOneSelectionThree;
-        questionOneSelectionThree = new JRadioButton("Bit worse");
+        questionOneSelectionThree = new JRadioButton(qOneAnsThree);
         constrainsQuestionOne.gridx = 0;
         constrainsQuestionOne.gridy = 3;
         panelQuestionOne.add(questionOneSelectionThree, constrainsQuestionOne);
         
         JRadioButton questionOneSelectionFour;
-        questionOneSelectionFour = new JRadioButton("Bit better");
+        questionOneSelectionFour = new JRadioButton(qOneAnsFour);
         constrainsQuestionOne.gridx = 0;
         constrainsQuestionOne.gridy = 4;
         panelQuestionOne.add(questionOneSelectionFour, constrainsQuestionOne);
-        
-        JRadioButton questionOneSelectionFive;
-        questionOneSelectionFive = new JRadioButton("Better");
-        constrainsQuestionOne.gridx = 0;
-        constrainsQuestionOne.gridy = 5;
-        panelQuestionOne.add(questionOneSelectionFive, constrainsQuestionOne);
-        
-        JRadioButton questionOneSelectionSix;
-        questionOneSelectionSix = new JRadioButton("Much Better");
-        constrainsQuestionOne.gridx = 0;
-        constrainsQuestionOne.gridy = 6;
-        panelQuestionOne.add(questionOneSelectionSix, constrainsQuestionOne);
         
         ButtonGroup questionOneGroup = new ButtonGroup();
         questionOneGroup.add(questionOneSelectionOne);
         questionOneGroup.add(questionOneSelectionTwo);
         questionOneGroup.add(questionOneSelectionThree);
         questionOneGroup.add(questionOneSelectionFour);
-        questionOneGroup.add(questionOneSelectionFive);
-        questionOneGroup.add(questionOneSelectionSix);
 
         JButton toQuestionTwo;
-        toQuestionTwo = new JButton("Next question");
+        toQuestionTwo = new JButton(nextQuestion);
         constrainsQuestionOne.gridx = 0;
         constrainsQuestionOne.gridy = 8;
         constrainsQuestionOne.ipadx = 100;
@@ -146,8 +162,14 @@ public class QuestionnareTab extends JComponent {
         constrainsQuestionTwo.fill = GridBagConstraints.HORIZONTAL;
         constrainsQuestionTwo.anchor = GridBagConstraints.FIRST_LINE_START;
         
+        String qTwo = splitor[5];
+		String qTwoAnsOne = splitor[6];
+		String qTwoAnsTwo = splitor[7];
+		String qTwoAnsThree = splitor[8];
+		String qTwoAnsFour = splitor[9];
+        
         JLabel questionTwo;
-        questionTwo = new JLabel("Q2: How is your breathing?");
+        questionTwo = new JLabel("Q2: " + qTwo);
         questionTwo.setFont(new Font("Lucida Grande", Font.BOLD, 20));
         constrainsQuestionTwo.ipadx = 180;
         constrainsQuestionTwo.gridx = 0;
@@ -155,51 +177,38 @@ public class QuestionnareTab extends JComponent {
         panelQuestionTwo.add(questionTwo, constrainsQuestionTwo);
         
         JRadioButton questionTwoSelectionOne;
-        questionTwoSelectionOne = new JRadioButton("Much worse");
+        questionTwoSelectionOne = new JRadioButton(qTwoAnsOne);
         constrainsQuestionTwo.gridx = 0;
         constrainsQuestionTwo.gridy = 1;
         panelQuestionTwo.add(questionTwoSelectionOne, constrainsQuestionTwo);
         
         JRadioButton questionTwoSelectionTwo;
-        questionTwoSelectionTwo = new JRadioButton("Worse");
+        questionTwoSelectionTwo = new JRadioButton(qTwoAnsTwo);
         constrainsQuestionTwo.gridx = 0;
         constrainsQuestionTwo.gridy = 2;
         panelQuestionTwo.add(questionTwoSelectionTwo, constrainsQuestionTwo);
         
         JRadioButton questionTwoSelectionThree;
-        questionTwoSelectionThree = new JRadioButton("Bit worse");
+        questionTwoSelectionThree = new JRadioButton(qTwoAnsThree);
         constrainsQuestionTwo.gridx = 0;
         constrainsQuestionTwo.gridy = 3;
         panelQuestionTwo.add(questionTwoSelectionThree, constrainsQuestionTwo);
         
         JRadioButton questionTwoSelectionFour;
-        questionTwoSelectionFour = new JRadioButton("Bit better");
+        questionTwoSelectionFour = new JRadioButton(qTwoAnsFour);
         constrainsQuestionTwo.gridx = 0;
         constrainsQuestionTwo.gridy = 4;
         panelQuestionTwo.add(questionTwoSelectionFour, constrainsQuestionTwo);
         
-        JRadioButton questionTwoSelectionFive;
-        questionTwoSelectionFive = new JRadioButton("Better");
-        constrainsQuestionTwo.gridx = 0;
-        constrainsQuestionTwo.gridy = 5;
-        panelQuestionTwo.add(questionTwoSelectionFive, constrainsQuestionTwo);
-        
-        JRadioButton questionTwoSelectionSix;
-        questionTwoSelectionSix = new JRadioButton("Much Better");
-        constrainsQuestionTwo.gridx = 0;
-        constrainsQuestionTwo.gridy = 6;
-        panelQuestionTwo.add(questionTwoSelectionSix, constrainsQuestionTwo);
         
         ButtonGroup questionTwoGroup = new ButtonGroup();
         questionTwoGroup.add(questionTwoSelectionOne);
         questionTwoGroup.add(questionTwoSelectionTwo);
         questionTwoGroup.add(questionTwoSelectionThree);
         questionTwoGroup.add(questionTwoSelectionFour);
-        questionTwoGroup.add(questionTwoSelectionFive);
-        questionTwoGroup.add(questionTwoSelectionSix);
 
         JButton toQuestionOne;
-        toQuestionOne = new JButton("Previous question");
+        toQuestionOne = new JButton(previousQuestion);
         constrainsQuestionTwo.gridx = 0;
         constrainsQuestionTwo.gridy = 7;
         constrainsQuestionTwo.ipadx = 120;
@@ -216,7 +225,7 @@ public class QuestionnareTab extends JComponent {
 		});
         
         JButton toQuestionThree;
-        toQuestionThree = new JButton("Next question");
+        toQuestionThree = new JButton(nextQuestion);
         constrainsQuestionTwo.gridx = 0;
         constrainsQuestionTwo.gridy = 8;
         constrainsQuestionTwo.ipadx = 120;
@@ -238,8 +247,15 @@ public class QuestionnareTab extends JComponent {
         constrainsQuestionThree.fill = GridBagConstraints.HORIZONTAL;
         constrainsQuestionThree.anchor = GridBagConstraints.FIRST_LINE_START;
         
+        String qThree = splitor[10];
+		String qThreeAnsOne = splitor[11];
+		String qThreeAnsTwo = splitor[12];
+		String qThreeAnsThree = splitor[13];
+		String qThreeAnsFour = splitor[14];
+        
+        
         JLabel questionThree;
-        questionThree = new JLabel("Q3: How is the amount of your sputum?");
+        questionThree = new JLabel("Q3: " + qThree);
         questionThree.setFont(new Font("Lucida Grande", Font.BOLD, 20));
         constrainsQuestionThree.ipadx = 180;
         constrainsQuestionThree.gridx = 0;
@@ -247,51 +263,37 @@ public class QuestionnareTab extends JComponent {
         panelQuestionThree.add(questionThree, constrainsQuestionThree);
         
         JRadioButton questionThreeSelectionOne;
-        questionThreeSelectionOne = new JRadioButton("Much worse");
+        questionThreeSelectionOne = new JRadioButton(qThreeAnsOne);
         constrainsQuestionThree.gridx = 0;
         constrainsQuestionThree.gridy = 1;
         panelQuestionThree.add(questionThreeSelectionOne, constrainsQuestionThree);
         
         JRadioButton questionThreeSelectionTwo;
-        questionThreeSelectionTwo = new JRadioButton("Worse");
+        questionThreeSelectionTwo = new JRadioButton(qThreeAnsTwo);
         constrainsQuestionThree.gridx = 0;
         constrainsQuestionThree.gridy = 2;
         panelQuestionThree.add(questionThreeSelectionTwo, constrainsQuestionThree);
         
         JRadioButton questionThreeSelectionThree;
-        questionThreeSelectionThree = new JRadioButton("Bit worse");
+        questionThreeSelectionThree = new JRadioButton(qThreeAnsThree);
         constrainsQuestionThree.gridx = 0;
         constrainsQuestionThree.gridy = 3;
         panelQuestionThree.add(questionThreeSelectionThree, constrainsQuestionThree);
         
         JRadioButton questionThreeSelectionFour;
-        questionThreeSelectionFour = new JRadioButton("Bit better");
+        questionThreeSelectionFour = new JRadioButton(qThreeAnsFour);
         constrainsQuestionThree.gridx = 0;
         constrainsQuestionThree.gridy = 4;
         panelQuestionThree.add(questionThreeSelectionFour, constrainsQuestionThree);
-        
-        JRadioButton questionThreeSelectionFive;
-        questionThreeSelectionFive = new JRadioButton("Better");
-        constrainsQuestionThree.gridx = 0;
-        constrainsQuestionThree.gridy = 5;
-        panelQuestionThree.add(questionThreeSelectionFive, constrainsQuestionThree);
-        
-        JRadioButton questionThreeSelectionSix;
-        questionThreeSelectionSix = new JRadioButton("Much Better");
-        constrainsQuestionThree.gridx = 0;
-        constrainsQuestionThree.gridy = 6;
-        panelQuestionThree.add(questionThreeSelectionSix, constrainsQuestionThree);
         
         ButtonGroup questionThreeGroup = new ButtonGroup();
         questionThreeGroup.add(questionThreeSelectionOne);
         questionThreeGroup.add(questionThreeSelectionTwo);
         questionThreeGroup.add(questionThreeSelectionThree);
         questionThreeGroup.add(questionThreeSelectionFour);
-        questionThreeGroup.add(questionThreeSelectionFive);
-        questionThreeGroup.add(questionThreeSelectionSix);
-
+        
         JButton backToQuestionTwo;
-        backToQuestionTwo = new JButton("Previous question");
+        backToQuestionTwo = new JButton(previousQuestion);
         constrainsQuestionThree.gridx = 0;
         constrainsQuestionThree.gridy = 7;
         constrainsQuestionThree.ipadx = 120;
@@ -308,7 +310,7 @@ public class QuestionnareTab extends JComponent {
 		});
         
         JButton toQuestionFour;
-        toQuestionFour = new JButton("Next question");
+        toQuestionFour = new JButton(nextQuestion);
         constrainsQuestionThree.gridx = 0;
         constrainsQuestionThree.gridy = 8;
         constrainsQuestionThree.ipadx = 120;
@@ -330,8 +332,12 @@ public class QuestionnareTab extends JComponent {
         constrainsQuestionFour.fill = GridBagConstraints.HORIZONTAL;
         constrainsQuestionFour.anchor = GridBagConstraints.FIRST_LINE_START;
         
+        String qFour = splitor[15];
+		String qFourAnsOne = splitor[16];
+		String qFourAnsTwo = splitor[17];
+        
         JLabel questionFour;
-        questionFour = new JLabel("Q4: How is your sputum colour?");
+        questionFour = new JLabel("Q4: " + qFour);
         questionFour.setFont(new Font("Lucida Grande", Font.BOLD, 20));
         constrainsQuestionFour.ipadx = 180;
         constrainsQuestionFour.gridx = 0;
@@ -339,39 +345,23 @@ public class QuestionnareTab extends JComponent {
         panelQuestionFour.add(questionFour, constrainsQuestionFour);
         
         JRadioButton questionFourSelectionOne;
-        questionFourSelectionOne = new JRadioButton("Brown");
+        questionFourSelectionOne = new JRadioButton(qFourAnsOne);
         constrainsQuestionFour.gridx = 0;
         constrainsQuestionFour.gridy = 1;
         panelQuestionFour.add(questionFourSelectionOne, constrainsQuestionFour);
         
         JRadioButton questionFourSelectionTwo;
-        questionFourSelectionTwo = new JRadioButton("Dark green");
+        questionFourSelectionTwo = new JRadioButton(qFourAnsTwo);
         constrainsQuestionFour.gridx = 0;
         constrainsQuestionFour.gridy = 2;
         panelQuestionFour.add(questionFourSelectionTwo, constrainsQuestionFour);
         
-        JRadioButton questionFourSelectionThree;
-        questionFourSelectionThree = new JRadioButton("Yellow");
-        constrainsQuestionFour.gridx = 0;
-        constrainsQuestionFour.gridy = 3;
-        panelQuestionFour.add(questionFourSelectionThree, constrainsQuestionFour);
-        
-        JRadioButton questionFourSelectionFour;
-        questionFourSelectionFour = new JRadioButton("Clear/White");
-        constrainsQuestionFour.gridx = 0;
-        constrainsQuestionFour.gridy = 4;
-        panelQuestionFour.add(questionFourSelectionFour, constrainsQuestionFour);
-        
-                
         ButtonGroup questionFourGroup = new ButtonGroup();
         questionFourGroup.add(questionFourSelectionOne);
         questionFourGroup.add(questionFourSelectionTwo);
-        questionFourGroup.add(questionFourSelectionThree);
-        questionFourGroup.add(questionFourSelectionFour);
-        
 
         JButton backToQuestionThree;
-        backToQuestionThree = new JButton("Previous question");
+        backToQuestionThree = new JButton(previousQuestion);
         constrainsQuestionFour.gridx = 0;
         constrainsQuestionFour.gridy = 7;
         constrainsQuestionFour.ipadx = 120;
@@ -388,7 +378,7 @@ public class QuestionnareTab extends JComponent {
 		});
         
         JButton toQuestionFive;
-        toQuestionFive = new JButton("Next question");
+        toQuestionFive = new JButton(nextQuestion);
         constrainsQuestionFour.gridx = 0;
         constrainsQuestionFour.gridy = 8;
         constrainsQuestionFour.ipadx = 120;
@@ -410,8 +400,13 @@ public class QuestionnareTab extends JComponent {
         constrainsQuestionFive.fill = GridBagConstraints.HORIZONTAL;
         constrainsQuestionFive.anchor = GridBagConstraints.FIRST_LINE_START;
         
+        String qFive = splitor[18];
+		String qFiveAnsOne = splitor[19];
+		String qFiveAnsTwo = splitor[20];
+		String qFiveAnsThree = splitor[21];
+        
         JLabel questionFive;
-        questionFive = new JLabel("Q5: How are you using your reliever Inhalers/ nebs or oxygen?");
+        questionFive = new JLabel("Q5: " + qFive);
         questionFive.setFont(new Font("Lucida Grande", Font.BOLD, 20));
         constrainsQuestionFive.ipadx = 180;
         constrainsQuestionFive.gridx = 0;
@@ -419,51 +414,30 @@ public class QuestionnareTab extends JComponent {
         panelQuestionFive.add(questionFive, constrainsQuestionFive);
         
         JRadioButton questionFiveSelectionOne;
-        questionFiveSelectionOne = new JRadioButton("Much more than usual");
+        questionFiveSelectionOne = new JRadioButton(qFiveAnsOne);
         constrainsQuestionFive.gridx = 0;
         constrainsQuestionFive.gridy = 1;
         panelQuestionFive.add(questionFiveSelectionOne, constrainsQuestionFive);
         
         JRadioButton questionFiveSelectionTwo;
-        questionFiveSelectionTwo = new JRadioButton("More than usual");
+        questionFiveSelectionTwo = new JRadioButton(qFiveAnsTwo);
         constrainsQuestionFive.gridx = 0;
         constrainsQuestionFive.gridy = 2;
         panelQuestionFive.add(questionFiveSelectionTwo, constrainsQuestionFive);
         
         JRadioButton questionFiveSelectionThree;
-        questionFiveSelectionThree = new JRadioButton("Bit more than usual");
+        questionFiveSelectionThree = new JRadioButton(qFiveAnsThree);
         constrainsQuestionFive.gridx = 0;
         constrainsQuestionFive.gridy = 3;
         panelQuestionFive.add(questionFiveSelectionThree, constrainsQuestionFive);
-        
-        JRadioButton questionFiveSelectionFour;
-        questionFiveSelectionFour = new JRadioButton("Bit less than usual");
-        constrainsQuestionFive.gridx = 0;
-        constrainsQuestionFive.gridy = 4;
-        panelQuestionFive.add(questionFiveSelectionFour, constrainsQuestionFive);
-        
-        JRadioButton questionFiveSelectionFive;
-        questionFiveSelectionFive = new JRadioButton("Less than usual");
-        constrainsQuestionFive.gridx = 0;
-        constrainsQuestionFive.gridy = 5;
-        panelQuestionFive.add(questionFiveSelectionFive, constrainsQuestionFive);
-        
-        JRadioButton questionFiveSelectionSix;
-        questionFiveSelectionSix = new JRadioButton("Much less than usual");
-        constrainsQuestionFive.gridx = 0;
-        constrainsQuestionFive.gridy = 6;
-        panelQuestionFive.add(questionFiveSelectionSix, constrainsQuestionFive);
         
         ButtonGroup questionFiveGroup = new ButtonGroup();
         questionFiveGroup.add(questionFiveSelectionOne);
         questionFiveGroup.add(questionFiveSelectionTwo);
         questionFiveGroup.add(questionFiveSelectionThree);
-        questionFiveGroup.add(questionFiveSelectionFour);
-        questionFiveGroup.add(questionFiveSelectionFive);
-        questionFiveGroup.add(questionFiveSelectionSix);
 
         JButton backToQuestionFour;
-        backToQuestionFour = new JButton("Previous question");
+        backToQuestionFour = new JButton(previousQuestion);
         constrainsQuestionFive.gridx = 0;
         constrainsQuestionFive.gridy = 7;
         constrainsQuestionFive.ipadx = 120;
@@ -480,7 +454,7 @@ public class QuestionnareTab extends JComponent {
 		});
         
         JButton toQuestionSix;
-        toQuestionSix = new JButton("Next question");
+        toQuestionSix = new JButton(nextQuestion);
         constrainsQuestionFive.gridx = 0;
         constrainsQuestionFive.gridy = 8;
         constrainsQuestionFive.ipadx = 120;
@@ -502,8 +476,12 @@ public class QuestionnareTab extends JComponent {
         constrainsQuestionSix.fill = GridBagConstraints.HORIZONTAL;
         constrainsQuestionSix.anchor = GridBagConstraints.FIRST_LINE_START;
         
+        String qSix = splitor[22];
+		String qSixAnsOne = splitor[23];
+		String qSixAnsTwo = splitor[24];
+        
         JLabel questionSix;
-        questionSix = new JLabel("Q6: Are you taking any EXTRA antibiotics or steriods at the moment?");
+        questionSix = new JLabel("Q6: " + qSix);
         questionSix.setFont(new Font("Lucida Grande", Font.BOLD, 20));
         constrainsQuestionSix.ipadx = 180;
         constrainsQuestionSix.gridx = 0;
@@ -511,13 +489,13 @@ public class QuestionnareTab extends JComponent {
         panelQuestionSix.add(questionSix, constrainsQuestionSix);
         
         JRadioButton questionSixSelectionOne;
-        questionSixSelectionOne = new JRadioButton("Yes");
+        questionSixSelectionOne = new JRadioButton(qSixAnsOne);
         constrainsQuestionSix.gridx = 0;
         constrainsQuestionSix.gridy = 1;
         panelQuestionSix.add(questionSixSelectionOne, constrainsQuestionSix);
         
         JRadioButton questionSixSelectionTwo;
-        questionSixSelectionTwo = new JRadioButton("No");
+        questionSixSelectionTwo = new JRadioButton(qSixAnsTwo);
         constrainsQuestionSix.gridx = 0;
         constrainsQuestionSix.gridy = 2;
         panelQuestionSix.add(questionSixSelectionTwo, constrainsQuestionSix);
@@ -530,7 +508,7 @@ public class QuestionnareTab extends JComponent {
                 
 
         JButton backToQuestionFive;
-        backToQuestionFive = new JButton("Previous question");
+        backToQuestionFive = new JButton(previousQuestion);
         constrainsQuestionSix.gridx = 0;
         constrainsQuestionSix.gridy = 7;
         constrainsQuestionSix.ipadx = 120;
@@ -547,7 +525,7 @@ public class QuestionnareTab extends JComponent {
 		});
         
         JButton SubmitQuestionnare;
-        SubmitQuestionnare = new JButton("Submit");
+        SubmitQuestionnare = new JButton(submit);
         constrainsQuestionSix.insets = new Insets(30, 5, 5, 5);
         constrainsQuestionSix.anchor = GridBagConstraints.SOUTH;
         constrainsQuestionSix.gridx = 0;

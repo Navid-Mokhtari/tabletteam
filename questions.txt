@@ -1,0 +1,34 @@
+Hvordan føler du deg i dag?
+,Bedre
+,Som vanlig
+,Verre
+,Mye verre
+
+,Hvordan er pusten din i dag?
+,Bedre
+,Som vanlig
+,Verre
+,Mye verre
+
+,Hvordan er det med mengde slim i dag?
+,Bedre
+,Som vanlig
+,Verre
+,Mye verre
+
+,Hvordan er fargen på slimet i dag?
+,Intet slim/klart/hvitt
+,gult/grønt/brunt
+
+,Bruker du anfallsmedisin/forstøver eller oksygen i dag?
+,Som vanlig
+,Mer enn vanlig
+,Mye mer enn vanlig
+
+,Tar du for noe ekstra antibiotika eller Prednisolon annet enn det som ble bestemt ved utskrivelse?
+,Nei
+,Ja
+
+,Neste spørsmål
+,Forrige spørsmål
+,Send inn
