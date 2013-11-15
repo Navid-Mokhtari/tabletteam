@@ -40,14 +40,14 @@ public class SpirometryConnection implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("1");
-		RemoteDevices remoteDevices = new RemoteDevices();
-		 remoteDevices.RemoveDeviceDiscovery();
-		 remoteDevices.ServiceSearch();
-//		spirometry = startConnection();
+		// RemoteDevices remoteDevices = new RemoteDevices();
+		// remoteDevices.RemoveDeviceDiscovery();
+		// remoteDevices.ServiceSearch();
+		spirometry = startConnection();
 		// spirometry = startWaitingConnection();
-		// if (spirometry.ParseMessage()) {
-		// updateGui();
-		// }
+		if (spirometry.ParseMessage()) {
+			updateGui();
+		}
 
 	}
 
