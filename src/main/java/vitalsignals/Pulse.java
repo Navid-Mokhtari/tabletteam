@@ -3,6 +3,7 @@ package vitalsignals;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 public class Pulse extends Measurements {
 	private String pulse;
 	private String oxigen;
@@ -20,6 +21,9 @@ public class Pulse extends Measurements {
 			pulse = pulseMeasurements.get(17);
 			oxigen = pulseMeasurements.get(19);
 			setDate(getCurrentDate());
+			if (pulse == "-1" || oxigen == "-1") {
+				return false;
+			}
 			return true;
 		} else {
 			return false;
