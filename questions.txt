@@ -29,6 +29,14 @@ Hvordan føler du deg i dag?
 ,Nei
 ,Ja
 
-,Neste spørsmål
-,Forrige spørsmål
+,Svarte du "Ja" i går også?
+,Nei
+,Ja
+
+,Hvilken antibiotika?
+,Dose Prednisolon?
+
+,Gjennomgå svarene!
+,Neste
+,Forrige
 ,Send inn
