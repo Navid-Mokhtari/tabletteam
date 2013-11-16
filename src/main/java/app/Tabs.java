@@ -21,7 +21,8 @@ public class Tabs extends JTabbedPane {
 		super(JTabbedPane.TOP);
 		setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
 		QuestionnareTab questionnareTab = new QuestionnareTab();
-		addTab("Questionnare", questionnareTab.getView());
+		addTab(currentLanguage.getString("Questionnaire"),
+				questionnareTab.getView());
 
 		MeasurementTab measurementTab = new MeasurementTab();
 		 addTab(currentLanguage.getString("Measurements"),
