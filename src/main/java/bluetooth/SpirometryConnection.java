@@ -23,7 +23,7 @@ import javax.swing.SwingUtilities;
 
 import vitalsignals.Spirometry;
 
-public class SpirometryConnection implements Runnable {
+public class SpirometryConnection {
 	private JLabel fev1Value, pefValue, timeSpiroValue;
 	private Spirometry spirometry;
 	StreamConnectionNotifier service;
@@ -37,7 +37,6 @@ public class SpirometryConnection implements Runnable {
 		this.timeSpiroValue = timeSpiroValue;
 	}
 
-	@Override
 	public void run() {
 		System.out.println("1");
 		// RemoteDevices remoteDevices = new RemoteDevices();
@@ -45,6 +44,8 @@ public class SpirometryConnection implements Runnable {
 		// remoteDevices.ServiceSearch();
 		spirometry = startConnection();
 		// spirometry = startWaitingConnection();
+		System.out.println(getClass().getName()
+				+ "Trying to parse spirometry data");
 		if (spirometry.ParseMessage()) {
 			updateGui();
 		}
@@ -136,7 +137,6 @@ public class SpirometryConnection implements Runnable {
 			System.out.println("No response, trying again");
 			System.out.println(e);
 			closeConnection();
-			startConnection();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -148,11 +148,11 @@ public class SpirometryConnection implements Runnable {
 		try {
 			con.close();
 			is.close();
-			service.close();
+			// service.close();
 		} catch (IOException e) {
 			con = null;
 			is = null;
-			service = null;
+			// service = null;
 			System.out.println("Input stream was unavalible");
 		}
 	}

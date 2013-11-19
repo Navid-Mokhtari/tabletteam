@@ -209,7 +209,6 @@ public class MeasurementTab extends Component implements ActionListener {
 		if (e.getSource() == measureSpiro) {
 			SpirometryConnection spirometryConnection = new SpirometryConnection(
 					fev1Value, pefValue, timeSpiroValue);
-//			spirometryConnection.run();
 			spirometryConnection.run();
 		}
 
