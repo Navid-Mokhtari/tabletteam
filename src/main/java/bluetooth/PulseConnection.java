@@ -5,6 +5,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.bluetooth.BluetoothStateException;
+import javax.bluetooth.DiscoveryAgent;
+import javax.bluetooth.LocalDevice;
 import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
@@ -17,6 +20,9 @@ import vitalsignals.Pulse;
 public class PulseConnection implements Runnable {
 	private JLabel pulseLabel, oxigenLabel, timeLabel;
 	private Pulse pulse;
+	StreamConnectionNotifier service;
+	StreamConnection con;
+	InputStream is;
 
 	public PulseConnection(JLabel pulseValue, JLabel oxigenValue, JLabel time) {
 		this.pulseLabel = pulseValue;
@@ -26,6 +32,7 @@ public class PulseConnection implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("1");
 		pulse = startWaitingConnection();
 		if (pulse.ParseMessage()) {
 			updateGui();
@@ -33,27 +40,33 @@ public class PulseConnection implements Runnable {
 	}
 
 	private Pulse startWaitingConnection() {
-		StreamConnectionNotifier service = null;
+		 try {
+		 LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
+		 } catch (BluetoothStateException e2) {
+		 System.out.println("Can't make device discoverable");
+		 e2.printStackTrace();
+		 }
 		try {
+
 			service = (StreamConnectionNotifier) Connector
-					.open("btspp://localhost:" + new UUID(0x1101).toString()
-							+ ";name=pulseService");
+					.open("btspp://localhost:"
+							+ new UUID(0x1101).toString()
+							+ ";name=pulseService;authenticate=false;encrypt=false;");
 		} catch (IOException e1) {
 			System.out.println(e1.toString());
 		}
 
-		StreamConnection con = null;
-
 		try {
+			System.out.println("Accepting and opening Stream Connection");
 			con = (StreamConnection) service.acceptAndOpen();
+			System.out.println(con.toString());
 		} catch (IOException e1) {
 			System.out.println(e1.toString());
 		}
 		List<String> messageList = new ArrayList<String>();
-		InputStream is = null;
 		try {
+			System.out.println("Opening input stream");
 			is = con.openInputStream();
-
 			int lenght = 0;
 			while (lenght < 22) {
 				try {
@@ -68,17 +81,24 @@ public class PulseConnection implements Runnable {
 			System.out.println(messageList.toString());
 		} catch (IOException e1) {
 			System.out.println(e1.toString());
-			e1.printStackTrace();
 		}
+		System.out.print("Closing connection");
+		closeConnection();
+		return new Pulse(messageList);
+
+	}
+
+	private void closeConnection() {
 		try {
 			con.close();
 			is.close();
+			service.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			con = null;
+			is = null;
+			service = null;
 			System.out.println("Input stream was unavalible");
 		}
-		return new Pulse(messageList);
-
 	}
 
 	public void updateGui() {

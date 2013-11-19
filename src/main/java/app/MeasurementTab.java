@@ -20,6 +20,7 @@ import org.apache.http.StatusLine;
 
 import vitalsignals.SendVS;
 import bluetooth.PulseConnection;
+import bluetooth.SpirometryConnection;
 
 import com.sun.corba.se.impl.orbutil.closure.Constant;
 
@@ -40,6 +41,16 @@ public class MeasurementTab extends Component implements ActionListener {
 
 	private JButton measurePulse;
 	private JButton sendPulse;
+
+	private JLabel fev1JLabel;
+	private static JLabel fev1Value;
+	private JLabel pefJLabel;
+	private static JLabel pefValue;
+	private JLabel timeSpiroLabel;
+	private static JLabel timeSpiroValue;
+
+	private JButton measureSpiro;
+	private JButton sendSpiro;
 
 	public Component getView() {
 		JComponent measurements = createPanel("My Measurements");
@@ -101,28 +112,81 @@ public class MeasurementTab extends Component implements ActionListener {
 		measurePulse.addActionListener(this);
 		panel.add(measurePulse, constrains);
 
-		sendPulse = new JButton("Send Pulse");
+		sendPulse = new JButton("Send Pulse Values");
 		constrains.gridx = 1;
 		constrains.gridy = 4;
 		sendPulse.addActionListener(this);
 		panel.add(sendPulse, constrains);
+
+		// Spirometer part
+		fev1JLabel = new JLabel("Fev1:");
+		constrains.gridx = 0;
+		constrains.gridy = 5;
+		panel.add(fev1JLabel, constrains);
+
+		fev1Value = new JLabel("303");
+		constrains.gridx = 1;
+		constrains.gridy = 5;
+		panel.add(fev1Value, constrains);
+
+		pefJLabel = new JLabel("Pef:");
+		constrains.gridx = 0;
+		constrains.gridy = 6;
+		panel.add(pefJLabel, constrains);
+
+		pefValue = new JLabel("124");
+		constrains.gridx = 1;
+		constrains.gridy = 6;
+		panel.add(pefValue, constrains);
+
+		timeSpiroLabel = new JLabel("Time:");
+		constrains.gridx = 0;
+		constrains.gridy = 7;
+		panel.add(timeSpiroLabel, constrains);
+
+		timeSpiroValue = new JLabel("10:11:12");
+		constrains.gridx = 1;
+		constrains.gridy = 7;
+		panel.add(timeSpiroValue, constrains);
+
+		measureSpiro = new JButton("Measure Spirometer");
+		constrains.gridx = 0;
+		constrains.gridy = 8;
+		measureSpiro.addActionListener(this);
+		panel.add(measureSpiro, constrains);
+
+		sendSpiro = new JButton("Send Spirometer Values");
+		constrains.gridx = 1;
+		constrains.gridy = 8;
+		measureSpiro.addActionListener(this);
+		panel.add(sendSpiro, constrains);
 
 		setFonts();
 		return panel;
 	}
 
 	private void setFonts() {
-		statusJLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		statusValue.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		pulseJLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		pulseValue.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		oxigenJLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		oxigenValue.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		timeLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		timeValue.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		sendPulse.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		measurePulse.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
-		pulseValue.setForeground(Color.green);
+		Font Standartfont = new Font("Lucida Grande", Font.PLAIN, 20);
+		statusJLabel.setFont(Standartfont);
+		statusValue.setFont(Standartfont);
+		pulseJLabel.setFont(Standartfont);
+		pulseValue.setFont(Standartfont);
+		oxigenJLabel.setFont(Standartfont);
+		oxigenValue.setFont(Standartfont);
+		timeLabel.setFont(Standartfont);
+		timeValue.setFont(Standartfont);
+		sendPulse.setFont(Standartfont);
+		measurePulse.setFont(Standartfont);
+		fev1JLabel.setFont(Standartfont);
+		fev1Value.setFont(Standartfont);
+		pefJLabel.setFont(Standartfont);
+		pefValue.setFont(Standartfont);
+		timeSpiroLabel.setFont(Standartfont);
+		timeSpiroValue.setFont(Standartfont);
+		sendSpiro.setFont(Standartfont);
+		measureSpiro.setFont(Standartfont);
+
+		// pulseValue.setForeground(Color.green);
 	}
 
 	@Override
@@ -141,6 +205,12 @@ public class MeasurementTab extends Component implements ActionListener {
 			PulseConnection pulseConnection = new PulseConnection(pulseValue,
 					oxigenValue, timeValue);
 			pulseConnection.run();
+		}
+		if (e.getSource() == measureSpiro) {
+			SpirometryConnection spirometryConnection = new SpirometryConnection(
+					fev1Value, pefValue, timeSpiroValue);
+//			spirometryConnection.run();
+			spirometryConnection.run();
 		}
 
 	}
