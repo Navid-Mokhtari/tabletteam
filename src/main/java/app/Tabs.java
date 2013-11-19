@@ -15,6 +15,10 @@ public class Tabs extends JTabbedPane {
 
 		MeasurementTab measurementTab = new MeasurementTab();
 		addTab("Measurements", measurementTab.getView());
+		
+		ChatPanel chatPanel = new ChatPanel();
+		addTab("Chat", chatPanel.getView());
+				
 
 	}
 

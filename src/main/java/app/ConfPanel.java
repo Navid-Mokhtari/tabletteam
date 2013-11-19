@@ -1,19 +1,21 @@
 package app;
-
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ConferencePanel extends JPanel {
+
+public class ConfPanel extends JPanel {
 	
-	 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 975058181186956453L;
 	private static JLabel pulseValue;
 	
 
-	public ConferencePanel(GridBagLayout gridBagLayout) {
+	public ConfPanel(GridBagLayout gridBagLayout) {
 		super(gridBagLayout);
 		
 		pulseValue = new JLabel("Not available");
@@ -22,6 +24,5 @@ public class ConferencePanel extends JPanel {
 		constrains.gridy = 1;
 		this.add(pulseValue, constrains);
 	}
-
-
+	
 }

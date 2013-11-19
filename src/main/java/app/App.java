@@ -16,6 +16,7 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 	private JPanel tabPanel;
 	private ConferencePanel conferencePanel;
 	private Tabs tabs;
+	private ConfPanel confPanel;
 
 	public App() {
 		super("eHealth monitoring");
@@ -30,13 +31,15 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 		tabs = new Tabs();
 		tabPanel.add(tabs);
 		getContentPane().add(add(tabPanel), BorderLayout.WEST);
-
-		conferencePanel = new ConferencePanel(new GridBagLayout());
+			confPanel = new ConfPanel(new GridBagLayout());
+		getContentPane().add(add(confPanel), BorderLayout.CENTER);
+/*	conferencePanel = new ConferencePanel(new GridBagLayout());
 		getContentPane().add(add(conferencePanel), BorderLayout.CENTER);
-
+*/
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[]
+			args) {
 		App initializer = new App();
 		initializer.setVisible(true);
 	}
