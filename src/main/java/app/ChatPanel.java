@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-public class ChatPanel1 extends JComponent {
+public class ChatPanel extends JComponent {
 
 	/**
 	 * 
