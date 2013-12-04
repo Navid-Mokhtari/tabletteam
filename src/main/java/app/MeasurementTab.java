@@ -1,17 +1,23 @@
 package app;
 
+import iipintegration.HttpsPostClient;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,11 +26,12 @@ import org.apache.http.StatusLine;
 
 import vitalsignals.SendVS;
 import bluetooth.PulseConnection;
+import bluetooth.RemoteDevices;
 import bluetooth.SpirometryConnection;
 
 import com.sun.corba.se.impl.orbutil.closure.Constant;
 
-public class MeasurementTab extends Component implements ActionListener {
+public class MeasurementTab extends JComponent implements ActionListener {
 	/**
 	 * 
 	 */
@@ -51,6 +58,8 @@ public class MeasurementTab extends Component implements ActionListener {
 
 	private JButton measureSpiro;
 	private JButton sendSpiro;
+
+	SpirometryConnection spirometryConnection;
 
 	public Component getView() {
 		JComponent measurements = createPanel("My Measurements");
@@ -158,7 +167,7 @@ public class MeasurementTab extends Component implements ActionListener {
 		sendSpiro = new JButton("Send Spirometer Values");
 		constrains.gridx = 1;
 		constrains.gridy = 8;
-		measureSpiro.addActionListener(this);
+		sendSpiro.addActionListener(this);
 		panel.add(sendSpiro, constrains);
 
 		setFonts();
@@ -192,25 +201,59 @@ public class MeasurementTab extends Component implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sendPulse) {
-			SendVS sendVitalSignal = new SendVS();
-			StatusLine statusLine = null;
-			try {
-				statusLine = sendVitalSignal.SendTestSignal();
-				statusValue.setText("Response:" + statusLine.getStatusCode());
-			} catch (ClientProtocolException e1) {
-				statusValue.setText("Was unable to send data");
-			}
+			// SendVS sendVS = new SendVS();
+			// StatusLine statusLine = null;
+			// try {
+			// statusLine = sendVS.SendTestSignal(oxigenValue.getText(),
+			// pulseValue.getText(),timeValue.getText());
+			// statusValue.setText("Response:" + statusLine.getStatusCode());
+			// } catch (ClientProtocolException e1) {
+			// statusValue.setText("Was unable to send data");
+			// }
+			HttpsPostClient httpsPostClient = new HttpsPostClient();
+			httpsPostClient.testPostHttps(null);
 		}
 		if (e.getSource() == measurePulse) {
 			PulseConnection pulseConnection = new PulseConnection(pulseValue,
 					oxigenValue, timeValue);
+
 			pulseConnection.run();
 		}
 		if (e.getSource() == measureSpiro) {
-			SpirometryConnection spirometryConnection = new SpirometryConnection(
-					fev1Value, pefValue, timeSpiroValue);
-			spirometryConnection.run();
+			spirometryConnection = new SpirometryConnection(fev1Value,
+					pefValue, timeSpiroValue);
+			spirometryConnection.measure();
+			// CreateAndShowProgress();
+		}
+		if (e.getSource() == sendSpiro) {
+			// SendVS sendVS = new SendVS();
+			// StatusLine statusLine = null;
+			// try {
+			// statusLine = sendVS.SendTestSignal(oxigenValue.toString(),
+			// pulseValue.toString());
+			// statusValue.setText("Response:" + statusLine.getStatusCode());
+			// } catch (ClientProtocolException e1) {
+			// statusValue.setText("Was unable to send data");
+			// }
+			// RemoteDevices remoteDevices = new RemoteDevices();
+			// remoteDevices.RemoveDeviceDiscovery();
+			// remoteDevices.ServiceSearch();
 		}
 
+	}
+
+	private void CreateAndShowProgress() {
+		JFrame frame = new JFrame("ProgressBar");
+		frame.setPreferredSize(new Dimension(100, 100));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// Create and set up the content pane.
+		JComponent newContentPane = new ProgressMonitor(this,
+				spirometryConnection);
+		newContentPane.setOpaque(true);
+		frame.setContentPane(newContentPane);
+
+		// Display the window.
+		frame.pack();
+		frame.setVisible(true);
 	}
 }

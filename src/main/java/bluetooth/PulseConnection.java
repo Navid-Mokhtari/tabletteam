@@ -17,35 +17,37 @@ import javax.swing.SwingUtilities;
 
 import vitalsignals.Pulse;
 
-public class PulseConnection implements Runnable {
+public class PulseConnection {
 	private JLabel pulseLabel, oxigenLabel, timeLabel;
 	private Pulse pulse;
 	StreamConnectionNotifier service;
 	StreamConnection con;
 	InputStream is;
 
+	// Pulse
 	public PulseConnection(JLabel pulseValue, JLabel oxigenValue, JLabel time) {
 		this.pulseLabel = pulseValue;
 		this.oxigenLabel = oxigenValue;
 		this.timeLabel = time;
 	}
 
-	@Override
 	public void run() {
 		System.out.println("1");
 		pulse = startWaitingConnection();
+		System.out.println("Trying to parse message");
 		if (pulse.ParseMessage()) {
+			System.out.println("Message parsed, trying to update GUI");
 			updateGui();
 		}
 	}
 
 	private Pulse startWaitingConnection() {
-		 try {
-		 LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
-		 } catch (BluetoothStateException e2) {
-		 System.out.println("Can't make device discoverable");
-		 e2.printStackTrace();
-		 }
+//		try {
+//			LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
+//		} catch (BluetoothStateException e2) {
+//			System.out.println("Can't make device discoverable");
+//			e2.printStackTrace();
+//		}
 		try {
 
 			service = (StreamConnectionNotifier) Connector
@@ -86,6 +88,48 @@ public class PulseConnection implements Runnable {
 		closeConnection();
 		return new Pulse(messageList);
 
+	}
+
+	private Pulse startConnection() {
+		System.out.println("Trying to open stream connection");
+		// StreamConnection conn = (StreamConnection) Connector
+		// .open("btspp://001C050064D8:1");
+		try {
+			con = (StreamConnection) Connector.open("btspp://001C050064D8:1",
+					1, true);
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		System.out.println("Trying to open input stream");
+		try {
+			is = con.openInputStream();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		List<String> messageList = new ArrayList<String>();
+		try {
+			System.out.println("Opening input stream");
+			is = con.openInputStream();
+			int lenght = 0;
+			while (lenght < 22) {
+				try {
+					String temp = String.valueOf(is.read());
+					messageList.add(temp);
+					System.out.println(temp);
+				} catch (IOException e) {
+					System.out.println(e.toString());
+				}
+				lenght++;
+			}
+			System.out.println(messageList.toString());
+		} catch (IOException e1) {
+			System.out.println(e1.toString());
+		}
+		System.out.print("Closing connection");
+		closeConnection();
+		return new Pulse(messageList);
 	}
 
 	private void closeConnection() {

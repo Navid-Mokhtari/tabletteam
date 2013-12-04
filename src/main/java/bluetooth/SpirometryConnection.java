@@ -37,7 +37,8 @@ public class SpirometryConnection {
 		this.timeSpiroValue = timeSpiroValue;
 	}
 
-	public void run() {
+	public void measure() {
+		
 		System.out.println("1");
 		// RemoteDevices remoteDevices = new RemoteDevices();
 		// remoteDevices.RemoveDeviceDiscovery();
