@@ -4,7 +4,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.rmi.CORBA.Tie;
+
 public class Pulse extends Measurements {
+	public Pulse() {
+	}
+
+	public Pulse(String pulse, String oxigen, String time)
+	{
+		this.pulse=pulse;
+		this.oxigen=oxigen;
+	}
+
 	private String pulse;
 	private String oxigen;
 	private List<String> pulseMeasurements;

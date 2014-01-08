@@ -44,24 +44,23 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import vitalsignals.Pulse;
+import vitalsignals.Spirometry;
 
 public class HttpsPostClient {
 
-	private static String infoId = "info:761538126";
-	private static String deviceId = "dev:862109402";
-	private static String description = "Spo2 information channel";
-	private static String parameterId = "aParameterId";
-	private static final String URL = "https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/"
-			+ infoId;
+	private String URL = "https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/";
 
 	/**
 	 * @param args
 	 *            the command line arguments
 	 */
-	public void testPostHttps(Pulse pulse) {
+	public void SendPulseHttps(Pulse pulse) {
 		// TODO code application logic here
 
 		// HttpClient httpclient = new DefaultHttpClient();
+
+		String infoId = "info:761538126";
+		URL += infoId;
 		HttpClient httpclient = getNewHttpClient();
 		HttpPost httppost = new HttpPost(URL);
 		HttpResponse response = null;
@@ -73,7 +72,51 @@ public class HttpsPostClient {
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 					20);
-			nameValuePairs.add(new BasicNameValuePair("pulse", "69"));
+			nameValuePairs
+					.add(new BasicNameValuePair("pulse", pulse.getPulse()));
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			response = httpclient.execute(httppost);
+
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+
+		System.out.println("TESTING: " + response.getStatusLine());
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputStream is = response.getEntity().getContent();
+			Document doc = db.parse(is);
+			Element root2 = doc.getDocumentElement();
+			printAllNodes(root2);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+	}
+
+	public void SendSpirometerHttps(Spirometry spirometry) {
+		String infoId = "info:460491730";
+		URL += infoId;
+		HttpClient httpclient = getNewHttpClient();
+		HttpPost httppost = new HttpPost(URL);
+		HttpResponse response = null;
+		try {
+			// Date currentDate = new Date();
+			// SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+			// "yyyy-MM-dd'T'HH:mm:ss");
+
+			// Add your data
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+					20);
+			nameValuePairs.add(new BasicNameValuePair("FEV1", spirometry
+					.getFev1()));
+			nameValuePairs.add(new BasicNameValuePair("PEF", spirometry
+					.getPef()));
+//			nameValuePairs.add(new BasicNameValuePair("time", spirometry
+//					.getDate().toString()));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
 

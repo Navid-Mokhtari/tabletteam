@@ -24,12 +24,15 @@ import javax.swing.JPanel;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.StatusLine;
 
+import vitalsignals.Pulse;
 import vitalsignals.SendVS;
+import vitalsignals.Spirometry;
 import bluetooth.PulseConnection;
 import bluetooth.RemoteDevices;
 import bluetooth.SpirometryConnection;
 
 import com.sun.corba.se.impl.orbutil.closure.Constant;
+import com.sun.org.apache.bcel.internal.generic.PUSH;
 
 public class MeasurementTab extends JComponent implements ActionListener {
 	/**
@@ -211,7 +214,9 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			// statusValue.setText("Was unable to send data");
 			// }
 			HttpsPostClient httpsPostClient = new HttpsPostClient();
-			httpsPostClient.testPostHttps(null);
+			Pulse pulse = new Pulse(pulseValue.getText(),
+					oxigenValue.getText(), timeValue.getText());
+			httpsPostClient.SendPulseHttps(pulse);
 		}
 		if (e.getSource() == measurePulse) {
 			PulseConnection pulseConnection = new PulseConnection(pulseValue,
@@ -226,6 +231,10 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			// CreateAndShowProgress();
 		}
 		if (e.getSource() == sendSpiro) {
+			HttpsPostClient httpsPostClient = new HttpsPostClient();
+			Spirometry spirometry = new Spirometry(fev1Value.getText(),
+					pefValue.getText(), timeSpiroValue.getText());
+			httpsPostClient.SendSpirometerHttps(spirometry);
 			// SendVS sendVS = new SendVS();
 			// StatusLine statusLine = null;
 			// try {
@@ -238,6 +247,7 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			// RemoteDevices remoteDevices = new RemoteDevices();
 			// remoteDevices.RemoveDeviceDiscovery();
 			// remoteDevices.ServiceSearch();
+
 		}
 
 	}

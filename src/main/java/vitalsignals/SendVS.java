@@ -44,13 +44,6 @@ public class SendVS {
 		valuePairs.add(new BasicNameValuePair("pulse", pulse));
 		valuePairs.add(new BasicNameValuePair("datetime", time));
 
-		// for Spirometer
-		// valuePairs.add(new BasicNameValuePair("patientId", "1234"));
-		// valuePairs.add(new BasicNameValuePair("equipmentId", "4444444"));
-		// valuePairs.add(new BasicNameValuePair("tabletId", "1234"));
-		// valuePairs.add(new BasicNameValuePair("oxy", "69"));
-		// valuePairs.add(new BasicNameValuePair("pulse", "96"));
-		// valuePairs.add(new BasicNameValuePair("datetime", "101020"));
 		try {
 			httppost.setEntity(new UrlEncodedFormEntity(valuePairs));
 		} catch (UnsupportedEncodingException e) {

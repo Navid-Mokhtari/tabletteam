@@ -13,6 +13,11 @@ public class Spirometry extends Measurements {
 			greenZone, yellowZone, orangeZone, originalDate, swNumber,
 			goodTest;
 
+	public Spirometry(String fev1, String pef,String time) {
+		this.fev1 = fev1;
+		this.pef = pef;
+	}
+
 	private List<String> message = new ArrayList<String>();
 	private String deviceLetter;
 	private String messageId;
