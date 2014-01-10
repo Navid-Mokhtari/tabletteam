@@ -48,7 +48,11 @@ import vitalsignals.Spirometry;
 
 public class HttpsPostClient {
 
-	private String URL = "https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/";
+	// Dafferianto's IIP
+	// private String URL =
+	// "https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/";
+	// Devoteam IIP
+	private String URL = "https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/";
 
 	/**
 	 * @param args
@@ -59,7 +63,8 @@ public class HttpsPostClient {
 
 		// HttpClient httpclient = new DefaultHttpClient();
 
-		String infoId = "info:761538126";
+		// String infoId = "info:761538126";
+		String infoId = "info:719089990";
 		URL += infoId;
 		HttpClient httpclient = getNewHttpClient();
 		HttpPost httppost = new HttpPost(URL);
@@ -74,6 +79,7 @@ public class HttpsPostClient {
 					20);
 			nameValuePairs
 					.add(new BasicNameValuePair("pulse", pulse.getPulse()));
+			nameValuePairs.add(new BasicNameValuePair("patientId", "1234567"));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
 
@@ -98,7 +104,8 @@ public class HttpsPostClient {
 	}
 
 	public void SendSpirometerHttps(Spirometry spirometry) {
-		String infoId = "info:460491730";
+		// String infoId = "info:460491730";
+		String infoId = "info:653788878";
 		URL += infoId;
 		HttpClient httpclient = getNewHttpClient();
 		HttpPost httppost = new HttpPost(URL);
@@ -115,8 +122,9 @@ public class HttpsPostClient {
 					.getFev1()));
 			nameValuePairs.add(new BasicNameValuePair("PEF", spirometry
 					.getPef()));
-//			nameValuePairs.add(new BasicNameValuePair("time", spirometry
-//					.getDate().toString()));
+			nameValuePairs.add(new BasicNameValuePair("patientId", "1234567"));
+			// nameValuePairs.add(new BasicNameValuePair("time", spirometry
+			// .getDate().toString()));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
 
