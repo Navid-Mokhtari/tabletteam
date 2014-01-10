@@ -1029,7 +1029,8 @@ public class QuestionnareTab extends JComponent {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				HttpClient httpClient = getNewHttpClient();
-		    	HttpPost httpPost = new HttpPost("https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/info:375745058");
+//		    	HttpPost httpPost = new HttpPost("https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/info:375745058");
+		    	HttpPost httpPost = new HttpPost("https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/info:634752814");
 		    	HttpResponse response = null;
 		    	try {
 		    		
@@ -1130,6 +1131,7 @@ public class QuestionnareTab extends JComponent {
 		        	params.add(new BasicNameValuePair("q_5", sQuestionFiveAnswer));
 		        	params.add(new BasicNameValuePair("q_6", sQuestionSixAnswer));
 		        	params.add(new BasicNameValuePair("q_7", sQuestionSevenAnswer));
+		        	params.add(new BasicNameValuePair("patientId", "1234567"));
 		            
 		        	httpPost.setEntity(new UrlEncodedFormEntity(params));
 		            response = httpClient.execute(httpPost);
