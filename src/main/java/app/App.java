@@ -42,6 +42,8 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 	}
 
 	public static void main(String[] args) throws IOException {
+		HealthProperties healthProperties = new HealthProperties();
+		healthProperties.loadProperties();
 		App initializer = new App();
 		initializer.setVisible(true);
 	}

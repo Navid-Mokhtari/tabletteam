@@ -2,37 +2,24 @@ package app;
 
 import iipintegration.HttpsPostClient;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.StatusLine;
-
 import vitalsignals.Pulse;
-import vitalsignals.SendVS;
 import vitalsignals.Spirometry;
 import bluetooth.PulseConnection;
-import bluetooth.RemoteDevices;
 import bluetooth.SpirometryConnection;
-
-import com.sun.corba.se.impl.orbutil.closure.Constant;
-import com.sun.org.apache.bcel.internal.generic.PUSH;
 
 public class MeasurementTab extends JComponent implements ActionListener {
 	/**
@@ -216,6 +203,7 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			HttpsPostClient httpsPostClient = new HttpsPostClient();
 			Pulse pulse = new Pulse(pulseValue.getText(),
 					oxigenValue.getText(), timeValue.getText());
+//			sendPulse.setText("Sending measurements...");
 			httpsPostClient.SendPulseHttps(pulse);
 		}
 		if (e.getSource() == measurePulse) {

@@ -8,10 +8,8 @@ import javax.swing.JTabbedPane;
 
 public class Tabs extends JTabbedPane {
 
-	/**
-	 * 
-	 */
-	Locale currentLocale = Locale.forLanguageTag("no");
+	String currentLang = HealthProperties.getProperty("currentLanguage");
+	Locale currentLocale = Locale.forLanguageTag(currentLang);
 	ResourceBundle currentLanguage = ResourceBundle.getBundle("language",
 			currentLocale);
 

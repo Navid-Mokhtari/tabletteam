@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -43,6 +44,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import app.HealthProperties;
 import vitalsignals.Pulse;
 import vitalsignals.Spirometry;
 
@@ -52,19 +54,24 @@ public class HttpsPostClient {
 	// private String URL =
 	// "https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/";
 	// Devoteam IIP
-	private String URL = "https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/";
+	// private String URL =
+	// "https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/";
+	private String username = HealthProperties.getProperty("iipUsername");
+	private String password = HealthProperties.getProperty("iipPassword");
+	private String iipUrl = HealthProperties.getProperty("iipUrl");
+	private String URL = "https://" + username + ":" + password + "@" + iipUrl;
+	private String pulseChannel = HealthProperties.getProperty("pulseChannel");
+	private String spirometerChannel = HealthProperties
+			.getProperty("spirometerChannel");
+	private String oxygenChannel = HealthProperties
+			.getProperty("oxygenChannel");
+	private String patientId = HealthProperties.getProperty("patientId");
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
 	public void SendPulseHttps(Pulse pulse) {
-		// TODO code application logic here
 
-		// HttpClient httpclient = new DefaultHttpClient();
+		SendOxygen(pulse);
 
-		// String infoId = "info:761538126";
-		String infoId = "info:719089990";
+		String infoId = pulseChannel;
 		URL += infoId;
 		HttpClient httpclient = getNewHttpClient();
 		HttpPost httppost = new HttpPost(URL);
@@ -79,7 +86,7 @@ public class HttpsPostClient {
 					20);
 			nameValuePairs
 					.add(new BasicNameValuePair("pulse", pulse.getPulse()));
-			nameValuePairs.add(new BasicNameValuePair("patientId", "1234567"));
+			nameValuePairs.add(new BasicNameValuePair("patientId", patientId));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
 
@@ -89,7 +96,7 @@ public class HttpsPostClient {
 			// TODO Auto-generated catch block
 		}
 
-		System.out.println("TESTING: " + response.getStatusLine());
+		System.out.println("\nTesting sending Pulse: " + response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -104,8 +111,7 @@ public class HttpsPostClient {
 	}
 
 	public void SendSpirometerHttps(Spirometry spirometry) {
-		// String infoId = "info:460491730";
-		String infoId = "info:653788878";
+		String infoId = spirometerChannel;
 		URL += infoId;
 		HttpClient httpclient = getNewHttpClient();
 		HttpPost httppost = new HttpPost(URL);
@@ -134,7 +140,51 @@ public class HttpsPostClient {
 			// TODO Auto-generated catch block
 		}
 
-		System.out.println("TESTING: " + response.getStatusLine());
+		System.out.println("Testing sending Spirometer: " + response.getStatusLine());
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputStream is = response.getEntity().getContent();
+			Document doc = db.parse(is);
+			Element root2 = doc.getDocumentElement();
+			printAllNodes(root2);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
+	}
+
+	private void SendOxygen(Pulse pulse) {
+
+		System.out.println(URL);
+
+		// String infoId = "info:761538126";
+		String infoId = oxygenChannel;
+		URL += infoId;
+		HttpClient httpclient = getNewHttpClient();
+		HttpPost httppost = new HttpPost(URL);
+		HttpResponse response = null;
+		try {
+			// Date currentDate = new Date();
+			// SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+			// "yyyy-MM-dd'T'HH:mm:ss");
+
+			// Add your data
+			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
+					20);
+			nameValuePairs
+					.add(new BasicNameValuePair("spo2", pulse.getOxigen()));
+			nameValuePairs.add(new BasicNameValuePair("patientId", patientId));
+			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+			response = httpclient.execute(httppost);
+
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}
+
+		System.out.println("Testing sending Oxygen: " + response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
