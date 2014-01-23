@@ -23,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
@@ -54,7 +55,8 @@ public class QuestionnareTab extends JComponent {
 	
 	public JPanel createPanel(String title) throws IOException {
         
-		Locale currentLocale = Locale.forLanguageTag("no");
+		String currentLang = HealthProperties.getProperty("currentLanguage");
+		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		final ResourceBundle currentLanguage = ResourceBundle.getBundle("language", currentLocale);
 		
 		//Panels
