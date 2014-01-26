@@ -12,7 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.KeyStore;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -1031,9 +1033,17 @@ public class QuestionnareTab extends JComponent {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				HttpClient httpClient = getNewHttpClient();
+				String username = HealthProperties.getProperty("iipUsername");
+				String password = HealthProperties.getProperty("iipPassword");
+				String iipUrl = HealthProperties.getProperty("iipUrl");
+				String questionnaireChannel = HealthProperties.getProperty("questionnaireChannel");
+				String patientId = HealthProperties.getProperty("patientId");
+				String URL = "https://" + username + ":" + password + "@" + iipUrl + questionnaireChannel;
 //		    	HttpPost httpPost = new HttpPost("https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/info:375745058");
-		    	HttpPost httpPost = new HttpPost("https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/info:634752814");
+//		    	HttpPost httpPost = new HttpPost("https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/info:634752814");
+		    	HttpPost httpPost = new HttpPost(URL);
 		    	HttpResponse response = null;
+		    	
 		    	try {
 		    		
 		    		//Question One
@@ -1123,6 +1133,12 @@ public class QuestionnareTab extends JComponent {
 		    			sQuestionSevenAnswer = "4";
 		    		}
 		    		
+		    		//Date
+		    		
+//		    		Date currentDate = new Date();
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+					String timeAndDate = simpleDateFormat.format(new Date());
+		    		
 		    		//Array to send to IIP
 		    		
 		    		List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -1133,7 +1149,8 @@ public class QuestionnareTab extends JComponent {
 		        	params.add(new BasicNameValuePair("q_5", sQuestionFiveAnswer));
 		        	params.add(new BasicNameValuePair("q_6", sQuestionSixAnswer));
 		        	params.add(new BasicNameValuePair("q_7", sQuestionSevenAnswer));
-		        	params.add(new BasicNameValuePair("patientId", "1234567"));
+		        	params.add(new BasicNameValuePair("patientId", patientId));
+		        	params.add(new BasicNameValuePair("dateTime", timeAndDate));
 		            
 		        	httpPost.setEntity(new UrlEncodedFormEntity(params));
 		            response = httpClient.execute(httpPost);
