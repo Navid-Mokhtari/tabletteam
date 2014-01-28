@@ -45,6 +45,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import app.HealthProperties;
+import app.Utilities;
 import vitalsignals.Pulse;
 import vitalsignals.Spirometry;
 
@@ -68,13 +69,11 @@ public class HttpsPostClient {
 	private String patientId = HealthProperties.getProperty("patientId");
 
 	public void SendPulseHttps(Pulse pulse) {
-
-		SendOxygen(pulse);
-
+		System.out.println("Trying to send pulse values");
 		String infoId = pulseChannel;
-		URL += infoId;
+		String pulseUrl = URL + infoId;
 		HttpClient httpclient = getNewHttpClient();
-		HttpPost httppost = new HttpPost(URL);
+		HttpPost httppost = new HttpPost(pulseUrl);
 		HttpResponse response = null;
 		try {
 			// Date currentDate = new Date();
@@ -89,14 +88,14 @@ public class HttpsPostClient {
 			nameValuePairs.add(new BasicNameValuePair("patientId", patientId));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
-
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
 
-		System.out.println("\nTesting sending Pulse: " + response.getStatusLine());
+		System.out.println("\nTesting sending Pulse: "
+				+ response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -107,14 +106,13 @@ public class HttpsPostClient {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-
 	}
 
 	public void SendSpirometerHttps(Spirometry spirometry) {
 		String infoId = spirometerChannel;
-		URL += infoId;
+		String spirometerUrl = URL + infoId;
 		HttpClient httpclient = getNewHttpClient();
-		HttpPost httppost = new HttpPost(URL);
+		HttpPost httppost = new HttpPost(spirometerUrl);
 		HttpResponse response = null;
 		try {
 			// Date currentDate = new Date();
@@ -140,7 +138,8 @@ public class HttpsPostClient {
 			// TODO Auto-generated catch block
 		}
 
-		System.out.println("Testing sending Spirometer: " + response.getStatusLine());
+		System.out.println("Testing sending Spirometer: "
+				+ response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -154,15 +153,13 @@ public class HttpsPostClient {
 
 	}
 
-	private void SendOxygen(Pulse pulse) {
-
-		System.out.println(URL);
-
+	public void SendOxygen(Pulse pulse) {
+		System.err.println("Trying to send oxigen values");
 		// String infoId = "info:761538126";
 		String infoId = oxygenChannel;
-		URL += infoId;
+		String oxygenUrl = URL + infoId;
 		HttpClient httpclient = getNewHttpClient();
-		HttpPost httppost = new HttpPost(URL);
+		HttpPost httppost = new HttpPost(oxygenUrl);
 		HttpResponse response = null;
 		try {
 			// Date currentDate = new Date();
@@ -184,7 +181,8 @@ public class HttpsPostClient {
 			// TODO Auto-generated catch block
 		}
 
-		System.out.println("Testing sending Oxygen: " + response.getStatusLine());
+		System.out.println("Testing sending Oxygen: "
+				+ response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -194,6 +192,8 @@ public class HttpsPostClient {
 			printAllNodes(root2);
 		} catch (Exception e) {
 			System.out.println(e.toString());
+		} finally {
+			Utilities.disposeDialog(null);
 		}
 
 	}

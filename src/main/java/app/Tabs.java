@@ -26,8 +26,8 @@ public class Tabs extends JTabbedPane {
 		addTab(currentLanguage.getString("Measurements"),
 				measurementTab.getView());
 		
-		ChatPanel chatPanel = new ChatPanel();
-		addTab("Chat", chatPanel.getView());
+//		ChatPanel chatPanel = new ChatPanel();
+//		addTab("Chat", chatPanel.getView());
 
 	}
 

@@ -10,7 +10,7 @@ public class HealthProperties {
 		try {
 			properties.load(getClass().getClassLoader().getResourceAsStream(
 					"config.properties"));
-			System.out.println("Loaded successfully");
+//			System.out.println("Loaded successfully");
 		} catch (IOException e) {
 			System.out.println("File with properties doesn't exist or was not loaded correctly");
 		}

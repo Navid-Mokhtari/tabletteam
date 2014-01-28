@@ -8,17 +8,32 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
+import com.sun.tools.internal.ws.processor.model.Message;
+
+import databaseaccess.DBConnection;
+import sun.swing.SwingAccessor;
 import vitalsignals.Pulse;
 import vitalsignals.Spirometry;
 import bluetooth.PulseConnection;
+import bluetooth.PulseConnectionRunnable;
 import bluetooth.SpirometryConnection;
 
 public class MeasurementTab extends JComponent implements ActionListener {
@@ -53,7 +68,10 @@ public class MeasurementTab extends JComponent implements ActionListener {
 
 	public Component getView() {
 		JComponent measurements = createPanel("My Measurements");
-		measurements.setPreferredSize(new Dimension(600, 600));
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
+		int ySize = ((int) tk.getScreenSize().getWidth()) - 100;
+		measurements.setPreferredSize(new Dimension(xSize, ySize));
 		return measurements;
 	}
 
@@ -108,12 +126,14 @@ public class MeasurementTab extends JComponent implements ActionListener {
 		measurePulse = new JButton("Measure Pulse");
 		constrains.gridx = 0;
 		constrains.gridy = 4;
+		measurePulse.setPreferredSize(new Dimension(300, 70));
 		measurePulse.addActionListener(this);
 		panel.add(measurePulse, constrains);
 
 		sendPulse = new JButton("Send Pulse Values");
 		constrains.gridx = 1;
 		constrains.gridy = 4;
+		sendPulse.setPreferredSize(new Dimension(300, 70));
 		sendPulse.addActionListener(this);
 		panel.add(sendPulse, constrains);
 
@@ -121,44 +141,44 @@ public class MeasurementTab extends JComponent implements ActionListener {
 		fev1JLabel = new JLabel("Fev1:");
 		constrains.gridx = 0;
 		constrains.gridy = 5;
-		panel.add(fev1JLabel, constrains);
+		// panel.add(fev1JLabel, constrains);
 
 		fev1Value = new JLabel("303");
 		constrains.gridx = 1;
 		constrains.gridy = 5;
-		panel.add(fev1Value, constrains);
+		// panel.add(fev1Value, constrains);
 
 		pefJLabel = new JLabel("Pef:");
 		constrains.gridx = 0;
 		constrains.gridy = 6;
-		panel.add(pefJLabel, constrains);
+		// panel.add(pefJLabel, constrains);
 
 		pefValue = new JLabel("124");
 		constrains.gridx = 1;
 		constrains.gridy = 6;
-		panel.add(pefValue, constrains);
+		// panel.add(pefValue, constrains);
 
 		timeSpiroLabel = new JLabel("Time:");
 		constrains.gridx = 0;
 		constrains.gridy = 7;
-		panel.add(timeSpiroLabel, constrains);
+		// panel.add(timeSpiroLabel, constrains);
 
 		timeSpiroValue = new JLabel("10:11:12");
 		constrains.gridx = 1;
 		constrains.gridy = 7;
-		panel.add(timeSpiroValue, constrains);
+		// panel.add(timeSpiroValue, constrains);
 
 		measureSpiro = new JButton("Measure Spirometer");
 		constrains.gridx = 0;
 		constrains.gridy = 8;
 		measureSpiro.addActionListener(this);
-		panel.add(measureSpiro, constrains);
+		// panel.add(measureSpiro, constrains);
 
 		sendSpiro = new JButton("Send Spirometer Values");
 		constrains.gridx = 1;
 		constrains.gridy = 8;
 		sendSpiro.addActionListener(this);
-		panel.add(sendSpiro, constrains);
+		// panel.add(sendSpiro, constrains);
 
 		setFonts();
 		return panel;
@@ -200,17 +220,49 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			// } catch (ClientProtocolException e1) {
 			// statusValue.setText("Was unable to send data");
 			// }
-			HttpsPostClient httpsPostClient = new HttpsPostClient();
-			Pulse pulse = new Pulse(pulseValue.getText(),
-					oxigenValue.getText(), timeValue.getText());
-//			sendPulse.setText("Sending measurements...");
-			httpsPostClient.SendPulseHttps(pulse);
+			Thread thread = new Thread(new Runnable() {
+
+				@Override
+				public void run() {
+					updateSendGui();
+
+				}
+			});
+			String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
+			String title = "Sending pulse measurements!";
+			int messageType = MessageType.INFO.ordinal();
+			thread.start();
+			Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
+					"Nonin device");
+			JOptionPane.showMessageDialog(this, message, title, messageType,
+					icon);
+			
+
 		}
 		if (e.getSource() == measurePulse) {
-			PulseConnection pulseConnection = new PulseConnection(pulseValue,
-					oxigenValue, timeValue);
+			// PulseConnection pulseConnection = new PulseConnection(pulseValue,
+			// oxigenValue, timeValue);
+			PulseConnectionRunnable pc = new PulseConnectionRunnable(
+					pulseValue, oxigenValue, timeValue, this);
+			Thread thread = new Thread(pc);
+			thread.start();
+			String message = "Trying to get measurements.\nIf you want to stop measuring, \npress \"OK\".";
+			String title = "Measure pulse!";
+			int messageType = MessageType.INFO.ordinal();
+			Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
+					"Nonin device");
+			JOptionPane.showMessageDialog(this, message, title, messageType,
+					icon);
+			if (thread.isAlive()) {
+				// Utilities.closeConnection();
+				System.out.println("Nothing yet implemented here");
+				System.out.println("Connection with button was closed!");
+			} else {
+				System.err
+						.println("Thread cannot be interrupted, because it is not alive");
+			}
 
-			pulseConnection.run();
+			// pulseConnection.run();
 		}
 		if (e.getSource() == measureSpiro) {
 			spirometryConnection = new SpirometryConnection(fev1Value,
@@ -219,10 +271,7 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			// CreateAndShowProgress();
 		}
 		if (e.getSource() == sendSpiro) {
-			HttpsPostClient httpsPostClient = new HttpsPostClient();
-			Spirometry spirometry = new Spirometry(fev1Value.getText(),
-					pefValue.getText(), timeSpiroValue.getText());
-			httpsPostClient.SendSpirometerHttps(spirometry);
+
 			// SendVS sendVS = new SendVS();
 			// StatusLine statusLine = null;
 			// try {
@@ -253,5 +302,26 @@ public class MeasurementTab extends JComponent implements ActionListener {
 		// Display the window.
 		frame.pack();
 		frame.setVisible(true);
+	}
+
+	private void updateSendGui() {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			public void run() {
+				HttpsPostClient httpsPostClient = new HttpsPostClient();
+				Pulse pulse = new Pulse(pulseValue.getText(), oxigenValue
+						.getText(), timeValue.getText());
+				// sendPulse.setText("Sending measurements...");
+				httpsPostClient.SendPulseHttps(pulse);
+				httpsPostClient.SendOxygen(pulse);
+				DBConnection dbConnection = new DBConnection();
+				try {
+					// dbConnection.savePulse(pulse);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 }

@@ -33,8 +33,8 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 		tabs = new Tabs();
 		tabPanel.add(tabs);
 		getContentPane().add(add(tabPanel), BorderLayout.WEST);
-		confPanel = new ConfPanel(new GridBagLayout());
-		getContentPane().add(add(confPanel), BorderLayout.CENTER);
+//		confPanel = new ConfPanel(new GridBagLayout());
+//		getContentPane().add(add(confPanel), BorderLayout.CENTER);
 		/*
 		 * conferencePanel = new ConferencePanel(new GridBagLayout());
 		 * getContentPane().add(add(conferencePanel), BorderLayout.CENTER);
