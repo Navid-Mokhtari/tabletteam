@@ -9,13 +9,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.Window;
 import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,13 +22,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.sun.tools.internal.ws.processor.model.Message;
-
 import databaseaccess.DBConnection;
-import sun.swing.SwingAccessor;
 import vitalsignals.Pulse;
-import vitalsignals.Spirometry;
-import bluetooth.PulseConnection;
 import bluetooth.PulseConnectionRunnable;
 import bluetooth.SpirometryConnection;
 
