@@ -1190,7 +1190,7 @@ public class QuestionnareTab extends JComponent {
 		    		}
 		    		
 		    		// Question Six
-		    		String sQuestionSixAnswer = null;
+		    		String sQuestionSixAnswer = "-1";
 		    		
 		    		if (questionSixSelectionOne.isSelected()) {
 		    			sQuestionSixAnswer = "0";
@@ -1207,7 +1207,7 @@ public class QuestionnareTab extends JComponent {
 		    		}
 		    		
 		    		//Question Seven
-		    		String sQuestionSevenAnswer = null;
+		    		String sQuestionSevenAnswer = "-1";
 		    		
 		    		if (questionSevenSelectionOne.isSelected()) {
 		    			sQuestionSevenAnswer = "1";
@@ -1238,7 +1238,7 @@ public class QuestionnareTab extends JComponent {
 		        	params.add(new BasicNameValuePair("patientId", patientId));
 		        	params.add(new BasicNameValuePair("dateTime", timeAndDate));
 		            
-		        	System.out.println("Tring to send data!");
+		        	System.out.println("Trying to send data!");
 		        	try {
 						httpPost.setEntity(new UrlEncodedFormEntity(params));
 					} catch (UnsupportedEncodingException e1) {
