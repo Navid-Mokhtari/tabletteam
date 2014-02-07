@@ -66,8 +66,8 @@ public class QuestionnareTab extends JComponent {
 	public Component getView() throws IOException {
 		JComponent questionnare = createPanel("My questions");
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
-		int ySize = ((int) tk.getScreenSize().getWidth()) - 100;
+		int xSize = ((int) tk.getScreenSize().getWidth());
+		int ySize = ((int) tk.getScreenSize().getWidth());
 		questionnare.setPreferredSize(new Dimension(xSize, ySize));
 		return questionnare;
 	}
