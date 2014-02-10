@@ -1,6 +1,5 @@
 package app;
 
-import iipintegration.HttpsPostClient;
 import iipintegration.MySSLSocketFactory;
 
 import java.awt.CardLayout;
@@ -10,10 +9,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -27,11 +24,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -40,7 +34,6 @@ import javax.swing.SwingUtilities;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -56,10 +49,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
-
-import sun.io.Converters;
-import vitalsignals.Pulse;
-import databaseaccess.DBConnection;
 
 public class QuestionnareTab extends JComponent {
 	private static final long serialVersionUID = -7594299439504858239L;
