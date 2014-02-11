@@ -800,7 +800,7 @@ public class QuestionnareTab extends JComponent {
 
 		final JLabel questionSix;
 		questionSix = new JLabel(currentLanguage.getString("qSix"));
-		questionSix.setFont(new Font("Lucida Grande", Font.BOLD, 40));
+		questionSix.setFont(new Font("Lucida Grande", Font.BOLD, 30));
 		questionSix.setForeground(Color.WHITE);
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 0;
@@ -810,7 +810,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionOne = new JRadioButton(
 				currentLanguage.getString("qSixAnsOne"));
 		questionSixSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN,
-				40));
+				30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 1;
 		panelQuestionSix.add(questionSixSelectionOne, constrainsQuestionSix);
@@ -820,7 +820,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionTwo = new JRadioButton(
 				currentLanguage.getString("qSixAnsTwo"));
 		questionSixSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
-				40));
+				30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 2;
 		panelQuestionSix.add(questionSixSelectionTwo, constrainsQuestionSix);
@@ -830,7 +830,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionThree = new JRadioButton(
 				currentLanguage.getString("qSixAnsThree"));
 		questionSixSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN,
-				40));
+				30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 3;
 		panelQuestionSix.add(questionSixSelectionThree, constrainsQuestionSix);
@@ -840,7 +840,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionFour = new JRadioButton(
 				currentLanguage.getString("qSixAnsFour"));
 		questionSixSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN,
-				40));
+				30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 4;
 		panelQuestionSix.add(questionSixSelectionFour, constrainsQuestionSix);
@@ -850,7 +850,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionFive = new JRadioButton(
 				currentLanguage.getString("qSixAnsFive"));
 		questionSixSelectionFive.setFont(new Font("Lucida Grande", Font.PLAIN,
-				40));
+				30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 5;
 		panelQuestionSix.add(questionSixSelectionFive, constrainsQuestionSix);
@@ -860,7 +860,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionSix = new JRadioButton(
 				currentLanguage.getString("qSixAnsSix"));
 		questionSixSelectionSix.setFont(new Font("Lucida Grande", Font.PLAIN,
-				40));
+				30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 6;
 		panelQuestionSix.add(questionSixSelectionSix, constrainsQuestionSix);
