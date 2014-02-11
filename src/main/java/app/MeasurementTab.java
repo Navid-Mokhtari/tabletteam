@@ -257,16 +257,16 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			// Public method to center the dialog after calling pack()
 			dialog.setLocationRelativeTo(this.getParent());
 			dialog.setVisible(true);
-			if (thread.isAlive()) {
-				// Utilities.closeConnection();
-				System.out.println("Nothing yet implemented here");
-				System.out.println("Connection with button was closed!");
-			} else {
-				System.err
-						.println("Thread cannot be interrupted, because it is not alive");
-			}
-
 			thread.start();
+			// if (thread.isAlive()) {
+			// // Utilities.closeConnection();
+			// System.out.println("Nothing yet implemented here");
+			// System.out.println("Connection with button was closed!");
+			// } else {
+			// System.err
+			// .println("Thread cannot be interrupted, because it is not alive");
+			// }
+
 		}
 		if (e.getSource() == measureSpiro) {
 			spirometryConnection = new SpirometryConnection(fev1Value,
