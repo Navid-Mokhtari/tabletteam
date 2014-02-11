@@ -9,8 +9,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -26,6 +28,7 @@ import java.util.ResourceBundle;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -34,6 +37,7 @@ import javax.swing.SwingUtilities;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -1293,27 +1297,27 @@ public class QuestionnareTab extends JComponent {
 		    	} catch (IOException e1) {
 		    		e1.printStackTrace();
 				}
-//				Thread thread = new Thread(new Runnable() {
-//
-//					@Override
-//					public void run() {
-//						updateSendGui();
-//
-//					}
-//				});
-//				String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
-//				String title = "Sending pulse measurements!";
-//				int messageType = MessageType.INFO.ordinal();
-//				thread.start();
+				Thread thread = new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						updateSendGui();
+
+					}
+				});
+				String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
+				String title = "Sending pulse measurements!";
+				int messageType = MessageType.INFO.ordinal();
+				thread.start();
 //				Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
 //						"Nonin device");
-//				try {
-//					JOptionPane.showMessageDialog(getView().getParent(),
-//							message, title, messageType, icon);
-//				} catch (HeadlessException | IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
+				try {
+					JOptionPane.showMessageDialog(getView().getParent(),
+							message, title, messageType, null);
+				} catch (HeadlessException | IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -1352,133 +1356,133 @@ public class QuestionnareTab extends JComponent {
 		SwingUtilities.invokeLater(new Runnable() {
 			// Make all QuestionAnwer variable public and visible
 			public void run() {
-				// HttpClient httpClient = getNewHttpClient();
-				// // HttpPost httpPost = new
-				// //
-				// HttpPost("https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/info:375745058");
-				// HttpPost httpPost = new HttpPost(
-				// "https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/info:634752814");
-				// HttpResponse response = null;
-				// try {
-				//
-				// // Question One
-				// String sQuestionOneAnswer = null;
-				//
-				// if (questionOneSelectionTwo.isSelected()) {
-				// sQuestionOneAnswer = "2";
-				// } else if (questionOneSelectionThree.isSelected()) {
-				// sQuestionOneAnswer = "3";
-				// } else if (questionOneSelectionFour.isSelected()) {
-				// sQuestionOneAnswer = "4";
-				// }
-				//
-				// // Question Two
-				// String sQuestionTwoAnswer = null;
-				//
-				// if (questionTwoSelectionTwo.isSelected()) {
-				// sQuestionTwoAnswer = "2";
-				// } else if (questionTwoSelectionThree.isSelected()) {
-				// sQuestionTwoAnswer = "3";
-				// } else if (questionTwoSelectionFour.isSelected()) {
-				// sQuestionTwoAnswer = "4";
-				// }
-				//
-				// // Question Three
-				// String sQuestionThreeAnswer = null;
-				//
-				// if (questionThreeSelectionTwo.isSelected()) {
-				// sQuestionThreeAnswer = "2";
-				// } else if (questionThreeSelectionThree.isSelected()) {
-				// sQuestionThreeAnswer = "3";
-				// } else if (questionThreeSelectionFour.isSelected()) {
-				// sQuestionThreeAnswer = "4";
-				// }
-				//
-				// // QuestionFour
-				// String sQuestionFourAnswer = null;
-				//
-				// if (questionFourSelectionOne.isSelected()) {
-				// sQuestionFourAnswer = "2";
-				// } else if (questionFourSelectionTwo.isSelected()) {
-				// sQuestionFourAnswer = "3";
-				// } else if (questionFourSelectionThree.isSelected()) {
-				// sQuestionFourAnswer = "4";
-				// }
-				//
-				// // Question Five
-				// String sQuestionFiveAnswer = null;
-				//
-				// if (questionFiveSelectionOne.isSelected()) {
-				// sQuestionFiveAnswer = "1";
-				// } else if (questionFiveSelectionTwo.isSelected()) {
-				// sQuestionFiveAnswer = "2";
-				// } else if (questionFiveSelectionThree.isSelected()) {
-				// sQuestionFiveAnswer = "3";
-				// } else if (questionFiveSelectionFour.isSelected()) {
-				// sQuestionFiveAnswer = "4";
-				// }
-				//
-				// // Question Six
-				// String sQuestionSixAnswer = null;
-				//
-				// if (questionSixSelectionOne.isSelected()) {
-				// sQuestionSixAnswer = "0";
-				// } else if (questionSixSelectionTwo.isSelected()) {
-				// sQuestionSixAnswer = "1";
-				// } else if (questionSixSelectionThree.isSelected()) {
-				// sQuestionSixAnswer = "2";
-				// } else if (questionSixSelectionFour.isSelected()) {
-				// sQuestionSixAnswer = "3";
-				// } else if (questionSixSelectionFive.isSelected()) {
-				// sQuestionSixAnswer = "4";
-				// } else if (questionSixSelectionSix.isSelected()) {
-				// sQuestionSixAnswer = "5";
-				// }
-				//
-				// // Question Seven
-				// String sQuestionSevenAnswer = null;
-				//
-				// if (questionSevenSelectionOne.isSelected()) {
-				// sQuestionSevenAnswer = "1";
-				// } else if (questionSevenSelectionTwo.isSelected()) {
-				// sQuestionSevenAnswer = "2";
-				// } else if (questionSevenSelectionThree.isSelected()) {
-				// sQuestionSevenAnswer = "3";
-				// } else if (questionSevenSelectionFour.isSelected()) {
-				// sQuestionSevenAnswer = "4";
-				// }
-				//
-				// // Array to send to IIP
-				//
-				// List<NameValuePair> params = new ArrayList<NameValuePair>();
-				// params.add(new BasicNameValuePair("q_1",
-				// sQuestionOneAnswer));
-				// params.add(new BasicNameValuePair("q_2",
-				// sQuestionTwoAnswer));
-				// params.add(new BasicNameValuePair("q_3",
-				// sQuestionThreeAnswer));
-				// params.add(new BasicNameValuePair("q_4",
-				// sQuestionFourAnswer));
-				// params.add(new BasicNameValuePair("q_5",
-				// sQuestionFiveAnswer));
-				// params.add(new BasicNameValuePair("q_6",
-				// sQuestionSixAnswer));
-				// params.add(new BasicNameValuePair("q_7",
-				// sQuestionSevenAnswer));
-				// params.add(new BasicNameValuePair("patientId", "1234567"));
-				//
-				// httpPost.setEntity(new UrlEncodedFormEntity(params));
-				// response = httpClient.execute(httpPost);
-				//
-				// } catch (ClientProtocolException e1) {
-				// // TODO Auto-generated catch block
-				// } catch (IOException e1) {
-				// // TODO Auto-generated catch block
-				// }
-				// finally
-				// {
-				// Utilities.disposeDialog(null);
-				// }
+				 HttpClient httpClient = getNewHttpClient();
+				 // HttpPost httpPost = new
+				 //
+				 HttpPost("https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/info:375745058");
+				 HttpPost httpPost = new HttpPost(
+				 "https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/info:634752814");
+				 HttpResponse response = null;
+				 try {
+				
+				 // Question One
+				 String sQuestionOneAnswer = null;
+				
+				 if (questionOneSelectionTwo.isSelected()) {
+				 sQuestionOneAnswer = "2";
+				 } else if (questionOneSelectionThree.isSelected()) {
+				 sQuestionOneAnswer = "3";
+				 } else if (questionOneSelectionFour.isSelected()) {
+				 sQuestionOneAnswer = "4";
+				 }
+				
+				 // Question Two
+				 String sQuestionTwoAnswer = null;
+				
+				 if (questionTwoSelectionTwo.isSelected()) {
+				 sQuestionTwoAnswer = "2";
+				 } else if (questionTwoSelectionThree.isSelected()) {
+				 sQuestionTwoAnswer = "3";
+				 } else if (questionTwoSelectionFour.isSelected()) {
+				 sQuestionTwoAnswer = "4";
+				 }
+				
+				 // Question Three
+				 String sQuestionThreeAnswer = null;
+				
+				 if (questionThreeSelectionTwo.isSelected()) {
+				 sQuestionThreeAnswer = "2";
+				 } else if (questionThreeSelectionThree.isSelected()) {
+				 sQuestionThreeAnswer = "3";
+				 } else if (questionThreeSelectionFour.isSelected()) {
+				 sQuestionThreeAnswer = "4";
+				 }
+				
+				 // QuestionFour
+				 String sQuestionFourAnswer = null;
+				
+				 if (questionFourSelectionOne.isSelected()) {
+				 sQuestionFourAnswer = "2";
+				 } else if (questionFourSelectionTwo.isSelected()) {
+				 sQuestionFourAnswer = "3";
+				 } else if (questionFourSelectionThree.isSelected()) {
+				 sQuestionFourAnswer = "4";
+				 }
+				
+				 // Question Five
+				 String sQuestionFiveAnswer = null;
+				
+				 if (questionFiveSelectionOne.isSelected()) {
+				 sQuestionFiveAnswer = "1";
+				 } else if (questionFiveSelectionTwo.isSelected()) {
+				 sQuestionFiveAnswer = "2";
+				 } else if (questionFiveSelectionThree.isSelected()) {
+				 sQuestionFiveAnswer = "3";
+				 } else if (questionFiveSelectionFour.isSelected()) {
+				 sQuestionFiveAnswer = "4";
+				 }
+				
+				 // Question Six
+				 String sQuestionSixAnswer = null;
+				
+				 if (questionSixSelectionOne.isSelected()) {
+				 sQuestionSixAnswer = "0";
+				 } else if (questionSixSelectionTwo.isSelected()) {
+				 sQuestionSixAnswer = "1";
+				 } else if (questionSixSelectionThree.isSelected()) {
+				 sQuestionSixAnswer = "2";
+				 } else if (questionSixSelectionFour.isSelected()) {
+				 sQuestionSixAnswer = "3";
+				 } else if (questionSixSelectionFive.isSelected()) {
+				 sQuestionSixAnswer = "4";
+				 } else if (questionSixSelectionSix.isSelected()) {
+				 sQuestionSixAnswer = "5";
+				 }
+				
+				 // Question Seven
+				 String sQuestionSevenAnswer = null;
+				
+				 if (questionSevenSelectionOne.isSelected()) {
+				 sQuestionSevenAnswer = "1";
+				 } else if (questionSevenSelectionTwo.isSelected()) {
+				 sQuestionSevenAnswer = "2";
+				 } else if (questionSevenSelectionThree.isSelected()) {
+				 sQuestionSevenAnswer = "3";
+				 } else if (questionSevenSelectionFour.isSelected()) {
+				 sQuestionSevenAnswer = "4";
+				 }
+				
+				 // Array to send to IIP
+				
+				 List<NameValuePair> params = new ArrayList<NameValuePair>();
+				 params.add(new BasicNameValuePair("q_1",
+				 sQuestionOneAnswer));
+				 params.add(new BasicNameValuePair("q_2",
+				 sQuestionTwoAnswer));
+				 params.add(new BasicNameValuePair("q_3",
+				 sQuestionThreeAnswer));
+				 params.add(new BasicNameValuePair("q_4",
+				 sQuestionFourAnswer));
+				 params.add(new BasicNameValuePair("q_5",
+				 sQuestionFiveAnswer));
+				 params.add(new BasicNameValuePair("q_6",
+				 sQuestionSixAnswer));
+				 params.add(new BasicNameValuePair("q_7",
+				 sQuestionSevenAnswer));
+				 params.add(new BasicNameValuePair("patientId", "1234567"));
+				
+				 httpPost.setEntity(new UrlEncodedFormEntity(params));
+				 response = httpClient.execute(httpPost);
+				
+				 } catch (ClientProtocolException e1) {
+				 // TODO Auto-generated catch block
+				 } catch (IOException e1) {
+				 // TODO Auto-generated catch block
+				 }
+				 finally
+				 {
+				 Utilities.disposeDialog(null);
+				 }
 			}
 		});
 	}
