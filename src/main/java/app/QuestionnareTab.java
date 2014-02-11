@@ -31,6 +31,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -1295,16 +1296,22 @@ public class QuestionnareTab extends JComponent {
 
 						}
 					});
-					String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
-					String title = "Sending pulse measurements!";
-					int messageType = MessageType.INFO.ordinal();
-					thread.start();
 					ClassLoader cldr = this.getClass().getClassLoader();
 					java.net.URL imageURL = cldr.getResource("sending.gif");
 					ImageIcon sendingImage = new ImageIcon(imageURL);
-					JOptionPane.showMessageDialog(getView().getParent(),
-							message, title, messageType, sendingImage);
-
+					final JDialog dialog = new JDialog();
+					dialog.setTitle("Sending answers...");
+					dialog.setUndecorated(false);
+					JPanel panel = new JPanel();
+					final JLabel label = new JLabel(sendingImage);
+					sendingImage.setImageObserver(label);
+					panel.add(label);
+					dialog.add(panel);
+					dialog.pack();
+					// Public method to center the dialog after calling pack()
+					dialog.setLocationRelativeTo(getView().getParent());
+					dialog.setVisible(true);
+					thread.start();
 				}
 
 				catch (HeadlessException | IOException e1) {

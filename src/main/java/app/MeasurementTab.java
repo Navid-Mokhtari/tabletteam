@@ -12,10 +12,12 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -215,9 +217,23 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			String message = "Trying to send measurements.\nIf you want to STOP measuring, \npress \"OK\".";
 			String title = "Sending pulse measurements!";
 			int messageType = MessageType.ERROR.ordinal();
+
+			// JOptionPane.showMessageDialog(this, message, title, messageType,
+			// sendingImage);
+			// Then we display the dialog on that frame
+			final JDialog dialog = new JDialog();
+			dialog.setTitle("Sending measurements...");
+			dialog.setUndecorated(false);
+			JPanel panel = new JPanel();
+			final JLabel label = new JLabel(sendingImage);
+			sendingImage.setImageObserver(label);
+			panel.add(label);
+			dialog.add(panel);
+			dialog.pack();
+			// Public method to center the dialog after calling pack()
+			dialog.setLocationRelativeTo(this.getParent());
+			dialog.setVisible(true);
 			thread.start();
-			JOptionPane.showMessageDialog(this, message, title, messageType,
-					sendingImage);
 		}
 		if (e.getSource() == measurePulse) {
 			ClassLoader cldr = this.getClass().getClassLoader();
@@ -226,12 +242,21 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			PulseConnectionRunnable pc = new PulseConnectionRunnable(
 					pulseValue, oxigenValue, timeValue, this);
 			Thread thread = new Thread(pc);
-			String message = "Trying to get measurements.\nIf you want to stop measuring, \npress \"OK\".";
-			String title = "Measure pulse!";
-			int messageType = MessageType.INFO.ordinal();
-			thread.start();
-			JOptionPane.showMessageDialog(this, message, title, messageType,
-					noninImage);
+			String message = "Trying to get measurements.";
+			String title = "Measure pulse";
+			final JDialog dialog = new JDialog();
+			dialog.setTitle(title);
+			dialog.setUndecorated(false);
+			JPanel panel = new JPanel();
+			final JLabel label = new JLabel(noninImage);
+			final JLabel messageLabel = new JLabel(message);
+			panel.add(label);
+			panel.add(messageLabel);
+			dialog.add(panel);
+			dialog.pack();
+			// Public method to center the dialog after calling pack()
+			dialog.setLocationRelativeTo(this.getParent());
+			dialog.setVisible(true);
 			if (thread.isAlive()) {
 				// Utilities.closeConnection();
 				System.out.println("Nothing yet implemented here");
@@ -241,7 +266,7 @@ public class MeasurementTab extends JComponent implements ActionListener {
 						.println("Thread cannot be interrupted, because it is not alive");
 			}
 
-			// pulseConnection.run();
+			thread.start();
 		}
 		if (e.getSource() == measureSpiro) {
 			spirometryConnection = new SpirometryConnection(fev1Value,
