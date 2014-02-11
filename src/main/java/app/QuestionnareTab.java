@@ -243,6 +243,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionTwo.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 8;
 		constrainsQuestionOne.ipadx = 100;
@@ -351,6 +352,7 @@ public class QuestionnareTab extends JComponent {
 		JButton toQuestionOne;
 		toQuestionOne = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		toQuestionOne.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 7;
 		constrainsQuestionTwo.ipadx = 120;
@@ -368,6 +370,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestionThree;
 		toQuestionThree = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionThree.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 8;
 		constrainsQuestionTwo.ipadx = 120;
@@ -480,6 +483,7 @@ public class QuestionnareTab extends JComponent {
 		JButton backToQuestionTwo;
 		backToQuestionTwo = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		backToQuestionTwo.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 7;
 		constrainsQuestionThree.ipadx = 120;
@@ -497,6 +501,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestionFour;
 		toQuestionFour = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionFour.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 8;
 		constrainsQuestionThree.ipadx = 120;
@@ -593,6 +598,7 @@ public class QuestionnareTab extends JComponent {
 		JButton backToQuestionThree;
 		backToQuestionThree = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		backToQuestionThree.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 7;
 		constrainsQuestionFour.ipadx = 120;
@@ -610,6 +616,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestionFive;
 		toQuestionFive = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionFive.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 8;
 		constrainsQuestionFour.ipadx = 120;
@@ -737,6 +744,7 @@ public class QuestionnareTab extends JComponent {
 		JButton backToQuestionFour;
 		backToQuestionFour = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		backToQuestionFour.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 7;
 		constrainsQuestionFive.ipadx = 120;
@@ -754,6 +762,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestionSix;
 		toQuestionSix = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionSix.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 8;
 		constrainsQuestionFive.ipadx = 120;
@@ -911,6 +920,7 @@ public class QuestionnareTab extends JComponent {
 		JButton backToQuestionFive;
 		backToQuestionFive = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		backToQuestionFive.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 7;
 		constrainsQuestionSix.ipadx = 120;
@@ -927,6 +937,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestionSeven;
 		toQuestionSeven = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionSeven.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 8;
 		constrainsQuestionSix.ipadx = 900;
@@ -1058,6 +1069,7 @@ public class QuestionnareTab extends JComponent {
 		JButton backToQuestionSix;
 		backToQuestionSix = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		backToQuestionSix.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 5;
 		constrainsQuestionSeven.ipadx = 120;
@@ -1074,6 +1086,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestionEight;
 		toQuestionEight = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionEight.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionSeven.insets = new Insets(30, 5, 5, 5);
 		constrainsQuestionSeven.anchor = GridBagConstraints.SOUTH;
 		constrainsQuestionSeven.gridx = 0;
@@ -1114,6 +1127,7 @@ public class QuestionnareTab extends JComponent {
 		JButton backToQuestionSeven;
 		backToQuestionSeven = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		backToQuestionSeven.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionEight.gridx = 0;
 		constrainsQuestionEight.gridy = 8;
 		constrainsQuestionEight.ipadx = 120;
@@ -1136,6 +1150,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton toQuestoinNine;
 		toQuestoinNine = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestoinNine.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionEight.insets = new Insets(5, 5, 5, 5);
 		constrainsQuestionEight.anchor = GridBagConstraints.SOUTH;
 		constrainsQuestionEight.gridx = 0;
@@ -1163,6 +1178,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton resetQuestionnaire;
 		resetQuestionnaire = new JButton(currentLanguage.getString("reset"));
+		resetQuestionnaire.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 8;
 		constrainsQuestionNine.ipadx = 120;
@@ -1188,6 +1204,7 @@ public class QuestionnareTab extends JComponent {
 		JButton backToQuestionEight;
 		backToQuestionEight = new JButton(
 				currentLanguage.getString("previousQuestion"));
+		backToQuestionEight.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 7;
 		constrainsQuestionNine.ipadx = 120;
@@ -1204,6 +1221,7 @@ public class QuestionnareTab extends JComponent {
 
 		JButton SubmitQuestionnare;
 		SubmitQuestionnare = new JButton(currentLanguage.getString("submit"));
+		SubmitQuestionnare.setFont(new Font("Lucida Grande", Font.BOLD, 40));
 		constrainsQuestionNine.anchor = GridBagConstraints.SOUTH;
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 9;
