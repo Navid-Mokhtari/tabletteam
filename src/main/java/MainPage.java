@@ -218,15 +218,18 @@ public class MainPage {
 																panel_2.add(button_2, gbc_button_2);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				panel.setVisible(false);
-				panel_2.setVisible(false);
-				frame.repaint();
-				frame.revalidate();
+			//	panel.setVisible(false);
+		//		panel_2.setVisible(false);
+		//	    frame.repaint();
+		//		frame.revalidate();
 				
 				//
-			Measur measur=new Measur();
-			
-			frame.getContentPane().add(measur, BorderLayout.CENTER);
+			//Measur measur=new Measur();
+            Dial dial=new Dial();
+            dial.setVisible(true);
+		
+		//	frame.getContentPane().add(dial, BorderLayout.CENTER);
+		//	frame.
 	
 				//
 				
@@ -238,8 +241,8 @@ public class MainPage {
 				//frame.getContentPane().add(panel3, BorderLayout.CENTER);
 //				measurementTab.setVisible(true);
 //				panel_3.setEnabled(true);
-				frame.repaint();
-				frame.revalidate();
+		//		frame.repaint();
+		//		frame.revalidate();
 
 			}
 		});
