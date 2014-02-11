@@ -116,14 +116,14 @@ public class MeasurementTab extends JComponent implements ActionListener {
 		constrains.gridy = 3;
 		panel.add(timeValue, constrains);
 
-		measurePulse = new JButton("Measure Pulse");
+		measurePulse = new JButton("Measure");
 		constrains.gridx = 0;
 		constrains.gridy = 4;
 		measurePulse.setPreferredSize(new Dimension(300, 70));
 		measurePulse.addActionListener(this);
 		panel.add(measurePulse, constrains);
 
-		sendPulse = new JButton("Send Pulse Values");
+		sendPulse = new JButton("Send");
 		constrains.gridx = 1;
 		constrains.gridy = 4;
 		sendPulse.setPreferredSize(new Dimension(300, 70));
@@ -161,13 +161,13 @@ public class MeasurementTab extends JComponent implements ActionListener {
 		constrains.gridy = 7;
 		// panel.add(timeSpiroValue, constrains);
 
-		measureSpiro = new JButton("Measure Spirometer");
+		measureSpiro = new JButton("Measure");
 		constrains.gridx = 0;
 		constrains.gridy = 8;
 		measureSpiro.addActionListener(this);
 		// panel.add(measureSpiro, constrains);
 
-		sendSpiro = new JButton("Send Spirometer Values");
+		sendSpiro = new JButton("Send");
 		constrains.gridx = 1;
 		constrains.gridy = 8;
 		sendSpiro.addActionListener(this);
