@@ -47,10 +47,6 @@ import app.MeasurementTab;
 import app.QuestionnareTab;
 import app.Tabs;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 
 import java.awt.Panel;
 import java.io.IOException;
