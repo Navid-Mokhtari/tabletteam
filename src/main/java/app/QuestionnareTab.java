@@ -1,5 +1,6 @@
 package app;
 
+import iipintegration.HttpsPostClient;
 import iipintegration.MySSLSocketFactory;
 
 import java.awt.CardLayout;
@@ -16,6 +17,7 @@ import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.KeyStore;
 import java.text.SimpleDateFormat;
@@ -26,6 +28,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,6 +37,8 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -53,9 +59,23 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+//import com.sun.org.apache.xpath.internal.operations.String;
 
 public class QuestionnareTab extends JComponent {
 	private static final long serialVersionUID = -7594299439504858239L;
+	// Question One
+	String sQuestionOneAnswer = null;
+	String sQuestionTwoAnswer = null;
+	String sQuestionThreeAnswer = null;
+	String sQuestionFourAnswer = null;
+	String sQuestionFiveAnswer = null;
+	String sQuestionSixAnswer = "-1";
+	String sQuestionSevenAnswer = "-1";
 
 	public Component getView() throws IOException {
 		JComponent questionnare = createPanel("My questions");
@@ -69,10 +89,11 @@ public class QuestionnareTab extends JComponent {
 	public JPanel createPanel(String title) throws IOException {
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
-		final ResourceBundle currentLanguage = ResourceBundle.getBundle("language", currentLocale);
-		
-		//Panels
-		
+		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
+				"language", currentLocale);
+
+		// Panels
+
 		final JPanel panelContainer = new JPanel();
 		JPanel panelQuestionOne = new JPanel();
 		JPanel panelQuestionTwo = new JPanel();
@@ -157,7 +178,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionOneSelectionTwo;
 		questionOneSelectionTwo = new JRadioButton(
 				currentLanguage.getString("aAsUsual"));
-		questionOneSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionOneSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionTwo, constrainsQuestionOne);
@@ -166,7 +188,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionOneSelectionThree;
 		questionOneSelectionThree = new JRadioButton(
 				currentLanguage.getString("aWorse"));
-		questionOneSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionOneSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 3;
 		panelQuestionOne.add(questionOneSelectionThree, constrainsQuestionOne);
@@ -175,7 +198,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionOneSelectionFour;
 		questionOneSelectionFour = new JRadioButton(
 				currentLanguage.getString("aMuchWorse"));
-		questionOneSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionOneSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 7;
 		panelQuestionOne.add(questionOneSelectionFour, constrainsQuestionOne);
@@ -261,7 +285,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionTwoSelectionTwo;
 		questionTwoSelectionTwo = new JRadioButton(
 				currentLanguage.getString("aAsUsual"));
-		questionTwoSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionTwoSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 2;
 		panelQuestionTwo.add(questionTwoSelectionTwo, constrainsQuestionTwo);
@@ -270,7 +295,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionTwoSelectionThree;
 		questionTwoSelectionThree = new JRadioButton(
 				currentLanguage.getString("aWorse"));
-		questionTwoSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionTwoSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 3;
 		panelQuestionTwo.add(questionTwoSelectionThree, constrainsQuestionTwo);
@@ -279,7 +305,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionTwoSelectionFour;
 		questionTwoSelectionFour = new JRadioButton(
 				currentLanguage.getString("aMuchWorse"));
-		questionTwoSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionTwoSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 4;
 		panelQuestionTwo.add(questionTwoSelectionFour, constrainsQuestionTwo);
@@ -383,7 +410,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionThreeSelectionTwo;
 		questionThreeSelectionTwo = new JRadioButton(
 				currentLanguage.getString("aAsUsual"));
-		questionThreeSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionThreeSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 2;
 		panelQuestionThree.add(questionThreeSelectionTwo,
@@ -393,7 +421,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionThreeSelectionThree;
 		questionThreeSelectionThree = new JRadioButton(
 				currentLanguage.getString("aWorse"));
-		questionThreeSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionThreeSelectionThree.setFont(new Font("Lucida Grande",
+				Font.PLAIN, 40));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 3;
 		panelQuestionThree.add(questionThreeSelectionThree,
@@ -403,7 +432,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionThreeSelectionFour;
 		questionThreeSelectionFour = new JRadioButton(
 				currentLanguage.getString("aMuchWorse"));
-		questionThreeSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionThreeSelectionFour.setFont(new Font("Lucida Grande",
+				Font.PLAIN, 40));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 4;
 		panelQuestionThree.add(questionThreeSelectionFour,
@@ -510,7 +540,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionFourSelectionOne;
 		questionFourSelectionOne = new JRadioButton(
 				currentLanguage.getString("qFourAnsOne"));
-		questionFourSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionFourSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 1;
 		panelQuestionFour.add(questionFourSelectionOne, constrainsQuestionFour);
@@ -519,7 +550,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionFourSelectionTwo;
 		questionFourSelectionTwo = new JRadioButton(
 				currentLanguage.getString("qFourAnsTwo"));
-		questionFourSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionFourSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 2;
 		panelQuestionFour.add(questionFourSelectionTwo, constrainsQuestionFour);
@@ -542,7 +574,7 @@ public class QuestionnareTab extends JComponent {
 				} else if (e.getActionCommand() == "3") {
 					sQuestionFourAnswer = currentLanguage
 							.getString("qFourAnsTwo");
-				} 
+				}
 
 				JLabel questionFourAnswer = new JLabel(sQuestionFourAnswer);
 				constrainsQuestionEight.gridx = 1;
@@ -620,7 +652,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionFiveSelectionOne;
 		questionFiveSelectionOne = new JRadioButton(
 				currentLanguage.getString("qFiveAnsOne"));
-		questionFiveSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionFiveSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 1;
 		panelQuestionFive.add(questionFiveSelectionOne, constrainsQuestionFive);
@@ -629,7 +662,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionFiveSelectionTwo;
 		questionFiveSelectionTwo = new JRadioButton(
 				currentLanguage.getString("qFiveAnsTwo"));
-		questionFiveSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionFiveSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 2;
 		panelQuestionFive.add(questionFiveSelectionTwo, constrainsQuestionFive);
@@ -638,7 +672,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionFiveSelectionThree;
 		questionFiveSelectionThree = new JRadioButton(
 				currentLanguage.getString("qFiveAnsThree"));
-		questionFiveSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionFiveSelectionThree.setFont(new Font("Lucida Grande",
+				Font.PLAIN, 40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 3;
 		panelQuestionFive.add(questionFiveSelectionThree,
@@ -648,7 +683,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionFiveSelectionFour;
 		questionFiveSelectionFour = new JRadioButton(
 				currentLanguage.getString("qFiveAnsFour"));
-		questionFiveSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionFiveSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 4;
 		panelQuestionFive
@@ -763,7 +799,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSixSelectionOne;
 		questionSixSelectionOne = new JRadioButton(
 				currentLanguage.getString("qSixAnsOne"));
-		questionSixSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSixSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 1;
 		panelQuestionSix.add(questionSixSelectionOne, constrainsQuestionSix);
@@ -772,7 +809,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSixSelectionTwo;
 		questionSixSelectionTwo = new JRadioButton(
 				currentLanguage.getString("qSixAnsTwo"));
-		questionSixSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSixSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 2;
 		panelQuestionSix.add(questionSixSelectionTwo, constrainsQuestionSix);
@@ -781,7 +819,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSixSelectionThree;
 		questionSixSelectionThree = new JRadioButton(
 				currentLanguage.getString("qSixAnsThree"));
-		questionSixSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSixSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 3;
 		panelQuestionSix.add(questionSixSelectionThree, constrainsQuestionSix);
@@ -790,7 +829,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSixSelectionFour;
 		questionSixSelectionFour = new JRadioButton(
 				currentLanguage.getString("qSixAnsFour"));
-		questionSixSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSixSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 4;
 		panelQuestionSix.add(questionSixSelectionFour, constrainsQuestionSix);
@@ -799,7 +839,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSixSelectionFive;
 		questionSixSelectionFive = new JRadioButton(
 				currentLanguage.getString("qSixAnsFive"));
-		questionSixSelectionFive.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSixSelectionFive.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 5;
 		panelQuestionSix.add(questionSixSelectionFive, constrainsQuestionSix);
@@ -808,7 +849,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSixSelectionSix;
 		questionSixSelectionSix = new JRadioButton(
 				currentLanguage.getString("qSixAnsSix"));
-		questionSixSelectionSix.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSixSelectionSix.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 6;
 		panelQuestionSix.add(questionSixSelectionSix, constrainsQuestionSix);
@@ -930,7 +972,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSevenSelectionOne;
 		questionSevenSelectionOne = new JRadioButton(
 				currentLanguage.getString("qSevenAnsOne"));
-		questionSevenSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSevenSelectionOne.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 1;
 		panelQuestionSeven.add(questionSevenSelectionOne,
@@ -940,7 +983,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSevenSelectionTwo;
 		questionSevenSelectionTwo = new JRadioButton(
 				currentLanguage.getString("qSevenAnsTwo"));
-		questionSevenSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSevenSelectionTwo.setFont(new Font("Lucida Grande", Font.PLAIN,
+				40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 2;
 		panelQuestionSeven.add(questionSevenSelectionTwo,
@@ -950,7 +994,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSevenSelectionThree;
 		questionSevenSelectionThree = new JRadioButton(
 				currentLanguage.getString("qSevenAnsThree"));
-		questionSevenSelectionThree.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSevenSelectionThree.setFont(new Font("Lucida Grande",
+				Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 3;
 		panelQuestionSeven.add(questionSevenSelectionThree,
@@ -960,7 +1005,8 @@ public class QuestionnareTab extends JComponent {
 		final JRadioButton questionSevenSelectionFour;
 		questionSevenSelectionFour = new JRadioButton(
 				currentLanguage.getString("qSevenAnsFour"));
-		questionSevenSelectionFour.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		questionSevenSelectionFour.setFont(new Font("Lucida Grande",
+				Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 4;
 		panelQuestionSeven.add(questionSevenSelectionFour,
@@ -1113,7 +1159,7 @@ public class QuestionnareTab extends JComponent {
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 0;
 		panelQuestionNine.add(reviewlabel, constrainsQuestionNine);
-		
+
 		JButton resetQuestionnaire;
 		resetQuestionnaire = new JButton(currentLanguage.getString("reset"));
 		constrainsQuestionNine.gridx = 0;
@@ -1122,7 +1168,7 @@ public class QuestionnareTab extends JComponent {
 		constrainsQuestionNine.ipady = 60;
 		panelQuestionNine.add(resetQuestionnaire, constrainsQuestionNine);
 		resetQuestionnaire.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -1135,7 +1181,6 @@ public class QuestionnareTab extends JComponent {
 				questionSevenGroup.clearSelection();
 				cl.show(panelContainer, "1");
 
-				
 			}
 		});
 
@@ -1169,159 +1214,108 @@ public class QuestionnareTab extends JComponent {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				HttpClient httpClient = getNewHttpClient();
-				String username = HealthProperties.getProperty("iipUsername");
-				String password = HealthProperties.getProperty("iipPassword");
-				String iipUrl = HealthProperties.getProperty("iipUrl");
-				String questionnaireChannel = HealthProperties.getProperty("questionnaireChannel");
-				String patientId = HealthProperties.getProperty("patientId");
-				String URL = "https://" + username + ":" + password + "@" + iipUrl + questionnaireChannel;
-		    	HttpPost httpPost = new HttpPost(URL);
-		    	HttpResponse response = null;
-		    	
-		    	try {
-		    		
-		    		//Question One
-		    		String sQuestionOneAnswer = null;
-		    		
-		    		if (questionOneSelectionTwo.isSelected()){
-		    			sQuestionOneAnswer = "2";
-		    		} else if (questionOneSelectionThree.isSelected()){
-		    			sQuestionOneAnswer = "3";
-		    		} else if (questionOneSelectionFour.isSelected()){
-		    			sQuestionOneAnswer = "4";
-		    		}
-		    		
-		    		//Question Two
-		    		String sQuestionTwoAnswer = null;
-		    		
-		    		if(questionTwoSelectionTwo.isSelected()){
-		    			sQuestionTwoAnswer = "2";
-		    		} else if (questionTwoSelectionThree.isSelected()){
-		    			sQuestionTwoAnswer = "3";
-		    		} else if (questionTwoSelectionFour.isSelected()){
-		    			sQuestionTwoAnswer = "4";
-		    		}
-		    		
-		    		//Question Three
-		    		String sQuestionThreeAnswer = null;
-		    		
-		    		if(questionThreeSelectionTwo.isSelected()){
-		    			sQuestionThreeAnswer = "2";
-		    		} else if (questionThreeSelectionThree.isSelected()){
-		    			sQuestionThreeAnswer = "3";
-		    		} else if (questionThreeSelectionFour.isSelected()){
-		    			sQuestionThreeAnswer = "4";
-		    		}
-		    		
-		    		//QuestionFour
-		    		String sQuestionFourAnswer = null;
-		    		
-		    		if (questionFourSelectionOne.isSelected()) {
-		    			sQuestionFourAnswer = "2";
-		    		} else if (questionFourSelectionTwo.isSelected()) {
-		    			sQuestionFourAnswer = "3";
-		    		} 
-		    		
-		    		//Question Five
-		    		String sQuestionFiveAnswer = null;
-		    		
-		    		if (questionFiveSelectionOne.isSelected()) {
-		    			sQuestionFiveAnswer = "1";
-		    		} else if (questionFiveSelectionTwo.isSelected()) {
-		    			sQuestionFiveAnswer = "2";
-		    		} else if (questionFiveSelectionThree.isSelected()) {
-		    			sQuestionFiveAnswer = "3";
-		    		} else if (questionFiveSelectionFour.isSelected()) {
-		    			sQuestionFiveAnswer = "4";
-		    		}
-		    		
-		    		// Question Six
-		    		String sQuestionSixAnswer = "-1";
-		    		
-		    		if (questionSixSelectionOne.isSelected()) {
-		    			sQuestionSixAnswer = "0";
-		    		} else if (questionSixSelectionTwo.isSelected()) {
-		    			sQuestionSixAnswer = "1";
-		    		} else if (questionSixSelectionThree.isSelected()) {
-		    			sQuestionSixAnswer = "2";
-		    		} else if (questionSixSelectionFour.isSelected()) {
-		    			sQuestionSixAnswer = "3";
-		    		} else if (questionSixSelectionFive.isSelected()) {
-		    			sQuestionSixAnswer = "4";
-		    		} else if (questionSixSelectionSix.isSelected()) {
-		    			sQuestionSixAnswer = "5";
-		    		}
-		    		
-		    		//Question Seven
-		    		String sQuestionSevenAnswer = "-1";
-		    		
-		    		if (questionSevenSelectionOne.isSelected()) {
-		    			sQuestionSevenAnswer = "1";
-		    		} else if (questionSevenSelectionTwo.isSelected()) {
-		    			sQuestionSevenAnswer = "2";
-		    		} else if (questionSevenSelectionThree.isSelected()) {
-		    			sQuestionSevenAnswer = "3";
-		    		} else if (questionSevenSelectionFour.isSelected()) {
-		    			sQuestionSevenAnswer = "4";
-		    		}
-		    		
-		    		//Date
-		    		
-					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-					String timeAndDate = simpleDateFormat.format(new Date());
-		    		
-		    		//Array to send to IIP
-		    		
-		    		List<NameValuePair> params = new ArrayList<NameValuePair>();
-					params.add(new BasicNameValuePair("q_1", sQuestionOneAnswer));
-		        	params.add(new BasicNameValuePair("q_2", sQuestionTwoAnswer));
-		        	params.add(new BasicNameValuePair("q_3", sQuestionThreeAnswer));
-		        	params.add(new BasicNameValuePair("q_4", sQuestionFourAnswer));
-		        	params.add(new BasicNameValuePair("q_5", sQuestionFiveAnswer));
-		        	params.add(new BasicNameValuePair("q_6", sQuestionSixAnswer));
-		        	params.add(new BasicNameValuePair("q_7", sQuestionSevenAnswer));
-		        	params.add(new BasicNameValuePair("patientId", patientId));
-		        	params.add(new BasicNameValuePair("dateTime", timeAndDate));
-		            
-		        	System.out.println("Trying to send data!");
-		        	try {
-						httpPost.setEntity(new UrlEncodedFormEntity(params));
-					} catch (UnsupportedEncodingException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-		            response = httpClient.execute(httpPost);
-		            System.out.println("Data was sent");
-		            
-		    	} catch (IOException e1) {
-		    		e1.printStackTrace();
-				}
-				Thread thread = new Thread(new Runnable() {
 
-					@Override
-					public void run() {
-						updateSendGui();
-
-					}
-				});
-				String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
-				String title = "Sending pulse measurements!";
-				int messageType = MessageType.INFO.ordinal();
-				thread.start();
-//				Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
-//						"Nonin device");
 				try {
+
+					if (questionOneSelectionTwo.isSelected()) {
+						sQuestionOneAnswer = "2";
+					} else if (questionOneSelectionThree.isSelected()) {
+						sQuestionOneAnswer = "3";
+					} else if (questionOneSelectionFour.isSelected()) {
+						sQuestionOneAnswer = "4";
+					}
+
+					if (questionTwoSelectionTwo.isSelected()) {
+						sQuestionTwoAnswer = "2";
+					} else if (questionTwoSelectionThree.isSelected()) {
+						sQuestionTwoAnswer = "3";
+					} else if (questionTwoSelectionFour.isSelected()) {
+						sQuestionTwoAnswer = "4";
+					}
+
+					if (questionThreeSelectionTwo.isSelected()) {
+						sQuestionThreeAnswer = "2";
+					} else if (questionThreeSelectionThree.isSelected()) {
+						sQuestionThreeAnswer = "3";
+					} else if (questionThreeSelectionFour.isSelected()) {
+						sQuestionThreeAnswer = "4";
+					}
+
+					if (questionFourSelectionOne.isSelected()) {
+						sQuestionFourAnswer = "2";
+					} else if (questionFourSelectionTwo.isSelected()) {
+						sQuestionFourAnswer = "3";
+					}
+
+					if (questionFiveSelectionOne.isSelected()) {
+						sQuestionFiveAnswer = "1";
+					} else if (questionFiveSelectionTwo.isSelected()) {
+						sQuestionFiveAnswer = "2";
+					} else if (questionFiveSelectionThree.isSelected()) {
+						sQuestionFiveAnswer = "3";
+					} else if (questionFiveSelectionFour.isSelected()) {
+						sQuestionFiveAnswer = "4";
+					}
+
+					if (questionSixSelectionOne.isSelected()) {
+						sQuestionSixAnswer = "0";
+					} else if (questionSixSelectionTwo.isSelected()) {
+						sQuestionSixAnswer = "1";
+					} else if (questionSixSelectionThree.isSelected()) {
+						sQuestionSixAnswer = "2";
+					} else if (questionSixSelectionFour.isSelected()) {
+						sQuestionSixAnswer = "3";
+					} else if (questionSixSelectionFive.isSelected()) {
+						sQuestionSixAnswer = "4";
+					} else if (questionSixSelectionSix.isSelected()) {
+						sQuestionSixAnswer = "5";
+					}
+
+					if (questionSevenSelectionOne.isSelected()) {
+						sQuestionSevenAnswer = "1";
+					} else if (questionSevenSelectionTwo.isSelected()) {
+						sQuestionSevenAnswer = "2";
+					} else if (questionSevenSelectionThree.isSelected()) {
+						sQuestionSevenAnswer = "3";
+					} else if (questionSevenSelectionFour.isSelected()) {
+						sQuestionSevenAnswer = "4";
+					}
+					final String[] questions = new String[] {
+							sQuestionOneAnswer, sQuestionTwoAnswer,
+							sQuestionThreeAnswer, sQuestionFourAnswer,
+							sQuestionFiveAnswer, sQuestionSixAnswer,
+							sQuestionSevenAnswer };
+
+					System.out.println("Trying to send data!");
+					Thread thread = new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+							updateSendGui(questions);
+
+						}
+					});
+					String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
+					String title = "Sending pulse measurements!";
+					int messageType = MessageType.INFO.ordinal();
+					thread.start();
+					ClassLoader cldr = this.getClass().getClassLoader();
+					java.net.URL imageURL = cldr.getResource("sending.gif");
+					ImageIcon sendingImage = new ImageIcon(imageURL);
 					JOptionPane.showMessageDialog(getView().getParent(),
-							message, title, messageType, null);
-				} catch (HeadlessException | IOException e1) {
-					// TODO Auto-generated catch block
+							message, title, messageType, sendingImage);
+
+				}
+
+				catch (HeadlessException | IOException e1) {
 					e1.printStackTrace();
 				}
+				//
 			}
 		});
 
 		return panelContainer;
+
 	}
 
 	private HttpClient getNewHttpClient() {
@@ -1352,139 +1346,80 @@ public class QuestionnareTab extends JComponent {
 		}
 	}
 
-	private void updateSendGui() {
+	private void updateSendGui(String[] questions) {
 		SwingUtilities.invokeLater(new Runnable() {
 			// Make all QuestionAnwer variable public and visible
 			public void run() {
-				 HttpClient httpClient = getNewHttpClient();
-				 // HttpPost httpPost = new
-				 //
-				 HttpPost("https://iip3:iip3@128.39.147.213:8181/IipDevU4H/root/provider/publication/info:375745058");
-				 HttpPost httpPost = new HttpPost(
-				 "https://tablet_0001:tablet_0001@172.25.5.15:8181/IipDevU4H/root/provider/publication/info:634752814");
-				 HttpResponse response = null;
-				 try {
-				
-				 // Question One
-				 String sQuestionOneAnswer = null;
-				
-				 if (questionOneSelectionTwo.isSelected()) {
-				 sQuestionOneAnswer = "2";
-				 } else if (questionOneSelectionThree.isSelected()) {
-				 sQuestionOneAnswer = "3";
-				 } else if (questionOneSelectionFour.isSelected()) {
-				 sQuestionOneAnswer = "4";
-				 }
-				
-				 // Question Two
-				 String sQuestionTwoAnswer = null;
-				
-				 if (questionTwoSelectionTwo.isSelected()) {
-				 sQuestionTwoAnswer = "2";
-				 } else if (questionTwoSelectionThree.isSelected()) {
-				 sQuestionTwoAnswer = "3";
-				 } else if (questionTwoSelectionFour.isSelected()) {
-				 sQuestionTwoAnswer = "4";
-				 }
-				
-				 // Question Three
-				 String sQuestionThreeAnswer = null;
-				
-				 if (questionThreeSelectionTwo.isSelected()) {
-				 sQuestionThreeAnswer = "2";
-				 } else if (questionThreeSelectionThree.isSelected()) {
-				 sQuestionThreeAnswer = "3";
-				 } else if (questionThreeSelectionFour.isSelected()) {
-				 sQuestionThreeAnswer = "4";
-				 }
-				
-				 // QuestionFour
-				 String sQuestionFourAnswer = null;
-				
-				 if (questionFourSelectionOne.isSelected()) {
-				 sQuestionFourAnswer = "2";
-				 } else if (questionFourSelectionTwo.isSelected()) {
-				 sQuestionFourAnswer = "3";
-				 } else if (questionFourSelectionThree.isSelected()) {
-				 sQuestionFourAnswer = "4";
-				 }
-				
-				 // Question Five
-				 String sQuestionFiveAnswer = null;
-				
-				 if (questionFiveSelectionOne.isSelected()) {
-				 sQuestionFiveAnswer = "1";
-				 } else if (questionFiveSelectionTwo.isSelected()) {
-				 sQuestionFiveAnswer = "2";
-				 } else if (questionFiveSelectionThree.isSelected()) {
-				 sQuestionFiveAnswer = "3";
-				 } else if (questionFiveSelectionFour.isSelected()) {
-				 sQuestionFiveAnswer = "4";
-				 }
-				
-				 // Question Six
-				 String sQuestionSixAnswer = null;
-				
-				 if (questionSixSelectionOne.isSelected()) {
-				 sQuestionSixAnswer = "0";
-				 } else if (questionSixSelectionTwo.isSelected()) {
-				 sQuestionSixAnswer = "1";
-				 } else if (questionSixSelectionThree.isSelected()) {
-				 sQuestionSixAnswer = "2";
-				 } else if (questionSixSelectionFour.isSelected()) {
-				 sQuestionSixAnswer = "3";
-				 } else if (questionSixSelectionFive.isSelected()) {
-				 sQuestionSixAnswer = "4";
-				 } else if (questionSixSelectionSix.isSelected()) {
-				 sQuestionSixAnswer = "5";
-				 }
-				
-				 // Question Seven
-				 String sQuestionSevenAnswer = null;
-				
-				 if (questionSevenSelectionOne.isSelected()) {
-				 sQuestionSevenAnswer = "1";
-				 } else if (questionSevenSelectionTwo.isSelected()) {
-				 sQuestionSevenAnswer = "2";
-				 } else if (questionSevenSelectionThree.isSelected()) {
-				 sQuestionSevenAnswer = "3";
-				 } else if (questionSevenSelectionFour.isSelected()) {
-				 sQuestionSevenAnswer = "4";
-				 }
-				
-				 // Array to send to IIP
-				
-				 List<NameValuePair> params = new ArrayList<NameValuePair>();
-				 params.add(new BasicNameValuePair("q_1",
-				 sQuestionOneAnswer));
-				 params.add(new BasicNameValuePair("q_2",
-				 sQuestionTwoAnswer));
-				 params.add(new BasicNameValuePair("q_3",
-				 sQuestionThreeAnswer));
-				 params.add(new BasicNameValuePair("q_4",
-				 sQuestionFourAnswer));
-				 params.add(new BasicNameValuePair("q_5",
-				 sQuestionFiveAnswer));
-				 params.add(new BasicNameValuePair("q_6",
-				 sQuestionSixAnswer));
-				 params.add(new BasicNameValuePair("q_7",
-				 sQuestionSevenAnswer));
-				 params.add(new BasicNameValuePair("patientId", "1234567"));
-				
-				 httpPost.setEntity(new UrlEncodedFormEntity(params));
-				 response = httpClient.execute(httpPost);
-				
-				 } catch (ClientProtocolException e1) {
-				 // TODO Auto-generated catch block
-				 } catch (IOException e1) {
-				 // TODO Auto-generated catch block
-				 }
-				 finally
-				 {
-				 Utilities.disposeDialog(null);
-				 }
+
+				String username = HealthProperties.getProperty("iipUsername");
+				String password = HealthProperties.getProperty("iipPassword");
+				String iipUrl = HealthProperties.getProperty("iipUrl");
+				String questionnaireChannel = HealthProperties
+						.getProperty("questionnaireChannel");
+				String patientId = HealthProperties.getProperty("patientId");
+				String URL = "https://" + username + ":" + password + "@"
+						+ iipUrl + questionnaireChannel;
+
+				HttpClient httpclient = getNewHttpClient();
+				HttpPost httpPost = new HttpPost(URL);
+				HttpResponse response = null;
+
+				// Array to send to IIP
+				// Date
+
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+						"yyyy-MM-dd'T'HH:mm:ss");
+				String timeAndDate = simpleDateFormat.format(new Date());
+				List<NameValuePair> params = new ArrayList<NameValuePair>();
+				params.add(new BasicNameValuePair("q_1", sQuestionOneAnswer));
+				params.add(new BasicNameValuePair("q_2", sQuestionTwoAnswer));
+				params.add(new BasicNameValuePair("q_3", sQuestionThreeAnswer));
+				params.add(new BasicNameValuePair("q_4", sQuestionFourAnswer));
+				params.add(new BasicNameValuePair("q_5", sQuestionFiveAnswer));
+				params.add(new BasicNameValuePair("q_6", sQuestionSixAnswer));
+				params.add(new BasicNameValuePair("q_7", sQuestionSevenAnswer));
+				params.add(new BasicNameValuePair("patientId", "1234567"));
+				params.add(new BasicNameValuePair("dateTime", timeAndDate));
+				try {
+					httpPost.setEntity(new UrlEncodedFormEntity(params));
+					response = httpclient.execute(httpPost);
+					System.out.println("\nTesting sending Pulse: "
+							+ response.getStatusLine());
+				} catch (ClientProtocolException e1) {
+					System.out.println(e1.toString());
+				} catch (IOException e1) {
+					System.out.println(e1.toString());
+				} finally {
+					Utilities.disposeDialog(null);
+				}
+				try {
+					DocumentBuilderFactory dbf = DocumentBuilderFactory
+							.newInstance();
+					DocumentBuilder db = dbf.newDocumentBuilder();
+					InputStream is = response.getEntity().getContent();
+					Document doc = db.parse(is);
+					Element root2 = doc.getDocumentElement();
+					printAllNodes(root2);
+				} catch (Exception e) {
+					System.out.println(e.toString());
+				}
 			}
 		});
 	}
 
+	private static void printAllNodes(Node doc) {
+		// System.out.println("Node: " + doc.getNodeName() + ", Value: " +
+		// doc.getNodeValue());
+		System.out.print("Tag: " + doc.getNodeName());
+		NodeList childrenNodes = doc.getChildNodes();
+		for (int i = 0; i < childrenNodes.getLength(); i++) {
+			Node childNode = childrenNodes.item(i);
+			if (childNode instanceof Element) {
+				System.out.println();
+				printAllNodes(childNode);
+			} else {
+				System.out.print(", Value: " + childNode.getNodeValue());
+			}
+		}
+	}
 }

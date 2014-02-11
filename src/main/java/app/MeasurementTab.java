@@ -203,8 +203,8 @@ public class MeasurementTab extends JComponent implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sendPulse) {
 			ClassLoader cldr = this.getClass().getClassLoader();
-			java.net.URL imageURL = cldr.getResource("Nonin.gif");
-			ImageIcon noninIcon = new ImageIcon(imageURL);
+			java.net.URL imageURL = cldr.getResource("sending.gif");
+			ImageIcon sendingImage = new ImageIcon(imageURL);
 			Thread thread = new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -212,29 +212,26 @@ public class MeasurementTab extends JComponent implements ActionListener {
 
 				}
 			});
-			String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
+			String message = "Trying to send measurements.\nIf you want to STOP measuring, \npress \"OK\".";
 			String title = "Sending pulse measurements!";
 			int messageType = MessageType.ERROR.ordinal();
-			JOptionPane.showMessageDialog(this, message, title, messageType,
-					noninIcon);
 			thread.start();
-
+			JOptionPane.showMessageDialog(this, message, title, messageType,
+					sendingImage);
 		}
 		if (e.getSource() == measurePulse) {
 			ClassLoader cldr = this.getClass().getClassLoader();
 			java.net.URL imageURL = cldr.getResource("Nonin.gif");
-			ImageIcon noninIcon = new ImageIcon(imageURL);
+			ImageIcon noninImage = new ImageIcon(imageURL);
 			PulseConnectionRunnable pc = new PulseConnectionRunnable(
 					pulseValue, oxigenValue, timeValue, this);
 			Thread thread = new Thread(pc);
 			String message = "Trying to get measurements.\nIf you want to stop measuring, \npress \"OK\".";
 			String title = "Measure pulse!";
 			int messageType = MessageType.INFO.ordinal();
-			Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
-					"Nonin device");
-			JOptionPane.showMessageDialog(this, message, title, messageType,
-					noninIcon);
 			thread.start();
+			JOptionPane.showMessageDialog(this, message, title, messageType,
+					noninImage);
 			if (thread.isAlive()) {
 				// Utilities.closeConnection();
 				System.out.println("Nothing yet implemented here");
