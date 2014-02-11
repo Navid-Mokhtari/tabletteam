@@ -202,17 +202,10 @@ public class MeasurementTab extends JComponent implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sendPulse) {
-			// SendVS sendVS = new SendVS();
-			// StatusLine statusLine = null;
-			// try {
-			// statusLine = sendVS.SendTestSignal(oxigenValue.getText(),
-			// pulseValue.getText(),timeValue.getText());
-			// statusValue.setText("Response:" + statusLine.getStatusCode());
-			// } catch (ClientProtocolException e1) {
-			// statusValue.setText("Was unable to send data");
-			// }
+			ClassLoader cldr = this.getClass().getClassLoader();
+			java.net.URL imageURL = cldr.getResource("Nonin.gif");
+			ImageIcon noninIcon = new ImageIcon(imageURL);
 			Thread thread = new Thread(new Runnable() {
-
 				@Override
 				public void run() {
 					updateSendGui();
@@ -221,29 +214,27 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			});
 			String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
 			String title = "Sending pulse measurements!";
-			int messageType = MessageType.INFO.ordinal();
-			thread.start();
-			Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
-					"Nonin device");
+			int messageType = MessageType.ERROR.ordinal();
 			JOptionPane.showMessageDialog(this, message, title, messageType,
-					icon);
-			
+					noninIcon);
+			thread.start();
 
 		}
 		if (e.getSource() == measurePulse) {
-			// PulseConnection pulseConnection = new PulseConnection(pulseValue,
-			// oxigenValue, timeValue);
+			ClassLoader cldr = this.getClass().getClassLoader();
+			java.net.URL imageURL = cldr.getResource("Nonin.gif");
+			ImageIcon noninIcon = new ImageIcon(imageURL);
 			PulseConnectionRunnable pc = new PulseConnectionRunnable(
 					pulseValue, oxigenValue, timeValue, this);
 			Thread thread = new Thread(pc);
-			thread.start();
 			String message = "Trying to get measurements.\nIf you want to stop measuring, \npress \"OK\".";
 			String title = "Measure pulse!";
 			int messageType = MessageType.INFO.ordinal();
 			Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
 					"Nonin device");
 			JOptionPane.showMessageDialog(this, message, title, messageType,
-					icon);
+					noninIcon);
+			thread.start();
 			if (thread.isAlive()) {
 				// Utilities.closeConnection();
 				System.out.println("Nothing yet implemented here");
@@ -261,23 +252,6 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			spirometryConnection.measure();
 			// CreateAndShowProgress();
 		}
-		if (e.getSource() == sendSpiro) {
-
-			// SendVS sendVS = new SendVS();
-			// StatusLine statusLine = null;
-			// try {
-			// statusLine = sendVS.SendTestSignal(oxigenValue.toString(),
-			// pulseValue.toString());
-			// statusValue.setText("Response:" + statusLine.getStatusCode());
-			// } catch (ClientProtocolException e1) {
-			// statusValue.setText("Was unable to send data");
-			// }
-			// RemoteDevices remoteDevices = new RemoteDevices();
-			// remoteDevices.RemoveDeviceDiscovery();
-			// remoteDevices.ServiceSearch();
-
-		}
-
 	}
 
 	private void CreateAndShowProgress() {
