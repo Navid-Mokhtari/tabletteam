@@ -34,7 +34,7 @@ public class Measur extends JPanel {
 		setLayout(gridBagLayout);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon("E:\\Work\\measure.jpg"));
+		lblNewLabel_3.setIcon(new ImageIcon(Measur.class.getResource("/pic/measure.jpg")));
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 0;
@@ -42,7 +42,7 @@ public class Measur extends JPanel {
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		JLabel label_1 = new JLabel("");
-		label_1.setIcon(new ImageIcon("E:\\Work\\video.jpg"));
+		label_1.setIcon(new ImageIcon(Measur.class.getResource("/pic/video.jpg")));
 		GridBagConstraints gbc_label_1 = new GridBagConstraints();
 		gbc_label_1.insets = new Insets(0, 0, 5, 5);
 		gbc_label_1.gridx = 3;

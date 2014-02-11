@@ -120,7 +120,7 @@ public class MainPage {
 		JButton btnNewButton = new JButton("");
 		
 
-		btnNewButton.setIcon(new ImageIcon("E:\\Work\\measure.jpg"));
+		btnNewButton.setIcon(new ImageIcon(MainPage.class.getResource("/pic/measure.jpg")));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.NORTHEAST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
@@ -130,7 +130,7 @@ public class MainPage {
 
 		JButton btnNewButton_1 = new JButton("");
 
-		btnNewButton_1.setIcon(new ImageIcon("E:\\Work\\question1.jpg"));
+		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/question1.jpg")));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTHEAST;
 		gbc_btnNewButton_1.gridx = 2;
@@ -185,7 +185,7 @@ public class MainPage {
 										textField_2.setColumns(10);
 														
 																JButton btnNewButton_4 = new JButton("");
-																btnNewButton_4.setIcon(new ImageIcon("E:\\Work\\video.jpg"));
+																btnNewButton_4.setIcon(new ImageIcon(MainPage.class.getResource("/pic/video.jpg")));
 																GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
 																gbc_btnNewButton_4.anchor = GridBagConstraints.NORTHEAST;
 																gbc_btnNewButton_4.insets = new Insets(0, 0, 5, 5);
@@ -194,7 +194,7 @@ public class MainPage {
 																panel_2.add(btnNewButton_4, gbc_btnNewButton_4);
 																
 																JButton button = new JButton("");
-																button.setIcon(new ImageIcon("E:\\Work\\history.jpg"));
+																button.setIcon(new ImageIcon(MainPage.class.getResource("/pic/history.jpg")));
 																GridBagConstraints gbc_button = new GridBagConstraints();
 																gbc_button.anchor = GridBagConstraints.EAST;
 																gbc_button.insets = new Insets(0, 0, 5, 5);
@@ -203,7 +203,7 @@ public class MainPage {
 																panel_2.add(button, gbc_button);
 																
 																JButton button_1 = new JButton("");
-																button_1.setIcon(new ImageIcon("E:\\Work\\bru.jpg"));
+																button_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/bru.jpg")));
 																GridBagConstraints gbc_button_1 = new GridBagConstraints();
 																gbc_button_1.anchor = GridBagConstraints.EAST;
 																gbc_button_1.insets = new Insets(0, 0, 5, 5);
@@ -212,7 +212,7 @@ public class MainPage {
 																panel_2.add(button_1, gbc_button_1);
 																
 																JButton button_2 = new JButton("");
-																button_2.setIcon(new ImageIcon("E:\\Work\\info.jpg"));
+																button_2.setIcon(new ImageIcon(MainPage.class.getResource("/pic/info.jpg")));
 																GridBagConstraints gbc_button_2 = new GridBagConstraints();
 																gbc_button_2.anchor = GridBagConstraints.EAST;
 																gbc_button_2.insets = new Insets(0, 0, 5, 5);
