@@ -47,10 +47,6 @@ import app.MeasurementTab;
 import app.QuestionnareTab;
 import app.Tabs;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 
 import java.awt.Panel;
 import java.io.IOException;
@@ -129,7 +125,8 @@ public class MainPage {
 		panel.add(btnNewButton, gbc_btnNewButton);
 
 		JButton btnNewButton_1 = new JButton("");
-
+		
+		
 		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/question1.jpg")));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTHEAST;
@@ -244,6 +241,46 @@ public class MainPage {
 				frame.repaint();
 				frame.revalidate();
 
+			}
+		});
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				//
+			
+			//	final Panel panel_2 = new Panel();
+				panel.setVisible(false);
+			
+				panel_2.setVisible(false);
+				frame.repaint();
+				frame.revalidate();
+				
+				//
+						//
+				QuestionnareTab questionnareTab=new QuestionnareTab();
+
+				JPanel panel3=null;
+				try {
+					panel3 = questionnareTab.createPanel("HHH");
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+								panel3.setVisible(true);
+				panel3.setEnabled(true);
+				frame.getContentPane().add(panel3, BorderLayout.CENTER);
+				questionnareTab.setVisible(true);
+//				measurementTab.setVisible(true);
+				panel3.setEnabled(true);
+				frame.repaint();
+				frame.revalidate();
+				//
+				
+				
+				
+				
 			}
 		});
 
