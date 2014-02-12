@@ -227,6 +227,7 @@ public class MainPage {
 			//Measur measur=new Measur();
             Dial dial=new Dial();
             dial.setVisible(true);
+            
 		
 		//	frame.getContentPane().add(dial, BorderLayout.CENTER);
 		//	frame.

@@ -18,6 +18,7 @@ import javax.swing.border.TitledBorder;
 
 public class Dial extends JDialog {
 
+
 	/**
 	 * Launch the application.
 	 */
@@ -35,6 +36,7 @@ public class Dial extends JDialog {
 	 * Create the dialog.
 	 */
 	public Dial() {
+		
 		setBounds(100, 100, 548, 572);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{888, 0};
