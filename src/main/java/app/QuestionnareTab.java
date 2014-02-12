@@ -1403,7 +1403,7 @@ public class QuestionnareTab extends JComponent {
 				params.add(new BasicNameValuePair("q_5", sQuestionFiveAnswer));
 				params.add(new BasicNameValuePair("q_6", sQuestionSixAnswer));
 				params.add(new BasicNameValuePair("q_7", sQuestionSevenAnswer));
-				params.add(new BasicNameValuePair("patientId", "1234567"));
+				params.add(new BasicNameValuePair("patientId", patientId));
 				params.add(new BasicNameValuePair("dateTime", timeAndDate));
 				try {
 					httpPost.setEntity(new UrlEncodedFormEntity(params));
