@@ -171,7 +171,7 @@ public class QuestionnareTab extends JComponent {
 		final JLabel questionOne;
 		questionOne = new JLabel(currentLanguage.getString("qOne"));
 		questionOne.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		questionOne.setForeground(Color.WHITE);
+		questionOne.setForeground(Color.BLUE);
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 0;
 		panelQuestionOne.add(questionOne, constrainsQuestionOne);
@@ -279,7 +279,7 @@ public class QuestionnareTab extends JComponent {
 		final JLabel questionTwo;
 		questionTwo = new JLabel(currentLanguage.getString("qTwo"));
 		questionTwo.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		questionTwo.setForeground(Color.WHITE);
+		questionTwo.setForeground(Color.BLUE);
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 0;
 		panelQuestionTwo.add(questionTwo, constrainsQuestionTwo);
@@ -406,7 +406,7 @@ public class QuestionnareTab extends JComponent {
 		final JLabel questionThree;
 		questionThree = new JLabel(currentLanguage.getString("qThree"));
 		questionThree.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		questionThree.setForeground(Color.WHITE);
+		questionThree.setForeground(Color.BLUE);
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 0;
 		panelQuestionThree.add(questionThree, constrainsQuestionThree);
@@ -538,7 +538,7 @@ public class QuestionnareTab extends JComponent {
 		final JLabel questionFour;
 		questionFour = new JLabel(currentLanguage.getString("qFour"));
 		questionFour.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		questionFour.setForeground(Color.WHITE);
+		questionFour.setForeground(Color.BLUE);
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 0;
 		panelQuestionFour.add(questionFour, constrainsQuestionFour);
@@ -652,7 +652,7 @@ public class QuestionnareTab extends JComponent {
 		final JLabel questionFive;
 		questionFive = new JLabel(currentLanguage.getString("qFive"));
 		questionFive.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		questionFive.setForeground(Color.WHITE);
+		questionFive.setForeground(Color.BLUE);
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 0;
 		panelQuestionFive.add(questionFive, constrainsQuestionFive);
@@ -801,7 +801,7 @@ public class QuestionnareTab extends JComponent {
 		final JLabel questionSix;
 		questionSix = new JLabel(currentLanguage.getString("qSix"));
 		questionSix.setFont(new Font("Lucida Grande", Font.BOLD, 30));
-		questionSix.setForeground(Color.WHITE);
+		questionSix.setForeground(Color.BLUE);
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 0;
 		panelQuestionSix.add(questionSix, constrainsQuestionSix);
@@ -976,7 +976,7 @@ public class QuestionnareTab extends JComponent {
 		final JLabel questionSeven;
 		questionSeven = new JLabel(currentLanguage.getString("qSeven"));
 		questionSeven.setFont(new Font("Lucida Grande", Font.BOLD, 40));
-		questionSeven.setForeground(Color.WHITE);
+		questionSeven.setForeground(Color.BLUE);
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 0;
 		panelQuestionSeven.add(questionSeven, constrainsQuestionSeven);
@@ -1119,7 +1119,7 @@ public class QuestionnareTab extends JComponent {
 		JLabel reviewlabel;
 		reviewlabel = new JLabel(currentLanguage.getString("qReview"));
 		reviewlabel.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		reviewlabel.setForeground(Color.WHITE);
+		reviewlabel.setForeground(Color.BLUE);
 		constrainsQuestionEight.gridx = 0;
 		constrainsQuestionEight.gridy = 0;
 		panelQuestionEight.add(reviewlabel, constrainsQuestionEight);
@@ -1171,7 +1171,7 @@ public class QuestionnareTab extends JComponent {
 
 		reviewlabel = new JLabel(currentLanguage.getString("qReview"));
 		reviewlabel.setFont(new Font("Lucida Grande", Font.BOLD, 20));
-		reviewlabel.setForeground(Color.WHITE);
+		reviewlabel.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 0;
 		panelQuestionNine.add(reviewlabel, constrainsQuestionNine);
