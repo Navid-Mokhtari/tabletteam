@@ -17,9 +17,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import com.intel.bluetooth.BlueCoveImpl;
-import com.intel.bluetooth.BluetoothConsts;
-import com.intel.bluetooth.obex.BlueCoveOBEX;
 
 import app.Utilities;
 import vitalsignals.Pulse;

@@ -64,7 +64,6 @@ public class MainPage {
 
 	private JFrame frame;
 	private JTextField textField_1;
-	private JTextField textField_2;
 
 	/**
 	 * Launch the application.
@@ -107,30 +106,50 @@ public class MainPage {
 		final Panel panel = new Panel();
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 40, 435, 283, 0 };
-		gbl_panel.rowHeights = new int[] { 189, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panel.columnWidths = new int[]{355, 89, 360, 89, 0};
+		gbl_panel.rowHeights = new int[]{23, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		JButton btnNewButton = new JButton("");
 		
-
-		btnNewButton.setIcon(new ImageIcon(MainPage.class.getResource("/pic/measure.jpg")));
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 Dial dial=new Dial();
+		            dial.setVisible(true);
+			}
+		});
+		btnNewButton.setIcon(new ImageIcon(MainPage.class.getResource("/pic/M.jpg")));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.NORTHEAST;
+		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 1;
+		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 0;
 		panel.add(btnNewButton, gbc_btnNewButton);
-
+		
+		JButton btnNewButton_2 = new JButton("");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				QuestionDial questiondial=new QuestionDial();
+	            questiondial.setVisible(true);
+				
+			}
+		});
+		btnNewButton_2.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Q.jpg")));
+		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_2.gridx = 1;
+		gbc_btnNewButton_2.gridy = 0;
+		panel.add(btnNewButton_2, gbc_btnNewButton_2);
+		
 		JButton btnNewButton_1 = new JButton("");
-		
-		
-		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/question1.jpg")));
+		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTHEAST;
-		gbc_btnNewButton_1.gridx = 2;
+		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTH;
+		gbc_btnNewButton_1.gridx = 3;
 		gbc_btnNewButton_1.gridy = 0;
 		panel.add(btnNewButton_1, gbc_btnNewButton_1);
 
@@ -145,8 +164,8 @@ public class MainPage {
 										
 										JLabel lblNewLabel = new JLabel("Last Update");
 										lblNewLabel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-										lblNewLabel.setForeground(new Color(30, 144, 255));
-										lblNewLabel.setFont(new Font("Arial", Font.BOLD, 18));
+										lblNewLabel.setForeground(Color.BLACK);
+										lblNewLabel.setFont(new Font("Arial", Font.BOLD, 16));
 										GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 										gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 										gbc_lblNewLabel.gridx = 0;
@@ -155,31 +174,12 @@ public class MainPage {
 										
 										textField_1 = new JTextField();
 										GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-										gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
+										gbc_textField_1.anchor = GridBagConstraints.WEST;
 										gbc_textField_1.insets = new Insets(0, 0, 5, 5);
 										gbc_textField_1.gridx = 1;
 										gbc_textField_1.gridy = 0;
 										panel_2.add(textField_1, gbc_textField_1);
 										textField_1.setColumns(10);
-										
-										JLabel lblNewLabel_1 = new JLabel("Last Update");
-										lblNewLabel_1.setForeground(new Color(30, 144, 255));
-										lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 18));
-										GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-										gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-										gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-										gbc_lblNewLabel_1.gridx = 2;
-										gbc_lblNewLabel_1.gridy = 0;
-										panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
-										
-										textField_2 = new JTextField();
-										GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-										gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-										gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-										gbc_textField_2.gridx = 3;
-										gbc_textField_2.gridy = 0;
-										panel_2.add(textField_2, gbc_textField_2);
-										textField_2.setColumns(10);
 														
 																JButton btnNewButton_4 = new JButton("");
 																btnNewButton_4.setIcon(new ImageIcon(MainPage.class.getResource("/pic/video.jpg")));
@@ -216,77 +216,6 @@ public class MainPage {
 																gbc_button_2.gridx = 3;
 																gbc_button_2.gridy = 1;
 																panel_2.add(button_2, gbc_button_2);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			//	panel.setVisible(false);
-		//		panel_2.setVisible(false);
-		//	    frame.repaint();
-		//		frame.revalidate();
-				
-				//
-			//Measur measur=new Measur();
-            Dial dial=new Dial();
-            dial.setVisible(true);
-            
-		
-		//	frame.getContentPane().add(dial, BorderLayout.CENTER);
-		//	frame.
-	
-				//
-				
-
-				//MeasurementTab measurementTab = new MeasurementTab();
-				//JPanel panel3 = measurementTab.createPanel("test");
-				//panel3.setVisible(true);
-				//panel3.setEnabled(true);
-				//frame.getContentPane().add(panel3, BorderLayout.CENTER);
-//				measurementTab.setVisible(true);
-//				panel_3.setEnabled(true);
-		//		frame.repaint();
-		//		frame.revalidate();
-
-			}
-		});
-		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				//
-			
-			//	final Panel panel_2 = new Panel();
-				panel.setVisible(false);
-			
-				panel_2.setVisible(false);
-				frame.repaint();
-				frame.revalidate();
-				
-				//
-						//
-				QuestionnareTab questionnareTab=new QuestionnareTab();
-
-				JPanel panel3=null;
-				try {
-					panel3 = questionnareTab.createPanel("HHH");
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-								panel3.setVisible(true);
-				panel3.setEnabled(true);
-				frame.getContentPane().add(panel3, BorderLayout.CENTER);
-				questionnareTab.setVisible(true);
-//				measurementTab.setVisible(true);
-				panel3.setEnabled(true);
-				frame.repaint();
-				frame.revalidate();
-				//
-				
-				
-				
-				
-			}
-		});
 
 	}
 
