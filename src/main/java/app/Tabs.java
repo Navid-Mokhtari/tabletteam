@@ -18,6 +18,7 @@ public class Tabs extends JTabbedPane {
 	public Tabs() throws IOException {
 		super(JTabbedPane.TOP);
 		setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+		
 		QuestionnareTab questionnareTab = new QuestionnareTab();
 		addTab(currentLanguage.getString("Questionnaire"),
 				questionnareTab.getView());
@@ -25,6 +26,10 @@ public class Tabs extends JTabbedPane {
 		MeasurementTab measurementTab = new MeasurementTab();
 		addTab(currentLanguage.getString("Measurements"),
 				measurementTab.getView());
+		
+		CatQuestionnaire catQuestionnaire = new CatQuestionnaire();
+		addTab(currentLanguage.getString("CatQuestionnaire"),
+				catQuestionnaire.getView());
 		
 //		ChatPanel chatPanel = new ChatPanel();
 //		addTab("Chat", chatPanel.getView());
