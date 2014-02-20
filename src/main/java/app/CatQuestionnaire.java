@@ -38,8 +38,9 @@ public class CatQuestionnaire extends JComponent {
 	String sQuestionThreeAnswer = null;
 	String sQuestionFourAnswer = null;
 	String sQuestionFiveAnswer = null;
-	String sQuestionSixAnswer = "-1";
-	String sQuestionSevenAnswer = "-1";
+	String sQuestionSixAnswer = null;
+	String sQuestionSevenAnswer = null;
+	String sQuestionEightAnswer = null;
 	
 	
 	public Component getView() throws IOException {
@@ -157,7 +158,7 @@ public class CatQuestionnaire extends JComponent {
 		constrainsQuestionOne.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionOneLeft;
-		questionOneLeft = new JLabel(currentLanguage.getString("qCatFourLeft"));
+		questionOneLeft = new JLabel(currentLanguage.getString("qCatOneLeft"));
 		questionOneLeft.setFont(new Font("Tahoma", Font.BOLD, 20));
 				questionOneLeft.setForeground(Color.BLUE);
 		constrainsQuestionOne.gridx = 0;
@@ -165,7 +166,7 @@ public class CatQuestionnaire extends JComponent {
 		panelQuestionOne.add(questionOneLeft, constrainsQuestionOne);
 		
 		final JLabel questionOneRight;
-		questionOneRight = new JLabel(currentLanguage.getString("qCatFourRight"));
+		questionOneRight = new JLabel(currentLanguage.getString("qCatOneRight"));
 		questionOneRight.setFont(new Font("Tahoma", Font.BOLD, 20));
 		questionOneRight.setForeground(Color.BLUE);
 		constrainsQuestionOne.gridx = 7;
