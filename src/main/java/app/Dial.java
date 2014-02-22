@@ -46,6 +46,8 @@ public class Dial extends JDialog {
 	 * Create the dialog.
 	 */
 	public Dial() {
+		final JLabel pulseValue;
+		final JLabel oxigenValue;
 		
 		setBounds(0, 0, 1366, 768);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -65,9 +67,9 @@ public class Dial extends JDialog {
 			getContentPane().add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[]{0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 			gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panel.setLayout(gbl_panel);
 			{
 				JLabel label = new JLabel("");
@@ -110,15 +112,36 @@ public class Dial extends JDialog {
 				panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 			}
 			{
+			    pulseValue = new JLabel("                       ");
+				pulseValue.setForeground(Color.WHITE);
+				pulseValue.setFont(new Font("Arial", Font.BOLD, 18));
+				pulseValue.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				GridBagConstraints gbc_pulseValue = new GridBagConstraints();
+				gbc_pulseValue.insets = new Insets(0, 0, 5, 0);
+				gbc_pulseValue.gridx = 0;
+				gbc_pulseValue.gridy = 11;
+				panel.add(pulseValue, gbc_pulseValue);
+			}
+			{
+				oxigenValue = new JLabel("                       ");
+				oxigenValue.setForeground(Color.WHITE);
+				oxigenValue.setFont(new Font("Arial", Font.BOLD, 18));
+				oxigenValue.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				GridBagConstraints gbc_oxigenValue = new GridBagConstraints();
+				gbc_oxigenValue.gridx = 0;
+				gbc_oxigenValue.gridy = 12;
+				panel.add(oxigenValue, gbc_oxigenValue);
+			}
+			{
 				JButton btnMeasure = new JButton("Measure");
 				btnMeasure.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						ClassLoader cldr = this.getClass().getClassLoader();
 						java.net.URL imageURL = cldr.getResource("Nonin.gif");
 						ImageIcon noninImage = new ImageIcon(imageURL);
-//						PulseConnectionRunnable pc = new PulseConnectionRunnable(
-//								pulseValue, oxigenValue, timeValue, this);
-//						Thread thread = new Thread(pc);
+						PulseConnectionRunnable pc = new PulseConnectionRunnable(
+								pulseValue, oxigenValue, null, null);
+						Thread thread = new Thread(pc);
 						String message = "Trying to get measurements.";
 						String title = "Measure pulse";
 						final JDialog dialog = new JDialog();
@@ -134,7 +157,7 @@ public class Dial extends JDialog {
 						// Public method to center the dialog after calling pack()
 //						dialog.setLocationRelativeTo(this.getParent());
 						dialog.setVisible(true);
-//						thread.start();
+						thread.start();
 						// if (thread.isAlive()) {
 						// // Utilities.closeConnection();
 						// System.out.println("Nothing yet implemented here");
@@ -173,6 +196,7 @@ public class Dial extends JDialog {
 				gbc_lblNewLabel_4.gridy = 10;
 				panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 			}
+			
 		}
 		{
 			JPanel buttonPane = new JPanel();
