@@ -1,63 +1,22 @@
-import app.Tabs;
-import app.MeasurementTab;
 import app.HealthProperties;
 
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagLayout;
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import java.awt.BorderLayout;
 
-import javax.swing.JSplitPane;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
-
 import java.awt.Color;
-
-import javax.swing.Box;
-
-import java.awt.Component;
-
-import javax.swing.BoxLayout;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Button;
-
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentListener;
-import javax.swing.JEditorPane;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import javax.swing.JSeparator;
-
-import app.App;
-import app.ConfPanel;
-import app.ConferencePanel;
-import app.HealthProperties;
-import app.MeasurementTab;
-import app.QuestionnareTab;
-import app.Tabs;
-
-
 import java.awt.Panel;
-import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.JComboBox;
-import app.MeasurementTab;
-
-import app.Tabs;
 import java.awt.Font;
 
 public class MainPage {
@@ -136,7 +95,7 @@ public class MainPage {
 				
 			}
 		});
-		btnNewButton_2.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Q.jpg")));
+		btnNewButton_2.setIcon(new ImageIcon(MainPage.class.getResource("/pic/question1.jpg")));
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
@@ -216,6 +175,7 @@ public class MainPage {
 																gbc_button_2.gridx = 3;
 																gbc_button_2.gridy = 1;
 																panel_2.add(button_2, gbc_button_2);
+
 
 	}
 

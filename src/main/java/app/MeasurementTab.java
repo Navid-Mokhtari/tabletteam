@@ -12,10 +12,12 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -114,14 +116,14 @@ public class MeasurementTab extends JComponent implements ActionListener {
 		constrains.gridy = 3;
 		panel.add(timeValue, constrains);
 
-		measurePulse = new JButton("Measure Pulse");
+		measurePulse = new JButton("Measure");
 		constrains.gridx = 0;
 		constrains.gridy = 4;
 		measurePulse.setPreferredSize(new Dimension(300, 70));
 		measurePulse.addActionListener(this);
 		panel.add(measurePulse, constrains);
 
-		sendPulse = new JButton("Send Pulse Values");
+		sendPulse = new JButton("Send");
 		constrains.gridx = 1;
 		constrains.gridy = 4;
 		sendPulse.setPreferredSize(new Dimension(300, 70));
@@ -159,13 +161,13 @@ public class MeasurementTab extends JComponent implements ActionListener {
 		constrains.gridy = 7;
 		// panel.add(timeSpiroValue, constrains);
 
-		measureSpiro = new JButton("Measure Spirometer");
+		measureSpiro = new JButton("Measure");
 		constrains.gridx = 0;
 		constrains.gridy = 8;
 		measureSpiro.addActionListener(this);
 		// panel.add(measureSpiro, constrains);
 
-		sendSpiro = new JButton("Send Spirometer Values");
+		sendSpiro = new JButton("Send");
 		constrains.gridx = 1;
 		constrains.gridy = 8;
 		sendSpiro.addActionListener(this);
@@ -202,58 +204,69 @@ public class MeasurementTab extends JComponent implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sendPulse) {
-			// SendVS sendVS = new SendVS();
-			// StatusLine statusLine = null;
-			// try {
-			// statusLine = sendVS.SendTestSignal(oxigenValue.getText(),
-			// pulseValue.getText(),timeValue.getText());
-			// statusValue.setText("Response:" + statusLine.getStatusCode());
-			// } catch (ClientProtocolException e1) {
-			// statusValue.setText("Was unable to send data");
-			// }
+			ClassLoader cldr = this.getClass().getClassLoader();
+			java.net.URL imageURL = cldr.getResource("sending.gif");
+			ImageIcon sendingImage = new ImageIcon(imageURL);
 			Thread thread = new Thread(new Runnable() {
-
 				@Override
 				public void run() {
 					updateSendGui();
 
 				}
 			});
-			String message = "Trying to send measurements.\nIf you want to stop measuring, \npress \"OK\".";
+			String message = "Trying to send measurements.\nIf you want to STOP measuring, \npress \"OK\".";
 			String title = "Sending pulse measurements!";
-			int messageType = MessageType.INFO.ordinal();
-			thread.start();
-			Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
-					"Nonin device");
-			JOptionPane.showMessageDialog(this, message, title, messageType,
-					icon);
-			
+			int messageType = MessageType.ERROR.ordinal();
 
+			// JOptionPane.showMessageDialog(this, message, title, messageType,
+			// sendingImage);
+			// Then we display the dialog on that frame
+			final JDialog dialog = new JDialog();
+			dialog.setTitle("Sending measurements...");
+			dialog.setUndecorated(false);
+			JPanel panel = new JPanel();
+			final JLabel label = new JLabel(sendingImage);
+			sendingImage.setImageObserver(label);
+			panel.add(label);
+			dialog.add(panel);
+			dialog.pack();
+			// Public method to center the dialog after calling pack()
+			dialog.setLocationRelativeTo(this.getParent());
+			dialog.setVisible(true);
+			thread.start();
 		}
 		if (e.getSource() == measurePulse) {
-			// PulseConnection pulseConnection = new PulseConnection(pulseValue,
-			// oxigenValue, timeValue);
+			ClassLoader cldr = this.getClass().getClassLoader();
+			java.net.URL imageURL = cldr.getResource("Nonin.gif");
+			ImageIcon noninImage = new ImageIcon(imageURL);
 			PulseConnectionRunnable pc = new PulseConnectionRunnable(
 					pulseValue, oxigenValue, timeValue, this);
 			Thread thread = new Thread(pc);
+			String message = "Trying to get measurements.";
+			String title = "Measure pulse";
+			final JDialog dialog = new JDialog();
+			dialog.setTitle(title);
+			dialog.setUndecorated(false);
+			JPanel panel = new JPanel();
+			final JLabel label = new JLabel(noninImage);
+			final JLabel messageLabel = new JLabel(message);
+			panel.add(label);
+			panel.add(messageLabel);
+			dialog.add(panel);
+			dialog.pack();
+			// Public method to center the dialog after calling pack()
+			dialog.setLocationRelativeTo(this.getParent());
+			dialog.setVisible(true);
 			thread.start();
-			String message = "Trying to get measurements.\nIf you want to stop measuring, \npress \"OK\".";
-			String title = "Measure pulse!";
-			int messageType = MessageType.INFO.ordinal();
-			Icon icon = new ImageIcon("src/main/resources/Nonin.gif",
-					"Nonin device");
-			JOptionPane.showMessageDialog(this, message, title, messageType,
-					icon);
-			if (thread.isAlive()) {
-				// Utilities.closeConnection();
-				System.out.println("Nothing yet implemented here");
-				System.out.println("Connection with button was closed!");
-			} else {
-				System.err
-						.println("Thread cannot be interrupted, because it is not alive");
-			}
+			// if (thread.isAlive()) {
+			// // Utilities.closeConnection();
+			// System.out.println("Nothing yet implemented here");
+			// System.out.println("Connection with button was closed!");
+			// } else {
+			// System.err
+			// .println("Thread cannot be interrupted, because it is not alive");
+			// }
 
-			// pulseConnection.run();
 		}
 		if (e.getSource() == measureSpiro) {
 			spirometryConnection = new SpirometryConnection(fev1Value,
@@ -261,23 +274,6 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			spirometryConnection.measure();
 			// CreateAndShowProgress();
 		}
-		if (e.getSource() == sendSpiro) {
-
-			// SendVS sendVS = new SendVS();
-			// StatusLine statusLine = null;
-			// try {
-			// statusLine = sendVS.SendTestSignal(oxigenValue.toString(),
-			// pulseValue.toString());
-			// statusValue.setText("Response:" + statusLine.getStatusCode());
-			// } catch (ClientProtocolException e1) {
-			// statusValue.setText("Was unable to send data");
-			// }
-			// RemoteDevices remoteDevices = new RemoteDevices();
-			// remoteDevices.RemoveDeviceDiscovery();
-			// remoteDevices.ServiceSearch();
-
-		}
-
 	}
 
 	private void CreateAndShowProgress() {

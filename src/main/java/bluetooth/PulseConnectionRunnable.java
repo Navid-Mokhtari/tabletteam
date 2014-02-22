@@ -52,12 +52,14 @@ public class PulseConnectionRunnable implements Runnable {
 			if (pulse.ParseMessage()) {
 				System.out.println("Message parsed, trying to update GUI");
 				updateGui();
-				Utilities.disposeDialog(measurementTab);
+
 			} else {
 				System.out.println("Message was not parsed!");
 			}
 		} catch (Exception e) {
 			System.out.println("We are here!" + e.toString());
+		} finally {
+			Utilities.disposeDialog(measurementTab);
 		}
 
 	}

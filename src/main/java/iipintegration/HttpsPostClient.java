@@ -86,16 +86,18 @@ public class HttpsPostClient {
 			nameValuePairs
 					.add(new BasicNameValuePair("pulse", pulse.getPulse()));
 			nameValuePairs.add(new BasicNameValuePair("patientId", patientId));
+			nameValuePairs.add(new BasicNameValuePair("dateTime", pulse
+					.getDate().toString()));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
+			System.out.println("\nTesting sending Pulse: "
+					+ response.getStatusLine());
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.toString());
 		}
 
-		System.out.println("\nTesting sending Pulse: "
-				+ response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -131,15 +133,14 @@ public class HttpsPostClient {
 			// .getDate().toString()));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
-
+			System.out.println("Testing sending Spirometer: "
+					+ response.getStatusLine());
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.toString());
 		}
 
-		System.out.println("Testing sending Spirometer: "
-				+ response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -172,17 +173,18 @@ public class HttpsPostClient {
 			nameValuePairs
 					.add(new BasicNameValuePair("spo2", pulse.getOxigen()));
 			nameValuePairs.add(new BasicNameValuePair("patientId", patientId));
+			nameValuePairs.add(new BasicNameValuePair("dateTime", pulse
+					.getDate().toString()));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
-
+			System.out.println("Testing sending Oxygen: "
+					+ response.getStatusLine());
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.toString());
 		}
 
-		System.out.println("Testing sending Oxygen: "
-				+ response.getStatusLine());
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();

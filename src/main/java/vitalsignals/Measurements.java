@@ -1,5 +1,6 @@
 package vitalsignals;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public abstract class Measurements {
@@ -8,8 +9,12 @@ public abstract class Measurements {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Date getDate()
-	{
+
+	public Date getDate() {
+		if (date == null) {
+			Calendar calendar = Calendar.getInstance();
+			return calendar.getTime();
+		}
 		return date;
 	}
 }

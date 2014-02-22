@@ -23,8 +23,8 @@ public class App extends JFrame implements ActionListener, DocumentListener {
 	public App() throws IOException {
 		super("eHealth monitoring");
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
-		int ySize = ((int) tk.getScreenSize().getHeight()) - 100;
+		int xSize = ((int) tk.getScreenSize().getWidth());
+		int ySize = ((int) tk.getScreenSize().getHeight());
 		this.setSize(xSize, ySize);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
