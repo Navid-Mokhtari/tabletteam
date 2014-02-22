@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class Dial extends JDialog {
@@ -100,15 +102,16 @@ public class Dial extends JDialog {
 				panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 			}
 			{
-				JLabel lblNewLabel_2 = new JLabel("           Measurments            ");
-				lblNewLabel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 20));
-				lblNewLabel_2.setForeground(Color.WHITE);
-				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-				gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
-				gbc_lblNewLabel_2.gridx = 0;
-				gbc_lblNewLabel_2.gridy = 7;
-				panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+				JButton btnMeasure = new JButton("Measure");
+				btnMeasure.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
+				GridBagConstraints gbc_btnMeasure = new GridBagConstraints();
+				gbc_btnMeasure.insets = new Insets(0, 0, 5, 0);
+				gbc_btnMeasure.gridx = 0;
+				gbc_btnMeasure.gridy = 7;
+				panel.add(btnMeasure, gbc_btnMeasure);
 			}
 			{
 				JLabel lblNewLabel_3 = new JLabel("        Spo2        ");
