@@ -83,7 +83,7 @@ public class QuestionnareTab extends JComponent {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 //		int xSize = ((int) tk.getScreenSize().getWidth());
 //		int ySize = ((int) tk.getScreenSize().getWidth());
-		questionnare.setPreferredSize(new Dimension(1280, 800));
+		questionnare.setPreferredSize(new Dimension(1366, 768));
 		return questionnare;
 	}
 

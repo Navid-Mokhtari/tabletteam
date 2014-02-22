@@ -46,9 +46,9 @@ public class CatQuestionnaire extends JComponent {
 	public Component getView() throws IOException {
 		JComponent questionnare = createPanel("Cat Questions");
 		Toolkit tk = Toolkit.getDefaultToolkit();
-		int xSize = ((int) tk.getScreenSize().getWidth());
-		int ySize = ((int) tk.getScreenSize().getWidth());
-		questionnare.setPreferredSize(new Dimension(xSize, ySize));
+//		int xSize = ((int) tk.getScreenSize().getWidth());
+//		int ySize = ((int) tk.getScreenSize().getWidth());
+		questionnare.setPreferredSize(new Dimension(1366, 768));
 		return questionnare;
 	}
 	
@@ -130,8 +130,8 @@ public class CatQuestionnaire extends JComponent {
 		URL iconUrlON = customRadioButton.getResource("radioButtonON.png");
 		Icon radioIconON = new ImageIcon(iconUrlON);
 		
-//		URL iconUrlOFF = customRadioButton.getResource("radioButtonOFF.png");
-//		Icon radioIconOFF = new ImageIcon(iconUrlOFF);
+		URL iconUrlOFF = customRadioButton.getResource("radioButtonOFF.png");
+		Icon radioIconOFF = new ImageIcon(iconUrlOFF);
 		
 		URL urlIconZero = customRadioButton.getResource("radioButtonZero.png");
 		Icon radioIconZero = new ImageIcon(urlIconZero);
@@ -154,24 +154,31 @@ public class CatQuestionnaire extends JComponent {
 		// adding Question one
 
 		final GridBagConstraints constrainsQuestionOne = new GridBagConstraints();
-		constrainsQuestionOne.insets = new Insets(5, 5, 5, 5);
 		constrainsQuestionOne.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionOneLeft;
-		questionOneLeft = new JLabel(currentLanguage.getString("qCatOneLeft"));
-		questionOneLeft.setFont(new Font("Tahoma", Font.BOLD, 20));
-				questionOneLeft.setForeground(Color.BLUE);
+		questionOneLeft = new JLabel(currentLanguage.getString("qCatFourLeft"));
+		questionOneLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
+		questionOneLeft.setForeground(Color.BLACK);
 		constrainsQuestionOne.gridx = 0;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneLeft, constrainsQuestionOne);
 		
 		final JLabel questionOneRight;
-		questionOneRight = new JLabel(currentLanguage.getString("qCatOneRight"));
-		questionOneRight.setFont(new Font("Tahoma", Font.BOLD, 20));
-		questionOneRight.setForeground(Color.BLUE);
+		questionOneRight = new JLabel(currentLanguage.getString("qCatFourRight"));
+		questionOneRight.setFont(new Font("Tahoma", Font.BOLD, 40));
+		questionOneRight.setForeground(Color.BLACK);
 		constrainsQuestionOne.gridx = 7;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneRight, constrainsQuestionOne);
+		
+		final JLabel questionOne;
+		questionOne = new JLabel(currentLanguage.getString("questionOne"));
+		questionOne.setFont(new Font("Tahoma", Font.BOLD, 50));
+		questionOne.setForeground(Color.BLUE);
+		constrainsQuestionOne.gridx = 0;
+		constrainsQuestionOne.gridy = 0;
+		panelQuestionOne.add(questionOne, constrainsQuestionOne);
 
 		final JRadioButton questionOneSelectionZero;
 		questionOneSelectionZero = new JRadioButton();
@@ -179,7 +186,7 @@ public class CatQuestionnaire extends JComponent {
 		questionOneSelectionZero.setIcon(radioIconZero);
 		questionOneSelectionZero.setSelectedIcon(radioIconON);
 		constrainsQuestionOne.gridx = 1;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionZero, constrainsQuestionOne);
 		questionOneSelectionZero.setActionCommand("0");
 
@@ -189,7 +196,7 @@ public class CatQuestionnaire extends JComponent {
 		questionOneSelectionOne.setIcon(radioIconOne);
 		questionOneSelectionOne.setSelectedIcon(radioIconON);
 		constrainsQuestionOne.gridx = 2;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionOne, constrainsQuestionOne);
 		questionOneSelectionOne.setActionCommand("1");
 
@@ -199,7 +206,7 @@ public class CatQuestionnaire extends JComponent {
 		questionOneSelectionTwo.setIcon(radioIconTwo);
 		questionOneSelectionTwo.setSelectedIcon(radioIconON);
 		constrainsQuestionOne.gridx = 3;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionTwo, constrainsQuestionOne);
 		questionOneSelectionTwo.setActionCommand("2");
 		
@@ -209,7 +216,7 @@ public class CatQuestionnaire extends JComponent {
 		questionOneSelectionThree.setIcon(radioIconThree);
 		questionOneSelectionThree.setSelectedIcon(radioIconON);
 		constrainsQuestionOne.gridx = 4;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionThree, constrainsQuestionOne);
 		questionOneSelectionThree.setActionCommand("3");
 		
@@ -219,7 +226,7 @@ public class CatQuestionnaire extends JComponent {
 		questionOneSelectionFour.setIcon(radioIconFour);
 		questionOneSelectionFour.setSelectedIcon(radioIconON);
 		constrainsQuestionOne.gridx = 5;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionFour, constrainsQuestionOne);
 		questionOneSelectionFour.setActionCommand("4");
 		
@@ -229,7 +236,7 @@ public class CatQuestionnaire extends JComponent {
 		questionOneSelectionFive.setIcon(radioIconFive);
 		questionOneSelectionFive.setSelectedIcon(radioIconON);
 		constrainsQuestionOne.gridx = 6;
-		constrainsQuestionOne.gridy = 1;
+		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionFive, constrainsQuestionOne);
 		questionOneSelectionFive.setActionCommand("5");
 
