@@ -20,10 +20,14 @@ import java.awt.Panel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
+import java.awt.Dimension;
+import javax.swing.JTable;
+import java.awt.Toolkit;
+import javax.swing.SwingConstants;
 
 public class MainPage {
 
-	private JFrame frame;
+	private JFrame frmUiaEhelse;
 	private JTextField textField_1;
 
 	/**
@@ -34,7 +38,7 @@ public class MainPage {
 			public void run() {
 				try {
 					MainPage window = new MainPage();
-					window.frame.setVisible(true);
+					window.frmUiaEhelse.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,21 +59,23 @@ public class MainPage {
 	private void initialize() {
 		HealthProperties healthProperties = new HealthProperties();
 		healthProperties.loadProperties();
-		frame = new JFrame();
-		frame.setResizable(false);
+		frmUiaEhelse = new JFrame();
+		frmUiaEhelse.setIconImage(Toolkit.getDefaultToolkit().getImage(MainPage.class.getResource("/pic/Doctor-icon2.png")));
+		frmUiaEhelse.setTitle("UiA, eHelse");
+		frmUiaEhelse.setResizable(false);
 //		Toolkit tk = Toolkit.getDefaultToolkit();
 //		int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
 //		int ySize = ((int) tk.getScreenSize().getWidth()) - 100;
 //		frame.setPreferredSize(new Dimension(xSize, ySize));
-		frame.setBounds(0, 0, 1366, 768);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmUiaEhelse.setBounds(0, 0, 1366, 768);
+		frmUiaEhelse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		final Panel panel = new Panel();
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		frmUiaEhelse.getContentPane().add(panel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{355, 89, 360, 89, 0};
-		gbl_panel.rowHeights = new int[]{23, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[]{589, 379, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{305, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
@@ -80,9 +86,9 @@ public class MainPage {
 		            dial.setVisible(true);
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(MainPage.class.getResource("/pic/M.jpg")));
+		btnNewButton.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Measurement2.JPG")));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
+		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 0;
@@ -97,73 +103,58 @@ public class MainPage {
 				
 			}
 		});
-		btnNewButton_2.setIcon(new ImageIcon(MainPage.class.getResource("/pic/question1.jpg")));
+		btnNewButton_2.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Question.JPG")));
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton_2.gridx = 1;
 		gbc_btnNewButton_2.gridy = 0;
 		panel.add(btnNewButton_2, gbc_btnNewButton_2);
 		
-		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-			
-				
-				CatQuestionDial catquestiondial=new CatQuestionDial();
-				catquestiondial.setVisible(true);
-				
-			}
-		});
-		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_1.gridx = 2;
-		gbc_btnNewButton_1.gridy = 0;
-		panel.add(btnNewButton_1, gbc_btnNewButton_1);
+		JLabel lblNewLabel_3 = new JLabel("              ");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_3.gridx = 5;
+		gbc_lblNewLabel_3.gridy = 0;
+		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Doctor-icon2.png")));
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.anchor = GridBagConstraints.EAST;
+		gbc_label.insets = new Insets(0, 0, 0, 5);
+		gbc_label.gridx = 6;
+		gbc_label.gridy = 0;
+		panel.add(label, gbc_label);
 
 		final Panel panel_2 = new Panel();
-		frame.getContentPane().add(panel_2, BorderLayout.WEST);
+		frmUiaEhelse.getContentPane().add(panel_2, BorderLayout.WEST);
 						GridBagLayout gbl_panel_2 = new GridBagLayout();
 						gbl_panel_2.columnWidths = new int[]{196, 193, 193, 193, 197, 0};
-						gbl_panel_2.rowHeights = new int[] {30, 0, 30, 0};
+						gbl_panel_2.rowHeights = new int[] {30, 0, 30, 0, 0, 0, 0, 0};
 						gbl_panel_2.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-						gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+						gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 						panel_2.setLayout(gbl_panel_2);
-										
-										JLabel lblNewLabel = new JLabel("Last Update");
-										lblNewLabel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-										lblNewLabel.setForeground(Color.BLACK);
-										lblNewLabel.setFont(new Font("Arial", Font.BOLD, 16));
-										GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-										gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-										gbc_lblNewLabel.gridx = 0;
-										gbc_lblNewLabel.gridy = 0;
-										panel_2.add(lblNewLabel, gbc_lblNewLabel);
-										
-										textField_1 = new JTextField();
-										GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-										gbc_textField_1.anchor = GridBagConstraints.WEST;
-										gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-										gbc_textField_1.gridx = 1;
-										gbc_textField_1.gridy = 0;
-										panel_2.add(textField_1, gbc_textField_1);
-										textField_1.setColumns(10);
-														
-																JButton btnNewButton_4 = new JButton("");
-																btnNewButton_4.setIcon(new ImageIcon(MainPage.class.getResource("/pic/video.jpg")));
-																GridBagConstraints gbc_btnNewButton_4 = new GridBagConstraints();
-																gbc_btnNewButton_4.anchor = GridBagConstraints.NORTHEAST;
-																gbc_btnNewButton_4.insets = new Insets(0, 0, 5, 5);
-																gbc_btnNewButton_4.gridx = 0;
-																gbc_btnNewButton_4.gridy = 1;
-																panel_2.add(btnNewButton_4, gbc_btnNewButton_4);
+																
+																JButton btnNewButton_1 = new JButton("");
+																GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+																gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+																gbc_btnNewButton_1.gridx = 0;
+																gbc_btnNewButton_1.gridy = 1;
+																panel_2.add(btnNewButton_1, gbc_btnNewButton_1);
+																btnNewButton_1.addActionListener(new ActionListener() {
+																	public void actionPerformed(ActionEvent arg0) {
+																		
+																	
+																		
+																		CatQuestionDial catquestiondial=new CatQuestionDial();
+																		catquestiondial.setVisible(true);
+																		
+																	}
+																});
+																btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/cat1.jpg")));
 																
 																JButton button = new JButton("");
-																button.setIcon(new ImageIcon(MainPage.class.getResource("/pic/history.jpg")));
+																button.setIcon(new ImageIcon(MainPage.class.getResource("/pic/History1.jpg")));
 																GridBagConstraints gbc_button = new GridBagConstraints();
 																gbc_button.anchor = GridBagConstraints.EAST;
 																gbc_button.insets = new Insets(0, 0, 5, 5);
@@ -171,23 +162,48 @@ public class MainPage {
 																gbc_button.gridy = 1;
 																panel_2.add(button, gbc_button);
 																
-																JButton button_1 = new JButton("");
-																button_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/bru.jpg")));
-																GridBagConstraints gbc_button_1 = new GridBagConstraints();
-																gbc_button_1.anchor = GridBagConstraints.EAST;
-																gbc_button_1.insets = new Insets(0, 0, 5, 5);
-																gbc_button_1.gridx = 2;
-																gbc_button_1.gridy = 1;
-																panel_2.add(button_1, gbc_button_1);
+																JLabel lblNewLabel_1 = new JLabel("Connection Status :");
+																lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
+																GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+																gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+																gbc_lblNewLabel_1.gridx = 0;
+																gbc_lblNewLabel_1.gridy = 3;
+																panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 																
-																JButton button_2 = new JButton("");
-																button_2.setIcon(new ImageIcon(MainPage.class.getResource("/pic/info.jpg")));
-																GridBagConstraints gbc_button_2 = new GridBagConstraints();
-																gbc_button_2.anchor = GridBagConstraints.EAST;
-																gbc_button_2.insets = new Insets(0, 0, 5, 5);
-																gbc_button_2.gridx = 3;
-																gbc_button_2.gridy = 1;
-																panel_2.add(button_2, gbc_button_2);
+																JLabel lblNewLabel_2 = new JLabel("Last Measurement Update :");
+																lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 16));
+																GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+																gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+																gbc_lblNewLabel_2.gridx = 0;
+																gbc_lblNewLabel_2.gridy = 4;
+																panel_2.add(lblNewLabel_2, gbc_lblNewLabel_2);
+																
+																JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2013  \r\n ");
+																lblUiaEhelse.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+																lblUiaEhelse.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 35));
+																GridBagConstraints gbc_lblUiaEhelse = new GridBagConstraints();
+																gbc_lblUiaEhelse.insets = new Insets(0, 0, 5, 5);
+																gbc_lblUiaEhelse.gridx = 1;
+																gbc_lblUiaEhelse.gridy = 4;
+																panel_2.add(lblUiaEhelse, gbc_lblUiaEhelse);
+																
+																JLabel lblNewLabel = new JLabel("Last Update");
+																lblNewLabel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+																lblNewLabel.setForeground(Color.BLACK);
+																lblNewLabel.setFont(new Font("Arial", Font.BOLD, 16));
+																GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+																gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
+																gbc_lblNewLabel.gridx = 3;
+																gbc_lblNewLabel.gridy = 6;
+																panel_2.add(lblNewLabel, gbc_lblNewLabel);
+																
+																textField_1 = new JTextField();
+																GridBagConstraints gbc_textField_1 = new GridBagConstraints();
+																gbc_textField_1.anchor = GridBagConstraints.WEST;
+																gbc_textField_1.gridx = 4;
+																gbc_textField_1.gridy = 6;
+																panel_2.add(textField_1, gbc_textField_1);
+																textField_1.setColumns(10);
 
 
 	}
