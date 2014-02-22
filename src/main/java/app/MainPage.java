@@ -1,4 +1,5 @@
 package app;
+import app.CatQuestionDial;
 import app.HealthProperties;
 
 import java.awt.EventQueue;
@@ -105,6 +106,16 @@ public class MainPage {
 		panel.add(btnNewButton_2, gbc_btnNewButton_2);
 		
 		JButton btnNewButton_1 = new JButton("");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			
+				
+				CatQuestionDial catquestiondial=new CatQuestionDial();
+				catquestiondial.setVisible(true);
+				
+			}
+		});
 		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
