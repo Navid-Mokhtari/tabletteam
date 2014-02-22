@@ -1,3 +1,4 @@
+package app;
 import app.HealthProperties;
 
 import java.awt.EventQueue;
@@ -59,7 +60,7 @@ public class MainPage {
 //		int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
 //		int ySize = ((int) tk.getScreenSize().getWidth()) - 100;
 //		frame.setPreferredSize(new Dimension(xSize, ySize));
-		frame.setBounds(100, 100, 899, 609);
+		frame.setBounds(0, 0, 1366, 768);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		final Panel panel = new Panel();
@@ -67,8 +68,8 @@ public class MainPage {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{355, 89, 360, 89, 0};
 		gbl_panel.rowHeights = new int[]{23, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JButton btnNewButton = new JButton("");
@@ -106,9 +107,10 @@ public class MainPage {
 		JButton btnNewButton_1 = new JButton("");
 		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton_1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton_1.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_1.gridx = 3;
+		gbc_btnNewButton_1.gridx = 2;
 		gbc_btnNewButton_1.gridy = 0;
 		panel.add(btnNewButton_1, gbc_btnNewButton_1);
 

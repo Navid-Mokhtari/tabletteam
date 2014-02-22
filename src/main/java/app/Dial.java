@@ -1,3 +1,4 @@
+package app;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -5,15 +6,22 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.border.TitledBorder;
+
+import bluetooth.PulseConnectionRunnable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -39,7 +47,7 @@ public class Dial extends JDialog {
 	 */
 	public Dial() {
 		
-		setBounds(100, 100, 548, 572);
+		setBounds(0, 0, 1366, 768);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{888, 0};
 		gridBagLayout.rowHeights = new int[]{445, 33, 0};
@@ -105,6 +113,36 @@ public class Dial extends JDialog {
 				JButton btnMeasure = new JButton("Measure");
 				btnMeasure.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						ClassLoader cldr = this.getClass().getClassLoader();
+						java.net.URL imageURL = cldr.getResource("Nonin.gif");
+						ImageIcon noninImage = new ImageIcon(imageURL);
+//						PulseConnectionRunnable pc = new PulseConnectionRunnable(
+//								pulseValue, oxigenValue, timeValue, this);
+//						Thread thread = new Thread(pc);
+						String message = "Trying to get measurements.";
+						String title = "Measure pulse";
+						final JDialog dialog = new JDialog();
+						dialog.setTitle(title);
+						dialog.setUndecorated(false);
+						JPanel panel = new JPanel();
+						final JLabel label = new JLabel(noninImage);
+						final JLabel messageLabel = new JLabel(message);
+						panel.add(label);
+						panel.add(messageLabel);
+						dialog.getContentPane().add(panel);
+						dialog.pack();
+						// Public method to center the dialog after calling pack()
+//						dialog.setLocationRelativeTo(this.getParent());
+						dialog.setVisible(true);
+//						thread.start();
+						// if (thread.isAlive()) {
+						// // Utilities.closeConnection();
+						// System.out.println("Nothing yet implemented here");
+						// System.out.println("Connection with button was closed!");
+						// } else {
+						// System.err
+						// .println("Thread cannot be interrupted, because it is not alive");
+						// }
 					}
 				});
 				GridBagConstraints gbc_btnMeasure = new GridBagConstraints();
@@ -147,7 +185,11 @@ public class Dial extends JDialog {
 			gbc_buttonPane.gridy = 1;
 			getContentPane().add(buttonPane, gbc_buttonPane);
 			{
-				JButton okButton = new JButton("Sending");
+				JButton okButton = new JButton("Send");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+					}
+				});
 				okButton.setForeground(new Color(30, 144, 255));
 				okButton.setFont(new Font("Arial", Font.BOLD, 16));
 				okButton.setActionCommand("OK");
@@ -156,6 +198,10 @@ public class Dial extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
 				cancelButton.setForeground(new Color(30, 144, 255));
 				cancelButton.setFont(new Font("Arial", Font.BOLD, 16));
 				cancelButton.setActionCommand("Cancel");

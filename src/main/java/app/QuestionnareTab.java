@@ -66,6 +66,8 @@ import org.w3c.dom.NodeList;
 //import com.sun.org.apache.xpath.internal.operations.String;
 
 public class QuestionnareTab extends JComponent {
+	public QuestionnareTab() {
+	}
 	private static final long serialVersionUID = -7594299439504858239L;
 	// Question One
 	String sQuestionOneAnswer = null;
@@ -1405,7 +1407,7 @@ public class QuestionnareTab extends JComponent {
 					final JLabel label = new JLabel(sendingImage);
 					sendingImage.setImageObserver(label);
 					panel.add(label);
-					dialog.add(panel);
+					dialog.getContentPane().add(panel);
 					dialog.pack();
 					// Public method to center the dialog after calling pack()
 					dialog.setLocationRelativeTo(getView().getParent());

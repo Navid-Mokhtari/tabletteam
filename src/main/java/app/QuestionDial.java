@@ -1,3 +1,4 @@
+package app;
 import java.awt.BorderLayout;
 
 import app.QuestionnareTab;
@@ -12,8 +13,6 @@ import javax.swing.border.EmptyBorder;
 
 
 public class QuestionDial extends JDialog {
-
-	private final JPanel contentPanel = new JPanel();
 
 	/**
 	 * Launch the application.
@@ -32,31 +31,11 @@ public class QuestionDial extends JDialog {
 	 * Create the dialog.
 	 */
 	public QuestionDial() {
-		setBounds(100, 100, 858, 636);
+		setBounds(0, 0, 1366, 768);
 	
 		
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		
-		
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		{
-			
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
 			
 			//
 			{
@@ -77,7 +56,7 @@ public class QuestionDial extends JDialog {
 		{
 			
 			JPanel panel12 = new JPanel();
-			getContentPane().add(panel12, BorderLayout.NORTH);
+			getContentPane().add(panel12, BorderLayout.CENTER);
 			QuestionnareTab questionnareTab=new QuestionnareTab();
 			try {
 				panel12 = questionnareTab.createPanel("HHH");
