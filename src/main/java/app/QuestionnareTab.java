@@ -228,36 +228,6 @@ public class QuestionnareTab extends JComponent {
 		questionOneGroup.add(questionOneSelectionThree);
 		questionOneGroup.add(questionOneSelectionFour);
 
-		class RadioListenerOne implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionOneAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionOneAnswer = currentLanguage.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionOneAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionOneAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				JLabel questionOneAnswer = new JLabel(sQuestionOneAnswer);
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 1;
-				panelQuestionEight.add(questionOneAnswer,
-						constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerOne listenerOne = new RadioListenerOne();
-		questionOneSelectionTwo.addActionListener(listenerOne);
-		questionOneSelectionThree.addActionListener(listenerOne);
-		questionOneSelectionFour.addActionListener(listenerOne);
-
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -271,6 +241,23 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				JLabel questionOneAnswer = new JLabel();
+				constrainsQuestionEight.gridx = 1;
+				constrainsQuestionEight.gridy = 1;
+				panelQuestionEight.add(questionOneAnswer,
+						constrainsQuestionEight);
+				
+				if (questionOneSelectionTwo.isSelected()) {
+					questionOneAnswer.setText(currentLanguage.getString("aAsUsual"));
+				} else if (questionOneSelectionThree.isSelected()) {
+					questionOneAnswer.setText(currentLanguage.getString("aWorse"));
+				} else if (questionOneSelectionFour.isSelected()) {
+					questionOneAnswer.setText(currentLanguage
+							.getString("aMuchWorse")); 
+				}
+
+				
+				
 				final JLabel questionOne;
 				questionOne = new JLabel(currentLanguage.getString("qOne"));
 				questionOne.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -345,36 +332,6 @@ public class QuestionnareTab extends JComponent {
 		questionTwoGroup.add(questionTwoSelectionThree);
 		questionTwoGroup.add(questionTwoSelectionFour);
 
-		class RadioListenerTwo implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionTwoAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionTwoAnswer = currentLanguage.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionTwoAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionTwoAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				JLabel questiontwoAnswer = new JLabel(sQuestionTwoAnswer);
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 2;
-				panelQuestionEight.add(questiontwoAnswer,
-						constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerTwo = new RadioListenerTwo();
-		questionTwoSelectionTwo.addActionListener(listenerTwo);
-		questionTwoSelectionThree.addActionListener(listenerTwo);
-		questionTwoSelectionFour.addActionListener(listenerTwo);
-
 		JButton toQuestionOne;
 		toQuestionOne = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -407,6 +364,20 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				JLabel questionTwoAnswer = new JLabel();
+				constrainsQuestionEight.gridx = 1;
+				constrainsQuestionEight.gridy = 2;
+				panelQuestionEight.add(questionTwoAnswer,
+						constrainsQuestionEight);
+
+				if (questionTwoSelectionTwo.isSelected()) {
+					questionTwoAnswer.setText(currentLanguage.getString("aAsUsual"));
+				} else if (questionTwoSelectionThree.isSelected()) {
+					questionTwoAnswer.setText(currentLanguage.getString("aWorse")); 
+				} else if (questionTwoSelectionFour.isSelected()) {
+					 questionTwoAnswer.setText(currentLanguage.getString("aMuchWorse")); 
+				}
+				
 				final JLabel questionTwo;
 				questionTwo = new JLabel(currentLanguage.getString("qTwo"));
 				questionTwo.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -484,37 +455,6 @@ public class QuestionnareTab extends JComponent {
 		questionThreeGroup.add(questionThreeSelectionThree);
 		questionThreeGroup.add(questionThreeSelectionFour);
 
-		class RadioListenerThree implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionThreeAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionThreeAnswer = currentLanguage
-							.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionThreeAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionThreeAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				JLabel questionThreeAnswer = new JLabel(sQuestionThreeAnswer);
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 3;
-				panelQuestionEight.add(questionThreeAnswer,
-						constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerThree listenerThree = new RadioListenerThree();
-		questionThreeSelectionTwo.addActionListener(listenerThree);
-		questionThreeSelectionThree.addActionListener(listenerThree);
-		questionThreeSelectionFour.addActionListener(listenerThree);
-
 		JButton backToQuestionTwo;
 		backToQuestionTwo = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -547,6 +487,22 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				JLabel questionThreeAnswer = new JLabel();
+				constrainsQuestionEight.gridx = 1;
+				constrainsQuestionEight.gridy = 3;
+				panelQuestionEight.add(questionThreeAnswer,
+						constrainsQuestionEight);
+				
+				if (questionThreeSelectionTwo.isSelected()) {
+					questionThreeAnswer.setText(currentLanguage
+							.getString("aAsUsual")); 
+				} else if (questionThreeSelectionThree.isSelected()) {
+					questionThreeAnswer.setText(currentLanguage.getString("aWorse")); 
+				} else if (questionThreeSelectionFour.isSelected()) {
+					questionThreeAnswer.setText(currentLanguage
+							.getString("aMuchWorse")); 
+				}
+
 				final JLabel questionThree;
 				questionThree = new JLabel(currentLanguage.getString("qThree"));
 				questionThree.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -608,34 +564,6 @@ public class QuestionnareTab extends JComponent {
 		questionFourGroup.add(questionFourSelectionOne);
 		questionFourGroup.add(questionFourSelectionTwo);
 
-		class RadioListenerFour implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionFourAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionFourAnswer = currentLanguage
-							.getString("qFourAnsOne");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionFourAnswer = currentLanguage
-							.getString("qFourAnsTwo");
-				}
-
-				JLabel questionFourAnswer = new JLabel(sQuestionFourAnswer);
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 4;
-				panelQuestionEight.add(questionFourAnswer,
-						constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerFour listenerFour = new RadioListenerFour();
-		questionFourSelectionOne.addActionListener(listenerFour);
-		questionFourSelectionTwo.addActionListener(listenerFour);
-
 		JButton backToQuestionThree;
 		backToQuestionThree = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -668,6 +596,20 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				JLabel questionFourAnswer = new JLabel();
+				constrainsQuestionEight.gridx = 1;
+				constrainsQuestionEight.gridy = 4;
+				panelQuestionEight.add(questionFourAnswer,
+						constrainsQuestionEight);
+				
+				if (questionFourSelectionOne.isSelected()) {
+					questionFourAnswer.setText(currentLanguage
+							.getString("qFourAnsOne"));
+				} else if (questionFourSelectionTwo.isSelected()) {
+					questionFourAnswer.setText(currentLanguage
+							.getString("qFourAnsTwo")); 
+				}
+
 				final JLabel questionFour;
 				questionFour = new JLabel(currentLanguage.getString("qFour"));
 				questionFour.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -758,42 +700,6 @@ public class QuestionnareTab extends JComponent {
 		questionFiveGroup.add(questionFiveSelectionThree);
 		questionFiveGroup.add(questionFiveSelectionFour);
 
-		class RadioListenerFive implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionFiveAnswer = null;
-
-				if (e.getActionCommand() == "1") {
-					sQuestionFiveAnswer = currentLanguage
-							.getString("qFiveAnsOne");
-				} else if (e.getActionCommand() == "2") {
-					sQuestionFiveAnswer = currentLanguage
-							.getString("qFiveAnsTwo");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionFiveAnswer = currentLanguage
-							.getString("qFiveAnsThree");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionFiveAnswer = currentLanguage
-							.getString("qFiveAnsFour");
-				}
-
-				JLabel questionFiveAnswer = new JLabel(sQuestionFiveAnswer);
-				constrainsQuestionNine.gridx = 1;
-				constrainsQuestionNine.gridy = 1;
-				panelQuestionNine.add(questionFiveAnswer,
-						constrainsQuestionNine);
-			}
-
-		}
-
-		RadioListenerFive listenerFive = new RadioListenerFive();
-		questionFiveSelectionOne.addActionListener(listenerFive);
-		questionFiveSelectionTwo.addActionListener(listenerFive);
-		questionFiveSelectionThree.addActionListener(listenerFive);
-		questionFiveSelectionFour.addActionListener(listenerFive);
-
 		JButton backToQuestionFour;
 		backToQuestionFour = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -826,12 +732,30 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				JLabel questionFiveAnswer = new JLabel();
+				constrainsQuestionNine.gridx = 1;
+				constrainsQuestionNine.gridy = 1;
+				panelQuestionNine.add(questionFiveAnswer,
+						constrainsQuestionNine);
+				
+				if (questionFiveSelectionOne.isSelected()) {
+					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsOne"));
+				} else if (questionFiveSelectionTwo.isSelected()) {
+					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsTwo"));
+				} else if (questionFiveSelectionThree.isSelected()) {
+					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsThree"));
+				} else if (questionFiveSelectionFour.isSelected()) {
+					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsFour"));
+				}
+				
 				final JLabel questionFive;
 				questionFive = new JLabel(currentLanguage.getString("qFive"));
 				questionFive.setFont(new Font("Tahoma", Font.BOLD, 20));
 				constrainsQuestionNine.gridx = 0;
 				constrainsQuestionNine.gridy = 1;
 				panelQuestionNine.add(questionFive, constrainsQuestionNine);
+				
 				if (questionFiveSelectionOne.isSelected()) {
 					cl.show(panelContainer, "8");
 				} else if (questionFiveSelectionTwo.isSelected()
@@ -945,49 +869,6 @@ public class QuestionnareTab extends JComponent {
 		questionSixGroup.add(questionSixSelectionFive);
 		questionSixGroup.add(questionSixSelectionSix);
 
-		class RadioListenerSix implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionSixAnswer = null;
-
-				if (e.getActionCommand() == "0") {
-					sQuestionSixAnswer = currentLanguage
-							.getString("qSixAnsOne");
-				} else if (e.getActionCommand() == "1") {
-					sQuestionSixAnswer = currentLanguage
-							.getString("qSixAnsTwo");
-				} else if (e.getActionCommand() == "2") {
-					sQuestionSixAnswer = currentLanguage
-							.getString("qSixAnsThree");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionSixAnswer = currentLanguage
-							.getString("qSixAnsFour");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionSixAnswer = currentLanguage
-							.getString("qSixAnsFive");
-				} else if (e.getActionCommand() == "5") {
-					sQuestionSixAnswer = currentLanguage
-							.getString("qSixAnsSix");
-				}
-
-				JLabel questionSixAnswer = new JLabel(sQuestionSixAnswer);
-				constrainsQuestionNine.gridx = 1;
-				constrainsQuestionNine.gridy = 2;
-				panelQuestionNine
-						.add(questionSixAnswer, constrainsQuestionNine);
-			}
-		}
-
-		RadioListenerSix listenerSix = new RadioListenerSix();
-		questionSixSelectionOne.addActionListener(listenerSix);
-		questionSixSelectionTwo.addActionListener(listenerSix);
-		questionSixSelectionThree.addActionListener(listenerSix);
-		questionSixSelectionFour.addActionListener(listenerSix);
-		questionSixSelectionFive.addActionListener(listenerSix);
-		questionSixSelectionSix.addActionListener(listenerSix);
-
 		JButton backToQuestionFive;
 		backToQuestionFive = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -1019,6 +900,32 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				JLabel questionSixAnswer = new JLabel();
+				constrainsQuestionNine.gridx = 1;
+				constrainsQuestionNine.gridy = 2;
+				panelQuestionNine
+						.add(questionSixAnswer, constrainsQuestionNine);
+				
+				if (questionSixSelectionOne.isSelected()) {
+					questionSixAnswer.setText(currentLanguage
+							.getString("qSixAnsOne"));
+				} else if (questionSixSelectionTwo.isSelected()) {
+					questionSixAnswer.setText(currentLanguage
+							.getString("qSixAnsTwo"));
+				} else if (questionSixSelectionThree.isSelected()) {
+					questionSixAnswer.setText(currentLanguage
+							.getString("qSixAnsThree"));
+				} else if (questionSixSelectionFour.isSelected()) {
+					questionSixAnswer.setText(currentLanguage
+							.getString("qSixAnsFour"));
+				} else if (questionSixSelectionFive.isSelected()) {
+					questionSixAnswer.setText(currentLanguage
+							.getString("qSixAnsFive"));
+				} else if (questionSixSelectionSix.isSelected()) {
+					questionSixAnswer.setText(currentLanguage
+							.getString("qSixAnsSix"));
+				}
+				
 				final JLabel questionSix;
 				questionSix = new JLabel(currentLanguage.getString("qSix"));
 				questionSix.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -1114,41 +1021,6 @@ public class QuestionnareTab extends JComponent {
 		questionSevenGroup.add(questionSevenSelectionThree);
 		questionSevenGroup.add(questionSevenSelectionFour);
 
-		class RadioListenerSeven implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionSevenAnswer = null;
-
-				if (e.getActionCommand() == "1") {
-					sQuestionSevenAnswer = currentLanguage
-							.getString("qSevenAnsOne");
-				} else if (e.getActionCommand() == "2") {
-					sQuestionSevenAnswer = currentLanguage
-							.getString("qSevenAnsTwo");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionSevenAnswer = currentLanguage
-							.getString("qSevenAnsThree");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionSevenAnswer = currentLanguage
-							.getString("qSevenAnsFour");
-				}
-
-				JLabel questionSevenAnswer = new JLabel(sQuestionSevenAnswer);
-				constrainsQuestionNine.gridx = 1;
-				constrainsQuestionNine.gridy = 3;
-				panelQuestionNine.add(questionSevenAnswer,
-						constrainsQuestionNine);
-			}
-		}
-
-		RadioListenerSeven listenerSeven = new RadioListenerSeven();
-		questionSevenSelectionOne.addActionListener(listenerSeven);
-		questionSevenSelectionTwo.addActionListener(listenerSeven);
-		questionSevenSelectionThree.addActionListener(listenerSeven);
-		questionSevenSelectionFour.addActionListener(listenerSeven);
-
 		JButton backToQuestionSix;
 		backToQuestionSix = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -1182,6 +1054,26 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				JLabel questionSevenAnswer = new JLabel();
+				constrainsQuestionNine.gridx = 1;
+				constrainsQuestionNine.gridy = 3;
+				panelQuestionNine.add(questionSevenAnswer,
+						constrainsQuestionNine);
+				
+				if (questionSevenSelectionOne.isSelected()) {
+					questionSevenAnswer.setText(currentLanguage
+							.getString("qSevenAnsOne"));
+				} else if (questionSevenSelectionTwo.isSelected()) {
+					questionSevenAnswer.setText(currentLanguage
+							.getString("qSevenAnsTwo"));
+				} else if (questionSevenSelectionThree.isSelected()) {
+					questionSevenAnswer.setText(currentLanguage
+							.getString("qSevenAnsThree"));
+				} else if (questionSevenSelectionFour.isSelected()) {
+					questionSevenAnswer.setText(currentLanguage
+							.getString("qSevenAnsFour"));
+				}
+
 				final JLabel questionSeven;
 				questionSeven = new JLabel(currentLanguage.getString("qSeven"));
 				questionSeven.setFont(new Font("Tahoma", Font.BOLD, 20));
