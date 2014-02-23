@@ -228,6 +228,12 @@ public class QuestionnareTab extends JComponent {
 		questionOneGroup.add(questionOneSelectionThree);
 		questionOneGroup.add(questionOneSelectionFour);
 
+		final JLabel questionOneAnswer = new JLabel();
+		constrainsQuestionEight.gridx = 1;
+		constrainsQuestionEight.gridy = 1;
+		panelQuestionEight.add(questionOneAnswer,
+				constrainsQuestionEight);
+		
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -241,11 +247,6 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JLabel questionOneAnswer = new JLabel();
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 1;
-				panelQuestionEight.add(questionOneAnswer,
-						constrainsQuestionEight);
 				
 				if (questionOneSelectionTwo.isSelected()) {
 					questionOneAnswer.setText(currentLanguage.getString("aAsUsual"));
@@ -351,6 +352,12 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
+		final JLabel questionTwoAnswer = new JLabel();
+		constrainsQuestionEight.gridx = 1;
+		constrainsQuestionEight.gridy = 2;
+		panelQuestionEight.add(questionTwoAnswer,
+				constrainsQuestionEight);
+		
 		JButton toQuestionThree;
 		toQuestionThree = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -364,11 +371,6 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JLabel questionTwoAnswer = new JLabel();
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 2;
-				panelQuestionEight.add(questionTwoAnswer,
-						constrainsQuestionEight);
 
 				if (questionTwoSelectionTwo.isSelected()) {
 					questionTwoAnswer.setText(currentLanguage.getString("aAsUsual"));
@@ -474,6 +476,12 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
+		final JLabel questionThreeAnswer = new JLabel();
+		constrainsQuestionEight.gridx = 1;
+		constrainsQuestionEight.gridy = 3;
+		panelQuestionEight.add(questionThreeAnswer,
+				constrainsQuestionEight);
+		
 		JButton toQuestionFour;
 		toQuestionFour = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -487,11 +495,6 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JLabel questionThreeAnswer = new JLabel();
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 3;
-				panelQuestionEight.add(questionThreeAnswer,
-						constrainsQuestionEight);
 				
 				if (questionThreeSelectionTwo.isSelected()) {
 					questionThreeAnswer.setText(currentLanguage
@@ -583,6 +586,12 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
+		final JLabel questionFourAnswer = new JLabel();
+		constrainsQuestionEight.gridx = 1;
+		constrainsQuestionEight.gridy = 4;
+		panelQuestionEight.add(questionFourAnswer,
+				constrainsQuestionEight);
+		
 		JButton toQuestionFive;
 		toQuestionFive = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -596,12 +605,6 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JLabel questionFourAnswer = new JLabel();
-				constrainsQuestionEight.gridx = 1;
-				constrainsQuestionEight.gridy = 4;
-				panelQuestionEight.add(questionFourAnswer,
-						constrainsQuestionEight);
-				
 				if (questionFourSelectionOne.isSelected()) {
 					questionFourAnswer.setText(currentLanguage
 							.getString("qFourAnsOne"));
@@ -719,6 +722,12 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
+		final JLabel questionFiveAnswer = new JLabel();
+		constrainsQuestionNine.gridx = 1;
+		constrainsQuestionNine.gridy = 1;
+		panelQuestionNine.add(questionFiveAnswer,
+				constrainsQuestionNine);
+		
 		JButton toQuestionSix;
 		toQuestionSix = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -732,13 +741,6 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-				JLabel questionFiveAnswer = new JLabel();
-				constrainsQuestionNine.gridx = 1;
-				constrainsQuestionNine.gridy = 1;
-				panelQuestionNine.add(questionFiveAnswer,
-						constrainsQuestionNine);
-				
 				if (questionFiveSelectionOne.isSelected()) {
 					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsOne"));
 				} else if (questionFiveSelectionTwo.isSelected()) {
@@ -887,6 +889,12 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
+		final JLabel questionSixAnswer = new JLabel();
+		constrainsQuestionNine.gridx = 1;
+		constrainsQuestionNine.gridy = 2;
+		panelQuestionNine
+				.add(questionSixAnswer, constrainsQuestionNine);
+		
 		JButton toQuestionSeven;
 		toQuestionSeven = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -900,11 +908,6 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JLabel questionSixAnswer = new JLabel();
-				constrainsQuestionNine.gridx = 1;
-				constrainsQuestionNine.gridy = 2;
-				panelQuestionNine
-						.add(questionSixAnswer, constrainsQuestionNine);
 				
 				if (questionSixSelectionOne.isSelected()) {
 					questionSixAnswer.setText(currentLanguage
@@ -1039,6 +1042,12 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
+		final JLabel questionSevenAnswer = new JLabel();
+		constrainsQuestionNine.gridx = 1;
+		constrainsQuestionNine.gridy = 3;
+		panelQuestionNine.add(questionSevenAnswer,
+				constrainsQuestionNine);
+		
 		JButton toQuestionEight;
 		toQuestionEight = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -1054,11 +1063,6 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				JLabel questionSevenAnswer = new JLabel();
-				constrainsQuestionNine.gridx = 1;
-				constrainsQuestionNine.gridy = 3;
-				panelQuestionNine.add(questionSevenAnswer,
-						constrainsQuestionNine);
 				
 				if (questionSevenSelectionOne.isSelected()) {
 					questionSevenAnswer.setText(currentLanguage
@@ -1164,6 +1168,9 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				questionSevenAnswer.setText(null);
+				
 				questionOneGroup.clearSelection();
 				questionTwoGroup.clearSelection();
 				questionThreeGroup.clearSelection();
@@ -1172,7 +1179,6 @@ public class QuestionnareTab extends JComponent {
 				questionSixGroup.clearSelection();
 				questionSevenGroup.clearSelection();
 				cl.show(panelContainer, "1");
-
 			}
 		});
 
