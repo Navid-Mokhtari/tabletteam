@@ -73,7 +73,7 @@ public class Dial extends JDialog {
 			panel.setLayout(gbl_panel);
 			{
 				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon(Dial.class.getResource("/pic/Measurement2.jpg")));
+				label.setIcon(new ImageIcon(Dial.class.getResource("/pic/Measurement2.JPG")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
 				gbc_label.insets = new Insets(0, 0, 5, 0);
 				gbc_label.gridx = 0;
