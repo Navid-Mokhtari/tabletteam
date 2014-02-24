@@ -83,7 +83,7 @@ public class Dial extends JDialog {
 			{
 				JLabel label = new JLabel("");
 				label.setIcon(new ImageIcon(Dial.class
-						.getResource("/pic/measure.jpg")));
+						.getResource("/pic/Final-measurment.jpg")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
 				gbc_label.insets = new Insets(0, 0, 5, 0);
 				gbc_label.gridx = 0;
@@ -251,8 +251,8 @@ public class Dial extends JDialog {
 				JButton okButton = new JButton("Send");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						pulseValue.setText("50");
-						oxigenValue.setText("20");
+//						pulseValue.setText("50");
+//						oxigenValue.setText("20");
 						if (!pulseValue.getText().isEmpty()) {
 
 							new Thread(new Runnable() {

@@ -166,7 +166,7 @@ public class CatQuestionnaire extends JComponent {
 
 		ClassLoader customRadioButton = this.getClass().getClassLoader();
 		
-		URL iconUrlON = customRadioButton.getResource("radioButtonON.png");
+		URL iconUrlON = customRadioButton.getResource("radioButtonCatON.png");
 		Icon radioIconON = new ImageIcon(iconUrlON);
 		
 		URL iconUrlOFF = customRadioButton.getResource("radioButtonOFF.png");
