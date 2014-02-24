@@ -18,16 +18,14 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import com.intel.bluetooth.BlueCoveImpl;
-import com.intel.bluetooth.BluetoothConsts;
-import com.intel.bluetooth.obex.BlueCoveOBEX;
-
+import com.intel.bluetooth.MicroeditionConnector;
 import app.Utilities;
 import vitalsignals.Pulse;
 
 public class PulseConnectionRunnable implements Runnable {
 	private JLabel pulseLabel, oxigenLabel, timeLabel;
 	private Pulse pulse;
-	private JComponent measurementTab;
+//	private JComponent measurementTab;
 	StreamConnectionNotifier service;
 	StreamConnection con;
 	InputStream is;
@@ -42,7 +40,7 @@ public class PulseConnectionRunnable implements Runnable {
 		this.pulseLabel = pulseValue;
 		this.oxigenLabel = oxigenValue;
 		this.timeLabel = time;
-		this.measurementTab = measurementTab;
+//		this.measurementTab = measurementTab;
 	}
 
 	public void run() {
@@ -58,13 +56,20 @@ public class PulseConnectionRunnable implements Runnable {
 			}
 		} catch (Exception e) {
 			System.out.println("We are here!" + e.toString());
-		} finally {
-			Utilities.disposeDialog(measurementTab);
-		}
+		} 
+//			finally {
+//			Utilities.disposeDialog(measurementTab);
+//		}
 
 	}
 
 	private Pulse startWaitingConnection() {
+		System.setProperty("bluecove.obex.timeout", "5000");
+		System.setProperty("bluecove.connect.timeout", "5000");
+		BlueCoveImpl.setConfigProperty("bluecove.obex.timeout", "5000");
+		BlueCoveImpl.setConfigProperty("bluecove.connect.timeout", "5000");
+		System.out.println(System.getProperty("bluecove.obex.timeout"));
+		System.out.println(System.getProperty("bluecove.connect.timeout"));
 		try {
 			LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
 		} catch (BluetoothStateException e2) {
@@ -72,10 +77,15 @@ public class PulseConnectionRunnable implements Runnable {
 			e2.printStackTrace();
 		}
 		try {
+			// service = (StreamConnectionNotifier) Connector
+			// .open("btspp://localhost:"
+			// + new UUID(0x1101).toString()
+			// + ";name=pulseService;authenticate=false;encrypt=false;");
 			service = (StreamConnectionNotifier) Connector
 					.open("btspp://localhost:"
 							+ new UUID(0x1101).toString()
-							+ ";name=pulseService;authenticate=false;encrypt=false;");
+							+ ";name=pulseService;authenticate=false;encrypt=false;",
+							MicroeditionConnector.READ_WRITE, true);
 		} catch (IOException e1) {
 			System.out.println(e1.toString());
 		}
@@ -87,6 +97,7 @@ public class PulseConnectionRunnable implements Runnable {
 		} catch (Exception e1) {
 			System.out.println("Some strange exeption");
 		}
+		Utilities.setConnection(service, con, is);
 		List<String> messageList = new ArrayList<String>();
 		try {
 			System.out.println("Opening input stream");
@@ -116,7 +127,7 @@ public class PulseConnectionRunnable implements Runnable {
 		System.out.println("Trying to open stream connection");
 		// StreamConnection conn = (StreamConnection) Connector
 		// .open("btspp://001C050064D8:1");
-		Utilities.setConnection(service, con, is);
+
 		try {
 			con = (StreamConnection) Connector.open("btspp://001C050064D8:1",
 					1, true);
@@ -125,6 +136,7 @@ public class PulseConnectionRunnable implements Runnable {
 			e2.printStackTrace();
 		}
 		System.out.println("Trying to open input stream");
+
 		try {
 			is = con.openInputStream();
 		} catch (IOException e2) {

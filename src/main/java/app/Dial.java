@@ -1,11 +1,13 @@
 package app;
-import java.awt.BorderLayout;
+
+import iipintegration.HttpsPostClient;
+
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.SwingUtilities;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -13,21 +15,26 @@ import java.awt.Insets;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.JTextField;
 
 import java.awt.Font;
 import java.awt.Color;
 
 import javax.swing.border.TitledBorder;
 
+import vitalsignals.Pulse;
+import databaseaccess.DBConnection;
 import bluetooth.PulseConnectionRunnable;
 
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-
 public class Dial extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 125208328959514400L;
 
 	/**
 	 * Launch the application.
@@ -48,13 +55,13 @@ public class Dial extends JDialog {
 	public Dial() {
 		final JLabel pulseValue;
 		final JLabel oxigenValue;
-		
+
 		setBounds(0, 0, 1366, 768);
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{888, 0};
-		gridBagLayout.rowHeights = new int[]{445, 33, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWidths = new int[] { 888, 0 };
+		gridBagLayout.rowHeights = new int[] { 445, 33, 0 };
+		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 		getContentPane().setLayout(gridBagLayout);
 		{
 			JPanel panel = new JPanel();
@@ -66,14 +73,17 @@ public class Dial extends JDialog {
 			gbc_panel.gridy = 0;
 			getContentPane().add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[]{0, 0};
-			gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-			gbl_panel.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-			gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+			gbl_panel.columnWidths = new int[] { 0, 0 };
+			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0 };
+			gbl_panel.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+					0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
 				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon(Dial.class.getResource("/pic/measure.jpg")));
+				label.setIcon(new ImageIcon(Dial.class
+						.getResource("/pic/measure.jpg")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
 				gbc_label.insets = new Insets(0, 0, 5, 0);
 				gbc_label.gridx = 0;
@@ -81,7 +91,8 @@ public class Dial extends JDialog {
 				panel.add(label, gbc_label);
 			}
 			{
-				JLabel lblNewLabel = new JLabel(". Make sure the instrunment is attached well\r\n");
+				JLabel lblNewLabel = new JLabel(
+						". Make sure the instrunment is attached well\r\n");
 				lblNewLabel.setFont(new Font("Arial", Font.BOLD, 18));
 				lblNewLabel.setForeground(Color.WHITE);
 				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -91,7 +102,8 @@ public class Dial extends JDialog {
 				panel.add(lblNewLabel, gbc_lblNewLabel);
 			}
 			{
-				JLabel lblWaitUntil = new JLabel("  . Wait until the measurment bar is full and you");
+				JLabel lblWaitUntil = new JLabel(
+						"  . Wait until the measurment bar is full and you");
 				lblWaitUntil.setForeground(Color.WHITE);
 				lblWaitUntil.setFont(new Font("Arial", Font.BOLD, 18));
 				GridBagConstraints gbc_lblWaitUntil = new GridBagConstraints();
@@ -112,10 +124,11 @@ public class Dial extends JDialog {
 				panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 			}
 			{
-			    pulseValue = new JLabel("                       ");
+				pulseValue = new JLabel("                       ");
 				pulseValue.setForeground(Color.WHITE);
 				pulseValue.setFont(new Font("Arial", Font.BOLD, 18));
-				pulseValue.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				pulseValue.setBorder(new TitledBorder(null, "",
+						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_pulseValue = new GridBagConstraints();
 				gbc_pulseValue.insets = new Insets(0, 0, 5, 0);
 				gbc_pulseValue.gridx = 0;
@@ -126,7 +139,8 @@ public class Dial extends JDialog {
 				oxigenValue = new JLabel("                       ");
 				oxigenValue.setForeground(Color.WHITE);
 				oxigenValue.setFont(new Font("Arial", Font.BOLD, 18));
-				oxigenValue.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				oxigenValue.setBorder(new TitledBorder(null, "",
+						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_oxigenValue = new GridBagConstraints();
 				gbc_oxigenValue.gridx = 0;
 				gbc_oxigenValue.gridy = 12;
@@ -136,36 +150,59 @@ public class Dial extends JDialog {
 				JButton btnMeasure = new JButton("Measure");
 				btnMeasure.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						ClassLoader cldr = this.getClass().getClassLoader();
-						java.net.URL imageURL = cldr.getResource("Nonin.gif");
-						ImageIcon noninImage = new ImageIcon(imageURL);
-						PulseConnectionRunnable pc = new PulseConnectionRunnable(
-								pulseValue, oxigenValue, null, null);
-						Thread thread = new Thread(pc);
-						String message = "Trying to get measurements.";
-						String title = "Measure pulse";
-						final JDialog dialog = new JDialog();
-						dialog.setTitle(title);
-						dialog.setUndecorated(false);
-						JPanel panel = new JPanel();
-						final JLabel label = new JLabel(noninImage);
-						final JLabel messageLabel = new JLabel(message);
-						panel.add(label);
-						panel.add(messageLabel);
-						dialog.getContentPane().add(panel);
-						dialog.pack();
-						// Public method to center the dialog after calling pack()
-//						dialog.setLocationRelativeTo(this.getParent());
-						dialog.setVisible(true);
-						thread.start();
-						// if (thread.isAlive()) {
-						// // Utilities.closeConnection();
-						// System.out.println("Nothing yet implemented here");
-						// System.out.println("Connection with button was closed!");
-						// } else {
-						// System.err
-						// .println("Thread cannot be interrupted, because it is not alive");
-						// }
+
+						new Thread() {
+							@Override
+							public void run() {
+								SwingUtilities.invokeLater(new Runnable() {
+									@Override
+									public void run() {
+										ClassLoader cldr = this.getClass()
+												.getClassLoader();
+										java.net.URL imageURL = cldr
+												.getResource("Nonin.gif");
+										ImageIcon noninImage = new ImageIcon(
+												imageURL);
+
+										String message = "Trying to get measurements.";
+										String title = "Measure pulse";
+										final JDialog dialog = new JDialog();
+										dialog.setName("TemporaryBTDialog");
+										dialog.setTitle(title);
+										dialog.setUndecorated(false);
+										JPanel panel = new JPanel();
+										JLabel label = new JLabel(noninImage);
+										JLabel messageLabel = new JLabel(
+												message);
+										panel.add(label);
+										panel.add(messageLabel);
+										dialog.getContentPane().add(panel);
+										dialog.pack();
+										dialog.setVisible(true);
+										dialog.setLocationRelativeTo(rootPane);
+
+									}
+								});
+								PulseConnectionRunnable pc = new PulseConnectionRunnable(
+										pulseValue, oxigenValue, null, null);
+								Thread thread = new Thread(pc);
+								thread.start();
+								try {
+									Thread.sleep(7000);
+								} catch (InterruptedException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} finally {
+									thread.interrupt();
+									if (thread.isAlive()) {
+										thread = null;
+										System.out.println("I am alive");
+									}
+									Utilities.disposeDialog(null);
+									Utilities.closeConnection();
+								}
+							}
+						}.start();
 					}
 				});
 				GridBagConstraints gbc_btnMeasure = new GridBagConstraints();
@@ -178,7 +215,8 @@ public class Dial extends JDialog {
 				JLabel lblNewLabel_3 = new JLabel("        Spo2        ");
 				lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 18));
 				lblNewLabel_3.setForeground(Color.WHITE);
-				lblNewLabel_3.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				lblNewLabel_3.setBorder(new TitledBorder(null, "",
+						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 				gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 0);
 				gbc_lblNewLabel_3.gridx = 0;
@@ -187,7 +225,8 @@ public class Dial extends JDialog {
 			}
 			{
 				JLabel lblNewLabel_4 = new JLabel("        Pulse        ");
-				lblNewLabel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				lblNewLabel_4.setBorder(new TitledBorder(null, "",
+						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 18));
 				lblNewLabel_4.setForeground(Color.WHITE);
 				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
@@ -196,7 +235,7 @@ public class Dial extends JDialog {
 				gbc_lblNewLabel_4.gridy = 10;
 				panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 			}
-			
+
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -212,6 +251,72 @@ public class Dial extends JDialog {
 				JButton okButton = new JButton("Send");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						pulseValue.setText("50");
+						oxigenValue.setText("20");
+						if (!pulseValue.getText().isEmpty()) {
+
+							new Thread(new Runnable() {
+								@Override
+								public void run() {
+									SwingUtilities.invokeLater(new Runnable() {
+										@Override
+										public void run() {
+											ClassLoader cldr = this.getClass()
+													.getClassLoader();
+											java.net.URL imageURL = cldr
+													.getResource("sending.gif");
+											final ImageIcon sendingImage = new ImageIcon(
+													imageURL);
+											String message = "Trying to send measurements.\nIf you want to STOP measuring, \npress \"OK\".";
+											String title = "Sending pulse measurements!";
+											int messageType = MessageType.ERROR
+													.ordinal();
+
+											// JOptionPane.showMessageDialog(this,
+											// message,
+											// title,
+											// messageType,
+											// sendingImage);
+											// Then we display the dialog on
+											// that frame
+											final JDialog dialog = new JDialog();
+											dialog.setName("TemporarySending");
+											dialog.setTitle("Sending measurements...");
+											dialog.setUndecorated(false);
+											JPanel panel = new JPanel();
+											final JLabel label = new JLabel(
+													sendingImage);
+											sendingImage
+													.setImageObserver(label);
+											panel.add(label);
+											dialog.add(panel);
+											dialog.pack();
+											// Public method to center the
+											// dialog after calling
+											// pack()
+											dialog.setLocationRelativeTo(rootPane);
+											dialog.setVisible(true);
+										}
+									});
+									HttpsPostClient httpsPostClient = new HttpsPostClient();
+									Pulse pulse = new Pulse(pulseValue
+											.getText(), oxigenValue.getText());
+									// sendPulse.setText("Sending measurements...");
+									httpsPostClient.SendPulseHttps(pulse);
+									httpsPostClient.SendOxygen(pulse);
+									DBConnection dbConnection = new DBConnection();
+									try {
+										// dbConnection.savePulse(pulse);
+									} catch (Exception e1) {
+										// TODO Auto-generated catch
+										// block
+										e1.printStackTrace();
+									}
+								}
+
+							}).start();
+
+						}
 					}
 				});
 				okButton.setForeground(new Color(30, 144, 255));
@@ -224,6 +329,7 @@ public class Dial extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						dispose();
 					}
 				});
 				cancelButton.setForeground(new Color(30, 144, 255));
@@ -233,5 +339,4 @@ public class Dial extends JDialog {
 			}
 		}
 	}
-
 }

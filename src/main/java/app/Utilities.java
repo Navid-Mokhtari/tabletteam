@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 public class Utilities {
-	private static StreamConnectionNotifier service;
+	static StreamConnectionNotifier service;
 	static StreamConnection con;
 	static InputStream is;
 
@@ -18,13 +18,19 @@ public class Utilities {
 		Frame[] frames = JOptionPane.getRootFrame().getFrames();
 		for (Frame frame : frames) {
 			System.out.println(frame.getName());
+			if (frame.getName().contains("Temporary")) {
+				System.out.println("Such frame exists");
+				frame.dispose();
+			}
+			System.out.println(frame.getName());
 			Window[] windows = frame.getWindows();
 			for (Window window : windows) {
 				Window[] win = window.getOwnedWindows();
 				for (Window w : win) {
 					if (w != null) {
 						System.out.println(w.getName());
-						if (w.getName().contains("dialog")) {
+						if (w.getName().contains("Temporary")) {
+							System.out.println("Such window exists");
 							w.dispose();
 						}
 					}
@@ -43,13 +49,13 @@ public class Utilities {
 	public static void closeConnection() {
 		try {
 			con.close();
-			is.close();
 			service.close();
+			is.close();
 		} catch (Exception e) {
 			con = null;
 			is = null;
 			service = null;
-			System.out.println("Input stream was unavalible");
+			System.out.println("Input stream was unavailable\n" + e.toString());
 		}
 	}
 }
