@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import app.QuestionnareTab;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -43,6 +45,11 @@ public class QuestionDial extends JDialog {
 	public QuestionDial() {
 		setBounds(0, 0, 1366, 768);
 		
+		String currentLang = HealthProperties.getProperty("currentLanguage");
+		Locale currentLocale = Locale.forLanguageTag(currentLang);
+		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
+				"language", currentLocale);
+		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +60,7 @@ public class QuestionDial extends JDialog {
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
-			JButton cancelButton = new JButton("Cancel");
+			JButton cancelButton = new JButton(currentLanguage.getString("cancel"));
 			cancelButton.setFont(new Font("Tahoma", Font.BOLD, 20));
 			buttonPane.add(cancelButton);
 			cancelButton.addActionListener(new ActionListener() {
