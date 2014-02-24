@@ -130,7 +130,7 @@ public class MainPage {
 			}
 		});
 		btnNewButton_1.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/cat1.jpg")));
+				.getResource("/pic/Cat1.jpg")));
 
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(MainPage.class
