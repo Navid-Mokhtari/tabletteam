@@ -61,7 +61,7 @@ public class MainPage {
 		healthProperties.loadProperties();
 		frmUiaEhelse = new JFrame();
 		frmUiaEhelse.setIconImage(Toolkit.getDefaultToolkit().getImage(MainPage.class.getResource("/pic/Doctor-icon2.png")));
-		frmUiaEhelse.setTitle("UiA, eHelse");
+		frmUiaEhelse.setTitle("UiA  eHelse");
 		frmUiaEhelse.setResizable(false);
 //		Toolkit tk = Toolkit.getDefaultToolkit();
 //		int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
@@ -80,6 +80,7 @@ public class MainPage {
 		panel.setLayout(gbl_panel);
 		
 		JButton btnNewButton = new JButton("");
+		btnNewButton.setMargin(new Insets(5, 20, 5, 20));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 Dial dial=new Dial();
@@ -95,6 +96,7 @@ public class MainPage {
 		panel.add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnNewButton_2 = new JButton("");
+		btnNewButton_2.setMargin(new Insets(5, 20, 5, 20));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -136,6 +138,7 @@ public class MainPage {
 						panel_2.setLayout(gbl_panel_2);
 																
 																JButton btnNewButton_1 = new JButton("");
+																btnNewButton_1.setMargin(new Insets(5, 20, 2, 20));
 																GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 																gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
 																gbc_btnNewButton_1.gridx = 0;
@@ -154,6 +157,7 @@ public class MainPage {
 																btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/cat1.jpg")));
 																
 																JButton button = new JButton("");
+																button.setMargin(new Insets(5, 20, 2, 20));
 																button.setIcon(new ImageIcon(MainPage.class.getResource("/pic/History1.jpg")));
 																GridBagConstraints gbc_button = new GridBagConstraints();
 																gbc_button.anchor = GridBagConstraints.EAST;
