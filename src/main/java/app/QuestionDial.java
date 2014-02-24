@@ -1,15 +1,23 @@
 package app;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import app.QuestionnareTab;
 
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 
 public class QuestionDial extends JDialog {
+	
+	private final JPanel contentPanel = new JPanel();
 
 	/**
 	 * 
@@ -36,6 +44,27 @@ public class QuestionDial extends JDialog {
 		setBounds(0, 0, 1366, 768);
 		
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setLayout(new FlowLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		getContentPane().add(contentPanel, BorderLayout.SOUTH);
+		
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			
+			JButton cancelButton = new JButton("Cancel");
+			cancelButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+			buttonPane.add(cancelButton);
+			cancelButton.addActionListener(new ActionListener() {
+					
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					dispose();
+					}
+			});
+		
 			
 			
 		JPanel panel12 = new JPanel();
@@ -48,6 +77,8 @@ public class QuestionDial extends JDialog {
 				e.printStackTrace();
 			}
 		panel12.setVisible(true);
+		
+		
 		getContentPane().add(panel12);
 					
 	}
