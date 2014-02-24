@@ -75,28 +75,28 @@ public class MainPage {
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{589, 379, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel.rowHeights = new int[]{305, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gbl_panel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setMargin(new Insets(5, 20, 5, 20));
+		btnNewButton.setMargin(new Insets(4, 4, 2, 4));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 Dial dial=new Dial();
 		            dial.setVisible(true);
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Measurement2.JPG")));
+		btnNewButton.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-measurment.jpg")));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
+		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 0;
 		panel.add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnNewButton_2 = new JButton("");
-		btnNewButton_2.setMargin(new Insets(5, 20, 5, 20));
+		btnNewButton_2.setMargin(new Insets(4, 4, 4, 4));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -112,21 +112,40 @@ public class MainPage {
 		gbc_btnNewButton_2.gridy = 0;
 		panel.add(btnNewButton_2, gbc_btnNewButton_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("              ");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_3.gridx = 5;
-		gbc_lblNewLabel_3.gridy = 0;
-		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JButton btnNewButton_1 = new JButton("");
+		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton_1.gridx = 2;
+		gbc_btnNewButton_1.gridy = 0;
+		panel.add(btnNewButton_1, gbc_btnNewButton_1);
+		btnNewButton_1.setMargin(new Insets(4, 4, 4, 4));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			
+				
+				CatQuestionDial catquestiondial=new CatQuestionDial();
+				catquestiondial.setVisible(true);
+				
+			}
+		});
+		btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Doctor-icon2.png")));
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.anchor = GridBagConstraints.EAST;
 		gbc_label.insets = new Insets(0, 0, 0, 5);
-		gbc_label.gridx = 6;
+		gbc_label.gridx = 4;
 		gbc_label.gridy = 0;
 		panel.add(label, gbc_label);
+		
+		JLabel lblNewLabel_3 = new JLabel("              ");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_3.gridx = 5;
+		gbc_lblNewLabel_3.gridy = 0;
+		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 
 		final Panel panel_2 = new Panel();
 		frmUiaEhelse.getContentPane().add(panel_2, BorderLayout.WEST);
@@ -137,32 +156,34 @@ public class MainPage {
 						gbl_panel_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 						panel_2.setLayout(gbl_panel_2);
 																
-																JButton btnNewButton_1 = new JButton("");
-																btnNewButton_1.setMargin(new Insets(5, 20, 2, 20));
-																GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-																gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-																gbc_btnNewButton_1.gridx = 0;
-																gbc_btnNewButton_1.gridy = 1;
-																panel_2.add(btnNewButton_1, gbc_btnNewButton_1);
-																btnNewButton_1.addActionListener(new ActionListener() {
-																	public void actionPerformed(ActionEvent arg0) {
-																		
-																	
-																		
-																		CatQuestionDial catquestiondial=new CatQuestionDial();
-																		catquestiondial.setVisible(true);
-																		
-																	}
-																});
-																btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
+																JButton btnNewButton_3 = new JButton("");
+																btnNewButton_3.setEnabled(false);
+																btnNewButton_3.setMargin(new Insets(4, 12, 4, 4));
+																btnNewButton_3.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-History.jpg")));
+																GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
+																gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
+																gbc_btnNewButton_3.gridx = 0;
+																gbc_btnNewButton_3.gridy = 1;
+																panel_2.add(btnNewButton_3, gbc_btnNewButton_3);
+																
+																JButton button_1 = new JButton("");
+																button_1.setEnabled(false);
+																button_1.setMargin(new Insets(4, 4, 4, 4));
+																button_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-Bruk.jpg")));
+																GridBagConstraints gbc_button_1 = new GridBagConstraints();
+																gbc_button_1.insets = new Insets(0, 0, 5, 5);
+																gbc_button_1.gridx = 1;
+																gbc_button_1.gridy = 1;
+																panel_2.add(button_1, gbc_button_1);
 																
 																JButton button = new JButton("");
-																button.setMargin(new Insets(5, 20, 2, 20));
-																button.setIcon(new ImageIcon(MainPage.class.getResource("/pic/History1.jpg")));
+																button.setEnabled(false);
+																button.setMargin(new Insets(4, 4, 4, 4));
+																button.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-Info.jpg")));
 																GridBagConstraints gbc_button = new GridBagConstraints();
 																gbc_button.anchor = GridBagConstraints.EAST;
 																gbc_button.insets = new Insets(0, 0, 5, 5);
-																gbc_button.gridx = 1;
+																gbc_button.gridx = 2;
 																gbc_button.gridy = 1;
 																panel_2.add(button, gbc_button);
 																
