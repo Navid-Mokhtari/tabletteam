@@ -154,7 +154,7 @@ public class MainPage {
 																		
 																	}
 																});
-																btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/cat1.jpg")));
+																btnNewButton_1.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
 																
 																JButton button = new JButton("");
 																button.setMargin(new Insets(5, 20, 2, 20));
