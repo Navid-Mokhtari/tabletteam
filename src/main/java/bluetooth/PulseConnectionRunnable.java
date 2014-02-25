@@ -2,6 +2,7 @@ package bluetooth;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.Thread.State;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,14 @@ import javax.swing.SwingUtilities;
 
 import com.intel.bluetooth.BlueCoveImpl;
 import com.intel.bluetooth.MicroeditionConnector;
+
 import app.Utilities;
 import vitalsignals.Pulse;
 
 public class PulseConnectionRunnable implements Runnable {
-	private JLabel pulseLabel, oxigenLabel, timeLabel;
+	private JLabel pulseValue, oxigenValue, timeLabel;
 	private Pulse pulse;
-//	private JComponent measurementTab;
+	// private JComponent measurementTab;
 	StreamConnectionNotifier service;
 	StreamConnection con;
 	InputStream is;
@@ -37,14 +39,15 @@ public class PulseConnectionRunnable implements Runnable {
 	// Pulse
 	public PulseConnectionRunnable(JLabel pulseValue, JLabel oxigenValue,
 			JLabel time, JComponent measurementTab) {
-		this.pulseLabel = pulseValue;
-		this.oxigenLabel = oxigenValue;
+		this.pulseValue = pulseValue;
+		this.oxigenValue = oxigenValue;
 		this.timeLabel = time;
-//		this.measurementTab = measurementTab;
+		// this.measurementTab = measurementTab;
 	}
 
 	public void run() {
 		try {
+			Utilities.pulseThread = this;
 			pulse = startWaitingConnection();
 			System.out.println("Trying to parse message");
 			if (pulse.ParseMessage()) {
@@ -56,10 +59,18 @@ public class PulseConnectionRunnable implements Runnable {
 			}
 		} catch (Exception e) {
 			System.out.println("We are here!" + e.toString());
-		} 
-//			finally {
-//			Utilities.disposeDialog(measurementTab);
-//		}
+		} finally {
+			Utilities.pulseThread = null;
+			Utilities utilities = new Utilities();
+			Thread mainThread = utilities.getMainThread();
+			System.out.println("Test="+mainThread.getId());
+			if (mainThread != null
+					&& mainThread.getState() == State.TIMED_WAITING) {
+				System.out.println("Trying to interrupt main Thread with ID="
+						+ mainThread.getId());
+				mainThread.interrupt();
+			}
+		}
 
 	}
 
@@ -187,15 +198,17 @@ public class PulseConnectionRunnable implements Runnable {
 				public void run() {
 					System.out.println("Trying to update GUI");
 					if (pulse.getPulse() != null) {
-						pulseLabel.setText(pulse.getPulse());
-						oxigenLabel.setText(pulse.getOxigen());
-						timeLabel.setText(pulse.getCurrentDate().toString());
+						pulseValue.setText(pulse.getPulse());
+						oxigenValue.setText(pulse.getOxigen());
+//						timeLabel.setText(pulse.getCurrentDate().toString());
 					}
 					pulse = null;
 				}
 			});
 		} catch (InvocationTargetException | InterruptedException e) {
-			System.out.println("It was interrupted");
+			System.out.println("It was interrupted" + e.toString());
+
+		} finally {
 			closeConnection();
 		}
 	}

@@ -68,6 +68,7 @@ import org.w3c.dom.NodeList;
 public class QuestionnareTab extends JComponent {
 	public QuestionnareTab() {
 	}
+
 	private static final long serialVersionUID = -7594299439504858239L;
 	// Question One
 	String sQuestionOneAnswer = null;
@@ -77,12 +78,12 @@ public class QuestionnareTab extends JComponent {
 	String sQuestionFiveAnswer = null;
 	String sQuestionSixAnswer = "0";
 	String sQuestionSevenAnswer = "0";
-	
+
 	public Component getView() throws IOException {
 		JComponent questionnare = createPanel("My questions");
 		Toolkit tk = Toolkit.getDefaultToolkit();
-//		int xSize = ((int) tk.getScreenSize().getWidth());
-//		int ySize = ((int) tk.getScreenSize().getWidth());
+		// int xSize = ((int) tk.getScreenSize().getWidth());
+		// int ySize = ((int) tk.getScreenSize().getWidth());
 		questionnare.setPreferredSize(new Dimension(1366, 768));
 		return questionnare;
 	}
@@ -92,7 +93,7 @@ public class QuestionnareTab extends JComponent {
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
 				"language", currentLocale);
-		
+
 		// Panels
 
 		final JPanel panelContainer = new JPanel();
@@ -161,12 +162,12 @@ public class QuestionnareTab extends JComponent {
 		constrainsQuestionEight.insets = new Insets(0, 0, 0, 0);
 		constrainsQuestionEight.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionEight.anchor = GridBagConstraints.FIRST_LINE_START;
-		
+
 		ClassLoader customRadioButton = this.getClass().getClassLoader();
-		
+
 		URL iconUrlON = customRadioButton.getResource("radioButtonON.png");
 		Icon radioIconON = new ImageIcon(iconUrlON);
-		
+
 		URL iconUrlOFF = customRadioButton.getResource("radioButtonOFF.png");
 		Icon radioIconOFF = new ImageIcon(iconUrlOFF);
 
@@ -190,8 +191,7 @@ public class QuestionnareTab extends JComponent {
 		questionOneSelectionTwo.setBackground(Color.ORANGE);
 		questionOneSelectionTwo.setIcon(radioIconOFF);
 		questionOneSelectionTwo.setSelectedIcon(radioIconON);
-		questionOneSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionOneSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 2;
 		panelQuestionOne.add(questionOneSelectionTwo, constrainsQuestionOne);
@@ -203,8 +203,7 @@ public class QuestionnareTab extends JComponent {
 		questionOneSelectionThree.setBackground(Color.ORANGE);
 		questionOneSelectionThree.setIcon(radioIconOFF);
 		questionOneSelectionThree.setSelectedIcon(radioIconON);
-		questionOneSelectionThree.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionOneSelectionThree.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 3;
 		panelQuestionOne.add(questionOneSelectionThree, constrainsQuestionOne);
@@ -216,8 +215,7 @@ public class QuestionnareTab extends JComponent {
 		questionOneSelectionFour.setBackground(Color.ORANGE);
 		questionOneSelectionFour.setIcon(radioIconOFF);
 		questionOneSelectionFour.setSelectedIcon(radioIconON);
-		questionOneSelectionFour.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionOneSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 7;
 		panelQuestionOne.add(questionOneSelectionFour, constrainsQuestionOne);
@@ -233,9 +231,8 @@ public class QuestionnareTab extends JComponent {
 		questionOneAnswer.setForeground(Color.BLUE);
 		constrainsQuestionEight.gridx = 1;
 		constrainsQuestionEight.gridy = 1;
-		panelQuestionEight.add(questionOneAnswer,
-				constrainsQuestionEight);
-		
+		panelQuestionEight.add(questionOneAnswer, constrainsQuestionEight);
+
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -249,18 +246,18 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 				if (questionOneSelectionTwo.isSelected()) {
-					questionOneAnswer.setText(currentLanguage.getString("aAsUsual"));
+					questionOneAnswer.setText(currentLanguage
+							.getString("aAsUsual"));
 				} else if (questionOneSelectionThree.isSelected()) {
-					questionOneAnswer.setText(currentLanguage.getString("aWorse"));
+					questionOneAnswer.setText(currentLanguage
+							.getString("aWorse"));
 				} else if (questionOneSelectionFour.isSelected()) {
 					questionOneAnswer.setText(currentLanguage
-							.getString("aMuchWorse")); 
+							.getString("aMuchWorse"));
 				}
 
-				
-				
 				final JLabel questionOne;
 				questionOne = new JLabel(currentLanguage.getString("qOne"));
 				questionOne.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -298,8 +295,7 @@ public class QuestionnareTab extends JComponent {
 		questionTwoSelectionTwo.setBackground(Color.ORANGE);
 		questionTwoSelectionTwo.setIcon(radioIconOFF);
 		questionTwoSelectionTwo.setSelectedIcon(radioIconON);
-		questionTwoSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionTwoSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 2;
 		panelQuestionTwo.add(questionTwoSelectionTwo, constrainsQuestionTwo);
@@ -311,8 +307,7 @@ public class QuestionnareTab extends JComponent {
 		questionTwoSelectionThree.setBackground(Color.ORANGE);
 		questionTwoSelectionThree.setIcon(radioIconOFF);
 		questionTwoSelectionThree.setSelectedIcon(radioIconON);
-		questionTwoSelectionThree.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionTwoSelectionThree.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 3;
 		panelQuestionTwo.add(questionTwoSelectionThree, constrainsQuestionTwo);
@@ -324,8 +319,7 @@ public class QuestionnareTab extends JComponent {
 		questionTwoSelectionFour.setBackground(Color.ORANGE);
 		questionTwoSelectionFour.setIcon(radioIconOFF);
 		questionTwoSelectionFour.setSelectedIcon(radioIconON);
-		questionTwoSelectionFour.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionTwoSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 4;
 		panelQuestionTwo.add(questionTwoSelectionFour, constrainsQuestionTwo);
@@ -360,9 +354,8 @@ public class QuestionnareTab extends JComponent {
 		questionTwoAnswer.setForeground(Color.BLUE);
 		constrainsQuestionEight.gridx = 1;
 		constrainsQuestionEight.gridy = 2;
-		panelQuestionEight.add(questionTwoAnswer,
-				constrainsQuestionEight);
-		
+		panelQuestionEight.add(questionTwoAnswer, constrainsQuestionEight);
+
 		JButton toQuestionThree;
 		toQuestionThree = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -378,13 +371,16 @@ public class QuestionnareTab extends JComponent {
 				// TODO Auto-generated method stub
 
 				if (questionTwoSelectionTwo.isSelected()) {
-					questionTwoAnswer.setText(currentLanguage.getString("aAsUsual"));
+					questionTwoAnswer.setText(currentLanguage
+							.getString("aAsUsual"));
 				} else if (questionTwoSelectionThree.isSelected()) {
-					questionTwoAnswer.setText(currentLanguage.getString("aWorse")); 
+					questionTwoAnswer.setText(currentLanguage
+							.getString("aWorse"));
 				} else if (questionTwoSelectionFour.isSelected()) {
-					 questionTwoAnswer.setText(currentLanguage.getString("aMuchWorse")); 
+					questionTwoAnswer.setText(currentLanguage
+							.getString("aMuchWorse"));
 				}
-				
+
 				final JLabel questionTwo;
 				questionTwo = new JLabel(currentLanguage.getString("qTwo"));
 				questionTwo.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -422,8 +418,7 @@ public class QuestionnareTab extends JComponent {
 		questionThreeSelectionTwo.setBackground(Color.ORANGE);
 		questionThreeSelectionTwo.setIcon(radioIconOFF);
 		questionThreeSelectionTwo.setSelectedIcon(radioIconON);
-		questionThreeSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionThreeSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 2;
 		panelQuestionThree.add(questionThreeSelectionTwo,
@@ -434,8 +429,7 @@ public class QuestionnareTab extends JComponent {
 		questionThreeSelectionThree = new JRadioButton(
 				currentLanguage.getString("aWorse"));
 		questionThreeSelectionThree.setBackground(Color.ORANGE);
-		questionThreeSelectionThree.setFont(new Font("Tahoma",
-				Font.PLAIN, 40));
+		questionThreeSelectionThree.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		questionThreeSelectionThree.setIcon(radioIconOFF);
 		questionThreeSelectionThree.setSelectedIcon(radioIconON);
 		constrainsQuestionThree.gridx = 0;
@@ -448,8 +442,7 @@ public class QuestionnareTab extends JComponent {
 		questionThreeSelectionFour = new JRadioButton(
 				currentLanguage.getString("aMuchWorse"));
 		questionThreeSelectionFour.setBackground(Color.ORANGE);
-		questionThreeSelectionFour.setFont(new Font("Tahoma",
-				Font.PLAIN, 40));
+		questionThreeSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		questionThreeSelectionFour.setIcon(radioIconOFF);
 		questionThreeSelectionFour.setSelectedIcon(radioIconON);
 		constrainsQuestionThree.gridx = 0;
@@ -487,9 +480,8 @@ public class QuestionnareTab extends JComponent {
 		questionThreeAnswer.setForeground(Color.BLUE);
 		constrainsQuestionEight.gridx = 1;
 		constrainsQuestionEight.gridy = 3;
-		panelQuestionEight.add(questionThreeAnswer,
-				constrainsQuestionEight);
-		
+		panelQuestionEight.add(questionThreeAnswer, constrainsQuestionEight);
+
 		JButton toQuestionFour;
 		toQuestionFour = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -503,15 +495,16 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 				if (questionThreeSelectionTwo.isSelected()) {
 					questionThreeAnswer.setText(currentLanguage
-							.getString("aAsUsual")); 
+							.getString("aAsUsual"));
 				} else if (questionThreeSelectionThree.isSelected()) {
-					questionThreeAnswer.setText(currentLanguage.getString("aWorse")); 
+					questionThreeAnswer.setText(currentLanguage
+							.getString("aWorse"));
 				} else if (questionThreeSelectionFour.isSelected()) {
 					questionThreeAnswer.setText(currentLanguage
-							.getString("aMuchWorse")); 
+							.getString("aMuchWorse"));
 				}
 
 				final JLabel questionThree;
@@ -552,8 +545,7 @@ public class QuestionnareTab extends JComponent {
 		questionFourSelectionOne.setBackground(Color.ORANGE);
 		questionFourSelectionOne.setIcon(radioIconOFF);
 		questionFourSelectionOne.setSelectedIcon(radioIconON);
-		questionFourSelectionOne.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionFourSelectionOne.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 1;
 		panelQuestionFour.add(questionFourSelectionOne, constrainsQuestionFour);
@@ -565,8 +557,7 @@ public class QuestionnareTab extends JComponent {
 		questionFourSelectionTwo.setBackground(Color.ORANGE);
 		questionFourSelectionTwo.setIcon(radioIconOFF);
 		questionFourSelectionTwo.setSelectedIcon(radioIconON);
-		questionFourSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionFourSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 2;
 		panelQuestionFour.add(questionFourSelectionTwo, constrainsQuestionFour);
@@ -600,9 +591,8 @@ public class QuestionnareTab extends JComponent {
 		questionFourAnswer.setForeground(Color.BLUE);
 		constrainsQuestionEight.gridx = 1;
 		constrainsQuestionEight.gridy = 4;
-		panelQuestionEight.add(questionFourAnswer,
-				constrainsQuestionEight);
-		
+		panelQuestionEight.add(questionFourAnswer, constrainsQuestionEight);
+
 		JButton toQuestionFive;
 		toQuestionFive = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -621,7 +611,7 @@ public class QuestionnareTab extends JComponent {
 							.getString("qFourAnsOne"));
 				} else if (questionFourSelectionTwo.isSelected()) {
 					questionFourAnswer.setText(currentLanguage
-							.getString("qFourAnsTwo")); 
+							.getString("qFourAnsTwo"));
 				}
 
 				final JLabel questionFour;
@@ -659,8 +649,7 @@ public class QuestionnareTab extends JComponent {
 		questionFiveSelectionOne = new JRadioButton(
 				currentLanguage.getString("qFiveAnsOne"));
 		questionFiveSelectionOne.setBackground(Color.ORANGE);
-		questionFiveSelectionOne.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionFiveSelectionOne.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		questionFiveSelectionOne.setIcon(radioIconOFF);
 		questionFiveSelectionOne.setSelectedIcon(radioIconON);
 		constrainsQuestionFive.gridx = 0;
@@ -674,8 +663,7 @@ public class QuestionnareTab extends JComponent {
 		questionFiveSelectionTwo.setBackground(Color.ORANGE);
 		questionFiveSelectionTwo.setIcon(radioIconOFF);
 		questionFiveSelectionTwo.setSelectedIcon(radioIconON);
-		questionFiveSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionFiveSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 2;
 		panelQuestionFive.add(questionFiveSelectionTwo, constrainsQuestionFive);
@@ -687,8 +675,7 @@ public class QuestionnareTab extends JComponent {
 		questionFiveSelectionThree.setBackground(Color.ORANGE);
 		questionFiveSelectionThree.setIcon(radioIconOFF);
 		questionFiveSelectionThree.setSelectedIcon(radioIconON);
-		questionFiveSelectionThree.setFont(new Font("Tahoma",
-				Font.PLAIN, 40));
+		questionFiveSelectionThree.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 3;
 		panelQuestionFive.add(questionFiveSelectionThree,
@@ -701,8 +688,7 @@ public class QuestionnareTab extends JComponent {
 		questionFiveSelectionFour.setBackground(Color.ORANGE);
 		questionFiveSelectionFour.setIcon(radioIconOFF);
 		questionFiveSelectionFour.setSelectedIcon(radioIconON);
-		questionFiveSelectionFour.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionFiveSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 4;
 		panelQuestionFive
@@ -739,9 +725,8 @@ public class QuestionnareTab extends JComponent {
 		questionFiveAnswer.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 1;
 		constrainsQuestionNine.gridy = 1;
-		panelQuestionNine.add(questionFiveAnswer,
-				constrainsQuestionNine);
-		
+		panelQuestionNine.add(questionFiveAnswer, constrainsQuestionNine);
+
 		JButton toQuestionSix;
 		toQuestionSix = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -756,15 +741,19 @@ public class QuestionnareTab extends JComponent {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (questionFiveSelectionOne.isSelected()) {
-					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsOne"));
+					questionFiveAnswer.setText(currentLanguage
+							.getString("qFiveAnsOne"));
 				} else if (questionFiveSelectionTwo.isSelected()) {
-					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsTwo"));
+					questionFiveAnswer.setText(currentLanguage
+							.getString("qFiveAnsTwo"));
 				} else if (questionFiveSelectionThree.isSelected()) {
-					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsThree"));
+					questionFiveAnswer.setText(currentLanguage
+							.getString("qFiveAnsThree"));
 				} else if (questionFiveSelectionFour.isSelected()) {
-					questionFiveAnswer.setText(currentLanguage.getString("qFiveAnsFour"));
+					questionFiveAnswer.setText(currentLanguage
+							.getString("qFiveAnsFour"));
 				}
-				
+
 				final JLabel questionFive;
 				questionFive = new JLabel(currentLanguage.getString("qFive"));
 				questionFive.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -772,7 +761,7 @@ public class QuestionnareTab extends JComponent {
 				constrainsQuestionNine.gridx = 0;
 				constrainsQuestionNine.gridy = 1;
 				panelQuestionNine.add(questionFive, constrainsQuestionNine);
-				
+
 				if (questionFiveSelectionOne.isSelected()) {
 					cl.show(panelContainer, "8");
 				} else if (questionFiveSelectionTwo.isSelected()
@@ -806,8 +795,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionOne.setBackground(Color.ORANGE);
 		questionSixSelectionOne.setIcon(radioIconOFF);
 		questionSixSelectionOne.setSelectedIcon(radioIconON);
-		questionSixSelectionOne.setFont(new Font("Tahoma", Font.PLAIN,
-				30));
+		questionSixSelectionOne.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 1;
 		panelQuestionSix.add(questionSixSelectionOne, constrainsQuestionSix);
@@ -819,8 +807,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionTwo.setBackground(Color.ORANGE);
 		questionSixSelectionTwo.setIcon(radioIconOFF);
 		questionSixSelectionTwo.setSelectedIcon(radioIconON);
-		questionSixSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN,
-				30));
+		questionSixSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 2;
 		panelQuestionSix.add(questionSixSelectionTwo, constrainsQuestionSix);
@@ -832,8 +819,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionThree.setBackground(Color.ORANGE);
 		questionSixSelectionThree.setIcon(radioIconOFF);
 		questionSixSelectionThree.setSelectedIcon(radioIconON);
-		questionSixSelectionThree.setFont(new Font("Tahoma", Font.PLAIN,
-				30));
+		questionSixSelectionThree.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 3;
 		panelQuestionSix.add(questionSixSelectionThree, constrainsQuestionSix);
@@ -845,8 +831,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionFour.setBackground(Color.ORANGE);
 		questionSixSelectionFour.setIcon(radioIconOFF);
 		questionSixSelectionFour.setSelectedIcon(radioIconON);
-		questionSixSelectionFour.setFont(new Font("Tahoma", Font.PLAIN,
-				30));
+		questionSixSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 4;
 		panelQuestionSix.add(questionSixSelectionFour, constrainsQuestionSix);
@@ -858,8 +843,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionFive.setBackground(Color.ORANGE);
 		questionSixSelectionFive.setIcon(radioIconOFF);
 		questionSixSelectionFive.setSelectedIcon(radioIconON);
-		questionSixSelectionFive.setFont(new Font("Tahoma", Font.PLAIN,
-				30));
+		questionSixSelectionFive.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 5;
 		panelQuestionSix.add(questionSixSelectionFive, constrainsQuestionSix);
@@ -871,8 +855,7 @@ public class QuestionnareTab extends JComponent {
 		questionSixSelectionSix.setBackground(Color.ORANGE);
 		questionSixSelectionSix.setIcon(radioIconOFF);
 		questionSixSelectionSix.setSelectedIcon(radioIconON);
-		questionSixSelectionSix.setFont(new Font("Tahoma", Font.PLAIN,
-				30));
+		questionSixSelectionSix.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 6;
 		panelQuestionSix.add(questionSixSelectionSix, constrainsQuestionSix);
@@ -909,9 +892,8 @@ public class QuestionnareTab extends JComponent {
 		questionSixAnswer.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 1;
 		constrainsQuestionNine.gridy = 2;
-		panelQuestionNine
-				.add(questionSixAnswer, constrainsQuestionNine);
-		
+		panelQuestionNine.add(questionSixAnswer, constrainsQuestionNine);
+
 		JButton toQuestionSeven;
 		toQuestionSeven = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -925,7 +907,7 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 				if (questionSixSelectionOne.isSelected()) {
 					questionSixAnswer.setText(currentLanguage
 							.getString("qSixAnsOne"));
@@ -945,7 +927,7 @@ public class QuestionnareTab extends JComponent {
 					questionSixAnswer.setText(currentLanguage
 							.getString("qSixAnsSix"));
 				}
-				
+
 				final JLabel questionSix;
 				questionSix = new JLabel(currentLanguage.getString("qSix"));
 				questionSix.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -986,8 +968,7 @@ public class QuestionnareTab extends JComponent {
 		questionSevenSelectionOne.setBackground(Color.ORANGE);
 		questionSevenSelectionOne.setIcon(radioIconOFF);
 		questionSevenSelectionOne.setSelectedIcon(radioIconON);
-		questionSevenSelectionOne.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionSevenSelectionOne.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 1;
 		panelQuestionSeven.add(questionSevenSelectionOne,
@@ -1000,8 +981,7 @@ public class QuestionnareTab extends JComponent {
 		questionSevenSelectionTwo.setBackground(Color.ORANGE);
 		questionSevenSelectionTwo.setIcon(radioIconOFF);
 		questionSevenSelectionTwo.setSelectedIcon(radioIconON);
-		questionSevenSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN,
-				40));
+		questionSevenSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 2;
 		panelQuestionSeven.add(questionSevenSelectionTwo,
@@ -1014,8 +994,7 @@ public class QuestionnareTab extends JComponent {
 		questionSevenSelectionThree.setBackground(Color.ORANGE);
 		questionSevenSelectionThree.setIcon(radioIconOFF);
 		questionSevenSelectionThree.setSelectedIcon(radioIconON);
-		questionSevenSelectionThree.setFont(new Font("Tahoma",
-				Font.PLAIN, 40));
+		questionSevenSelectionThree.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 3;
 		panelQuestionSeven.add(questionSevenSelectionThree,
@@ -1028,8 +1007,7 @@ public class QuestionnareTab extends JComponent {
 		questionSevenSelectionFour.setBackground(Color.ORANGE);
 		questionSevenSelectionFour.setIcon(radioIconOFF);
 		questionSevenSelectionFour.setSelectedIcon(radioIconON);
-		questionSevenSelectionFour.setFont(new Font("Tahoma",
-				Font.PLAIN, 40));
+		questionSevenSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 4;
 		panelQuestionSeven.add(questionSevenSelectionFour,
@@ -1065,9 +1043,8 @@ public class QuestionnareTab extends JComponent {
 		questionSevenAnswer.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 1;
 		constrainsQuestionNine.gridy = 3;
-		panelQuestionNine.add(questionSevenAnswer,
-				constrainsQuestionNine);
-		
+		panelQuestionNine.add(questionSevenAnswer, constrainsQuestionNine);
+
 		JButton toQuestionEight;
 		toQuestionEight = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -1083,7 +1060,7 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 				if (questionSevenSelectionOne.isSelected()) {
 					questionSevenAnswer.setText(currentLanguage
 							.getString("qSevenAnsOne"));
@@ -1189,9 +1166,9 @@ public class QuestionnareTab extends JComponent {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 				questionSevenAnswer.setText(null);
-				
+
 				questionOneGroup.clearSelection();
 				questionTwoGroup.clearSelection();
 				questionThreeGroup.clearSelection();
@@ -1308,33 +1285,50 @@ public class QuestionnareTab extends JComponent {
 							sQuestionSevenAnswer };
 
 					System.out.println("Trying to send data!");
-					Thread thread = new Thread(new Runnable() {
+					new Thread(new Runnable() {
 
 						@Override
 						public void run() {
-							updateSendGui(questions);
+							SwingUtilities.invokeLater(new Runnable() {
+								@Override
+								public void run() {
+									ClassLoader cldr = this.getClass()
+											.getClassLoader();
+									java.net.URL imageURL = cldr
+											.getResource("sending.gif");
+									ImageIcon sendingImage = new ImageIcon(
+											imageURL);
+									final JDialog dialog = new JDialog();
+									dialog.setTitle("Sending answers...");
+									dialog.setName("TemporarySend");
+									dialog.setUndecorated(false);
+									JPanel panel = new JPanel();
+									final JLabel label = new JLabel(
+											sendingImage);
+									sendingImage.setImageObserver(label);
+									panel.add(label);
+									dialog.getContentPane().add(panel);
+									dialog.pack();
+									// Public method to center the dialog after
+									// calling pack()
+									try {
+										dialog.setLocationRelativeTo(getView()
+												.getParent());
+									} catch (IOException e) {
+										System.out.println("Can't get View");
+									}
+									dialog.setVisible(true);
+								}
+							});
 
+							updateSendGui(questions);
 						}
-					});
-					ClassLoader cldr = this.getClass().getClassLoader();
-					java.net.URL imageURL = cldr.getResource("sending.gif");
-					ImageIcon sendingImage = new ImageIcon(imageURL);
-					final JDialog dialog = new JDialog();
-					dialog.setTitle("Sending answers...");
-					dialog.setUndecorated(false);
-					JPanel panel = new JPanel();
-					final JLabel label = new JLabel(sendingImage);
-					sendingImage.setImageObserver(label);
-					panel.add(label);
-					dialog.getContentPane().add(panel);
-					dialog.pack();
-					// Public method to center the dialog after calling pack()
-					dialog.setLocationRelativeTo(getView().getParent());
-					dialog.setVisible(true);
-					thread.start();
+
+					}).start();
+
 				}
 
-				catch (HeadlessException | IOException e1) {
+				catch (HeadlessException e1) {
 					e1.printStackTrace();
 				}
 				//
@@ -1374,64 +1368,59 @@ public class QuestionnareTab extends JComponent {
 	}
 
 	private void updateSendGui(String[] questions) {
-		SwingUtilities.invokeLater(new Runnable() {
-			// Make all QuestionAnwer variable public and visible
-			public void run() {
+		// Make all QuestionAnwer variable public and visible
 
-				String username = HealthProperties.getProperty("iipUsername");
-				String password = HealthProperties.getProperty("iipPassword");
-				String iipUrl = HealthProperties.getProperty("iipUrl");
-				String questionnaireChannel = HealthProperties
-						.getProperty("questionnaireChannel");
-				String patientId = HealthProperties.getProperty("patientId");
-				String URL = "https://" + username + ":" + password + "@"
-						+ iipUrl + questionnaireChannel;
+		String username = HealthProperties.getProperty("iipUsername");
+		String password = HealthProperties.getProperty("iipPassword");
+		String iipUrl = HealthProperties.getProperty("iipUrl");
+		String questionnaireChannel = HealthProperties
+				.getProperty("questionnaireChannel");
+		String patientId = HealthProperties.getProperty("patientId");
+		String URL = "https://" + username + ":" + password + "@" + iipUrl
+				+ questionnaireChannel;
 
-				HttpClient httpclient = getNewHttpClient();
-				HttpPost httpPost = new HttpPost(URL);
-				HttpResponse response = null;
+		HttpClient httpclient = getNewHttpClient();
+		HttpPost httpPost = new HttpPost(URL);
+		HttpResponse response = null;
 
-				// Array to send to IIP
-				// Date
+		// Array to send to IIP
+		// Date
 
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-						"yyyy-MM-dd'T'HH:mm:ss");
-				String timeAndDate = simpleDateFormat.format(new Date());
-				List<NameValuePair> params = new ArrayList<NameValuePair>();
-				params.add(new BasicNameValuePair("q_1", sQuestionOneAnswer));
-				params.add(new BasicNameValuePair("q_2", sQuestionTwoAnswer));
-				params.add(new BasicNameValuePair("q_3", sQuestionThreeAnswer));
-				params.add(new BasicNameValuePair("q_4", sQuestionFourAnswer));
-				params.add(new BasicNameValuePair("q_5", sQuestionFiveAnswer));
-				params.add(new BasicNameValuePair("q_6", sQuestionSixAnswer));
-				params.add(new BasicNameValuePair("q_7", sQuestionSevenAnswer));
-				params.add(new BasicNameValuePair("patientId", patientId));
-				params.add(new BasicNameValuePair("dateTime", timeAndDate));
-				try {
-					httpPost.setEntity(new UrlEncodedFormEntity(params));
-					response = httpclient.execute(httpPost);
-					System.out.println("\nTesting sending Pulse: "
-							+ response.getStatusLine());
-				} catch (ClientProtocolException e1) {
-					System.out.println(e1.toString());
-				} catch (IOException e1) {
-					System.out.println(e1.toString());
-				} finally {
-					Utilities.disposeDialog(null);
-				}
-				try {
-					DocumentBuilderFactory dbf = DocumentBuilderFactory
-							.newInstance();
-					DocumentBuilder db = dbf.newDocumentBuilder();
-					InputStream is = response.getEntity().getContent();
-					Document doc = db.parse(is);
-					Element root2 = doc.getDocumentElement();
-					printAllNodes(root2);
-				} catch (Exception e) {
-					System.out.println(e.toString());
-				}
-			}
-		});
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss");
+		String timeAndDate = simpleDateFormat.format(new Date());
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("q_1", sQuestionOneAnswer));
+		params.add(new BasicNameValuePair("q_2", sQuestionTwoAnswer));
+		params.add(new BasicNameValuePair("q_3", sQuestionThreeAnswer));
+		params.add(new BasicNameValuePair("q_4", sQuestionFourAnswer));
+		params.add(new BasicNameValuePair("q_5", sQuestionFiveAnswer));
+		params.add(new BasicNameValuePair("q_6", sQuestionSixAnswer));
+		params.add(new BasicNameValuePair("q_7", sQuestionSevenAnswer));
+		params.add(new BasicNameValuePair("patientId", patientId));
+		params.add(new BasicNameValuePair("dateTime", timeAndDate));
+		try {
+			httpPost.setEntity(new UrlEncodedFormEntity(params));
+			response = httpclient.execute(httpPost);
+			System.out.println("\nTesting sending Pulse: "
+					+ response.getStatusLine());
+		} catch (ClientProtocolException e1) {
+			System.out.println(e1.toString());
+		} catch (IOException e1) {
+			System.out.println(e1.toString());
+		} finally {
+			Utilities.disposeDialog(null);
+		}
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputStream is = response.getEntity().getContent();
+			Document doc = db.parse(is);
+			Element root2 = doc.getDocumentElement();
+			printAllNodes(root2);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 	}
 
 	private static void printAllNodes(Node doc) {

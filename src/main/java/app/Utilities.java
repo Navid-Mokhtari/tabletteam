@@ -9,10 +9,21 @@ import javax.microedition.io.StreamConnectionNotifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
+import bluetooth.PulseConnectionRunnable;
+
 public class Utilities {
 	static StreamConnectionNotifier service;
 	static StreamConnection con;
 	static InputStream is;
+	public static Thread mainThread;
+	public static PulseConnectionRunnable pulseThread;
+	public Thread getMainThread() {
+		return mainThread;
+	}
+
+	public void setMainThread(Thread mainThread) {
+			Utilities.mainThread = mainThread;
+	}
 
 	public static void disposeDialog(JComponent component) {
 		Frame[] frames = JOptionPane.getRootFrame().getFrames();

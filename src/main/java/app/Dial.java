@@ -74,15 +74,16 @@ public class Dial extends JDialog {
 			getContentPane().add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
 			gbl_panel.columnWidths = new int[] { 0, 0, 0, 0 };
-			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-					0, 0, 0 };
+			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+					0, 0, 0, 0 };
 			gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0 };
-			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-					0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+					0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
 				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon(Dial.class.getResource("/pic/measurment1.jpg")));
+				label.setIcon(new ImageIcon(Dial.class
+						.getResource("/pic/measurment1.jpg")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
 				gbc_label.insets = new Insets(0, 0, 5, 5);
 				gbc_label.gridx = 1;
@@ -117,7 +118,8 @@ public class Dial extends JDialog {
 				panel.add(lblNewLabel, gbc_lblNewLabel);
 			}
 			{
-				JLabel lblWaitUntil = new JLabel(". Wait until the measurement-bar is full and you");
+				JLabel lblWaitUntil = new JLabel(
+						". Wait until the measurement-bar is full and you");
 				lblWaitUntil.setForeground(Color.WHITE);
 				lblWaitUntil.setFont(new Font("Arial", Font.BOLD, 30));
 				GridBagConstraints gbc_lblWaitUntil = new GridBagConstraints();
@@ -127,7 +129,8 @@ public class Dial extends JDialog {
 				panel.add(lblWaitUntil, gbc_lblWaitUntil);
 			}
 			{
-				JLabel lblNewLabel_1 = new JLabel("                            see the measurments");
+				JLabel lblNewLabel_1 = new JLabel(
+						"                            see the measurments");
 				lblNewLabel_1.setForeground(Color.WHITE);
 				lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 30));
 				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -199,18 +202,26 @@ public class Dial extends JDialog {
 
 									}
 								});
-								PulseConnectionRunnable pc = new PulseConnectionRunnable(
-										pulseValue, oxigenValue, null, null);
-								Thread thread = new Thread(pc);
-								thread.start();
+								System.out.println("Main thread ID is "
+										+ Thread.currentThread().getId());
+								Thread thread = null;
+								Utilities utilities = new Utilities();
+								utilities.setMainThread(Thread.currentThread());
+								if (Utilities.pulseThread == null) {
+									PulseConnectionRunnable pc = new PulseConnectionRunnable(
+											pulseValue, oxigenValue, null, null);
+									thread = new Thread(pc);
+									thread.start();
+								}
 								try {
-									Thread.sleep(7000);
+									Thread.sleep(30000);
 								} catch (InterruptedException e) {
-									// TODO Auto-generated catch block
+									System.out
+											.println("Main thread was woken up");
 									e.printStackTrace();
 								} finally {
-									thread.interrupt();
-									if (thread.isAlive()) {
+									if (thread != null && thread.isAlive()) {
+										thread.interrupt();
 										thread = null;
 										System.out.println("I am alive");
 									}
@@ -267,8 +278,8 @@ public class Dial extends JDialog {
 				JButton okButton = new JButton("Send");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-//						pulseValue.setText("50");
-//						oxigenValue.setText("20");
+						// pulseValue.setText("50");
+						// oxigenValue.setText("20");
 						if (!pulseValue.getText().isEmpty()) {
 
 							new Thread(new Runnable() {
