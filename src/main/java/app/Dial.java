@@ -73,52 +73,67 @@ public class Dial extends JDialog {
 			gbc_panel.gridy = 0;
 			getContentPane().add(panel, gbc_panel);
 			GridBagLayout gbl_panel = new GridBagLayout();
-			gbl_panel.columnWidths = new int[] { 0, 0 };
-			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+			gbl_panel.columnWidths = new int[] { 0, 0, 0, 0 };
+			gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 					0, 0, 0 };
-			gbl_panel.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
-			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+			gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0 };
+			gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 					0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 			panel.setLayout(gbl_panel);
 			{
 				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon(Dial.class.getResource("/pic/Final-measurment.jpg")));
+				label.setIcon(new ImageIcon(Dial.class.getResource("/pic/measurment1.jpg")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
-				gbc_label.insets = new Insets(0, 0, 5, 0);
-				gbc_label.gridx = 0;
+				gbc_label.insets = new Insets(0, 0, 5, 5);
+				gbc_label.gridx = 1;
 				gbc_label.gridy = 0;
 				panel.add(label, gbc_label);
 			}
 			{
+				JLabel lblNewLabel_5 = new JLabel("                     ");
+				GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
+				gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel_5.gridx = 3;
+				gbc_lblNewLabel_5.gridy = 0;
+				panel.add(lblNewLabel_5, gbc_lblNewLabel_5);
+			}
+			{
+				JLabel lblNewLabel_2 = new JLabel("                      ");
+				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+				gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNewLabel_2.gridx = 2;
+				gbc_lblNewLabel_2.gridy = 1;
+				panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+			}
+			{
 				JLabel lblNewLabel = new JLabel(
-						". Make sure the instrunment is attached well\r\n");
-				lblNewLabel.setFont(new Font("Arial", Font.BOLD, 18));
+						". Make sure the instrunment is attached well    \r\n ");
+				lblNewLabel.setFont(new Font("Arial", Font.BOLD, 30));
 				lblNewLabel.setForeground(Color.WHITE);
 				GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-				gbc_lblNewLabel.gridx = 0;
+				gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNewLabel.gridx = 1;
 				gbc_lblNewLabel.gridy = 3;
 				panel.add(lblNewLabel, gbc_lblNewLabel);
 			}
 			{
-				JLabel lblWaitUntil = new JLabel(
-						"  . Wait until the measurment bar is full and you");
+				JLabel lblWaitUntil = new JLabel(". Wait until the measurement-bar is full and you");
 				lblWaitUntil.setForeground(Color.WHITE);
-				lblWaitUntil.setFont(new Font("Arial", Font.BOLD, 18));
+				lblWaitUntil.setFont(new Font("Arial", Font.BOLD, 30));
 				GridBagConstraints gbc_lblWaitUntil = new GridBagConstraints();
-				gbc_lblWaitUntil.insets = new Insets(0, 0, 5, 0);
-				gbc_lblWaitUntil.gridx = 0;
+				gbc_lblWaitUntil.insets = new Insets(0, 0, 5, 5);
+				gbc_lblWaitUntil.gridx = 1;
 				gbc_lblWaitUntil.gridy = 4;
 				panel.add(lblWaitUntil, gbc_lblWaitUntil);
 			}
 			{
-				JLabel lblNewLabel_1 = new JLabel("    see the measurments");
+				JLabel lblNewLabel_1 = new JLabel("                            see the measurments");
 				lblNewLabel_1.setForeground(Color.WHITE);
-				lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 18));
+				lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 30));
 				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-				gbc_lblNewLabel_1.gridx = 0;
+				gbc_lblNewLabel_1.gridx = 1;
 				gbc_lblNewLabel_1.gridy = 5;
 				panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 			}
@@ -129,8 +144,8 @@ public class Dial extends JDialog {
 				pulseValue.setBorder(new TitledBorder(null, "",
 						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_pulseValue = new GridBagConstraints();
-				gbc_pulseValue.insets = new Insets(0, 0, 5, 0);
-				gbc_pulseValue.gridx = 0;
+				gbc_pulseValue.insets = new Insets(0, 0, 5, 5);
+				gbc_pulseValue.gridx = 1;
 				gbc_pulseValue.gridy = 11;
 				panel.add(pulseValue, gbc_pulseValue);
 			}
@@ -141,12 +156,14 @@ public class Dial extends JDialog {
 				oxigenValue.setBorder(new TitledBorder(null, "",
 						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_oxigenValue = new GridBagConstraints();
-				gbc_oxigenValue.gridx = 0;
-				gbc_oxigenValue.gridy = 12;
+				gbc_oxigenValue.insets = new Insets(0, 0, 5, 5);
+				gbc_oxigenValue.gridx = 1;
+				gbc_oxigenValue.gridy = 10;
 				panel.add(oxigenValue, gbc_oxigenValue);
 			}
 			{
 				JButton btnMeasure = new JButton("Measure");
+				btnMeasure.setFont(new Font("Arial", Font.PLAIN, 40));
 				btnMeasure.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 
@@ -205,33 +222,33 @@ public class Dial extends JDialog {
 					}
 				});
 				GridBagConstraints gbc_btnMeasure = new GridBagConstraints();
-				gbc_btnMeasure.insets = new Insets(0, 0, 5, 0);
-				gbc_btnMeasure.gridx = 0;
-				gbc_btnMeasure.gridy = 7;
+				gbc_btnMeasure.insets = new Insets(0, 0, 5, 5);
+				gbc_btnMeasure.gridx = 1;
+				gbc_btnMeasure.gridy = 8;
 				panel.add(btnMeasure, gbc_btnMeasure);
 			}
 			{
-				JLabel lblNewLabel_3 = new JLabel("        Spo2        ");
-				lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 18));
+				JLabel lblNewLabel_3 = new JLabel(" Spo2 ");
+				lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 30));
 				lblNewLabel_3.setForeground(Color.WHITE);
 				lblNewLabel_3.setBorder(new TitledBorder(null, "",
 						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-				gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_3.gridx = 0;
-				gbc_lblNewLabel_3.gridy = 9;
+				gbc_lblNewLabel_3.gridy = 10;
 				panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 			}
 			{
-				JLabel lblNewLabel_4 = new JLabel("        Pulse        ");
+				JLabel lblNewLabel_4 = new JLabel(" Pulse");
 				lblNewLabel_4.setBorder(new TitledBorder(null, "",
 						TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 18));
+				lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 30));
 				lblNewLabel_4.setForeground(Color.WHITE);
 				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-				gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 0);
+				gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_4.gridx = 0;
-				gbc_lblNewLabel_4.gridy = 10;
+				gbc_lblNewLabel_4.gridy = 11;
 				panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 			}
 
@@ -288,7 +305,7 @@ public class Dial extends JDialog {
 											sendingImage
 													.setImageObserver(label);
 											panel.add(label);
-											dialog.add(panel);
+											dialog.getContentPane().add(panel);
 											dialog.pack();
 											// Public method to center the
 											// dialog after calling
