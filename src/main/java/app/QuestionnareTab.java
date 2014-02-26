@@ -1299,7 +1299,7 @@ public class QuestionnareTab extends JComponent {
 									ImageIcon sendingImage = new ImageIcon(
 											imageURL);
 									final JDialog dialog = new JDialog();
-									dialog.setTitle("Sending answers...");
+									dialog.setTitle(currentLanguage.getString("sendingAnswers"));
 									dialog.setName("TemporarySend");
 									dialog.setUndecorated(false);
 									JPanel panel = new JPanel();
@@ -1402,7 +1402,7 @@ public class QuestionnareTab extends JComponent {
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(params));
 			response = httpclient.execute(httpPost);
-			System.out.println("\nTesting sending Pulse: "
+			System.out.println("\nTesting sending daily questionnaire: "
 					+ response.getStatusLine());
 		} catch (ClientProtocolException e1) {
 			System.out.println(e1.toString());
