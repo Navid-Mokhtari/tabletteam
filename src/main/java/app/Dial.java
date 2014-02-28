@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javax.swing.border.CompoundBorder;
 
 public class Dial extends JDialog {
 
@@ -149,7 +150,7 @@ public class Dial extends JDialog {
 			{
 				pulseValue = new JLabel("                       ");
 				pulseValue.setForeground(Color.WHITE);
-				pulseValue.setFont(new Font("Arial", Font.BOLD, 18));
+				pulseValue.setFont(new Font("Arial", Font.BOLD, 30));
 				pulseValue.setBorder(new TitledBorder(null, "",
 						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_pulseValue = new GridBagConstraints();
@@ -161,7 +162,7 @@ public class Dial extends JDialog {
 			{
 				oxigenValue = new JLabel("                       ");
 				oxigenValue.setForeground(Color.WHITE);
-				oxigenValue.setFont(new Font("Arial", Font.BOLD, 18));
+				oxigenValue.setFont(new Font("Arial", Font.BOLD, 30));
 				oxigenValue.setBorder(new TitledBorder(null, "",
 						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_oxigenValue = new GridBagConstraints();
@@ -245,26 +246,24 @@ public class Dial extends JDialog {
 				panel.add(btnMeasure, gbc_btnMeasure);
 			}
 			{
-				JLabel lblNewLabel_3 = new JLabel(" Spo2 ");
+				JLabel lblNewLabel_3 = new JLabel(currentLanguage.getString("Dial.lblNewLabel_3.text")); //$NON-NLS-1$
 				lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 30));
 				lblNewLabel_3.setForeground(Color.WHITE);
-				lblNewLabel_3.setBorder(new TitledBorder(null, "",
-						TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+				gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
 				gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_3.gridx = 0;
+				gbc_lblNewLabel_3.gridx = 1;
 				gbc_lblNewLabel_3.gridy = 10;
 				panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 			}
 			{
-				JLabel lblNewLabel_4 = new JLabel(" Pulse");
-				lblNewLabel_4.setBorder(new TitledBorder(null, "",
-						TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				JLabel lblNewLabel_4 = new JLabel(currentLanguage.getString("Dial.lblNewLabel_4.text"));
 				lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 30));
 				lblNewLabel_4.setForeground(Color.WHITE);
 				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+				gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
 				gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_4.gridx = 0;
+				gbc_lblNewLabel_4.gridx = 1;
 				gbc_lblNewLabel_4.gridy = 11;
 				panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 			}
