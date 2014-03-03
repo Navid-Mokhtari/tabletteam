@@ -9,6 +9,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -30,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
 import javax.swing.border.CompoundBorder;
 
 public class Dial extends JDialog {
@@ -312,6 +314,7 @@ public class Dial extends JDialog {
 											// Then we display the dialog on
 											// that frame
 											final JDialog dialog = new JDialog();
+											dialog.setPreferredSize(new Dimension(380, 170));
 											dialog.setName("TemporarySending");
 											dialog.setTitle(currentLanguage.getString("sendingMeasurement"));
 											dialog.setUndecorated(false);

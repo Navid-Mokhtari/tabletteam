@@ -12,6 +12,7 @@ import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -1526,7 +1527,8 @@ public class CatQuestionnaire extends JDialog {
 									ImageIcon sendingImage = new ImageIcon(
 											imageURL);
 									final JDialog dialog = new JDialog();
-									dialog.setTitle(currentLanguage.getString("sendingAnswers"));
+									dialog.setTitle(currentLanguage.getString("sendingCatAnswers"));
+									dialog.setPreferredSize(new Dimension(380, 170));
 									dialog.setName("TemporarySend");
 									dialog.setUndecorated(false);
 									JPanel panel = new JPanel();
@@ -1557,6 +1559,8 @@ public class CatQuestionnaire extends JDialog {
 				catch (HeadlessException e1) {
 					e1.printStackTrace();
 				}
+				Window w = SwingUtilities.getWindowAncestor(panelContainer);
+				w.dispose();
 			}
 		});
 

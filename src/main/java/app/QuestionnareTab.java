@@ -12,6 +12,7 @@ import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -65,7 +66,7 @@ import org.w3c.dom.NodeList;
 
 //import com.sun.org.apache.xpath.internal.operations.String;
 
-public class QuestionnareTab extends JComponent {
+public class QuestionnareTab extends JDialog {
 	public QuestionnareTab() {
 	}
 
@@ -1275,6 +1276,7 @@ public class QuestionnareTab extends JComponent {
 									ImageIcon sendingImage = new ImageIcon(
 											imageURL);
 									final JDialog dialog = new JDialog();
+									dialog.setPreferredSize(new Dimension(380, 170));
 									dialog.setTitle(currentLanguage.getString("sendingAnswers"));
 									dialog.setName("TemporarySend");
 									dialog.setUndecorated(false);
@@ -1307,7 +1309,8 @@ public class QuestionnareTab extends JComponent {
 				catch (HeadlessException e1) {
 					e1.printStackTrace();
 				}
-				//
+				Window w = SwingUtilities.getWindowAncestor(panelContainer);
+				w.dispose();
 			}
 		});
 
