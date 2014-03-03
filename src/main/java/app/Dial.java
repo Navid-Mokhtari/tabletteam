@@ -60,7 +60,7 @@ public class Dial extends JDialog {
 	public Dial() {
 		final JLabel pulseValue;
 		final JLabel oxigenValue;
-		
+
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
@@ -100,22 +100,22 @@ public class Dial extends JDialog {
 				gbc_label.gridy = 0;
 				panel.add(label, gbc_label);
 			}
-//			{
-//				JLabel lblNewLabel_5 = new JLabel("                     ");
-//				GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
-//				gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 0);
-//				gbc_lblNewLabel_5.gridx = 3;
-//				gbc_lblNewLabel_5.gridy = 0;
-//				panel.add(lblNewLabel_5, gbc_lblNewLabel_5);
-//			}
-//			{
-//				JLabel lblNewLabel_2 = new JLabel("                      ");
-//				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-//				gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-//				gbc_lblNewLabel_2.gridx = 2;
-//				gbc_lblNewLabel_2.gridy = 1;
-//				panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-//			}
+			// {
+			// JLabel lblNewLabel_5 = new JLabel("                     ");
+			// GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
+			// gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 0);
+			// gbc_lblNewLabel_5.gridx = 3;
+			// gbc_lblNewLabel_5.gridy = 0;
+			// panel.add(lblNewLabel_5, gbc_lblNewLabel_5);
+			// }
+			// {
+			// JLabel lblNewLabel_2 = new JLabel("                      ");
+			// GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+			// gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+			// gbc_lblNewLabel_2.gridx = 2;
+			// gbc_lblNewLabel_2.gridy = 1;
+			// panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
+			// }
 			{
 				JLabel lblNewLabel = new JLabel(
 						currentLanguage.getString("firstInstruction"));
@@ -128,7 +128,8 @@ public class Dial extends JDialog {
 				panel.add(lblNewLabel, gbc_lblNewLabel);
 			}
 			{
-				JLabel lblWaitUntil = new JLabel(currentLanguage.getString("secondInstruction"));
+				JLabel lblWaitUntil = new JLabel(
+						currentLanguage.getString("secondInstruction"));
 				lblWaitUntil.setForeground(Color.WHITE);
 				lblWaitUntil.setFont(new Font("Arial", Font.BOLD, 30));
 				GridBagConstraints gbc_lblWaitUntil = new GridBagConstraints();
@@ -137,18 +138,18 @@ public class Dial extends JDialog {
 				gbc_lblWaitUntil.gridy = 4;
 				panel.add(lblWaitUntil, gbc_lblWaitUntil);
 			}
-//			{
-//				JLabel lblNewLabel_1 = new JLabel(
-//						"                            see the measurments");
-//				lblNewLabel_1.setForeground(Color.WHITE);
-//				lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 30));
-//				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-//				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-//				gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-//				gbc_lblNewLabel_1.gridx = 1;
-//				gbc_lblNewLabel_1.gridy = 5;
-//				panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-//			}
+			// {
+			// JLabel lblNewLabel_1 = new JLabel(
+			// "                            see the measurments");
+			// lblNewLabel_1.setForeground(Color.WHITE);
+			// lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 30));
+			// GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+			// gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+			// gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+			// gbc_lblNewLabel_1.gridx = 1;
+			// gbc_lblNewLabel_1.gridy = 5;
+			// panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
+			// }
 			{
 				pulseValue = new JLabel("                       ");
 				pulseValue.setForeground(Color.WHITE);
@@ -174,7 +175,8 @@ public class Dial extends JDialog {
 				panel.add(oxigenValue, gbc_oxigenValue);
 			}
 			{
-				JButton btnMeasure = new JButton(currentLanguage.getString("measure"));
+				JButton btnMeasure = new JButton(
+						currentLanguage.getString("measure"));
 				btnMeasure.setFont(new Font("Arial", Font.PLAIN, 40));
 				btnMeasure.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -248,7 +250,8 @@ public class Dial extends JDialog {
 				panel.add(btnMeasure, gbc_btnMeasure);
 			}
 			{
-				JLabel lblNewLabel_3 = new JLabel(currentLanguage.getString("Dial.lblNewLabel_3.text")); //$NON-NLS-1$
+				JLabel lblNewLabel_3 = new JLabel(
+						currentLanguage.getString("Dial.lblNewLabel_3.text")); //$NON-NLS-1$
 				lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 30));
 				lblNewLabel_3.setForeground(Color.WHITE);
 				GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
@@ -259,7 +262,8 @@ public class Dial extends JDialog {
 				panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 			}
 			{
-				JLabel lblNewLabel_4 = new JLabel(currentLanguage.getString("Dial.lblNewLabel_4.text"));
+				JLabel lblNewLabel_4 = new JLabel(
+						currentLanguage.getString("Dial.lblNewLabel_4.text"));
 				lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 30));
 				lblNewLabel_4.setForeground(Color.WHITE);
 				GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
@@ -282,11 +286,10 @@ public class Dial extends JDialog {
 			gbc_buttonPane.gridy = 1;
 			getContentPane().add(buttonPane, gbc_buttonPane);
 			{
-				JButton okButton = new JButton(currentLanguage.getString("submit"));
+				JButton okButton = new JButton(
+						currentLanguage.getString("submit"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						// pulseValue.setText("50");
-						// oxigenValue.setText("20");
 						if (!pulseValue.getText().isEmpty()) {
 
 							new Thread(new Runnable() {
@@ -314,9 +317,11 @@ public class Dial extends JDialog {
 											// Then we display the dialog on
 											// that frame
 											final JDialog dialog = new JDialog();
-											dialog.setPreferredSize(new Dimension(380, 170));
+											dialog.setPreferredSize(new Dimension(
+													380, 170));
 											dialog.setName("TemporarySending");
-											dialog.setTitle(currentLanguage.getString("sendingMeasurement"));
+											dialog.setTitle(currentLanguage
+													.getString("sendingMeasurement"));
 											dialog.setUndecorated(false);
 											JPanel panel = new JPanel();
 											final JLabel label = new JLabel(
@@ -361,7 +366,8 @@ public class Dial extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
-				JButton cancelButton = new JButton(currentLanguage.getString("cancel"));
+				JButton cancelButton = new JButton(
+						currentLanguage.getString("cancel"));
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
