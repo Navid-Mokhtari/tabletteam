@@ -154,13 +154,11 @@ public class QuestionnareTab extends JComponent {
 		panelQuestionNine.setLayout(gbl_panel);
 
 		final GridBagConstraints constrainsQuestionNine = new GridBagConstraints();
-		constrainsQuestionNine.insets = new Insets(0, 0, 0, 0);
-		constrainsQuestionNine.fill = GridBagConstraints.HORIZONTAL;
+		constrainsQuestionNine.insets = new Insets(10, 10, 10, 10);
 		constrainsQuestionNine.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final GridBagConstraints constrainsQuestionEight = new GridBagConstraints();
-		constrainsQuestionEight.insets = new Insets(0, 0, 0, 0);
-		constrainsQuestionEight.fill = GridBagConstraints.HORIZONTAL;
+		constrainsQuestionEight.insets = new Insets(10, 10, 10, 10);
 		constrainsQuestionEight.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		ClassLoader customRadioButton = this.getClass().getClassLoader();
@@ -233,13 +231,21 @@ public class QuestionnareTab extends JComponent {
 		constrainsQuestionEight.gridy = 1;
 		panelQuestionEight.add(questionOneAnswer, constrainsQuestionEight);
 
+		JButton backButton;
+		backButton = new JButton(currentLanguage.getString("previousQuestion"));
+		backButton.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backButton.setPreferredSize(new Dimension(225, 125));
+		backButton.setEnabled(false);
+		constrainsQuestionOne.gridx = 0;
+		constrainsQuestionOne.gridy = 8;
+		panelQuestionOne.add(backButton, constrainsQuestionOne);
+		
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionOne.gridx = 0;
+		toQuestionTwo.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionOne.gridx = 1;
 		constrainsQuestionOne.gridy = 8;
-		constrainsQuestionOne.ipadx = 100;
-		constrainsQuestionOne.ipady = 60;
 		panelQuestionOne.add(toQuestionTwo, constrainsQuestionOne);
 		toQuestionTwo.addActionListener(new ActionListener() {
 
@@ -260,7 +266,7 @@ public class QuestionnareTab extends JComponent {
 
 				final JLabel questionOne;
 				questionOne = new JLabel(currentLanguage.getString("qOne"));
-				questionOne.setFont(new Font("Tahoma", Font.BOLD, 20));
+				questionOne.setFont(new Font("Tahoma", Font.BOLD, 40));
 				questionOne.setForeground(Color.BLUE);
 				constrainsQuestionEight.gridx = 0;
 				constrainsQuestionEight.gridy = 1;
@@ -278,7 +284,6 @@ public class QuestionnareTab extends JComponent {
 
 		GridBagConstraints constrainsQuestionTwo = new GridBagConstraints();
 		constrainsQuestionTwo.insets = new Insets(5, 5, 5, 5);
-		constrainsQuestionTwo.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionTwo.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionTwo;
@@ -334,10 +339,9 @@ public class QuestionnareTab extends JComponent {
 		toQuestionOne = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		toQuestionOne.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionOne.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 7;
-		constrainsQuestionTwo.ipadx = 120;
-		constrainsQuestionTwo.ipady = 60;
 		panelQuestionTwo.add(toQuestionOne, constrainsQuestionTwo);
 		toQuestionOne.addActionListener(new ActionListener() {
 
@@ -359,10 +363,9 @@ public class QuestionnareTab extends JComponent {
 		JButton toQuestionThree;
 		toQuestionThree = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionTwo.gridx = 0;
-		constrainsQuestionTwo.gridy = 8;
-		constrainsQuestionTwo.ipadx = 120;
-		constrainsQuestionTwo.ipady = 60;
+		toQuestionThree.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionTwo.gridx = 1;
+		constrainsQuestionTwo.gridy = 7;
 		panelQuestionTwo.add(toQuestionThree, constrainsQuestionTwo);
 		toQuestionThree.addActionListener(new ActionListener() {
 
@@ -383,7 +386,7 @@ public class QuestionnareTab extends JComponent {
 
 				final JLabel questionTwo;
 				questionTwo = new JLabel(currentLanguage.getString("qTwo"));
-				questionTwo.setFont(new Font("Tahoma", Font.BOLD, 20));
+				questionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
 				questionTwo.setForeground(Color.BLUE);
 				constrainsQuestionEight.gridx = 0;
 				constrainsQuestionEight.gridy = 2;
@@ -401,7 +404,6 @@ public class QuestionnareTab extends JComponent {
 
 		GridBagConstraints constrainsQuestionThree = new GridBagConstraints();
 		constrainsQuestionThree.insets = new Insets(5, 5, 5, 5);
-		constrainsQuestionThree.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionThree.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionThree;
@@ -460,10 +462,9 @@ public class QuestionnareTab extends JComponent {
 		backToQuestionTwo = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionTwo.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 7;
-		constrainsQuestionThree.ipadx = 120;
-		constrainsQuestionThree.ipady = 60;
 		panelQuestionThree.add(backToQuestionTwo, constrainsQuestionThree);
 		backToQuestionTwo.addActionListener(new ActionListener() {
 
@@ -485,10 +486,9 @@ public class QuestionnareTab extends JComponent {
 		JButton toQuestionFour;
 		toQuestionFour = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionThree.gridx = 0;
-		constrainsQuestionThree.gridy = 8;
-		constrainsQuestionThree.ipadx = 120;
-		constrainsQuestionThree.ipady = 60;
+		toQuestionFour.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionThree.gridx = 1;
+		constrainsQuestionThree.gridy = 7;
 		panelQuestionThree.add(toQuestionFour, constrainsQuestionThree);
 		toQuestionFour.addActionListener(new ActionListener() {
 
@@ -510,7 +510,7 @@ public class QuestionnareTab extends JComponent {
 				final JLabel questionThree;
 				questionThree = new JLabel(currentLanguage.getString("qThree"));
 				questionThree.setForeground(Color.BLUE);
-				questionThree.setFont(new Font("Tahoma", Font.BOLD, 20));
+				questionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
 				constrainsQuestionEight.gridx = 0;
 				constrainsQuestionEight.gridy = 3;
 				panelQuestionEight.add(questionThree, constrainsQuestionEight);
@@ -528,7 +528,6 @@ public class QuestionnareTab extends JComponent {
 
 		GridBagConstraints constrainsQuestionFour = new GridBagConstraints();
 		constrainsQuestionFour.insets = new Insets(5, 5, 5, 5);
-		constrainsQuestionFour.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionFour.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionFour;
@@ -571,10 +570,9 @@ public class QuestionnareTab extends JComponent {
 		backToQuestionThree = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionThree.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionFour.gridx = 0;
-		constrainsQuestionFour.gridy = 7;
-		constrainsQuestionFour.ipadx = 120;
-		constrainsQuestionFour.ipady = 60;
+		constrainsQuestionFour.gridy = 8;
 		panelQuestionFour.add(backToQuestionThree, constrainsQuestionFour);
 		backToQuestionThree.addActionListener(new ActionListener() {
 
@@ -596,10 +594,9 @@ public class QuestionnareTab extends JComponent {
 		JButton toQuestionFive;
 		toQuestionFive = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionFour.gridx = 0;
+		toQuestionFive.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionFour.gridx = 1;
 		constrainsQuestionFour.gridy = 8;
-		constrainsQuestionFour.ipadx = 120;
-		constrainsQuestionFour.ipady = 60;
 		panelQuestionFour.add(toQuestionFive, constrainsQuestionFour);
 		toQuestionFive.addActionListener(new ActionListener() {
 
@@ -616,7 +613,7 @@ public class QuestionnareTab extends JComponent {
 
 				final JLabel questionFour;
 				questionFour = new JLabel(currentLanguage.getString("qFour"));
-				questionFour.setFont(new Font("Tahoma", Font.BOLD, 20));
+				questionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
 				questionFour.setForeground(Color.BLUE);
 				constrainsQuestionEight.gridx = 0;
 				constrainsQuestionEight.gridy = 4;
@@ -634,7 +631,6 @@ public class QuestionnareTab extends JComponent {
 
 		GridBagConstraints constrainsQuestionFive = new GridBagConstraints();
 		constrainsQuestionFive.insets = new Insets(5, 5, 5, 5);
-		constrainsQuestionFive.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionFive.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionFive;
@@ -705,10 +701,9 @@ public class QuestionnareTab extends JComponent {
 		backToQuestionFour = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionFour.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionFive.gridx = 0;
-		constrainsQuestionFive.gridy = 7;
-		constrainsQuestionFive.ipadx = 120;
-		constrainsQuestionFive.ipady = 60;
+		constrainsQuestionFive.gridy = 8;
 		panelQuestionFive.add(backToQuestionFour, constrainsQuestionFive);
 		backToQuestionFour.addActionListener(new ActionListener() {
 
@@ -730,10 +725,9 @@ public class QuestionnareTab extends JComponent {
 		JButton toQuestionSix;
 		toQuestionSix = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionFive.gridx = 0;
+		toQuestionSix.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionFive.gridx = 1;
 		constrainsQuestionFive.gridy = 8;
-		constrainsQuestionFive.ipadx = 120;
-		constrainsQuestionFive.ipady = 60;
 		panelQuestionFive.add(toQuestionSix, constrainsQuestionFive);
 		toQuestionSix.addActionListener(new ActionListener() {
 
@@ -756,7 +750,7 @@ public class QuestionnareTab extends JComponent {
 
 				final JLabel questionFive;
 				questionFive = new JLabel(currentLanguage.getString("qFive"));
-				questionFive.setFont(new Font("Tahoma", Font.BOLD, 20));
+				questionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
 				questionFive.setForeground(Color.BLUE);
 				constrainsQuestionNine.gridx = 0;
 				constrainsQuestionNine.gridy = 1;
@@ -778,7 +772,6 @@ public class QuestionnareTab extends JComponent {
 
 		GridBagConstraints constrainsQuestionSix = new GridBagConstraints();
 		constrainsQuestionSix.insets = new Insets(5, 5, 5, 5);
-		constrainsQuestionSix.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionSix.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSix;
@@ -873,10 +866,9 @@ public class QuestionnareTab extends JComponent {
 		backToQuestionFive = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionFive.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionSix.gridx = 0;
-		constrainsQuestionSix.gridy = 7;
-		constrainsQuestionSix.ipadx = 120;
-		constrainsQuestionSix.ipady = 60;
+		constrainsQuestionSix.gridy = 8;
 		panelQuestionSix.add(backToQuestionFive, constrainsQuestionSix);
 		backToQuestionFive.addActionListener(new ActionListener() {
 
@@ -897,10 +889,9 @@ public class QuestionnareTab extends JComponent {
 		JButton toQuestionSeven;
 		toQuestionSeven = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionSix.gridx = 0;
+		toQuestionSeven.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionSix.gridx = 1;
 		constrainsQuestionSix.gridy = 8;
-		constrainsQuestionSix.ipadx = 900;
-		constrainsQuestionSix.ipady = 60;
 		panelQuestionSix.add(toQuestionSeven, constrainsQuestionSix);
 		toQuestionSeven.addActionListener(new ActionListener() {
 
@@ -930,7 +921,7 @@ public class QuestionnareTab extends JComponent {
 
 				final JLabel questionSix;
 				questionSix = new JLabel(currentLanguage.getString("qSix"));
-				questionSix.setFont(new Font("Tahoma", Font.BOLD, 20));
+				questionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
 				questionSix.setForeground(Color.BLUE);
 				constrainsQuestionNine.gridx = 0;
 				constrainsQuestionNine.gridy = 2;
@@ -951,7 +942,6 @@ public class QuestionnareTab extends JComponent {
 
 		GridBagConstraints constrainsQuestionSeven = new GridBagConstraints();
 		constrainsQuestionSeven.insets = new Insets(5, 5, 5, 5);
-		constrainsQuestionSeven.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionSeven.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSeven;
@@ -1024,10 +1014,9 @@ public class QuestionnareTab extends JComponent {
 		backToQuestionSix = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionSix.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionSeven.gridx = 0;
-		constrainsQuestionSeven.gridy = 5;
-		constrainsQuestionSeven.ipadx = 120;
-		constrainsQuestionSeven.ipady = 60;
+		constrainsQuestionSeven.gridy = 7;
 		panelQuestionSeven.add(backToQuestionSix, constrainsQuestionSeven);
 		backToQuestionSix.addActionListener(new ActionListener() {
 
@@ -1048,12 +1037,9 @@ public class QuestionnareTab extends JComponent {
 		JButton toQuestionEight;
 		toQuestionEight = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionSeven.insets = new Insets(30, 5, 5, 5);
-		constrainsQuestionSeven.anchor = GridBagConstraints.SOUTH;
-		constrainsQuestionSeven.gridx = 0;
-		constrainsQuestionSeven.gridy = 6;
-		constrainsQuestionSeven.ipadx = 120;
-		constrainsQuestionSeven.ipady = 60;
+		toQuestionEight.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionSeven.gridx = 1;
+		constrainsQuestionSeven.gridy = 7;
 		panelQuestionSeven.add(toQuestionEight, constrainsQuestionSeven);
 		toQuestionEight.addActionListener(new ActionListener() {
 
@@ -1077,7 +1063,7 @@ public class QuestionnareTab extends JComponent {
 
 				final JLabel questionSeven;
 				questionSeven = new JLabel(currentLanguage.getString("qSeven"));
-				questionSeven.setFont(new Font("Tahoma", Font.BOLD, 20));
+				questionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
 				questionSeven.setForeground(Color.BLUE);
 				constrainsQuestionNine.gridx = 0;
 				constrainsQuestionNine.gridy = 3;
@@ -1095,8 +1081,7 @@ public class QuestionnareTab extends JComponent {
 
 		JLabel reviewlabel;
 		reviewlabel = new JLabel(currentLanguage.getString("qReview"));
-		reviewlabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		reviewlabel.setForeground(Color.BLUE);
+		reviewlabel.setFont(new Font("Tahoma", Font.BOLD, 40));
 		constrainsQuestionEight.gridx = 0;
 		constrainsQuestionEight.gridy = 0;
 		panelQuestionEight.add(reviewlabel, constrainsQuestionEight);
@@ -1105,10 +1090,9 @@ public class QuestionnareTab extends JComponent {
 		backToQuestionSeven = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionSeven.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionEight.gridx = 0;
-		constrainsQuestionEight.gridy = 8;
-		constrainsQuestionEight.ipadx = 120;
-		constrainsQuestionEight.ipady = 60;
+		constrainsQuestionEight.gridy = 9;
 		panelQuestionEight.add(backToQuestionSeven, constrainsQuestionEight);
 		backToQuestionSeven.addActionListener(new ActionListener() {
 
@@ -1125,17 +1109,14 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
-		JButton toQuestoinNine;
-		toQuestoinNine = new JButton(currentLanguage.getString("nextQuestion"));
-		toQuestoinNine.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionEight.insets = new Insets(5, 5, 5, 5);
-		constrainsQuestionEight.anchor = GridBagConstraints.SOUTH;
-		constrainsQuestionEight.gridx = 0;
+		JButton toQuestionNine;
+		toQuestionNine = new JButton(currentLanguage.getString("nextQuestion"));
+		toQuestionNine.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionNine.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionEight.gridx = 1;
 		constrainsQuestionEight.gridy = 9;
-		constrainsQuestionEight.ipadx = 120;
-		constrainsQuestionEight.ipady = 60;
-		panelQuestionEight.add(toQuestoinNine, constrainsQuestionEight);
-		toQuestoinNine.addActionListener(new ActionListener() {
+		panelQuestionEight.add(toQuestionNine, constrainsQuestionEight);
+		toQuestionNine.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1147,19 +1128,34 @@ public class QuestionnareTab extends JComponent {
 		// Panel 9
 
 		reviewlabel = new JLabel(currentLanguage.getString("qReview"));
-		reviewlabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		reviewlabel.setForeground(Color.BLUE);
+		reviewlabel.setFont(new Font("Tahoma", Font.BOLD, 40));
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 0;
 		panelQuestionNine.add(reviewlabel, constrainsQuestionNine);
 
+		JButton backToQuestionEight;
+		backToQuestionEight = new JButton(
+				currentLanguage.getString("previousQuestion"));
+		backToQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionEight.setPreferredSize(new Dimension(300,125));
+		constrainsQuestionNine.gridx = 0;
+		constrainsQuestionNine.gridy = 7;
+		panelQuestionNine.add(backToQuestionEight, constrainsQuestionNine);
+		backToQuestionEight.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				cl.show(panelContainer, "8");
+			}
+		});
+		
 		JButton resetQuestionnaire;
 		resetQuestionnaire = new JButton(currentLanguage.getString("reset"));
 		resetQuestionnaire.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionNine.gridx = 0;
-		constrainsQuestionNine.gridy = 8;
-		constrainsQuestionNine.ipadx = 120;
-		constrainsQuestionNine.ipady = 60;
+		resetQuestionnaire.setPreferredSize(new Dimension(300, 125));
+		constrainsQuestionNine.gridx = 1;
+		constrainsQuestionNine.gridy = 7;
 		panelQuestionNine.add(resetQuestionnaire, constrainsQuestionNine);
 		resetQuestionnaire.addActionListener(new ActionListener() {
 
@@ -1180,35 +1176,15 @@ public class QuestionnareTab extends JComponent {
 			}
 		});
 
-		JButton backToQuestionEight;
-		backToQuestionEight = new JButton(
-				currentLanguage.getString("previousQuestion"));
-		backToQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
+		JButton submitQuestionnare;
+		submitQuestionnare = new JButton(currentLanguage.getString("submit"));
+		submitQuestionnare.setFont(new Font("Tahoma", Font.BOLD, 40));
+		submitQuestionnare.setPreferredSize(new Dimension(300, 125));
 		constrainsQuestionNine.gridx = 0;
-		constrainsQuestionNine.gridy = 7;
-		constrainsQuestionNine.ipadx = 120;
-		constrainsQuestionNine.ipady = 60;
-		panelQuestionNine.add(backToQuestionEight, constrainsQuestionNine);
-		backToQuestionEight.addActionListener(new ActionListener() {
+		constrainsQuestionNine.gridy = 8;
+		panelQuestionNine.add(submitQuestionnare, constrainsQuestionNine);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				cl.show(panelContainer, "8");
-			}
-		});
-
-		JButton SubmitQuestionnare;
-		SubmitQuestionnare = new JButton(currentLanguage.getString("submit"));
-		SubmitQuestionnare.setFont(new Font("Tahoma", Font.BOLD, 40));
-		constrainsQuestionNine.anchor = GridBagConstraints.SOUTH;
-		constrainsQuestionNine.gridx = 0;
-		constrainsQuestionNine.gridy = 9;
-		constrainsQuestionNine.ipadx = 120;
-		constrainsQuestionNine.ipady = 60;
-		panelQuestionNine.add(SubmitQuestionnare, constrainsQuestionNine);
-
-		SubmitQuestionnare.addActionListener(new ActionListener() {
+		submitQuestionnare.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {

@@ -352,7 +352,7 @@ public class Dial extends JDialog {
 					}
 				});
 				okButton.setForeground(new Color(30, 144, 255));
-				okButton.setFont(new Font("Arial", Font.BOLD, 16));
+				okButton.setFont(new Font("Tahoma", Font.BOLD, 40));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -365,7 +365,7 @@ public class Dial extends JDialog {
 					}
 				});
 				cancelButton.setForeground(new Color(30, 144, 255));
-				cancelButton.setFont(new Font("Arial", Font.BOLD, 16));
+				cancelButton.setFont(new Font("Tahoma", Font.BOLD, 40));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

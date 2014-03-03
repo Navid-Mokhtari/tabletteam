@@ -62,7 +62,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class CatQuestionnaire extends JComponent {
+import sun.java2d.Disposer;
+
+public class CatQuestionnaire extends JDialog {
 
 	/**
 	 * 
@@ -151,16 +153,6 @@ public class CatQuestionnaire extends JComponent {
 
 		GridBagLayout gblNine = new GridBagLayout();
 		panelQuestionNine.setLayout(gblNine);
-
-		final GridBagConstraints constrainsQuestionNine = new GridBagConstraints();
-		constrainsQuestionNine.insets = new Insets(0, 0, 0, 0);
-		constrainsQuestionNine.fill = GridBagConstraints.HORIZONTAL;
-		constrainsQuestionNine.anchor = GridBagConstraints.FIRST_LINE_START;
-
-		final GridBagConstraints constrainsQuestionEight = new GridBagConstraints();
-		constrainsQuestionEight.insets = new Insets(0, 0, 0, 0);
-		constrainsQuestionEight.fill = GridBagConstraints.HORIZONTAL;
-		constrainsQuestionEight.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		ClassLoader customRadioButton = this.getClass().getClassLoader();
 
@@ -286,58 +278,17 @@ public class CatQuestionnaire extends JComponent {
 		questionOneGroup.add(questionOneSelectionFour);
 		questionOneGroup.add(questionOneSelectionFive);
 
-		class RadioListenerOne implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// String sQuestionOneAnswer = null;
-				//
-				// if (e.getActionCommand() == "2") {
-				// sQuestionOneAnswer = currentLanguage.getString("aAsUsual");
-				// } else if (e.getActionCommand() == "3") {
-				// sQuestionOneAnswer = currentLanguage.getString("aWorse");
-				// } else if (e.getActionCommand() == "4") {
-				// sQuestionOneAnswer = currentLanguage
-				// .getString("aMuchWorse");
-				// }
-
-				// JLabel questionOneAnswer = new JLabel(sQuestionOneAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 1;
-				// panelQuestionEight.add(questionOneAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerOne listenerOne = new RadioListenerOne();
-		questionOneSelectionZero.addActionListener(listenerOne);
-		questionOneSelectionOne.addActionListener(listenerOne);
-		questionOneSelectionTwo.addActionListener(listenerOne);
-		questionOneSelectionThree.addActionListener(listenerOne);
-		questionOneSelectionFour.addActionListener(listenerOne);
-		questionOneSelectionFive.addActionListener(listenerOne);
-
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionTwo.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionOne.gridx = 7;
 		constrainsQuestionOne.gridy = 3;
-		constrainsQuestionOne.ipadx = 100;
-		constrainsQuestionOne.ipady = 60;
 		panelQuestionOne.add(toQuestionTwo, constrainsQuestionOne);
 		toQuestionTwo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// final JLabel questionOne;
-				// questionOne = new JLabel(currentLanguage.getString("qOne"));
-				// questionOne.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 1;
-				// panelQuestionEight.add(questionOne, constrainsQuestionEight);
 				if (questionOneSelectionZero.isSelected()
 						|| questionOneSelectionOne.isSelected()
 						|| questionOneSelectionTwo.isSelected()
@@ -346,14 +297,12 @@ public class CatQuestionnaire extends JComponent {
 						|| questionOneSelectionFive.isSelected()) {
 					cl.show(panelContainer, "2");
 				}
-
 			}
 		});
 
 		// Question Two
 
 		GridBagConstraints constrainsQuestionTwo = new GridBagConstraints();
-		constrainsQuestionTwo.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionTwo.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionTwo;
@@ -448,44 +397,13 @@ public class CatQuestionnaire extends JComponent {
 		questionTwoGroup.add(questionTwoSelectionFour);
 		questionTwoGroup.add(questionTwoSelectionFive);
 
-		class RadioListenerTwo implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionTwoAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionTwoAnswer = currentLanguage.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionTwoAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionTwoAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				// JLabel questiontwoAnswer = new JLabel(sQuestionTwoAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questiontwoAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerTwo = new RadioListenerTwo();
-		questionTwoSelectionTwo.addActionListener(listenerTwo);
-		questionTwoSelectionThree.addActionListener(listenerTwo);
-		questionTwoSelectionFour.addActionListener(listenerTwo);
-
 		JButton toQuestionOne;
 		toQuestionOne = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		toQuestionOne.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionOne.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionTwo.gridx = 0;
 		constrainsQuestionTwo.gridy = 7;
-		constrainsQuestionTwo.ipadx = 120;
-		constrainsQuestionTwo.ipady = 60;
 		panelQuestionTwo.add(toQuestionOne, constrainsQuestionTwo);
 		toQuestionOne.addActionListener(new ActionListener() {
 
@@ -500,22 +418,14 @@ public class CatQuestionnaire extends JComponent {
 		JButton toQuestionThree;
 		toQuestionThree = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionThree.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionTwo.gridx = 7;
 		constrainsQuestionTwo.gridy = 7;
-		constrainsQuestionTwo.ipadx = 120;
-		constrainsQuestionTwo.ipady = 60;
 		panelQuestionTwo.add(toQuestionThree, constrainsQuestionTwo);
 		toQuestionThree.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// final JLabel questionTwo;
-				// questionTwo = new JLabel(currentLanguage.getString("qTwo"));
-				// questionTwo.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionTwo, constrainsQuestionEight);
 				if (questionTwoSelectionZero.isSelected()
 						|| questionTwoSelectionOne.isSelected()
 						|| questionTwoSelectionTwo.isSelected()
@@ -531,7 +441,6 @@ public class CatQuestionnaire extends JComponent {
 		// Question Three
 
 		GridBagConstraints constrainsQuestionThree = new GridBagConstraints();
-		constrainsQuestionThree.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionThree.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionThree;
@@ -634,46 +543,13 @@ public class CatQuestionnaire extends JComponent {
 		questionThreeGroup.add(questionThreeSelectionFour);
 		questionThreeGroup.add(questionThreeSelectionFive);
 
-		class RadioListenerThree implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionThreeAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionThreeAnswer = currentLanguage
-							.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionThreeAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionThreeAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				// JLabel questionThreeAnswer = new
-				// JLabel(sQuestionThreeAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionThreeAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerThree = new RadioListenerTwo();
-		questionThreeSelectionTwo.addActionListener(listenerTwo);
-		questionThreeSelectionThree.addActionListener(listenerTwo);
-		questionThreeSelectionFour.addActionListener(listenerTwo);
-
 		JButton backToQuestionTwo;
 		backToQuestionTwo = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionTwo.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionThree.gridx = 0;
 		constrainsQuestionThree.gridy = 7;
-		constrainsQuestionThree.ipadx = 120;
-		constrainsQuestionThree.ipady = 60;
 		panelQuestionThree.add(backToQuestionTwo, constrainsQuestionThree);
 		backToQuestionTwo.addActionListener(new ActionListener() {
 
@@ -688,24 +564,14 @@ public class CatQuestionnaire extends JComponent {
 		JButton toQuestionFour;
 		toQuestionFour = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionFour.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionThree.gridx = 7;
 		constrainsQuestionThree.gridy = 7;
-		constrainsQuestionThree.ipadx = 120;
-		constrainsQuestionThree.ipady = 60;
 		panelQuestionThree.add(toQuestionFour, constrainsQuestionThree);
 		toQuestionFour.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// final JLabel questionThree;
-				// questionThree = new
-				// JLabel(currentLanguage.getString("qTwo"));
-				// questionThree.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionThree,
-				// constrainsQuestionEight);
 				if (questionThreeSelectionZero.isSelected()
 						|| questionThreeSelectionOne.isSelected()
 						|| questionThreeSelectionTwo.isSelected()
@@ -721,7 +587,6 @@ public class CatQuestionnaire extends JComponent {
 		// Question Four
 
 		GridBagConstraints constrainsQuestionFour = new GridBagConstraints();
-		constrainsQuestionFour.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionFour.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionFour;
@@ -735,7 +600,6 @@ public class CatQuestionnaire extends JComponent {
 		final JLabel questionFourLeft;
 		questionFourLeft = new JLabel(currentLanguage.getString("qCatFourLeft"));
 		questionFourLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
-		questionFourLeft.setForeground(Color.BLACK);
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 2;
 		panelQuestionFour.add(questionFourLeft, constrainsQuestionFour);
@@ -821,44 +685,15 @@ public class CatQuestionnaire extends JComponent {
 		questionFourGroup.add(questionFourSelectionFour);
 		questionFourGroup.add(questionFourSelectionFive);
 
-		class RadioListenerFour implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionFourAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionFourAnswer = currentLanguage.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionFourAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionFourAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				// JLabel questionFourAnswer = new JLabel(sQuestionFourAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionFourAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerFour = new RadioListenerTwo();
-		questionFourSelectionTwo.addActionListener(listenerTwo);
-		questionFourSelectionThree.addActionListener(listenerTwo);
-		questionFourSelectionFour.addActionListener(listenerTwo);
-
 		JButton backToQuestionThree;
 		backToQuestionThree = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionThree.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionFour.ipadx = 80;
+		constrainsQuestionFour.ipady = 60;
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 7;
-		constrainsQuestionFour.ipadx = 120;
-		constrainsQuestionFour.ipady = 60;
 		panelQuestionFour.add(backToQuestionThree, constrainsQuestionFour);
 		backToQuestionThree.addActionListener(new ActionListener() {
 
@@ -873,23 +708,14 @@ public class CatQuestionnaire extends JComponent {
 		JButton toQuestionFive;
 		toQuestionFive = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionFive.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionFour.gridx = 7;
 		constrainsQuestionFour.gridy = 7;
-		constrainsQuestionFour.ipadx = 120;
-		constrainsQuestionFour.ipady = 60;
 		panelQuestionFour.add(toQuestionFive, constrainsQuestionFour);
 		toQuestionFive.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// final JLabel questionFour;
-				// questionFour = new JLabel(currentLanguage.getString("qTwo"));
-				// questionFour.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionFour,
-				// constrainsQuestionEight);
 				if (questionFourSelectionZero.isSelected()
 						|| questionFourSelectionOne.isSelected()
 						|| questionFourSelectionTwo.isSelected()
@@ -905,7 +731,6 @@ public class CatQuestionnaire extends JComponent {
 		// Question Five
 
 		GridBagConstraints constrainsQuestionFive = new GridBagConstraints();
-		constrainsQuestionFive.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionFive.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionFive;
@@ -1005,44 +830,15 @@ public class CatQuestionnaire extends JComponent {
 		questionFiveGroup.add(questionFiveSelectionFour);
 		questionFiveGroup.add(questionFiveSelectionFive);
 
-		class RadioListenerFive implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionFiveAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionFiveAnswer = currentLanguage.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionFiveAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionFiveAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				// JLabel questionFiveAnswer = new JLabel(sQuestionFiveAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionFiveAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerFive = new RadioListenerTwo();
-		questionFiveSelectionTwo.addActionListener(listenerTwo);
-		questionFiveSelectionThree.addActionListener(listenerTwo);
-		questionFiveSelectionFour.addActionListener(listenerTwo);
-
 		JButton backToQuestionFour;
 		backToQuestionFour = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionFour.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionFive.ipadx = 80;
+		constrainsQuestionFive.ipady = 60;
 		constrainsQuestionFive.gridx = 0;
 		constrainsQuestionFive.gridy = 7;
-		constrainsQuestionFive.ipadx = 120;
-		constrainsQuestionFive.ipady = 60;
 		panelQuestionFive.add(backToQuestionFour, constrainsQuestionFive);
 		backToQuestionFour.addActionListener(new ActionListener() {
 
@@ -1057,23 +853,14 @@ public class CatQuestionnaire extends JComponent {
 		JButton toQuestionSix;
 		toQuestionSix = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionSix.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionFive.gridx = 7;
 		constrainsQuestionFive.gridy = 7;
-		constrainsQuestionFive.ipadx = 120;
-		constrainsQuestionFive.ipady = 60;
 		panelQuestionFive.add(toQuestionSix, constrainsQuestionFive);
 		toQuestionSix.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// final JLabel questionFive;
-				// questionFive = new JLabel(currentLanguage.getString("qTwo"));
-				// questionFive.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionFive,
-				// constrainsQuestionEight);
 				if (questionFiveSelectionZero.isSelected()
 						|| questionFiveSelectionOne.isSelected()
 						|| questionFiveSelectionTwo.isSelected()
@@ -1089,7 +876,6 @@ public class CatQuestionnaire extends JComponent {
 		// Question Six
 
 		GridBagConstraints constrainsQuestionSix = new GridBagConstraints();
-		constrainsQuestionSix.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionSix.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSix;
@@ -1184,44 +970,15 @@ public class CatQuestionnaire extends JComponent {
 		questionSixGroup.add(questionSixSelectionFour);
 		questionSixGroup.add(questionSixSelectionFive);
 
-		class RadioListenerSix implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionSixAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionSixAnswer = currentLanguage.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionSixAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionSixAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				// JLabel questionSixAnswer = new JLabel(sQuestionSixAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionSixAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerSix = new RadioListenerTwo();
-		questionSixSelectionTwo.addActionListener(listenerTwo);
-		questionSixSelectionThree.addActionListener(listenerTwo);
-		questionSixSelectionFour.addActionListener(listenerTwo);
-
 		JButton backToQuestionFive;
 		backToQuestionFive = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionFive.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionSix.ipadx = 80;
+		constrainsQuestionSix.ipady = 60;
 		constrainsQuestionSix.gridx = 0;
 		constrainsQuestionSix.gridy = 7;
-		constrainsQuestionSix.ipadx = 120;
-		constrainsQuestionSix.ipady = 60;
 		panelQuestionSix.add(backToQuestionFive, constrainsQuestionSix);
 		backToQuestionFive.addActionListener(new ActionListener() {
 
@@ -1236,22 +993,14 @@ public class CatQuestionnaire extends JComponent {
 		JButton toQuestionSeven;
 		toQuestionSeven = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionSeven.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionSix.gridx = 7;
 		constrainsQuestionSix.gridy = 7;
-		constrainsQuestionSix.ipadx = 120;
-		constrainsQuestionSix.ipady = 60;
 		panelQuestionSix.add(toQuestionSeven, constrainsQuestionSix);
 		toQuestionSeven.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// final JLabel questionSix;
-				// questionSix = new JLabel(currentLanguage.getString("qTwo"));
-				// questionSix.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionSix, constrainsQuestionEight);
 				if (questionSixSelectionZero.isSelected()
 						|| questionSixSelectionOne.isSelected()
 						|| questionSixSelectionTwo.isSelected()
@@ -1267,7 +1016,6 @@ public class CatQuestionnaire extends JComponent {
 		// Question Seven
 
 		GridBagConstraints constrainsQuestionSeven = new GridBagConstraints();
-		constrainsQuestionSeven.fill = GridBagConstraints.HORIZONTAL;
 		constrainsQuestionSeven.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSeven;
@@ -1370,46 +1118,15 @@ public class CatQuestionnaire extends JComponent {
 		questionSevenGroup.add(questionSevenSelectionFour);
 		questionSevenGroup.add(questionSevenSelectionFive);
 
-		class RadioListenerSeven implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionSevenAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionSevenAnswer = currentLanguage
-							.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionSevenAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionSevenAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				// JLabel questionSevenAnswer = new
-				// JLabel(sQuestionSevenAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionSevenAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerSeven = new RadioListenerTwo();
-		questionSevenSelectionTwo.addActionListener(listenerTwo);
-		questionSevenSelectionThree.addActionListener(listenerTwo);
-		questionSevenSelectionFour.addActionListener(listenerTwo);
-
 		JButton backToQuestionSix;
 		backToQuestionSix = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionSix.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionSeven.ipadx = 80;
+		constrainsQuestionSeven.ipady = 60;
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 7;
-		constrainsQuestionSeven.ipadx = 120;
-		constrainsQuestionSeven.ipady = 60;
 		panelQuestionSeven.add(backToQuestionSix, constrainsQuestionSeven);
 		backToQuestionSix.addActionListener(new ActionListener() {
 
@@ -1424,24 +1141,15 @@ public class CatQuestionnaire extends JComponent {
 		JButton toQuestionEight;
 		toQuestionEight = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionEight.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionSeven.gridx = 7;
 		constrainsQuestionSeven.gridy = 7;
-		constrainsQuestionSeven.ipadx = 120;
-		constrainsQuestionSeven.ipady = 60;
 		panelQuestionSeven.add(toQuestionEight, constrainsQuestionSeven);
 		toQuestionEight.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				// final JLabel questionSeven;
-				// questionSeven = new
-				// JLabel(currentLanguage.getString("qTwo"));
-				// questionSeven.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionSeven,
-				// constrainsQuestionEight);
 				if (questionSevenSelectionZero.isSelected()
 						|| questionSevenSelectionOne.isSelected()
 						|| questionSevenSelectionTwo.isSelected()
@@ -1456,9 +1164,7 @@ public class CatQuestionnaire extends JComponent {
 
 		// Question Eight
 
-		// GridBagConstraints constrainsQuestionEight = new
-		// GridBagConstraints();
-		constrainsQuestionEight.fill = GridBagConstraints.HORIZONTAL;
+		GridBagConstraints constrainsQuestionEight = new GridBagConstraints();
 		constrainsQuestionEight.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionEight;
@@ -1561,46 +1267,13 @@ public class CatQuestionnaire extends JComponent {
 		questionEightGroup.add(questionEightSelectionFour);
 		questionEightGroup.add(questionEightSelectionFive);
 
-		class RadioListenerEight implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String sQuestionEightAnswer = null;
-
-				if (e.getActionCommand() == "2") {
-					sQuestionEightAnswer = currentLanguage
-							.getString("aAsUsual");
-				} else if (e.getActionCommand() == "3") {
-					sQuestionEightAnswer = currentLanguage.getString("aWorse");
-				} else if (e.getActionCommand() == "4") {
-					sQuestionEightAnswer = currentLanguage
-							.getString("aMuchWorse");
-				}
-
-				// JLabel questionEightAnswer = new
-				// JLabel(sQuestionEightAnswer);
-				// constrainsQuestionEight.gridx = 1;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionEightAnswer,
-				// constrainsQuestionEight);
-			}
-
-		}
-
-		RadioListenerTwo listenerEight = new RadioListenerTwo();
-		questionEightSelectionTwo.addActionListener(listenerTwo);
-		questionEightSelectionThree.addActionListener(listenerTwo);
-		questionEightSelectionFour.addActionListener(listenerTwo);
-
 		JButton backToQuestionSeven;
 		backToQuestionSeven = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionSeven.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionEight.gridx = 0;
 		constrainsQuestionEight.gridy = 7;
-		constrainsQuestionEight.ipadx = 120;
-		constrainsQuestionEight.ipady = 60;
 		panelQuestionEight.add(backToQuestionSeven, constrainsQuestionEight);
 		backToQuestionSeven.addActionListener(new ActionListener() {
 
@@ -1615,24 +1288,15 @@ public class CatQuestionnaire extends JComponent {
 		JButton toQuestionNine;
 		toQuestionNine = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionNine.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toQuestionNine.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionEight.gridx = 7;
 		constrainsQuestionEight.gridy = 7;
-		constrainsQuestionEight.ipadx = 120;
-		constrainsQuestionEight.ipady = 60;
 		panelQuestionEight.add(toQuestionNine, constrainsQuestionEight);
 		toQuestionNine.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				// final JLabel questionEight;
-				// questionEight = new
-				// JLabel(currentLanguage.getString("qTwo"));
-				// questionEight.setFont(new Font("Tahoma", Font.BOLD, 20));
-				// constrainsQuestionEight.gridx = 0;
-				// constrainsQuestionEight.gridy = 2;
-				// panelQuestionEight.add(questionEight,
-				// constrainsQuestionEight);
 				if (questionEightSelectionZero.isSelected()
 						|| questionEightSelectionOne.isSelected()
 						|| questionEightSelectionTwo.isSelected()
@@ -1646,6 +1310,10 @@ public class CatQuestionnaire extends JComponent {
 		});
 
 		// Submit Panel
+		
+		final GridBagConstraints constrainsQuestionNine = new GridBagConstraints();
+		constrainsQuestionNine.insets = new Insets(5, 5, 5, 5);
+		constrainsQuestionNine.anchor = GridBagConstraints.CENTER;
 
 		JLabel submitLabel;
 		submitLabel = new JLabel(currentLanguage.getString("submitLabel"));
@@ -1653,16 +1321,15 @@ public class CatQuestionnaire extends JComponent {
 		submitLabel.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 0;
-		constrainsQuestionNine.ipady = 60;
 		panelQuestionNine.add(submitLabel, constrainsQuestionNine);
 
 		JButton backToQuestionEight;
 		backToQuestionEight = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToQuestionEight.setPreferredSize(new Dimension(400, 125));
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 1;
-		constrainsQuestionNine.ipady = 60;
 		panelQuestionNine.add(backToQuestionEight, constrainsQuestionNine);
 		backToQuestionEight.addActionListener(new ActionListener() {
 
@@ -1676,9 +1343,9 @@ public class CatQuestionnaire extends JComponent {
 		JButton resetCatQuestionnaire;
 		resetCatQuestionnaire = new JButton(currentLanguage.getString("reset"));
 		resetCatQuestionnaire.setFont(new Font("Tahoma", Font.BOLD, 40));
+		resetCatQuestionnaire.setPreferredSize(new Dimension(400, 125));
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 2;
-		constrainsQuestionNine.ipady = 60;
 		panelQuestionNine.add(resetCatQuestionnaire, constrainsQuestionNine);
 		resetCatQuestionnaire.addActionListener(new ActionListener() {
 
@@ -1700,6 +1367,7 @@ public class CatQuestionnaire extends JComponent {
 		JButton submitCat;
 		submitCat = new JButton(currentLanguage.getString("submit"));
 		submitCat.setFont(new Font("Tahoma", Font.BOLD, 40));
+		submitCat.setPreferredSize(new Dimension(400, 125));
 		constrainsQuestionNine.gridy = 3;
 		panelQuestionNine.add(submitCat, constrainsQuestionNine);
 		submitCat.addActionListener(new ActionListener() {
@@ -1889,7 +1557,6 @@ public class CatQuestionnaire extends JComponent {
 				catch (HeadlessException e1) {
 					e1.printStackTrace();
 				}
-				//
 			}
 		});
 

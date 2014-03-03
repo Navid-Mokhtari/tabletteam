@@ -58,7 +58,7 @@ public class CatQuestionDial extends JDialog {
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton cancelButton = new JButton(currentLanguage.getString("cancel"));
-			cancelButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+			cancelButton.setFont(new Font("Tahoma", Font.BOLD, 30));
 			buttonPane.add(cancelButton);
 			cancelButton.addActionListener(new ActionListener() {
 					
