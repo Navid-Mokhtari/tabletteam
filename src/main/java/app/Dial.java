@@ -352,6 +352,8 @@ public class Dial extends JDialog {
 										// block
 										e1.printStackTrace();
 									}
+									//TODO insert data change to the main window!
+									dispose();
 								}
 
 							}).start();

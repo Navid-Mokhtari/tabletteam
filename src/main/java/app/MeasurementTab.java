@@ -240,7 +240,7 @@ public class MeasurementTab extends JComponent implements ActionListener {
 			java.net.URL imageURL = cldr.getResource("Nonin.gif");
 			ImageIcon noninImage = new ImageIcon(imageURL);
 			PulseConnectionRunnable pc = new PulseConnectionRunnable(
-					pulseValue, oxigenValue, timeValue, this);
+					pulseValue, oxigenValue, null);
 			Thread thread = new Thread(pc);
 			String message = "Trying to get measurements.";
 			String title = "Measure pulse";
