@@ -5,24 +5,32 @@ import app.HealthProperties;
 
 import java.awt.EventQueue;
 import java.awt.GridBagLayout;
+
 import javax.swing.JFrame;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import java.awt.Color;
 
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+
 import java.awt.Panel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.swing.JPanel;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -62,6 +70,10 @@ public class MainPage {
 	private void initialize() {
 		HealthProperties healthProperties = new HealthProperties();
 		healthProperties.loadProperties();
+		String currentLang = HealthProperties.getProperty("currentLanguage");
+		Locale currentLocale = Locale.forLanguageTag(currentLang);
+		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
+				"language", currentLocale);
 		frmUiaEhelse = new JFrame();
 		frmUiaEhelse.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				MainPage.class.getResource("/pic/Doctor-icon2.png")));
@@ -233,37 +245,37 @@ public class MainPage {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabel_4 = new JLabel("Siste Ny m\u00E5ling");
+		JLabel lblNewLabel_4 = new JLabel(currentLanguage.getString("lastMeasurement"));
 		lblNewLabel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_4, "2, 2");
 		
-		JLabel lblNewLabel_6 = new JLabel("1");
+		JLabel lblNewLabel_6 = new JLabel("N/A");
 		lblNewLabel_6.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_6.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_6, "2, 4");
 		
-		JLabel lblNewLabel_7 = new JLabel("Siste Sp\u00F8rreskjema");
+		JLabel lblNewLabel_7 = new JLabel(currentLanguage.getString("lastQuestionnaire"));
 		lblNewLabel_7.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_7.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_7, "2, 8");
 		
-		JLabel lblNewLabel_8 = new JLabel("1");
+		JLabel lblNewLabel_8 = new JLabel("N/A");
 		lblNewLabel_8.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_8.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_8, "2, 10");
 		
-		JLabel lblSisteCat = new JLabel("Siste Cat");
+		JLabel lblSisteCat = new JLabel(currentLanguage.getString("lastCAT"));
 		lblSisteCat.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblSisteCat.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblSisteCat, "2, 14");
 		
-		JLabel lblNewLabel_5 = new JLabel("1");
+		JLabel lblNewLabel_5 = new JLabel("N/A");
 		lblNewLabel_5.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_5.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_5, "2, 16");
 
-		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2013  \r\n ");
+		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2014  \r\n ");
 		lblUiaEhelse.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		lblUiaEhelse.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 35));
@@ -273,12 +285,12 @@ public class MainPage {
 		gbc_lblUiaEhelse.gridy = 4;
 		panel_2.add(lblUiaEhelse, gbc_lblUiaEhelse);
 		
-				JLabel lblNewLabel_1 = new JLabel("Connection Status :");
+				JLabel lblNewLabel_1 = new JLabel(currentLanguage.getString("connStat"));
 				lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
 				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_1.gridx = 0;
-				gbc_lblNewLabel_1.gridy = 5;
+				gbc_lblNewLabel_1.gridy = 4;
 				panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
 		textField_1 = new JTextField();
