@@ -60,11 +60,12 @@ public class Dial extends JDialog {
 	public Dial() {
 		final JLabel pulseValue;
 		final JLabel oxigenValue;
-
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
 				"language", currentLocale);
+		final JButton okButton = new JButton(
+				currentLanguage.getString("submit"));
 
 		setBounds(0, 0, 1366, 768);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -220,7 +221,7 @@ public class Dial extends JDialog {
 								utilities.setMainThread(Thread.currentThread());
 								if (Utilities.pulseThread == null) {
 									PulseConnectionRunnable pc = new PulseConnectionRunnable(
-											pulseValue, oxigenValue, null, null);
+											pulseValue, oxigenValue, okButton);
 									thread = new Thread(pc);
 									thread.start();
 								}
@@ -286,8 +287,7 @@ public class Dial extends JDialog {
 			gbc_buttonPane.gridy = 1;
 			getContentPane().add(buttonPane, gbc_buttonPane);
 			{
-				JButton okButton = new JButton(
-						currentLanguage.getString("submit"));
+				// okButton = new JButton(currentLanguage.getString("submit"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if (!pulseValue.getText().isEmpty()) {
@@ -362,6 +362,7 @@ public class Dial extends JDialog {
 				okButton.setForeground(new Color(30, 144, 255));
 				okButton.setFont(new Font("Tahoma", Font.BOLD, 40));
 				okButton.setActionCommand("OK");
+				okButton.setEnabled(false);
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}

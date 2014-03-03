@@ -14,19 +14,20 @@ import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
-import javax.swing.JComponent;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+
+import vitalsignals.Pulse;
+import app.Utilities;
 
 import com.intel.bluetooth.BlueCoveImpl;
 import com.intel.bluetooth.MicroeditionConnector;
 
-import app.Utilities;
-import vitalsignals.Pulse;
-
 public class PulseConnectionRunnable implements Runnable {
 	private JLabel pulseValue, oxigenValue, timeLabel;
 	private Pulse pulse;
+	private JButton sendButton;
 	// private JComponent measurementTab;
 	StreamConnectionNotifier service;
 	StreamConnection con;
@@ -38,10 +39,11 @@ public class PulseConnectionRunnable implements Runnable {
 
 	// Pulse
 	public PulseConnectionRunnable(JLabel pulseValue, JLabel oxigenValue,
-			JLabel time, JComponent measurementTab) {
+			 JButton sendButton) {
 		this.pulseValue = pulseValue;
 		this.oxigenValue = oxigenValue;
-		this.timeLabel = time;
+//		this.timeLabel = time;
+		this.sendButton = sendButton;
 		// this.measurementTab = measurementTab;
 	}
 
@@ -63,7 +65,7 @@ public class PulseConnectionRunnable implements Runnable {
 			Utilities.pulseThread = null;
 			Utilities utilities = new Utilities();
 			Thread mainThread = utilities.getMainThread();
-			System.out.println("Test="+mainThread.getId());
+			System.out.println("Test=" + mainThread.getId());
 			if (mainThread != null
 					&& mainThread.getState() == State.TIMED_WAITING) {
 				System.out.println("Trying to interrupt main Thread with ID="
@@ -200,7 +202,8 @@ public class PulseConnectionRunnable implements Runnable {
 					if (pulse.getPulse() != null) {
 						pulseValue.setText(pulse.getPulse());
 						oxigenValue.setText(pulse.getOxigen());
-//						timeLabel.setText(pulse.getCurrentDate().toString());
+						sendButton.setEnabled(true);
+						// timeLabel.setText(pulse.getCurrentDate().toString());
 					}
 					pulse = null;
 				}
