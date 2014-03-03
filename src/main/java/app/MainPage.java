@@ -22,6 +22,11 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.JPanel;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
 
 public class MainPage {
 
@@ -85,6 +90,7 @@ public class MainPage {
 			public void actionPerformed(ActionEvent arg0) {
 				Dial dial = new Dial();
 				dial.setVisible(true);
+			
 			}
 		});
 		btnNewButton.setIcon(new ImageIcon(MainPage.class
@@ -126,6 +132,7 @@ public class MainPage {
 
 				CatQuestionDial catquestiondial = new CatQuestionDial();
 				catquestiondial.setVisible(true);
+				
 
 			}
 		});
@@ -154,9 +161,9 @@ public class MainPage {
 		GridBagLayout gbl_panel_2 = new GridBagLayout();
 		gbl_panel_2.columnWidths = new int[] { 196, 193, 193, 193, 197, 0 };
 		gbl_panel_2.rowHeights = new int[] { 30, 0, 30, 0, 0, 0, 0, 0 };
-		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0,
 				Double.MIN_VALUE };
-		gbl_panel_2.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+		gbl_panel_2.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, Double.MIN_VALUE };
 		panel_2.setLayout(gbl_panel_2);
 
@@ -193,22 +200,68 @@ public class MainPage {
 		gbc_button.gridx = 2;
 		gbc_button.gridy = 1;
 		panel_2.add(button, gbc_button);
-
-		JLabel lblNewLabel_1 = new JLabel("Connection Status :");
-		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 3;
-		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
-
-		JLabel lblNewLabel_2 = new JLabel("Last Measurement Update :");
-		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 16));
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 4;
-		panel_2.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		
+		JPanel panel_1 = new JPanel();
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.fill = GridBagConstraints.BOTH;
+		gbc_panel_1.gridx = 3;
+		gbc_panel_1.gridy = 1;
+		panel_2.add(panel_1, gbc_panel_1);
+		panel_1.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblNewLabel_4 = new JLabel("Siste Ny m\u00E5ling");
+		lblNewLabel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_4, "2, 2");
+		
+		JLabel lblNewLabel_6 = new JLabel("1");
+		lblNewLabel_6.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblNewLabel_6.setFont(new Font("Arial", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_6, "2, 4");
+		
+		JLabel lblNewLabel_7 = new JLabel("Siste Sp\u00F8rreskjema");
+		lblNewLabel_7.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblNewLabel_7.setFont(new Font("Arial", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_7, "2, 8");
+		
+		JLabel lblNewLabel_8 = new JLabel("1");
+		lblNewLabel_8.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblNewLabel_8.setFont(new Font("Arial", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_8, "2, 10");
+		
+		JLabel lblSisteCat = new JLabel("Siste Cat");
+		lblSisteCat.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblSisteCat.setFont(new Font("Arial", Font.BOLD, 20));
+		panel_1.add(lblSisteCat, "2, 14");
+		
+		JLabel lblNewLabel_5 = new JLabel("1");
+		lblNewLabel_5.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblNewLabel_5.setFont(new Font("Arial", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_5, "2, 16");
 
 		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2013  \r\n ");
 		lblUiaEhelse.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
@@ -219,17 +272,14 @@ public class MainPage {
 		gbc_lblUiaEhelse.gridx = 1;
 		gbc_lblUiaEhelse.gridy = 4;
 		panel_2.add(lblUiaEhelse, gbc_lblUiaEhelse);
-
-		JLabel lblNewLabel = new JLabel("Last Update");
-		lblNewLabel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
-		lblNewLabel.setForeground(Color.BLACK);
-		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 16));
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel.gridx = 3;
-		gbc_lblNewLabel.gridy = 6;
-		panel_2.add(lblNewLabel, gbc_lblNewLabel);
+		
+				JLabel lblNewLabel_1 = new JLabel("Connection Status :");
+				lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
+				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+				gbc_lblNewLabel_1.gridx = 0;
+				gbc_lblNewLabel_1.gridy = 5;
+				panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
 		textField_1 = new JTextField();
 		GridBagConstraints gbc_textField_1 = new GridBagConstraints();

@@ -65,7 +65,10 @@ import org.w3c.dom.NodeList;
 
 import sun.java2d.Disposer;
 
+
+
 public class CatQuestionnaire extends JDialog {
+	public String Catupdate;
 
 	/**
 	 * 
@@ -1650,7 +1653,12 @@ public class CatQuestionnaire extends JDialog {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
+		Catupdate=timeAndDate;
+		
+		
+		
 	}
+
 
 	private static void printAllNodes(Node doc) {
 		// System.out.println("Node: " + doc.getNodeName() + ", Value: " +
