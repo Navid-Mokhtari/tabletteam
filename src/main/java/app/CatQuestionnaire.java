@@ -106,16 +106,16 @@ public class CatQuestionnaire extends JDialog {
 		JPanel panelQuestionSeven = new JPanel();
 		final JPanel panelQuestionEight = new JPanel();
 		final JPanel panelQuestionNine = new JPanel();
-		panelContainer.setBackground(Color.GREEN);
-		panelQuestionOne.setBackground(Color.GREEN);
-		panelQuestionTwo.setBackground(Color.GREEN);
-		panelQuestionThree.setBackground(Color.GREEN);
-		panelQuestionFour.setBackground(Color.GREEN);
-		panelQuestionFive.setBackground(Color.GREEN);
-		panelQuestionSix.setBackground(Color.GREEN);
-		panelQuestionSeven.setBackground(Color.GREEN);
-		panelQuestionEight.setBackground(Color.GREEN);
-		panelQuestionNine.setBackground(Color.GREEN);
+		panelContainer.setBackground(Color.WHITE);
+		panelQuestionOne.setBackground(Color.WHITE);
+		panelQuestionTwo.setBackground(Color.WHITE);
+		panelQuestionThree.setBackground(Color.WHITE);
+		panelQuestionFour.setBackground(Color.WHITE);
+		panelQuestionFive.setBackground(Color.WHITE);
+		panelQuestionSix.setBackground(Color.WHITE);
+		panelQuestionSeven.setBackground(Color.WHITE);
+		panelQuestionEight.setBackground(Color.WHITE);
+		panelQuestionNine.setBackground(Color.WHITE);
 
 		// Container panel layout
 
