@@ -22,7 +22,6 @@ import java.security.KeyStore;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,10 +66,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-
-
-//import com.sun.org.apache.xpath.internal.operations.String;
 
 public class QuestionnareTab extends JDialog {
 	public QuestionnareTab() {

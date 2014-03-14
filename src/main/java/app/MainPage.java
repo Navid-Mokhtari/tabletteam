@@ -1,8 +1,5 @@
 package app;
 
-import app.CatQuestionDial;
-import app.HealthProperties;
-
 import java.awt.EventQueue;
 import java.awt.GridBagLayout;
 
@@ -13,7 +10,6 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -26,6 +22,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -37,9 +37,22 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
 
 public class MainPage {
-
+	
 	private JFrame frmUiaEhelse;
 	private JTextField textField_1;
+	
+	//DB values
+	
+	Connection connect = null;
+	private String dbName = app.HealthProperties.getProperty("dbName");
+	private String dbUsername = app.HealthProperties.getProperty("dbUsername");
+	private String dbPassword = app.HealthProperties.getProperty("dbPassword");
+	String lastDaily = "N/A";
+	String lastCAT = "N/A";
+	
+//	private String dbName = "eHealthDB";
+//	private String dbUsername = "eHealth";
+//	private String dbPassword = "ehelsepwd";
 
 	/**
 	 * Launch the application.
@@ -61,6 +74,8 @@ public class MainPage {
 	 * Create the application.
 	 */
 	public MainPage() {
+		System.out.println("\nDB Name: " + dbName + "\nDB Username " + dbUsername + "\nDB Password: " + dbPassword);
+		readFromDB();
 		initialize();
 	}
 
@@ -74,6 +89,10 @@ public class MainPage {
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
 				"language", currentLocale);
+		
+		 
+		
+		
 		frmUiaEhelse = new JFrame();
 		frmUiaEhelse.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				MainPage.class.getResource("/pic/Doctor-icon2.png")));
@@ -245,6 +264,7 @@ public class MainPage {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
+		
 		JLabel lblNewLabel_4 = new JLabel(currentLanguage.getString("lastMeasurement"));
 		lblNewLabel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 20));
@@ -260,7 +280,7 @@ public class MainPage {
 		lblNewLabel_7.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_7, "2, 8");
 		
-		JLabel lblNewLabel_8 = new JLabel("N/A");
+		JLabel lblNewLabel_8 = new JLabel(lastDaily);
 		lblNewLabel_8.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_8.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_8, "2, 10");
@@ -270,7 +290,7 @@ public class MainPage {
 		lblSisteCat.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblSisteCat, "2, 14");
 		
-		JLabel lblNewLabel_5 = new JLabel("N/A");
+		JLabel lblNewLabel_5 = new JLabel(lastCAT);
 		lblNewLabel_5.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_5.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_5, "2, 16");
@@ -303,4 +323,42 @@ public class MainPage {
 
 	}
 
+	public void readFromDB () {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost:3306/" + dbName
+							+ "?user=" + dbUsername + "&password=" + dbPassword);
+			
+			// Getting the time for last daily Q
+			Statement dailyStatement = connect.createStatement();
+			dailyStatement.executeQuery("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 4 ORDER BY EHRID DESC LIMIT 1");
+			ResultSet dailyRS = dailyStatement.getResultSet();
+			dailyRS.next();
+			String dailyEHRDateTime = dailyRS.getString("EHRDateTime");
+			lastDaily = dailyEHRDateTime;
+			
+			dailyStatement.close();
+			dailyRS.close();
+			
+			// Getting the time for last CAT Q
+			Statement CATStatement = connect.createStatement();
+			CATStatement.executeQuery("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 5 ORDER BY EHRID DESC LIMIT 1");
+			ResultSet CATRS = CATStatement.getResultSet();
+			CATRS.next();
+			String CATEHRDateTime = CATRS.getString("EHRDateTime");
+			lastCAT = CATEHRDateTime;
+			
+			CATStatement.close();
+			CATRS.close();
+			
+			System.out.println("\nSuccessfully read from DB!");
+			
+		} catch (Exception e) {
+			System.out.println("Reading from DB failed");
+			e.printStackTrace();
+			}
+	}
 }
+
+	
