@@ -41,19 +41,11 @@ public class MainPage {
 	private JFrame frmUiaEhelse;
 	private JTextField textField_1;
 	
-	//DB values
+	// Initializing labels for sent status
 	
-	Connection connect = null;
-	private String dbName = app.HealthProperties.getProperty("dbName");
-	private String dbUsername = app.HealthProperties.getProperty("dbUsername");
-	private String dbPassword = app.HealthProperties.getProperty("dbPassword");
 	String lastDaily = "N/A";
 	String lastCAT = "N/A";
 	
-//	private String dbName = "eHealthDB";
-//	private String dbUsername = "eHealth";
-//	private String dbPassword = "ehelsepwd";
-
 	/**
 	 * Launch the application.
 	 */
@@ -74,7 +66,8 @@ public class MainPage {
 	 * Create the application.
 	 */
 	public MainPage() {
-		System.out.println("\nDB Name: " + dbName + "\nDB Username " + dbUsername + "\nDB Password: " + dbPassword);
+		HealthProperties healthProperties = new HealthProperties();
+		healthProperties.loadProperties();
 		readFromDB();
 		initialize();
 	}
@@ -83,15 +76,11 @@ public class MainPage {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		HealthProperties healthProperties = new HealthProperties();
-		healthProperties.loadProperties();
+		
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
 				"language", currentLocale);
-		
-		 
-		
 		
 		frmUiaEhelse = new JFrame();
 		frmUiaEhelse.setIconImage(Toolkit.getDefaultToolkit().getImage(
@@ -324,6 +313,10 @@ public class MainPage {
 	}
 
 	public void readFromDB () {
+		Connection connect = null;
+		String dbName = app.HealthProperties.getProperty("dbName");
+		String dbUsername = app.HealthProperties.getProperty("dbUsername");
+		String dbPassword = app.HealthProperties.getProperty("dbPassword");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = (Connection) DriverManager
@@ -340,6 +333,8 @@ public class MainPage {
 			
 			dailyStatement.close();
 			dailyRS.close();
+
+			System.out.println("\nSuccessfully read last daily questionnaire from DB!");
 			
 			// Getting the time for last CAT Q
 			Statement CATStatement = connect.createStatement();
@@ -352,7 +347,7 @@ public class MainPage {
 			CATStatement.close();
 			CATRS.close();
 			
-			System.out.println("\nSuccessfully read from DB!");
+			System.out.println("\nSuccessfully read last CAT from DB!");
 			
 		} catch (Exception e) {
 			System.out.println("Reading from DB failed");

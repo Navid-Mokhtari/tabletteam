@@ -15,7 +15,7 @@ public class HealthProperties {
 			properties.load(file);
 			file.close();
 		} catch (IOException e) {
-			System.out.println("File was not found");
+			System.out.println("External config file was not found!\nReading internal config file...");
 			try {
 				properties.load(getClass().getClassLoader()
 						.getResourceAsStream("config.properties"));

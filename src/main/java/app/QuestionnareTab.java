@@ -1,7 +1,6 @@
 package app;
 
 import iipintegration.MySSLSocketFactory;
-
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
