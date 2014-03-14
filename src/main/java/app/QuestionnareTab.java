@@ -19,6 +19,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.security.KeyStore;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +37,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -64,6 +68,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
+
 //import com.sun.org.apache.xpath.internal.operations.String;
 
 public class QuestionnareTab extends JDialog {
@@ -71,7 +77,9 @@ public class QuestionnareTab extends JDialog {
 	}
 
 	private static final long serialVersionUID = -7594299439504858239L;
-	// Question One
+ 
+	//Final answers
+	
 	String sQuestionOneAnswer = null;
 	String sQuestionTwoAnswer = null;
 	String sQuestionThreeAnswer = null;
@@ -79,6 +87,22 @@ public class QuestionnareTab extends JDialog {
 	String sQuestionFiveAnswer = null;
 	String sQuestionSixAnswer = "0";
 	String sQuestionSevenAnswer = "0";
+	
+	//DB values
+	
+	private Connection connect = null;
+	private Statement statement = null;
+	private ResultSet resultSet = null;
+	private String dbName = HealthProperties.getProperty("dbName");
+	private String dbUsername = HealthProperties.getProperty("dbUsername");
+	private String dbPassword = HealthProperties.getProperty("dbPassword");
+	Integer statusDaily = 0;
+	
+	// Date
+	
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss");
+	String timeAndDate = simpleDateFormat.format(new Date());
 
 	public Component getView() throws IOException {
 		JComponent questionnare = createPanel("My questions");
@@ -1255,13 +1279,8 @@ public class QuestionnareTab extends JDialog {
 					} else if (questionSevenSelectionFour.isSelected()) {
 						sQuestionSevenAnswer = "4";
 					}
-					final String[] questions = new String[] {
-							sQuestionOneAnswer, sQuestionTwoAnswer,
-							sQuestionThreeAnswer, sQuestionFourAnswer,
-							sQuestionFiveAnswer, sQuestionSixAnswer,
-							sQuestionSevenAnswer };
 
-					System.out.println("Trying to send data!");
+					System.out.println("Trying to send data...");
 					new Thread(new Runnable() {
 
 						@Override
@@ -1288,7 +1307,6 @@ public class QuestionnareTab extends JDialog {
 									dialog.getContentPane().add(panel);
 									dialog.pack();
 									// Public method to center the dialog after
-									// calling pack()
 									try {
 										dialog.setLocationRelativeTo(getView()
 												.getParent());
@@ -1299,7 +1317,17 @@ public class QuestionnareTab extends JDialog {
 								}
 							});
 
-							updateSendGui(questions);
+							updateSendGui();
+							System.out.println("\nDaily sent status " + statusDaily);
+							
+							try {
+								sendEHRToDB();
+								sendDailyValuesToDB();
+								
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 
 					}).start();
@@ -1312,8 +1340,8 @@ public class QuestionnareTab extends JDialog {
 				Window w = SwingUtilities.getWindowAncestor(panelContainer);
 				w.dispose();
 			}
+		
 		});
-
 		return panelContainer;
 
 	}
@@ -1346,8 +1374,7 @@ public class QuestionnareTab extends JDialog {
 		}
 	}
 
-	private void updateSendGui(String[] questions) {
-		// Make all QuestionAnwer variable public and visible
+	public void updateSendGui() {
 
 		String username = HealthProperties.getProperty("iipUsername");
 		String password = HealthProperties.getProperty("iipPassword");
@@ -1363,11 +1390,7 @@ public class QuestionnareTab extends JDialog {
 		HttpResponse response = null;
 
 		// Array to send to IIP
-		// Date
-
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ss");
-		String timeAndDate = simpleDateFormat.format(new Date());
+		
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("q_1", sQuestionOneAnswer));
 		params.add(new BasicNameValuePair("q_2", sQuestionTwoAnswer));
@@ -1383,6 +1406,12 @@ public class QuestionnareTab extends JDialog {
 			response = httpclient.execute(httpPost);
 			System.out.println("\nTesting sending daily questionnaire: "
 					+ response.getStatusLine());
+			
+			if (response.getStatusLine().getStatusCode() == 200 ) {
+				statusDaily = 1;
+			} else 
+				statusDaily = 0;
+			
 		} catch (ClientProtocolException e1) {
 			System.out.println(e1.toString());
 		} catch (IOException e1) {
@@ -1401,7 +1430,108 @@ public class QuestionnareTab extends JDialog {
 			System.out.println(e.toString());
 		}
 	}
+	
+	// Inserting EHR column in DB
 
+			public void sendEHRToDB() throws Exception {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					connect = (Connection) DriverManager
+							.getConnection("jdbc:mysql://localhost:3306/" + dbName
+									+ "?user=" + dbUsername + "&password=" + dbPassword);
+
+					statement = (Statement) connect.createStatement();
+					statement.executeUpdate("INSERT INTO " + dbName + ".EHR" + 
+											"(EHRID, pasientID, conceptIDFromConcept, EHRDateTime, EHRSentStatus) " + 
+											"VALUES (NULL, " + HealthProperties.getProperty("patientId")
+											+ ", 4, '" + timeAndDate + "', " + statusDaily + ");"
+													);
+					statement = null;
+					System.out.println("Successfully inserted into EHR table");
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					} finally {
+						closeForEHR();
+				}
+			} 
+			// closing
+			      
+			private void closeForEHR() {
+				try {
+					
+					if (statement != null) {
+						statement.close();
+					}
+
+					if (connect != null) {
+						connect.close();
+					}
+				} catch (Exception e) {
+
+				}
+			}
+	
+	
+	// Questionnaire values to DB
+
+		public void sendDailyValuesToDB() throws Exception {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				connect = (Connection) DriverManager
+						.getConnection("jdbc:mysql://localhost:3306/" + dbName
+								+ "?user=" + dbUsername + "&password=" + dbPassword);
+
+				Statement s = connect.createStatement();
+				s.executeQuery("SELECT `EHRID` FROM `EHR` WHERE `conceptIDFromConcept` = 4 ORDER BY EHRID DESC LIMIT 1");
+				ResultSet rs = s.getResultSet();
+				rs.next();
+				int EHRID = rs.getInt("EHRID");
+				System.out.println("Latest EHRID read from DB = " + EHRID);
+				
+				statement = (Statement) connect.createStatement();
+				statement.executeUpdate("INSERT INTO " + dbName + ".EHRContent" + 
+										"(EHRContentID, EHRIDFromEHR, parameterIDFromConceptParameters, parameterValue) " + 
+											"VALUES (NULL, " + EHRID + ", 19, " + sQuestionOneAnswer + "),"
+												+ " (NULL, " + EHRID + ", 20, " + sQuestionTwoAnswer + "),"
+												+ " (NULL, " + EHRID + ", 21, " + sQuestionThreeAnswer + "),"
+												+ " (NULL, " + EHRID + ", 22, " + sQuestionFourAnswer + "),"
+												+ " (NULL, " + EHRID + ", 22, " + sQuestionFiveAnswer + "),"
+												+ " (NULL, " + EHRID + ", 24, " + sQuestionSixAnswer + "),"
+												+ " (NULL, " + EHRID + ", 25, " + sQuestionSevenAnswer + ")"
+												+ ";");
+				statement = null;
+				System.out.println("Successfully inserted into EHRContent table");
+						
+			} catch (Exception e) {
+				e.printStackTrace();
+				} finally {
+					closeForEHRContent();
+			}
+		}
+
+		// closing
+		      
+		private void closeForEHRContent() {
+			try {
+				if (resultSet != null) {
+					resultSet.close();
+				}
+
+				if (statement != null) {
+					statement.close();
+				}
+
+				if (connect != null) {
+					connect.close();
+				}
+			} catch (Exception e) {
+
+			}
+		}
+			
+	//Print all nodes
+		
 	private static void printAllNodes(Node doc) {
 		// System.out.println("Node: " + doc.getNodeName() + ", Value: " +
 		// doc.getNodeValue());
