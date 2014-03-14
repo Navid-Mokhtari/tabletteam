@@ -2,39 +2,32 @@ package app;
 
 import iipintegration.HttpsPostClient;
 
-import java.awt.FlowLayout;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-
-import java.awt.Font;
 import java.awt.Color;
-
-import javax.swing.border.TitledBorder;
-
-import vitalsignals.Pulse;
-import databaseaccess.DBConnection;
-import bluetooth.PulseConnectionRunnable;
-
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.TrayIcon.MessageType;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.swing.border.CompoundBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.border.TitledBorder;
 
-public class Dial extends JDialog {
+import vitalsignals.Pulse;
+import bluetooth.PulseConnectionRunnable;
+import databaseaccess.DBConnection;
+
+public class Measurement extends JDialog {
 
 	/**
 	 * 
@@ -42,22 +35,9 @@ public class Dial extends JDialog {
 	private static final long serialVersionUID = 125208328959514400L;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			Dial dialog = new Dial();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
-	public Dial() {
+	public Measurement() {
 		final JLabel pulseValue;
 		final JLabel oxigenValue;
 		String currentLang = HealthProperties.getProperty("currentLanguage");
@@ -93,7 +73,7 @@ public class Dial extends JDialog {
 			panel.setLayout(gbl_panel);
 			{
 				JLabel label = new JLabel("");
-				label.setIcon(new ImageIcon(Dial.class
+				label.setIcon(new ImageIcon(Measurement.class
 						.getResource("/pic/measurment1.jpg")));
 				GridBagConstraints gbc_label = new GridBagConstraints();
 				gbc_label.insets = new Insets(0, 0, 5, 5);
