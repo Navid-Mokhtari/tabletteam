@@ -162,6 +162,7 @@ public class QuestionnareTab extends JDialog {
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
+		
 		panelQuestionOne.setLayout(gbl_panel);
 		panelQuestionTwo.setLayout(gbl_panel);
 		panelQuestionThree.setLayout(gbl_panel);
