@@ -103,42 +103,42 @@ public class MainPage {
 				0.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
+		
+				JButton btnNewButton_2 = new JButton("");
+				btnNewButton_2.setMargin(new Insets(4, 4, 4, 4));
+				btnNewButton_2.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
 
-		JButton btnNewButton = new JButton("");
-		btnNewButton.setMargin(new Insets(4, 4, 2, 4));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Measurement dial = new Measurement();
-				dial.setVisible(true);
+						QuestionDial questiondial = new QuestionDial();
+						questiondial.setVisible(true);
 
-			}
-		});
-		btnNewButton.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Final-measurment.jpg")));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 0;
-		panel.add(btnNewButton, gbc_btnNewButton);
+					}
+				});
+				btnNewButton_2.setIcon(new ImageIcon(MainPage.class
+						.getResource("/pic/Question.JPG")));
+				GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
+				gbc_btnNewButton_2.anchor = GridBagConstraints.EAST;
+				gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
+				gbc_btnNewButton_2.gridx = 0;
+				gbc_btnNewButton_2.gridy = 0;
+				panel.add(btnNewButton_2, gbc_btnNewButton_2);
+		
+				JButton btnNewButton = new JButton("");
+				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+				gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+				gbc_btnNewButton.gridx = 1;
+				gbc_btnNewButton.gridy = 0;
+				panel.add(btnNewButton, gbc_btnNewButton);
+				btnNewButton.setMargin(new Insets(4, 4, 2, 4));
+				btnNewButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Measurement dial = new Measurement();
+						dial.setVisible(true);
 
-		JButton btnNewButton_2 = new JButton("");
-		btnNewButton_2.setMargin(new Insets(4, 4, 4, 4));
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				QuestionDial questiondial = new QuestionDial();
-				questiondial.setVisible(true);
-
-			}
-		});
-		btnNewButton_2.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Question.JPG")));
-		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_2.gridx = 1;
-		gbc_btnNewButton_2.gridy = 0;
-		panel.add(btnNewButton_2, gbc_btnNewButton_2);
+					}
+				});
+				btnNewButton.setIcon(new ImageIcon(MainPage.class
+						.getResource("/pic/Final-measurment.jpg")));
 
 		JButton btnNewButton_1 = new JButton("");
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
