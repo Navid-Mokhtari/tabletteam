@@ -48,6 +48,8 @@ public class Measurement extends JDialog {
 				currentLanguage.getString("submit"));
 
 		setBounds(0, 0, 1366, 768);
+		setTitle("UiA eHelse v" + HealthProperties.getProperty("appVersion"));
+		setResizable(false);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 888, 0 };
 		gridBagLayout.rowHeights = new int[] { 445, 33, 0 };
@@ -175,8 +177,8 @@ public class Measurement extends JDialog {
 										ImageIcon noninImage = new ImageIcon(
 												imageURL);
 
-										String message = "Trying to get measurements.";
-										String title = "Measure pulse";
+										String message = currentLanguage.getString("measureInstructions");
+										String title = currentLanguage.getString("measuring");
 										final JDialog dialog = new JDialog();
 										dialog.setName("TemporaryBTDialog");
 										dialog.setTitle(title);
@@ -185,12 +187,14 @@ public class Measurement extends JDialog {
 										JLabel label = new JLabel(noninImage);
 										JLabel messageLabel = new JLabel(
 												message);
+										messageLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
 										panel.add(label);
 										panel.add(messageLabel);
+										dialog.setLocation(410, 50);
 										dialog.getContentPane().add(panel);
 										dialog.pack();
 										dialog.setVisible(true);
-										dialog.setLocationRelativeTo(rootPane);
+//										dialog.setLocationRelativeTo(rootPane);
 
 									}
 								});

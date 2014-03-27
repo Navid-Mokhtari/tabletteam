@@ -284,13 +284,7 @@ public class QuestionnareTab extends JDialog {
 							.getString("aMuchWorse"));
 				}
 
-				final JLabel questionOne;
-				questionOne = new JLabel(currentLanguage.getString("qOne"));
-				questionOne.setFont(new Font("Tahoma", Font.BOLD, 40));
-				questionOne.setForeground(Color.BLUE);
-				constrainsQuestionEight.gridx = 0;
-				constrainsQuestionEight.gridy = 1;
-				panelQuestionEight.add(questionOne, constrainsQuestionEight);
+				
 				if (questionOneSelectionTwo.isSelected()
 						|| questionOneSelectionThree.isSelected()
 						|| questionOneSelectionFour.isSelected()) {
@@ -404,13 +398,7 @@ public class QuestionnareTab extends JDialog {
 							.getString("aMuchWorse"));
 				}
 
-				final JLabel questionTwo;
-				questionTwo = new JLabel(currentLanguage.getString("qTwo"));
-				questionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
-				questionTwo.setForeground(Color.BLUE);
-				constrainsQuestionEight.gridx = 0;
-				constrainsQuestionEight.gridy = 2;
-				panelQuestionEight.add(questionTwo, constrainsQuestionEight);
+				
 				if (questionTwoSelectionTwo.isSelected()
 						|| questionTwoSelectionThree.isSelected()
 						|| questionTwoSelectionFour.isSelected()) {
@@ -527,13 +515,7 @@ public class QuestionnareTab extends JDialog {
 							.getString("aMuchWorse"));
 				}
 
-				final JLabel questionThree;
-				questionThree = new JLabel(currentLanguage.getString("qThree"));
-				questionThree.setForeground(Color.BLUE);
-				questionThree.setFont(new Font("Tahoma", Font.BOLD, 40));
-				constrainsQuestionEight.gridx = 0;
-				constrainsQuestionEight.gridy = 3;
-				panelQuestionEight.add(questionThree, constrainsQuestionEight);
+				
 				if (questionThreeSelectionTwo.isSelected()
 						|| questionThreeSelectionThree.isSelected()
 						|| questionThreeSelectionFour.isSelected()) {
@@ -631,13 +613,7 @@ public class QuestionnareTab extends JDialog {
 							.getString("qFourAnsTwo"));
 				}
 
-				final JLabel questionFour;
-				questionFour = new JLabel(currentLanguage.getString("qFour"));
-				questionFour.setFont(new Font("Tahoma", Font.BOLD, 40));
-				questionFour.setForeground(Color.BLUE);
-				constrainsQuestionEight.gridx = 0;
-				constrainsQuestionEight.gridy = 4;
-				panelQuestionEight.add(questionFour, constrainsQuestionEight);
+				
 				if (questionFourSelectionOne.isSelected()
 						|| questionFourSelectionTwo.isSelected()) {
 					cl.show(panelContainer, "5");
@@ -768,17 +744,11 @@ public class QuestionnareTab extends JDialog {
 							.getString("qFiveAnsFour"));
 				}
 
-				final JLabel questionFive;
-				questionFive = new JLabel(currentLanguage.getString("qFive"));
-				questionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
-				questionFive.setForeground(Color.BLUE);
-				constrainsQuestionNine.gridx = 0;
-				constrainsQuestionNine.gridy = 1;
-				panelQuestionNine.add(questionFive, constrainsQuestionNine);
+				
 
-				if (questionFiveSelectionOne.isSelected()) {
-					cl.show(panelContainer, "8");
-				} else if (questionFiveSelectionTwo.isSelected()
+				
+				if (questionFiveSelectionOne.isSelected()
+						|| questionFiveSelectionTwo.isSelected()
 						|| questionFiveSelectionThree.isSelected()
 						|| questionFiveSelectionFour.isSelected()) {
 					cl.show(panelContainer, "6");
@@ -795,7 +765,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSix.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSix;
-		questionSix = new JLabel(currentLanguage.getString("qSix"));
+		questionSix = new JLabel(currentLanguage.getString("qSixA"));
 		questionSix.setFont(new Font("Tahoma", Font.BOLD, 30));
 		questionSix.setForeground(Color.BLUE);
 		constrainsQuestionSix.gridx = 0;
@@ -804,7 +774,7 @@ public class QuestionnareTab extends JDialog {
 
 		final JRadioButton questionSixSelectionOne;
 		questionSixSelectionOne = new JRadioButton(
-				currentLanguage.getString("qSixAnsOne"));
+				currentLanguage.getString("no"));
 		questionSixSelectionOne.setBackground(Color.ORANGE);
 		questionSixSelectionOne.setIcon(radioIconOFF);
 		questionSixSelectionOne.setSelectedIcon(radioIconON);
@@ -813,18 +783,38 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSix.gridy = 1;
 		panelQuestionSix.add(questionSixSelectionOne, constrainsQuestionSix);
 		questionSixSelectionOne.setActionCommand("0");
+		
+		final JRadioButton questionSixSelectionOneYes;
+		questionSixSelectionOneYes = new JRadioButton(
+				currentLanguage.getString("yes"));
+		questionSixSelectionOneYes.setBackground(Color.ORANGE);
+		questionSixSelectionOneYes.setIcon(radioIconOFF);
+		questionSixSelectionOneYes.setSelectedIcon(radioIconON);
+		questionSixSelectionOneYes.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		constrainsQuestionSix.gridx = 1;
+		constrainsQuestionSix.gridy = 1;
+		panelQuestionSix.add(questionSixSelectionOneYes, constrainsQuestionSix);
+		questionSixSelectionOneYes.setActionCommand("1");
+		
+		final JLabel questionSixB;
+		questionSixB = new JLabel(currentLanguage.getString("qSixB"));
+		questionSixB.setFont(new Font("Tahoma", Font.BOLD, 30));
+		questionSixB.setForeground(Color.BLUE);
+		constrainsQuestionSix.gridx = 0;
+		constrainsQuestionSix.gridy = 2;
+		panelQuestionSix.add(questionSixB, constrainsQuestionSix);
 
 		final JRadioButton questionSixSelectionTwo;
 		questionSixSelectionTwo = new JRadioButton(
 				currentLanguage.getString("qSixAnsTwo"));
-		questionSixSelectionTwo.setBackground(Color.ORANGE);
+				questionSixSelectionTwo.setBackground(Color.ORANGE);
 		questionSixSelectionTwo.setIcon(radioIconOFF);
 		questionSixSelectionTwo.setSelectedIcon(radioIconON);
 		questionSixSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
-		constrainsQuestionSix.gridy = 2;
+		constrainsQuestionSix.gridy = 3;
 		panelQuestionSix.add(questionSixSelectionTwo, constrainsQuestionSix);
-		questionSixSelectionTwo.setActionCommand("1");
+		questionSixSelectionTwo.setActionCommand("2");
 
 		final JRadioButton questionSixSelectionThree;
 		questionSixSelectionThree = new JRadioButton(
@@ -834,9 +824,9 @@ public class QuestionnareTab extends JDialog {
 		questionSixSelectionThree.setSelectedIcon(radioIconON);
 		questionSixSelectionThree.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
-		constrainsQuestionSix.gridy = 3;
+		constrainsQuestionSix.gridy = 4;
 		panelQuestionSix.add(questionSixSelectionThree, constrainsQuestionSix);
-		questionSixSelectionThree.setActionCommand("2");
+		questionSixSelectionThree.setActionCommand("3");
 
 		final JRadioButton questionSixSelectionFour;
 		questionSixSelectionFour = new JRadioButton(
@@ -846,9 +836,9 @@ public class QuestionnareTab extends JDialog {
 		questionSixSelectionFour.setSelectedIcon(radioIconON);
 		questionSixSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
-		constrainsQuestionSix.gridy = 4;
+		constrainsQuestionSix.gridy = 5;
 		panelQuestionSix.add(questionSixSelectionFour, constrainsQuestionSix);
-		questionSixSelectionFour.setActionCommand("3");
+		questionSixSelectionFour.setActionCommand("4");
 
 		final JRadioButton questionSixSelectionFive;
 		questionSixSelectionFive = new JRadioButton(
@@ -858,9 +848,9 @@ public class QuestionnareTab extends JDialog {
 		questionSixSelectionFive.setSelectedIcon(radioIconON);
 		questionSixSelectionFive.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
-		constrainsQuestionSix.gridy = 5;
+		constrainsQuestionSix.gridy = 6;
 		panelQuestionSix.add(questionSixSelectionFive, constrainsQuestionSix);
-		questionSixSelectionFive.setActionCommand("4");
+		questionSixSelectionFive.setActionCommand("5");
 
 		final JRadioButton questionSixSelectionSix;
 		questionSixSelectionSix = new JRadioButton(
@@ -870,17 +860,59 @@ public class QuestionnareTab extends JDialog {
 		questionSixSelectionSix.setSelectedIcon(radioIconON);
 		questionSixSelectionSix.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constrainsQuestionSix.gridx = 0;
-		constrainsQuestionSix.gridy = 6;
+		constrainsQuestionSix.gridy = 7;
 		panelQuestionSix.add(questionSixSelectionSix, constrainsQuestionSix);
-		questionSixSelectionSix.setActionCommand("5");
-
+		questionSixSelectionSix.setActionCommand("6");
+		
+		final ButtonGroup questionSixGroupOne = new ButtonGroup();
+		questionSixGroupOne.add(questionSixSelectionOne);
+		questionSixGroupOne.add(questionSixSelectionOneYes);
+		
 		final ButtonGroup questionSixGroup = new ButtonGroup();
-		questionSixGroup.add(questionSixSelectionOne);
 		questionSixGroup.add(questionSixSelectionTwo);
 		questionSixGroup.add(questionSixSelectionThree);
 		questionSixGroup.add(questionSixSelectionFour);
 		questionSixGroup.add(questionSixSelectionFive);
 		questionSixGroup.add(questionSixSelectionSix);
+		
+		questionSixB.setEnabled(false);
+		questionSixSelectionTwo.setEnabled(false);
+		questionSixSelectionThree.setEnabled(false);
+		questionSixSelectionFour.setEnabled(false);
+		questionSixSelectionFive.setEnabled(false);
+		questionSixSelectionSix.setEnabled(false);
+		
+		class RadioListenerSix implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getActionCommand() == "1") {
+					questionSixB.setEnabled(true);
+					questionSixSelectionTwo.setEnabled(true);
+					questionSixSelectionThree.setEnabled(true);
+					questionSixSelectionFour.setEnabled(true);
+					questionSixSelectionFive.setEnabled(true);
+					questionSixSelectionSix.setEnabled(true);
+				}
+				
+				if (e.getActionCommand() == "0") {
+					questionSixGroup.clearSelection();
+					sQuestionSixAnswer = "0";
+					questionSixB.setEnabled(false);
+					questionSixSelectionTwo.setEnabled(false);
+					questionSixSelectionThree.setEnabled(false);
+					questionSixSelectionFour.setEnabled(false);
+					questionSixSelectionFive.setEnabled(false);
+					questionSixSelectionSix.setEnabled(false);
+				}
+			}
+			
+		}
+		
+		RadioListenerSix listenerSix = new RadioListenerSix();
+		questionSixSelectionOne.addActionListener(listenerSix);
+		questionSixSelectionOneYes.addActionListener(listenerSix);
 
 		JButton backToQuestionFive;
 		backToQuestionFive = new JButton(
@@ -888,7 +920,7 @@ public class QuestionnareTab extends JDialog {
 		backToQuestionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
 		backToQuestionFive.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionSix.gridx = 0;
-		constrainsQuestionSix.gridy = 8;
+		constrainsQuestionSix.gridy = 9;
 		panelQuestionSix.add(backToQuestionFive, constrainsQuestionSix);
 		backToQuestionFive.addActionListener(new ActionListener() {
 
@@ -905,13 +937,20 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionNine.gridx = 1;
 		constrainsQuestionNine.gridy = 2;
 		panelQuestionNine.add(questionSixAnswer, constrainsQuestionNine);
+		
+		final JLabel questionSixAnswerB = new JLabel();
+		questionSixAnswerB.setFont(new Font("Tahoma", Font.ITALIC, 30));
+		questionSixAnswerB.setForeground(Color.BLUE);
+		constrainsQuestionNine.gridx = 2;
+		constrainsQuestionNine.gridy = 2;
+		panelQuestionNine.add(questionSixAnswerB, constrainsQuestionNine);
 
 		JButton toQuestionSeven;
 		toQuestionSeven = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
 		toQuestionSeven.setPreferredSize(new Dimension(225, 125));
 		constrainsQuestionSix.gridx = 1;
-		constrainsQuestionSix.gridy = 8;
+		constrainsQuestionSix.gridy = 9;
 		panelQuestionSix.add(toQuestionSeven, constrainsQuestionSix);
 		toQuestionSeven.addActionListener(new ActionListener() {
 
@@ -921,33 +960,36 @@ public class QuestionnareTab extends JDialog {
 
 				if (questionSixSelectionOne.isSelected()) {
 					questionSixAnswer.setText(currentLanguage
-							.getString("qSixAnsOne"));
-				} else if (questionSixSelectionTwo.isSelected()) {
-					questionSixAnswer.setText(currentLanguage
+							.getString("no"));
+				} else if (questionSixSelectionOneYes.isSelected()) {
+					questionSixAnswer.setText(currentLanguage.getString("yes"));
+				} 
+				
+				if (questionSixSelectionTwo.isSelected()) {
+					questionSixAnswerB.setText(currentLanguage
 							.getString("qSixAnsTwo"));
 				} else if (questionSixSelectionThree.isSelected()) {
-					questionSixAnswer.setText(currentLanguage
+					questionSixAnswerB.setText(currentLanguage
 							.getString("qSixAnsThree"));
 				} else if (questionSixSelectionFour.isSelected()) {
-					questionSixAnswer.setText(currentLanguage
+					questionSixAnswerB.setText(currentLanguage
 							.getString("qSixAnsFour"));
 				} else if (questionSixSelectionFive.isSelected()) {
-					questionSixAnswer.setText(currentLanguage
+					questionSixAnswerB.setText(currentLanguage
 							.getString("qSixAnsFive"));
 				} else if (questionSixSelectionSix.isSelected()) {
-					questionSixAnswer.setText(currentLanguage
+					questionSixAnswerB.setText(currentLanguage
 							.getString("qSixAnsSix"));
 				}
-
-				final JLabel questionSix;
-				questionSix = new JLabel(currentLanguage.getString("qSix"));
-				questionSix.setFont(new Font("Tahoma", Font.BOLD, 40));
-				questionSix.setForeground(Color.BLUE);
-				constrainsQuestionNine.gridx = 0;
-				constrainsQuestionNine.gridy = 2;
-				panelQuestionNine.add(questionSix, constrainsQuestionNine);
+				
 				if (questionSixSelectionOne.isSelected()) {
-					cl.show(panelContainer, "8");
+					questionSixAnswerB.setText(null);
+				}
+
+				
+				
+				if (questionSixSelectionOne.isSelected()) {
+					cl.show(panelContainer, "7");
 				} else if (questionSixSelectionTwo.isSelected()
 						|| questionSixSelectionThree.isSelected()
 						|| questionSixSelectionFour.isSelected()
@@ -965,12 +1007,47 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSeven.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSeven;
-		questionSeven = new JLabel(currentLanguage.getString("qSeven"));
+		questionSeven = new JLabel(currentLanguage.getString("qSevenA"));
 		questionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionSeven.setForeground(Color.BLUE);
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 0;
 		panelQuestionSeven.add(questionSeven, constrainsQuestionSeven);
+		
+
+		final JRadioButton questionSevenSelectionOneA;
+		questionSevenSelectionOneA = new JRadioButton(
+				currentLanguage.getString("no"));
+		questionSevenSelectionOneA.setBackground(Color.ORANGE);
+		questionSevenSelectionOneA.setIcon(radioIconOFF);
+		questionSevenSelectionOneA.setSelectedIcon(radioIconON);
+		questionSevenSelectionOneA.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		constrainsQuestionSeven.gridx = 0;
+		constrainsQuestionSeven.gridy = 1;
+		panelQuestionSeven.add(questionSevenSelectionOneA,
+				constrainsQuestionSeven);
+		questionSevenSelectionOneA.setActionCommand("0");
+		
+		final JRadioButton questionSevenSelectionOneB;
+		questionSevenSelectionOneB = new JRadioButton(
+				currentLanguage.getString("yes"));
+		questionSevenSelectionOneB.setBackground(Color.ORANGE);
+		questionSevenSelectionOneB.setIcon(radioIconOFF);
+		questionSevenSelectionOneB.setSelectedIcon(radioIconON);
+		questionSevenSelectionOneB.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		constrainsQuestionSeven.gridx = 1;
+		constrainsQuestionSeven.gridy = 1;
+		panelQuestionSeven.add(questionSevenSelectionOneB,
+				constrainsQuestionSeven);
+		questionSevenSelectionOneB.setActionCommand("1");
+		
+		final JLabel questionSevenB;
+		questionSevenB = new JLabel(currentLanguage.getString("qSevenB"));
+		questionSevenB.setFont(new Font("Tahoma", Font.BOLD, 40));
+		questionSevenB.setForeground(Color.BLUE);
+		constrainsQuestionSeven.gridx = 0;
+		constrainsQuestionSeven.gridy = 2;
+		panelQuestionSeven.add(questionSevenB, constrainsQuestionSeven);
 
 		final JRadioButton questionSevenSelectionOne;
 		questionSevenSelectionOne = new JRadioButton(
@@ -980,10 +1057,9 @@ public class QuestionnareTab extends JDialog {
 		questionSevenSelectionOne.setSelectedIcon(radioIconON);
 		questionSevenSelectionOne.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
-		constrainsQuestionSeven.gridy = 1;
+		constrainsQuestionSeven.gridy = 5;
 		panelQuestionSeven.add(questionSevenSelectionOne,
 				constrainsQuestionSeven);
-		questionSevenSelectionOne.setActionCommand("1");
 
 		final JRadioButton questionSevenSelectionTwo;
 		questionSevenSelectionTwo = new JRadioButton(
@@ -993,10 +1069,9 @@ public class QuestionnareTab extends JDialog {
 		questionSevenSelectionTwo.setSelectedIcon(radioIconON);
 		questionSevenSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
-		constrainsQuestionSeven.gridy = 2;
+		constrainsQuestionSeven.gridy = 4;
 		panelQuestionSeven.add(questionSevenSelectionTwo,
 				constrainsQuestionSeven);
-		questionSevenSelectionTwo.setActionCommand("2");
 
 		final JRadioButton questionSevenSelectionThree;
 		questionSevenSelectionThree = new JRadioButton(
@@ -1009,7 +1084,6 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSeven.gridy = 3;
 		panelQuestionSeven.add(questionSevenSelectionThree,
 				constrainsQuestionSeven);
-		questionSevenSelectionThree.setActionCommand("3");
 
 		final JRadioButton questionSevenSelectionFour;
 		questionSevenSelectionFour = new JRadioButton(
@@ -1019,16 +1093,54 @@ public class QuestionnareTab extends JDialog {
 		questionSevenSelectionFour.setSelectedIcon(radioIconON);
 		questionSevenSelectionFour.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		constrainsQuestionSeven.gridx = 0;
-		constrainsQuestionSeven.gridy = 4;
+		constrainsQuestionSeven.gridy = 6;
 		panelQuestionSeven.add(questionSevenSelectionFour,
 				constrainsQuestionSeven);
-		questionSevenSelectionFour.setActionCommand("4");
 
 		final ButtonGroup questionSevenGroup = new ButtonGroup();
 		questionSevenGroup.add(questionSevenSelectionOne);
 		questionSevenGroup.add(questionSevenSelectionTwo);
 		questionSevenGroup.add(questionSevenSelectionThree);
 		questionSevenGroup.add(questionSevenSelectionFour);
+		
+		final ButtonGroup questionSevenGroupOne = new ButtonGroup();
+		questionSevenGroupOne.add(questionSevenSelectionOneA);
+		questionSevenGroupOne.add(questionSevenSelectionOneB);
+		
+		questionSevenB.setEnabled(false);
+		questionSevenSelectionOne.setEnabled(false);
+		questionSevenSelectionTwo.setEnabled(false);
+		questionSevenSelectionThree.setEnabled(false);
+		questionSevenSelectionFour.setEnabled(false);
+		
+		class RadioListenerSeven implements ActionListener {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getActionCommand() == "1") {
+					questionSevenB.setEnabled(true);
+					questionSevenSelectionOne.setEnabled(true);
+					questionSevenSelectionTwo.setEnabled(true);
+					questionSevenSelectionThree.setEnabled(true);
+					questionSevenSelectionFour.setEnabled(true);
+				}
+				if (e.getActionCommand() == "0") {
+					sQuestionSevenAnswer = "0";
+					questionSevenGroup.clearSelection();
+					questionSevenB.setEnabled(false);
+					questionSevenSelectionOne.setEnabled(false);
+					questionSevenSelectionTwo.setEnabled(false);
+					questionSevenSelectionThree.setEnabled(false);
+					questionSevenSelectionFour.setEnabled(false);
+				}
+			}
+		}
+		
+		RadioListenerSeven listenerSeven = new RadioListenerSeven();
+		questionSevenSelectionOneA.addActionListener(listenerSeven);
+		questionSevenSelectionOneB.addActionListener(listenerSeven);
+
 
 		JButton backToQuestionSix;
 		backToQuestionSix = new JButton(
@@ -1053,6 +1165,13 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionNine.gridx = 1;
 		constrainsQuestionNine.gridy = 3;
 		panelQuestionNine.add(questionSevenAnswer, constrainsQuestionNine);
+		
+		final JLabel questionSevenAnswerYes = new JLabel();
+		questionSevenAnswerYes.setFont(new Font("Tahoma", Font.ITALIC, 30));
+		questionSevenAnswerYes.setForeground(Color.BLUE);
+		constrainsQuestionNine.gridx = 2;
+		constrainsQuestionNine.gridy = 3;
+		panelQuestionNine.add(questionSevenAnswerYes, constrainsQuestionNine);
 
 		JButton toQuestionEight;
 		toQuestionEight = new JButton(currentLanguage.getString("nextQuestion"));
@@ -1067,28 +1186,33 @@ public class QuestionnareTab extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 
+				if (questionSevenSelectionOneA.isSelected()) {
+					questionSevenAnswer.setText(currentLanguage
+							.getString("no"));
+				} else if (questionSevenSelectionOneB.isSelected()) {
+					questionSevenAnswer.setText(currentLanguage.getString("yes"));
+				}
+				
 				if (questionSevenSelectionOne.isSelected()) {
-					questionSevenAnswer.setText(currentLanguage
-							.getString("qSevenAnsOne"));
+					questionSevenAnswerYes.setText(currentLanguage.getString("qSevenAnsOne"));
 				} else if (questionSevenSelectionTwo.isSelected()) {
-					questionSevenAnswer.setText(currentLanguage
+					questionSevenAnswerYes.setText(currentLanguage
 							.getString("qSevenAnsTwo"));
 				} else if (questionSevenSelectionThree.isSelected()) {
-					questionSevenAnswer.setText(currentLanguage
+					questionSevenAnswerYes.setText(currentLanguage
 							.getString("qSevenAnsThree"));
 				} else if (questionSevenSelectionFour.isSelected()) {
-					questionSevenAnswer.setText(currentLanguage
+					questionSevenAnswerYes.setText(currentLanguage
 							.getString("qSevenAnsFour"));
 				}
+				
+				if (questionSevenSelectionOneA.isSelected()) {
+					questionSevenAnswerYes.setText(null);
+				}
 
-				final JLabel questionSeven;
-				questionSeven = new JLabel(currentLanguage.getString("qSeven"));
-				questionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
-				questionSeven.setForeground(Color.BLUE);
-				constrainsQuestionNine.gridx = 0;
-				constrainsQuestionNine.gridy = 3;
-				panelQuestionNine.add(questionSeven, constrainsQuestionNine);
-				if (questionSevenSelectionOne.isSelected()
+				
+				if (questionSevenSelectionOneA.isSelected()
+						|| questionSevenSelectionOne.isSelected()
 						|| questionSevenSelectionTwo.isSelected()
 						|| questionSevenSelectionThree.isSelected()
 						|| questionSevenSelectionFour.isSelected()) {
@@ -1097,7 +1221,7 @@ public class QuestionnareTab extends JDialog {
 			}
 		});
 
-		// Panel 8
+		// Review panel 8
 
 		JLabel reviewlabel;
 		reviewlabel = new JLabel(currentLanguage.getString("qReview"));
@@ -1106,6 +1230,35 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionEight.gridy = 0;
 		panelQuestionEight.add(reviewlabel, constrainsQuestionEight);
 
+		final JLabel questionOneFinal;
+		questionOneFinal = new JLabel(currentLanguage.getString("qOne"));
+		questionOneFinal.setFont(new Font("Tahoma", Font.BOLD, 40));
+		questionOneFinal.setForeground(Color.BLUE);
+		constrainsQuestionEight.gridx = 0;
+		constrainsQuestionEight.gridy = 1;
+		panelQuestionEight.add(questionOneFinal, constrainsQuestionEight);
+		final JLabel questionTwoFinal;
+		questionTwoFinal = new JLabel(currentLanguage.getString("qTwo"));
+		questionTwoFinal.setFont(new Font("Tahoma", Font.BOLD, 40));
+		questionTwoFinal.setForeground(Color.BLUE);
+		constrainsQuestionEight.gridx = 0;
+		constrainsQuestionEight.gridy = 2;
+		panelQuestionEight.add(questionTwoFinal, constrainsQuestionEight);
+		final JLabel questionThreeFinal;
+		questionThreeFinal = new JLabel(currentLanguage.getString("qThree"));
+		questionThreeFinal.setForeground(Color.BLUE);
+		questionThreeFinal.setFont(new Font("Tahoma", Font.BOLD, 40));
+		constrainsQuestionEight.gridx = 0;
+		constrainsQuestionEight.gridy = 3;
+		panelQuestionEight.add(questionThreeFinal, constrainsQuestionEight);
+		final JLabel questionFourFinal;
+		questionFourFinal = new JLabel(currentLanguage.getString("qFour"));
+		questionFourFinal.setFont(new Font("Tahoma", Font.BOLD, 40));
+		questionFourFinal.setForeground(Color.BLUE);
+		constrainsQuestionEight.gridx = 0;
+		constrainsQuestionEight.gridy = 4;
+		panelQuestionEight.add(questionFourFinal, constrainsQuestionEight);
+		
 		JButton backToQuestionSeven;
 		backToQuestionSeven = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -1119,13 +1272,7 @@ public class QuestionnareTab extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (questionFiveSelectionOne.isSelected()) {
-					cl.show(panelContainer, "5");
-				} else if (questionSixSelectionOne.isSelected()) {
-					cl.show(panelContainer, "6");
-				} else {
 					cl.show(panelContainer, "7");
-				}
 			}
 		});
 
@@ -1145,13 +1292,35 @@ public class QuestionnareTab extends JDialog {
 			}
 		});
 
-		// Panel 9
+		// Review panel 9
 
 		reviewlabel = new JLabel(currentLanguage.getString("qReview"));
-		reviewlabel.setFont(new Font("Tahoma", Font.BOLD, 40));
+		reviewlabel.setFont(new Font("Tahoma", Font.BOLD, 35));
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 0;
 		panelQuestionNine.add(reviewlabel, constrainsQuestionNine);
+		
+		final JLabel questionFiveFinal;
+		questionFiveFinal = new JLabel(currentLanguage.getString("qFive"));
+		questionFiveFinal.setFont(new Font("Tahoma", Font.BOLD, 25));
+		questionFiveFinal.setForeground(Color.BLUE);
+		constrainsQuestionNine.gridx = 0;
+		constrainsQuestionNine.gridy = 1;
+		panelQuestionNine.add(questionFiveFinal, constrainsQuestionNine);
+		final JLabel questionSixFinal;
+		questionSixFinal = new JLabel(currentLanguage.getString("qSixA"));
+		questionSixFinal.setFont(new Font("Tahoma", Font.BOLD, 25));
+		questionSixFinal.setForeground(Color.BLUE);
+		constrainsQuestionNine.gridx = 0;
+		constrainsQuestionNine.gridy = 2;
+		panelQuestionNine.add(questionSixFinal, constrainsQuestionNine);
+		final JLabel questionSevenFinal;
+		questionSevenFinal = new JLabel(currentLanguage.getString("qSevenA"));
+		questionSevenFinal.setFont(new Font("Tahoma", Font.BOLD, 25));
+		questionSevenFinal.setForeground(Color.BLUE);
+		constrainsQuestionNine.gridx = 0;
+		constrainsQuestionNine.gridy = 3;
+		panelQuestionNine.add(questionSevenFinal, constrainsQuestionNine);
 
 		JButton backToQuestionEight;
 		backToQuestionEight = new JButton(
@@ -1192,6 +1361,8 @@ public class QuestionnareTab extends JDialog {
 				questionFiveGroup.clearSelection();
 				questionSixGroup.clearSelection();
 				questionSevenGroup.clearSelection();
+				questionSixGroupOne.clearSelection();
+				questionSevenGroupOne.clearSelection();
 				cl.show(panelContainer, "1");
 			}
 		});
@@ -1265,7 +1436,9 @@ public class QuestionnareTab extends JDialog {
 						sQuestionSixAnswer = "5";
 					}
 
-					if (questionSevenSelectionOne.isSelected()) {
+					if (questionSevenSelectionOneA.isSelected()){
+						sQuestionSevenAnswer = "0";
+					} else if (questionSevenSelectionOne.isSelected()) {
 						sQuestionSevenAnswer = "1";
 					} else if (questionSevenSelectionTwo.isSelected()) {
 						sQuestionSevenAnswer = "2";

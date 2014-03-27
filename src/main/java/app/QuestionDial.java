@@ -34,6 +34,7 @@ public class QuestionDial extends JDialog {
 			QuestionDial dialog = new QuestionDial();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setTitle("UiA eHelse v" + HealthProperties.getProperty("appVersion"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -44,6 +45,8 @@ public class QuestionDial extends JDialog {
 	 */
 	public QuestionDial() {
 		setBounds(0, 0, 1366, 768);
+		setTitle("UiA eHelse v" + HealthProperties.getProperty("appVersion"));
+		setResizable(false);
 		
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);

@@ -85,7 +85,7 @@ public class MainPage {
 		frmUiaEhelse = new JFrame();
 		frmUiaEhelse.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				MainPage.class.getResource("/pic/Doctor-icon2.png")));
-		frmUiaEhelse.setTitle("UiA  eHelse");
+		frmUiaEhelse.setTitle("UiA eHelse v" + HealthProperties.getProperty("appVersion"));
 		frmUiaEhelse.setResizable(false);
 		// Toolkit tk = Toolkit.getDefaultToolkit();
 		// int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
