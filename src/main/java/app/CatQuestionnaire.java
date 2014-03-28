@@ -1751,8 +1751,8 @@ public class CatQuestionnaire extends JDialog {
 			String message = isSent ? currentLanguage
 					.getString("sentQuestionnaires") : currentLanguage
 					.getString("notSentQuestionnaires");
-			MainPage.showMessageDialog(message, isSent);
 			Utilities.disposeDialog(null);
+			MainPage.showMessageDialog(message, isSent);
 		}
 	}
 
