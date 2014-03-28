@@ -3,6 +3,7 @@ package app;
 import java.awt.Frame;
 import java.awt.Window;
 import java.io.InputStream;
+import java.util.Locale;
 
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
@@ -17,12 +18,13 @@ public class Utilities {
 	static InputStream is;
 	public static Thread mainThread;
 	public static PulseConnectionRunnable pulseThread;
+
 	public Thread getMainThread() {
 		return mainThread;
 	}
 
 	public void setMainThread(Thread mainThread) {
-			Utilities.mainThread = mainThread;
+		Utilities.mainThread = mainThread;
 	}
 
 	public static void disposeDialog(JComponent component) {
@@ -68,5 +70,10 @@ public class Utilities {
 			service = null;
 			System.out.println("Input stream was unavailable\n" + e.toString());
 		}
+	}
+
+	public static Locale getCurrentLanguage() {
+		String currentLang = HealthProperties.getProperty("currentLanguage");
+		return Locale.forLanguageTag(currentLang);
 	}
 }

@@ -1,29 +1,17 @@
 package vitalsignals;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class Pulse extends Measurements {
 	public Pulse() {
 	}
 
-	public Pulse(String pulse, String oxigen, String time) {
+	public Pulse(String pulse, String oxigen, Date time) {
 		this.pulse = pulse;
 		this.oxigen = oxigen;
-		Date dateTime;
-		try {
-			dateTime = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH)
-					.parse(time);
-		} catch (ParseException e) {
-			Calendar cal = Calendar.getInstance();
-			dateTime = cal.getTime();
-			e.printStackTrace();
-		}
-		this.setDate(dateTime);
+		this.setDate(time);
 	}
 
 	public Pulse(String pulse, String oxigen) {

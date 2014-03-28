@@ -39,10 +39,10 @@ public class PulseConnectionRunnable implements Runnable {
 
 	// Pulse
 	public PulseConnectionRunnable(JLabel pulseValue, JLabel oxigenValue,
-			 JButton sendButton) {
+			JButton sendButton) {
 		this.pulseValue = pulseValue;
 		this.oxigenValue = oxigenValue;
-//		this.timeLabel = time;
+		// this.timeLabel = time;
 		this.sendButton = sendButton;
 		// this.measurementTab = measurementTab;
 	}
@@ -84,7 +84,12 @@ public class PulseConnectionRunnable implements Runnable {
 		System.out.println(System.getProperty("bluecove.obex.timeout"));
 		System.out.println(System.getProperty("bluecove.connect.timeout"));
 		try {
-			LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
+			System.out.println("Device discoverable status:"
+					+ LocalDevice.getLocalDevice().getDiscoverable());
+			if (LocalDevice.getLocalDevice().getDiscoverable() != DiscoveryAgent.GIAC) {
+				LocalDevice.getLocalDevice().setDiscoverable(
+						DiscoveryAgent.GIAC);
+			}
 		} catch (BluetoothStateException e2) {
 			System.out.println("Can't make device discoverable");
 			e2.printStackTrace();

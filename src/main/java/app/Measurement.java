@@ -321,19 +321,20 @@ public class Measurement extends JDialog {
 									HttpsPostClient httpsPostClient = new HttpsPostClient();
 									Pulse pulse = new Pulse(pulseValue
 											.getText(), oxigenValue.getText());
-									// sendPulse.setText("Sending measurements...");
-									httpsPostClient.SendPulseHttps(pulse);
+									boolean isSent = httpsPostClient
+											.SendPulseHttps(pulse);
 									httpsPostClient.SendOxygen(pulse);
+
 									DBConnection dbConnection = new DBConnection();
-									try {
-										// dbConnection.savePulse(pulse);
-									} catch (Exception e1) {
-										// TODO Auto-generated catch
-										// block
-										e1.printStackTrace();
-									}
-									//TODO insert data change to the main window!
+									dbConnection.savePulseAndOxygen(pulse,
+											isSent);
 									dispose();
+									String message = "";
+									if (isSent) {
+									} else {
+
+									}
+
 								}
 
 							}).start();

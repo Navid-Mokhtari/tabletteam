@@ -68,7 +68,9 @@ public class HttpsPostClient {
 			.getProperty("oxygenChannel");
 	private String patientId = HealthProperties.getProperty("patientId");
 
-	public void SendPulseHttps(Pulse pulse) {
+	@SuppressWarnings("finally")
+	public boolean SendPulseHttps(Pulse pulse) {
+		boolean isSent = false;
 		System.out.println("Trying to send pulse values");
 		String infoId = pulseChannel;
 		String pulseUrl = URL + infoId;
@@ -92,10 +94,10 @@ public class HttpsPostClient {
 			response = httpclient.execute(httppost);
 			System.out.println("\nTesting sending Pulse: "
 					+ response.getStatusLine());
+			isSent = true;
 		} catch (ClientProtocolException e) {
 			System.out.println(e.toString());
 		} catch (IOException e) {
-			System.out.println(e.toString());
 		}
 
 		try {
@@ -107,6 +109,8 @@ public class HttpsPostClient {
 			printAllNodes(root2);
 		} catch (Exception e) {
 			System.out.println(e.toString());
+		} finally {
+			return isSent;
 		}
 	}
 
