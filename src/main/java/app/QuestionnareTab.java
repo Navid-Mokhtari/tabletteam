@@ -82,6 +82,11 @@ public class QuestionnareTab extends JDialog {
 	String sQuestionSixAnswer = "0";
 	String sQuestionSevenAnswer = "0";
 	
+	String leftTag300 = "<html><body style='width: 300px'>";
+	String leftTag500 = "<html><body style='width: 500px'>";
+	String leftTag800 = "<html><body style='width: 800px'>";
+	String rightTag = "</html>";
+	
 	//DB values
 	
 	private Connection connect = null;
@@ -630,7 +635,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionFive.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionFive;
-		questionFive = new JLabel(currentLanguage.getString("qFive"));
+		questionFive = new JLabel(leftTag800 + currentLanguage.getString("qFive") + rightTag);
 		questionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionFive.setForeground(Color.BLUE);
 		constrainsQuestionFive.gridx = 0;
@@ -1007,7 +1012,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSeven.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSeven;
-		questionSeven = new JLabel(currentLanguage.getString("qSevenA"));
+		questionSeven = new JLabel(leftTag800 + currentLanguage.getString("qSevenA") + rightTag);
 		questionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionSeven.setForeground(Color.BLUE);
 		constrainsQuestionSeven.gridx = 0;
@@ -1301,22 +1306,22 @@ public class QuestionnareTab extends JDialog {
 		panelQuestionNine.add(reviewlabel, constrainsQuestionNine);
 		
 		final JLabel questionFiveFinal;
-		questionFiveFinal = new JLabel(currentLanguage.getString("qFive"));
-		questionFiveFinal.setFont(new Font("Tahoma", Font.BOLD, 25));
+		questionFiveFinal = new JLabel(leftTag500 + currentLanguage.getString("qFive") + rightTag);
+		questionFiveFinal.setFont(new Font("Tahoma", Font.BOLD, 30));
 		questionFiveFinal.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 1;
 		panelQuestionNine.add(questionFiveFinal, constrainsQuestionNine);
 		final JLabel questionSixFinal;
-		questionSixFinal = new JLabel(currentLanguage.getString("qSixA"));
-		questionSixFinal.setFont(new Font("Tahoma", Font.BOLD, 25));
+		questionSixFinal = new JLabel(leftTag500 + currentLanguage.getString("qSixA") + rightTag);
+		questionSixFinal.setFont(new Font("Tahoma", Font.BOLD, 30));
 		questionSixFinal.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 2;
 		panelQuestionNine.add(questionSixFinal, constrainsQuestionNine);
 		final JLabel questionSevenFinal;
-		questionSevenFinal = new JLabel(currentLanguage.getString("qSevenA"));
-		questionSevenFinal.setFont(new Font("Tahoma", Font.BOLD, 25));
+		questionSevenFinal = new JLabel(leftTag500 + currentLanguage.getString("qSevenA") + rightTag);
+		questionSevenFinal.setFont(new Font("Tahoma", Font.BOLD, 30));
 		questionSevenFinal.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 3;
@@ -1340,7 +1345,7 @@ public class QuestionnareTab extends JDialog {
 		});
 		
 		JButton resetQuestionnaire;
-		resetQuestionnaire = new JButton(currentLanguage.getString("reset"));
+		resetQuestionnaire = new JButton(leftTag300 + currentLanguage.getString("reset") + rightTag);
 		resetQuestionnaire.setFont(new Font("Tahoma", Font.BOLD, 40));
 		resetQuestionnaire.setPreferredSize(new Dimension(300, 125));
 		constrainsQuestionNine.gridx = 1;

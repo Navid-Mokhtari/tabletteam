@@ -2,6 +2,7 @@ package app;
 
 import iipintegration.MySSLSocketFactory;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -88,6 +89,10 @@ public class CatQuestionnaire extends JDialog {
 	String sQuestionSevenAnswer = null;
 	String sQuestionEightAnswer = null;
 	
+	String leftTag300 = "<html><body style='width: 300px'>";
+	String leftTag800 = "<html><body style='width: 800px'>";
+	String rightTag = "</html>";
+	
 	//DB values
 	
 	private Connection connect = null;
@@ -120,6 +125,7 @@ public class CatQuestionnaire extends JDialog {
 				"language", currentLocale);
 
 		final JPanel panelContainer = new JPanel();
+		JPanel panelIntro = new JPanel();
 		JPanel panelQuestionOne = new JPanel();
 		JPanel panelQuestionTwo = new JPanel();
 		JPanel panelQuestionThree = new JPanel();
@@ -130,6 +136,7 @@ public class CatQuestionnaire extends JDialog {
 		final JPanel panelQuestionEight = new JPanel();
 		final JPanel panelQuestionNine = new JPanel();
 		panelContainer.setBackground(Color.WHITE);
+		panelIntro.setBackground(Color.WHITE);
 		panelQuestionOne.setBackground(Color.WHITE);
 		panelQuestionTwo.setBackground(Color.WHITE);
 		panelQuestionThree.setBackground(Color.WHITE);
@@ -144,6 +151,7 @@ public class CatQuestionnaire extends JDialog {
 
 		final CardLayout cl = new CardLayout();
 		panelContainer.setLayout(cl);
+		panelContainer.add(panelIntro, "0");
 		panelContainer.add(panelQuestionOne, "1");
 		panelContainer.add(panelQuestionTwo, "2");
 		panelContainer.add(panelQuestionThree, "3");
@@ -153,7 +161,7 @@ public class CatQuestionnaire extends JDialog {
 		panelContainer.add(panelQuestionSeven, "7");
 		panelContainer.add(panelQuestionEight, "8");
 		panelContainer.add(panelQuestionNine, "9");
-		cl.show(panelContainer, "1");
+		cl.show(panelContainer, "0");
 
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -166,6 +174,8 @@ public class CatQuestionnaire extends JDialog {
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
+		
+		panelIntro.setLayout(null);
 		panelQuestionOne.setLayout(gbl_panel);
 		panelQuestionTwo.setLayout(gbl_panel);
 		panelQuestionThree.setLayout(gbl_panel);
@@ -205,10 +215,31 @@ public class CatQuestionnaire extends JDialog {
 		URL urlIconFive = customRadioButton.getResource("radioButtonFive.png");
 		Icon radioIconFive = new ImageIcon(urlIconFive);
 
+		// Adding intro page
+		
+		final JLabel intro = new JLabel(leftTag800 + currentLanguage.getString("CATInstructions") + rightTag);
+		intro.setFont(new Font("Tahoma", Font.BOLD, 40));
+		intro.setBounds(150, 10, 1366, 500);
+		panelIntro.add(intro);
+		
+		final JButton toStart = new JButton(currentLanguage.getString("nextQuestion"));
+		toStart.setFont(new Font("Tahoma", Font.BOLD, 40));
+		toStart.setBounds(550, 500, 250, 150);
+		panelIntro.add(toStart);
+		toStart.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cl.show(panelContainer, "1");
+			}
+		});
+		
+		
 		// adding Question one
 
 		final GridBagConstraints constrainsQuestionOne = new GridBagConstraints();
 		constrainsQuestionOne.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionOne.insets = new Insets(5, 5, 5, 5);
 
 		final JLabel questionOneLeft;
 		questionOneLeft = new JLabel(currentLanguage.getString("qCatOneLeft"));
@@ -302,6 +333,22 @@ public class CatQuestionnaire extends JDialog {
 		questionOneGroup.add(questionOneSelectionFour);
 		questionOneGroup.add(questionOneSelectionFive);
 
+		JButton backToIntro;
+		backToIntro = new JButton(currentLanguage.getString("previousQuestion"));
+		backToIntro.setFont(new Font("Tahoma", Font.BOLD, 40));
+		backToIntro.setPreferredSize(new Dimension(225, 125));
+		constrainsQuestionOne.gridx = 0;
+		constrainsQuestionOne.gridy = 3;
+		panelQuestionOne.add(backToIntro, constrainsQuestionOne);
+		backToIntro.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cl.show(panelContainer, "0");
+				
+			}
+		});
+		
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -328,6 +375,7 @@ public class CatQuestionnaire extends JDialog {
 
 		GridBagConstraints constrainsQuestionTwo = new GridBagConstraints();
 		constrainsQuestionTwo.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionTwo.insets = new Insets(3, 3, 3, 3);
 
 		final JLabel questionTwo;
 		questionTwo = new JLabel(currentLanguage.getString("questionTwo"));
@@ -338,7 +386,7 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionTwo.add(questionTwo, constrainsQuestionTwo);
 
 		final JLabel questionTwoLeft;
-		questionTwoLeft = new JLabel(currentLanguage.getString("qCatTwoLeft"));
+		questionTwoLeft = new JLabel(leftTag300 + currentLanguage.getString("qCatTwoLeft") + rightTag);
 		questionTwoLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionTwoLeft.setForeground(Color.BLACK);
 		constrainsQuestionTwo.gridx = 0;
@@ -346,7 +394,7 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionTwo.add(questionTwoLeft, constrainsQuestionTwo);
 
 		final JLabel questionTwoRight;
-		questionTwoRight = new JLabel(currentLanguage.getString("qCatTwoRight"));
+		questionTwoRight = new JLabel(leftTag300 + currentLanguage.getString("qCatTwoRight") + rightTag);
 		questionTwoRight.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionTwoRight.setForeground(Color.BLACK);
 		constrainsQuestionTwo.gridx = 7;
@@ -466,6 +514,7 @@ public class CatQuestionnaire extends JDialog {
 
 		GridBagConstraints constrainsQuestionThree = new GridBagConstraints();
 		constrainsQuestionThree.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionThree.insets = new Insets(3, 3, 3, 3);
 
 		final JLabel questionThree;
 		questionThree = new JLabel(currentLanguage.getString("questionThree"));
@@ -476,8 +525,8 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionThree.add(questionThree, constrainsQuestionThree);
 
 		final JLabel questionThreeLeft;
-		questionThreeLeft = new JLabel(
-				currentLanguage.getString("qCatThreeLeft"));
+		questionThreeLeft = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatThreeLeft") + rightTag);
 		questionThreeLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionThreeLeft.setForeground(Color.BLACK);
 		constrainsQuestionThree.gridx = 0;
@@ -485,8 +534,8 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionThree.add(questionThreeLeft, constrainsQuestionThree);
 
 		final JLabel questionThreeRight;
-		questionThreeRight = new JLabel(
-				currentLanguage.getString("qCatThreeRight"));
+		questionThreeRight = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatThreeRight") + rightTag);
 		questionThreeRight.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionThreeRight.setForeground(Color.BLACK);
 		constrainsQuestionThree.gridx = 7;
@@ -612,6 +661,7 @@ public class CatQuestionnaire extends JDialog {
 
 		GridBagConstraints constrainsQuestionFour = new GridBagConstraints();
 		constrainsQuestionFour.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionFour.insets = new Insets(5, 5, 5, 5);
 
 		final JLabel questionFour;
 		questionFour = new JLabel(currentLanguage.getString("questionFour"));
@@ -622,15 +672,15 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionFour.add(questionFour, constrainsQuestionFour);
 
 		final JLabel questionFourLeft;
-		questionFourLeft = new JLabel(currentLanguage.getString("qCatFourLeft"));
+		questionFourLeft = new JLabel(leftTag300 + currentLanguage.getString("qCatFourLeft") + rightTag);
 		questionFourLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
 		constrainsQuestionFour.gridx = 0;
 		constrainsQuestionFour.gridy = 2;
 		panelQuestionFour.add(questionFourLeft, constrainsQuestionFour);
 
 		final JLabel questionFourRight;
-		questionFourRight = new JLabel(
-				currentLanguage.getString("qCatFourRight"));
+		questionFourRight = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatFourRight") + rightTag);
 		questionFourRight.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionFourRight.setForeground(Color.BLACK);
 		constrainsQuestionFour.gridx = 7;
@@ -756,6 +806,7 @@ public class CatQuestionnaire extends JDialog {
 
 		GridBagConstraints constrainsQuestionFive = new GridBagConstraints();
 		constrainsQuestionFive.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionFive.insets = new Insets(5, 5, 5, 5);
 
 		final JLabel questionFive;
 		questionFive = new JLabel(currentLanguage.getString("questionFive"));
@@ -766,7 +817,7 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionFive.add(questionFive, constrainsQuestionFive);
 
 		final JLabel questionFiveLeft;
-		questionFiveLeft = new JLabel(currentLanguage.getString("qCatFiveLeft"));
+		questionFiveLeft = new JLabel(leftTag300 + currentLanguage.getString("qCatFiveLeft") + rightTag);
 		questionFiveLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionFiveLeft.setForeground(Color.BLACK);
 		constrainsQuestionFive.gridx = 0;
@@ -774,8 +825,8 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionFive.add(questionFiveLeft, constrainsQuestionFive);
 
 		final JLabel questionFiveRight;
-		questionFiveRight = new JLabel(
-				currentLanguage.getString("qCatFiveRight"));
+		questionFiveRight = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatFiveRight") + rightTag);
 		questionFiveRight.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionFiveRight.setForeground(Color.BLACK);
 		constrainsQuestionFive.gridx = 7;
@@ -901,6 +952,7 @@ public class CatQuestionnaire extends JDialog {
 
 		GridBagConstraints constrainsQuestionSix = new GridBagConstraints();
 		constrainsQuestionSix.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionSix.insets = new Insets(5, 5, 5, 5);
 
 		final JLabel questionSix;
 		questionSix = new JLabel(currentLanguage.getString("questionSix"));
@@ -911,7 +963,7 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionSix.add(questionSix, constrainsQuestionSix);
 
 		final JLabel questionSixLeft;
-		questionSixLeft = new JLabel(currentLanguage.getString("qCatSixLeft"));
+		questionSixLeft = new JLabel(leftTag300 + currentLanguage.getString("qCatSixLeft") + rightTag);
 		questionSixLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionSixLeft.setForeground(Color.BLACK);
 		constrainsQuestionSix.gridx = 0;
@@ -919,7 +971,7 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionSix.add(questionSixLeft, constrainsQuestionSix);
 
 		final JLabel questionSixRight;
-		questionSixRight = new JLabel(currentLanguage.getString("qCatSixRight"));
+		questionSixRight = new JLabel(leftTag300 + currentLanguage.getString("qCatSixRight") + rightTag);
 		questionSixRight.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionSixRight.setForeground(Color.BLACK);
 		constrainsQuestionSix.gridx = 7;
@@ -1041,6 +1093,7 @@ public class CatQuestionnaire extends JDialog {
 
 		GridBagConstraints constrainsQuestionSeven = new GridBagConstraints();
 		constrainsQuestionSeven.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionSeven.insets = new Insets(5, 5, 5, 5);
 
 		final JLabel questionSeven;
 		questionSeven = new JLabel(currentLanguage.getString("questionSeven"));
@@ -1051,8 +1104,8 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionSeven.add(questionSeven, constrainsQuestionSeven);
 
 		final JLabel questionSevenLeft;
-		questionSevenLeft = new JLabel(
-				currentLanguage.getString("qCatSevenLeft"));
+		questionSevenLeft = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatSevenLeft") + rightTag);
 		questionSevenLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionSevenLeft.setForeground(Color.BLACK);
 		constrainsQuestionSeven.gridx = 0;
@@ -1060,8 +1113,8 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionSeven.add(questionSevenLeft, constrainsQuestionSeven);
 
 		final JLabel questionSevenRight;
-		questionSevenRight = new JLabel(
-				currentLanguage.getString("qCatSevenRight"));
+		questionSevenRight = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatSevenRight") + rightTag);
 		questionSevenRight.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionSevenRight.setForeground(Color.BLACK);
 		constrainsQuestionSeven.gridx = 7;
@@ -1190,6 +1243,7 @@ public class CatQuestionnaire extends JDialog {
 
 		GridBagConstraints constrainsQuestionEight = new GridBagConstraints();
 		constrainsQuestionEight.anchor = GridBagConstraints.FIRST_LINE_START;
+		constrainsQuestionEight.insets = new Insets(3, 3, 3, 3);
 
 		final JLabel questionEight;
 		questionEight = new JLabel(currentLanguage.getString("questionEight"));
@@ -1200,8 +1254,8 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionEight.add(questionEight, constrainsQuestionEight);
 
 		final JLabel questionEightLeft;
-		questionEightLeft = new JLabel(
-				currentLanguage.getString("qCatEightLeft"));
+		questionEightLeft = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatEightLeft") + rightTag);
 		questionEightLeft.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionEightLeft.setForeground(Color.BLACK);
 		constrainsQuestionEight.gridx = 0;
@@ -1209,8 +1263,8 @@ public class CatQuestionnaire extends JDialog {
 		panelQuestionEight.add(questionEightLeft, constrainsQuestionEight);
 
 		final JLabel questionEightRight;
-		questionEightRight = new JLabel(
-				currentLanguage.getString("qCatEightRight"));
+		questionEightRight = new JLabel(leftTag300 + 
+				currentLanguage.getString("qCatEightRight") + rightTag);
 		questionEightRight.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionEightRight.setForeground(Color.BLACK);
 		constrainsQuestionEight.gridx = 7;
@@ -1365,7 +1419,8 @@ public class CatQuestionnaire extends JDialog {
 		});
 
 		JButton resetCatQuestionnaire;
-		resetCatQuestionnaire = new JButton(currentLanguage.getString("reset"));
+		resetCatQuestionnaire = new JButton(leftTag300 + currentLanguage.getString("reset") + rightTag);
+		resetCatQuestionnaire.setMargin(new Insets(0, 50, 0, 50));
 		resetCatQuestionnaire.setFont(new Font("Tahoma", Font.BOLD, 40));
 		resetCatQuestionnaire.setPreferredSize(new Dimension(400, 125));
 		constrainsQuestionNine.gridx = 0;
@@ -1384,7 +1439,7 @@ public class CatQuestionnaire extends JDialog {
 				questionSixGroup.clearSelection();
 				questionSevenGroup.clearSelection();
 				questionEightGroup.clearSelection();
-				cl.show(panelContainer, "1");
+				cl.show(panelContainer, "0");
 			}
 		});
 
