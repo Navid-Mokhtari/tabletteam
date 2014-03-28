@@ -14,7 +14,7 @@ import javax.swing.SwingWorker;
 
 import junit.awtui.ProgressBar;
 import sun.awt.image.OffScreenImage;
-import bluetooth.PulseConnection;
+import bluetooth.PulseConnectionOld;
 import bluetooth.SpirometryConnection;
 
 public class ProgressMonitor extends JPanel implements ActionListener,
@@ -32,7 +32,7 @@ public class ProgressMonitor extends JPanel implements ActionListener,
 			if (currentConnection instanceof SpirometryConnection) {
 				((SpirometryConnection) currentConnection).measure();
 			}
-			if (currentConnection instanceof PulseConnection) {
+			if (currentConnection instanceof PulseConnectionOld) {
 
 			}
 			return null;
@@ -51,8 +51,8 @@ public class ProgressMonitor extends JPanel implements ActionListener,
 		if (connection instanceof SpirometryConnection) {
 			currentConnection = (SpirometryConnection) connection;
 		}
-		if (connection instanceof PulseConnection) {
-			currentConnection = (PulseConnection) connection;
+		if (connection instanceof PulseConnectionOld) {
+			currentConnection = (PulseConnectionOld) connection;
 		}
 	}
 

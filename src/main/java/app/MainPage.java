@@ -7,8 +7,10 @@ import javax.swing.JFrame;
 
 import java.awt.BorderLayout;
 
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -38,13 +40,14 @@ import com.jgoodies.forms.factories.FormFactory;
 
 public class MainPage {
 
-	private JFrame frmUiaEhelse;
+	private static JFrame frmUiaEhelse;
 	private JTextField textField_1;
 
 	// Initializing labels for sent status
 
 	String lastDaily = "N/A";
 	String lastCAT = "N/A";
+	String lastPulse = "N/A";
 
 	/**
 	 * Launch the application.
@@ -263,7 +266,7 @@ public class MainPage {
 		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_4, "2, 2");
 
-		JLabel lblNewLabel_6 = new JLabel("N/A");
+		JLabel lblNewLabel_6 = new JLabel(lastPulse);
 		lblNewLabel_6.setBorder(new TitledBorder(null, "",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		lblNewLabel_6.setFont(new Font("Arial", Font.BOLD, 20));
@@ -360,11 +363,39 @@ public class MainPage {
 			CATStatement.close();
 			CATRS.close();
 
+			Statement pulseStatement = connect.createStatement();
+			pulseStatement
+					.execute("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 1 ORDER BY EHRID DESC LIMIT 1");
+			ResultSet resultSet = pulseStatement.getResultSet();
+			if (resultSet.next()) {
+				lastPulse = resultSet.getString(1);
+			}
+			resultSet.close();
+			pulseStatement.close();
 			System.out.println("\nSuccessfully read last CAT from DB!");
 
 		} catch (Exception e) {
 			System.out.println("Reading from DB failed");
 			e.printStackTrace();
 		}
+	}
+
+	public static void showMessageDialog(String message, boolean isSent) {
+		String currentLang = HealthProperties.getProperty("currentLanguage");
+		Locale currentLocale = Locale.forLanguageTag(currentLang);
+		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
+				"language", currentLocale);
+		Icon icon = null;
+		ClassLoader cldr = MainPage.class.getClassLoader();
+		java.net.URL imageURL = null;
+		if (isSent) {
+			imageURL = cldr.getResource("glad.png");
+		} else {
+			imageURL = cldr.getResource("smile_6.png");
+		}
+		icon = new ImageIcon(imageURL);
+		String title = currentLanguage.getString("sendStatus");
+		JOptionPane
+				.showConfirmDialog(frmUiaEhelse, message, title, JOptionPane.PLAIN_MESSAGE, 2, icon);
 	}
 }

@@ -1,6 +1,7 @@
 package app;
 
 import iipintegration.MySSLSocketFactory;
+
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -71,9 +72,9 @@ public class QuestionnareTab extends JDialog {
 	}
 
 	private static final long serialVersionUID = -7594299439504858239L;
- 
-	//Final answers
-	
+
+	// Final answers
+
 	String sQuestionOneAnswer = null;
 	String sQuestionTwoAnswer = null;
 	String sQuestionThreeAnswer = null;
@@ -81,14 +82,14 @@ public class QuestionnareTab extends JDialog {
 	String sQuestionFiveAnswer = null;
 	String sQuestionSixAnswer = "0";
 	String sQuestionSevenAnswer = "0";
-	
+
 	String leftTag300 = "<html><body style='width: 300px'>";
 	String leftTag500 = "<html><body style='width: 500px'>";
 	String leftTag800 = "<html><body style='width: 800px'>";
 	String rightTag = "</html>";
-	
-	//DB values
-	
+
+	// DB values
+
 	private Connection connect = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
@@ -96,11 +97,11 @@ public class QuestionnareTab extends JDialog {
 	private String dbUsername = HealthProperties.getProperty("dbUsername");
 	private String dbPassword = HealthProperties.getProperty("dbPassword");
 	Integer statusDaily = 0;
-	
+
 	// Date
-	
+
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-				"yyyy-MM-dd'T'HH:mm:ss");
+			"yyyy-MM-dd'T'HH:mm:ss");
 	String timeAndDate = simpleDateFormat.format(new Date());
 
 	public Component getView() throws IOException {
@@ -167,7 +168,7 @@ public class QuestionnareTab extends JDialog {
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
-		
+
 		panelQuestionOne.setLayout(gbl_panel);
 		panelQuestionTwo.setLayout(gbl_panel);
 		panelQuestionThree.setLayout(gbl_panel);
@@ -264,7 +265,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionOne.gridx = 0;
 		constrainsQuestionOne.gridy = 8;
 		panelQuestionOne.add(backButton, constrainsQuestionOne);
-		
+
 		JButton toQuestionTwo;
 		toQuestionTwo = new JButton(currentLanguage.getString("nextQuestion"));
 		toQuestionTwo.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -289,7 +290,6 @@ public class QuestionnareTab extends JDialog {
 							.getString("aMuchWorse"));
 				}
 
-				
 				if (questionOneSelectionTwo.isSelected()
 						|| questionOneSelectionThree.isSelected()
 						|| questionOneSelectionFour.isSelected()) {
@@ -403,7 +403,6 @@ public class QuestionnareTab extends JDialog {
 							.getString("aMuchWorse"));
 				}
 
-				
 				if (questionTwoSelectionTwo.isSelected()
 						|| questionTwoSelectionThree.isSelected()
 						|| questionTwoSelectionFour.isSelected()) {
@@ -520,7 +519,6 @@ public class QuestionnareTab extends JDialog {
 							.getString("aMuchWorse"));
 				}
 
-				
 				if (questionThreeSelectionTwo.isSelected()
 						|| questionThreeSelectionThree.isSelected()
 						|| questionThreeSelectionFour.isSelected()) {
@@ -618,7 +616,6 @@ public class QuestionnareTab extends JDialog {
 							.getString("qFourAnsTwo"));
 				}
 
-				
 				if (questionFourSelectionOne.isSelected()
 						|| questionFourSelectionTwo.isSelected()) {
 					cl.show(panelContainer, "5");
@@ -635,7 +632,8 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionFive.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionFive;
-		questionFive = new JLabel(leftTag800 + currentLanguage.getString("qFive") + rightTag);
+		questionFive = new JLabel(leftTag800
+				+ currentLanguage.getString("qFive") + rightTag);
 		questionFive.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionFive.setForeground(Color.BLUE);
 		constrainsQuestionFive.gridx = 0;
@@ -749,9 +747,6 @@ public class QuestionnareTab extends JDialog {
 							.getString("qFiveAnsFour"));
 				}
 
-				
-
-				
 				if (questionFiveSelectionOne.isSelected()
 						|| questionFiveSelectionTwo.isSelected()
 						|| questionFiveSelectionThree.isSelected()
@@ -788,7 +783,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSix.gridy = 1;
 		panelQuestionSix.add(questionSixSelectionOne, constrainsQuestionSix);
 		questionSixSelectionOne.setActionCommand("0");
-		
+
 		final JRadioButton questionSixSelectionOneYes;
 		questionSixSelectionOneYes = new JRadioButton(
 				currentLanguage.getString("yes"));
@@ -800,7 +795,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSix.gridy = 1;
 		panelQuestionSix.add(questionSixSelectionOneYes, constrainsQuestionSix);
 		questionSixSelectionOneYes.setActionCommand("1");
-		
+
 		final JLabel questionSixB;
 		questionSixB = new JLabel(currentLanguage.getString("qSixB"));
 		questionSixB.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -812,7 +807,7 @@ public class QuestionnareTab extends JDialog {
 		final JRadioButton questionSixSelectionTwo;
 		questionSixSelectionTwo = new JRadioButton(
 				currentLanguage.getString("qSixAnsTwo"));
-				questionSixSelectionTwo.setBackground(Color.ORANGE);
+		questionSixSelectionTwo.setBackground(Color.ORANGE);
 		questionSixSelectionTwo.setIcon(radioIconOFF);
 		questionSixSelectionTwo.setSelectedIcon(radioIconON);
 		questionSixSelectionTwo.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -868,25 +863,25 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSix.gridy = 7;
 		panelQuestionSix.add(questionSixSelectionSix, constrainsQuestionSix);
 		questionSixSelectionSix.setActionCommand("6");
-		
+
 		final ButtonGroup questionSixGroupOne = new ButtonGroup();
 		questionSixGroupOne.add(questionSixSelectionOne);
 		questionSixGroupOne.add(questionSixSelectionOneYes);
-		
+
 		final ButtonGroup questionSixGroup = new ButtonGroup();
 		questionSixGroup.add(questionSixSelectionTwo);
 		questionSixGroup.add(questionSixSelectionThree);
 		questionSixGroup.add(questionSixSelectionFour);
 		questionSixGroup.add(questionSixSelectionFive);
 		questionSixGroup.add(questionSixSelectionSix);
-		
+
 		questionSixB.setEnabled(false);
 		questionSixSelectionTwo.setEnabled(false);
 		questionSixSelectionThree.setEnabled(false);
 		questionSixSelectionFour.setEnabled(false);
 		questionSixSelectionFive.setEnabled(false);
 		questionSixSelectionSix.setEnabled(false);
-		
+
 		class RadioListenerSix implements ActionListener {
 
 			@Override
@@ -900,7 +895,7 @@ public class QuestionnareTab extends JDialog {
 					questionSixSelectionFive.setEnabled(true);
 					questionSixSelectionSix.setEnabled(true);
 				}
-				
+
 				if (e.getActionCommand() == "0") {
 					questionSixGroup.clearSelection();
 					sQuestionSixAnswer = "0";
@@ -912,9 +907,9 @@ public class QuestionnareTab extends JDialog {
 					questionSixSelectionSix.setEnabled(false);
 				}
 			}
-			
+
 		}
-		
+
 		RadioListenerSix listenerSix = new RadioListenerSix();
 		questionSixSelectionOne.addActionListener(listenerSix);
 		questionSixSelectionOneYes.addActionListener(listenerSix);
@@ -942,7 +937,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionNine.gridx = 1;
 		constrainsQuestionNine.gridy = 2;
 		panelQuestionNine.add(questionSixAnswer, constrainsQuestionNine);
-		
+
 		final JLabel questionSixAnswerB = new JLabel();
 		questionSixAnswerB.setFont(new Font("Tahoma", Font.ITALIC, 30));
 		questionSixAnswerB.setForeground(Color.BLUE);
@@ -964,12 +959,11 @@ public class QuestionnareTab extends JDialog {
 				// TODO Auto-generated method stub
 
 				if (questionSixSelectionOne.isSelected()) {
-					questionSixAnswer.setText(currentLanguage
-							.getString("no"));
+					questionSixAnswer.setText(currentLanguage.getString("no"));
 				} else if (questionSixSelectionOneYes.isSelected()) {
 					questionSixAnswer.setText(currentLanguage.getString("yes"));
-				} 
-				
+				}
+
 				if (questionSixSelectionTwo.isSelected()) {
 					questionSixAnswerB.setText(currentLanguage
 							.getString("qSixAnsTwo"));
@@ -986,13 +980,11 @@ public class QuestionnareTab extends JDialog {
 					questionSixAnswerB.setText(currentLanguage
 							.getString("qSixAnsSix"));
 				}
-				
+
 				if (questionSixSelectionOne.isSelected()) {
 					questionSixAnswerB.setText(null);
 				}
 
-				
-				
 				if (questionSixSelectionOne.isSelected()) {
 					cl.show(panelContainer, "7");
 				} else if (questionSixSelectionTwo.isSelected()
@@ -1012,13 +1004,13 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionSeven.anchor = GridBagConstraints.FIRST_LINE_START;
 
 		final JLabel questionSeven;
-		questionSeven = new JLabel(leftTag800 + currentLanguage.getString("qSevenA") + rightTag);
+		questionSeven = new JLabel(leftTag800
+				+ currentLanguage.getString("qSevenA") + rightTag);
 		questionSeven.setFont(new Font("Tahoma", Font.BOLD, 40));
 		questionSeven.setForeground(Color.BLUE);
 		constrainsQuestionSeven.gridx = 0;
 		constrainsQuestionSeven.gridy = 0;
 		panelQuestionSeven.add(questionSeven, constrainsQuestionSeven);
-		
 
 		final JRadioButton questionSevenSelectionOneA;
 		questionSevenSelectionOneA = new JRadioButton(
@@ -1032,7 +1024,7 @@ public class QuestionnareTab extends JDialog {
 		panelQuestionSeven.add(questionSevenSelectionOneA,
 				constrainsQuestionSeven);
 		questionSevenSelectionOneA.setActionCommand("0");
-		
+
 		final JRadioButton questionSevenSelectionOneB;
 		questionSevenSelectionOneB = new JRadioButton(
 				currentLanguage.getString("yes"));
@@ -1045,7 +1037,7 @@ public class QuestionnareTab extends JDialog {
 		panelQuestionSeven.add(questionSevenSelectionOneB,
 				constrainsQuestionSeven);
 		questionSevenSelectionOneB.setActionCommand("1");
-		
+
 		final JLabel questionSevenB;
 		questionSevenB = new JLabel(currentLanguage.getString("qSevenB"));
 		questionSevenB.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -1107,17 +1099,17 @@ public class QuestionnareTab extends JDialog {
 		questionSevenGroup.add(questionSevenSelectionTwo);
 		questionSevenGroup.add(questionSevenSelectionThree);
 		questionSevenGroup.add(questionSevenSelectionFour);
-		
+
 		final ButtonGroup questionSevenGroupOne = new ButtonGroup();
 		questionSevenGroupOne.add(questionSevenSelectionOneA);
 		questionSevenGroupOne.add(questionSevenSelectionOneB);
-		
+
 		questionSevenB.setEnabled(false);
 		questionSevenSelectionOne.setEnabled(false);
 		questionSevenSelectionTwo.setEnabled(false);
 		questionSevenSelectionThree.setEnabled(false);
 		questionSevenSelectionFour.setEnabled(false);
-		
+
 		class RadioListenerSeven implements ActionListener {
 
 			@Override
@@ -1141,11 +1133,10 @@ public class QuestionnareTab extends JDialog {
 				}
 			}
 		}
-		
+
 		RadioListenerSeven listenerSeven = new RadioListenerSeven();
 		questionSevenSelectionOneA.addActionListener(listenerSeven);
 		questionSevenSelectionOneB.addActionListener(listenerSeven);
-
 
 		JButton backToQuestionSix;
 		backToQuestionSix = new JButton(
@@ -1170,7 +1161,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionNine.gridx = 1;
 		constrainsQuestionNine.gridy = 3;
 		panelQuestionNine.add(questionSevenAnswer, constrainsQuestionNine);
-		
+
 		final JLabel questionSevenAnswerYes = new JLabel();
 		questionSevenAnswerYes.setFont(new Font("Tahoma", Font.ITALIC, 30));
 		questionSevenAnswerYes.setForeground(Color.BLUE);
@@ -1192,14 +1183,15 @@ public class QuestionnareTab extends JDialog {
 				// TODO Auto-generated method stub
 
 				if (questionSevenSelectionOneA.isSelected()) {
-					questionSevenAnswer.setText(currentLanguage
-							.getString("no"));
+					questionSevenAnswer.setText(currentLanguage.getString("no"));
 				} else if (questionSevenSelectionOneB.isSelected()) {
-					questionSevenAnswer.setText(currentLanguage.getString("yes"));
+					questionSevenAnswer.setText(currentLanguage
+							.getString("yes"));
 				}
-				
+
 				if (questionSevenSelectionOne.isSelected()) {
-					questionSevenAnswerYes.setText(currentLanguage.getString("qSevenAnsOne"));
+					questionSevenAnswerYes.setText(currentLanguage
+							.getString("qSevenAnsOne"));
 				} else if (questionSevenSelectionTwo.isSelected()) {
 					questionSevenAnswerYes.setText(currentLanguage
 							.getString("qSevenAnsTwo"));
@@ -1210,12 +1202,11 @@ public class QuestionnareTab extends JDialog {
 					questionSevenAnswerYes.setText(currentLanguage
 							.getString("qSevenAnsFour"));
 				}
-				
+
 				if (questionSevenSelectionOneA.isSelected()) {
 					questionSevenAnswerYes.setText(null);
 				}
 
-				
 				if (questionSevenSelectionOneA.isSelected()
 						|| questionSevenSelectionOne.isSelected()
 						|| questionSevenSelectionTwo.isSelected()
@@ -1263,7 +1254,7 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionEight.gridx = 0;
 		constrainsQuestionEight.gridy = 4;
 		panelQuestionEight.add(questionFourFinal, constrainsQuestionEight);
-		
+
 		JButton backToQuestionSeven;
 		backToQuestionSeven = new JButton(
 				currentLanguage.getString("previousQuestion"));
@@ -1277,7 +1268,7 @@ public class QuestionnareTab extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-					cl.show(panelContainer, "7");
+				cl.show(panelContainer, "7");
 			}
 		});
 
@@ -1304,23 +1295,26 @@ public class QuestionnareTab extends JDialog {
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 0;
 		panelQuestionNine.add(reviewlabel, constrainsQuestionNine);
-		
+
 		final JLabel questionFiveFinal;
-		questionFiveFinal = new JLabel(leftTag500 + currentLanguage.getString("qFive") + rightTag);
+		questionFiveFinal = new JLabel(leftTag500
+				+ currentLanguage.getString("qFive") + rightTag);
 		questionFiveFinal.setFont(new Font("Tahoma", Font.BOLD, 30));
 		questionFiveFinal.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 1;
 		panelQuestionNine.add(questionFiveFinal, constrainsQuestionNine);
 		final JLabel questionSixFinal;
-		questionSixFinal = new JLabel(leftTag500 + currentLanguage.getString("qSixA") + rightTag);
+		questionSixFinal = new JLabel(leftTag500
+				+ currentLanguage.getString("qSixA") + rightTag);
 		questionSixFinal.setFont(new Font("Tahoma", Font.BOLD, 30));
 		questionSixFinal.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 2;
 		panelQuestionNine.add(questionSixFinal, constrainsQuestionNine);
 		final JLabel questionSevenFinal;
-		questionSevenFinal = new JLabel(leftTag500 + currentLanguage.getString("qSevenA") + rightTag);
+		questionSevenFinal = new JLabel(leftTag500
+				+ currentLanguage.getString("qSevenA") + rightTag);
 		questionSevenFinal.setFont(new Font("Tahoma", Font.BOLD, 30));
 		questionSevenFinal.setForeground(Color.BLUE);
 		constrainsQuestionNine.gridx = 0;
@@ -1331,7 +1325,7 @@ public class QuestionnareTab extends JDialog {
 		backToQuestionEight = new JButton(
 				currentLanguage.getString("previousQuestion"));
 		backToQuestionEight.setFont(new Font("Tahoma", Font.BOLD, 40));
-		backToQuestionEight.setPreferredSize(new Dimension(300,125));
+		backToQuestionEight.setPreferredSize(new Dimension(300, 125));
 		constrainsQuestionNine.gridx = 0;
 		constrainsQuestionNine.gridy = 7;
 		panelQuestionNine.add(backToQuestionEight, constrainsQuestionNine);
@@ -1343,9 +1337,10 @@ public class QuestionnareTab extends JDialog {
 				cl.show(panelContainer, "8");
 			}
 		});
-		
+
 		JButton resetQuestionnaire;
-		resetQuestionnaire = new JButton(leftTag300 + currentLanguage.getString("reset") + rightTag);
+		resetQuestionnaire = new JButton(leftTag300
+				+ currentLanguage.getString("reset") + rightTag);
 		resetQuestionnaire.setFont(new Font("Tahoma", Font.BOLD, 40));
 		resetQuestionnaire.setPreferredSize(new Dimension(300, 125));
 		constrainsQuestionNine.gridx = 1;
@@ -1441,7 +1436,7 @@ public class QuestionnareTab extends JDialog {
 						sQuestionSixAnswer = "5";
 					}
 
-					if (questionSevenSelectionOneA.isSelected()){
+					if (questionSevenSelectionOneA.isSelected()) {
 						sQuestionSevenAnswer = "0";
 					} else if (questionSevenSelectionOne.isSelected()) {
 						sQuestionSevenAnswer = "1";
@@ -1468,8 +1463,10 @@ public class QuestionnareTab extends JDialog {
 									ImageIcon sendingImage = new ImageIcon(
 											imageURL);
 									final JDialog dialog = new JDialog();
-									dialog.setPreferredSize(new Dimension(380, 170));
-									dialog.setTitle(currentLanguage.getString("sendingAnswers"));
+									dialog.setPreferredSize(new Dimension(380,
+											170));
+									dialog.setTitle(currentLanguage
+											.getString("sendingAnswers"));
 									dialog.setName("TemporarySend");
 									dialog.setUndecorated(false);
 									JPanel panel = new JPanel();
@@ -1491,12 +1488,13 @@ public class QuestionnareTab extends JDialog {
 							});
 
 							updateSendGui();
-							System.out.println("\nDaily sent status " + statusDaily);
-							
+							System.out.println("\nDaily sent status "
+									+ statusDaily);
+
 							try {
 								sendEHRToDB();
 								sendDailyValuesToDB();
-								
+
 							} catch (Exception e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -1513,7 +1511,7 @@ public class QuestionnareTab extends JDialog {
 				Window w = SwingUtilities.getWindowAncestor(panelContainer);
 				w.dispose();
 			}
-		
+
 		});
 		return panelContainer;
 
@@ -1563,7 +1561,7 @@ public class QuestionnareTab extends JDialog {
 		HttpResponse response = null;
 
 		// Array to send to IIP
-		
+
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("q_1", sQuestionOneAnswer));
 		params.add(new BasicNameValuePair("q_2", sQuestionTwoAnswer));
@@ -1579,18 +1577,16 @@ public class QuestionnareTab extends JDialog {
 			response = httpclient.execute(httpPost);
 			System.out.println("\nTesting sending daily questionnaire: "
 					+ response.getStatusLine());
-			
-			if (response.getStatusLine().getStatusCode() == 200 ) {
+
+			if (response.getStatusLine().getStatusCode() == 200) {
 				statusDaily = 1;
-			} else 
+			} else
 				statusDaily = 0;
-			
+
 		} catch (ClientProtocolException e1) {
 			System.out.println(e1.toString());
 		} catch (IOException e1) {
 			System.out.println(e1.toString());
-		} finally {
-			Utilities.disposeDialog(null);
 		}
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -1601,110 +1597,132 @@ public class QuestionnareTab extends JDialog {
 			printAllNodes(root2);
 		} catch (Exception e) {
 			System.out.println(e.toString());
+		} finally {
+			String currentLang = HealthProperties
+					.getProperty("currentLanguage");
+			Locale currentLocale = Locale.forLanguageTag(currentLang);
+			final ResourceBundle currentLanguage = ResourceBundle.getBundle(
+					"language", currentLocale);
+			Boolean isSent = statusDaily == 1 ? true : false;
+
+			String message = isSent ? currentLanguage
+					.getString("sentQuestionnaires") : currentLanguage
+					.getString("notSentQuestionnaires");
+			MainPage.showMessageDialog(message, isSent);
+			Utilities.disposeDialog(null);
 		}
 	}
-	
+
 	// Inserting EHR column in DB
 
-			public void sendEHRToDB() throws Exception {
-				try {
-					Class.forName("com.mysql.jdbc.Driver");
-					connect = (Connection) DriverManager
-							.getConnection("jdbc:mysql://localhost:3306/" + dbName
-									+ "?user=" + dbUsername + "&password=" + dbPassword);
+	public void sendEHRToDB() throws Exception {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost:3306/" + dbName
+							+ "?user=" + dbUsername + "&password=" + dbPassword);
 
-					statement = (Statement) connect.createStatement();
-					statement.executeUpdate("INSERT INTO " + dbName + ".EHR" + 
-											"(EHRID, pasientID, conceptIDFromConcept, EHRDateTime, EHRSentStatus) " + 
-											"VALUES (NULL, " + HealthProperties.getProperty("patientId")
-											+ ", 4, '" + timeAndDate + "', " + statusDaily + ");"
-													);
-					statement = null;
-					System.out.println("Successfully inserted into EHR table");
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-					} finally {
-						closeForEHR();
-				}
-			} 
-			// closing
-			      
-			private void closeForEHR() {
-				try {
-					
-					if (statement != null) {
-						statement.close();
-					}
+			statement = (Statement) connect.createStatement();
+			statement
+					.executeUpdate("INSERT INTO "
+							+ dbName
+							+ ".EHR"
+							+ "(EHRID, pasientID, conceptIDFromConcept, EHRDateTime, EHRSentStatus) "
+							+ "VALUES (NULL, "
+							+ HealthProperties.getProperty("patientId")
+							+ ", 4, '" + timeAndDate + "', " + statusDaily
+							+ ");");
+			statement = null;
+			System.out.println("Successfully inserted into EHR table");
 
-					if (connect != null) {
-						connect.close();
-					}
-				} catch (Exception e) {
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeForEHR();
+		}
+	}
 
-				}
+	// closing
+
+	private void closeForEHR() {
+		try {
+
+			if (statement != null) {
+				statement.close();
 			}
-	
-	
+
+			if (connect != null) {
+				connect.close();
+			}
+		} catch (Exception e) {
+
+		}
+	}
+
 	// Questionnaire values to DB
 
-		public void sendDailyValuesToDB() throws Exception {
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				connect = (Connection) DriverManager
-						.getConnection("jdbc:mysql://localhost:3306/" + dbName
-								+ "?user=" + dbUsername + "&password=" + dbPassword);
+	public void sendDailyValuesToDB() throws Exception {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost:3306/" + dbName
+							+ "?user=" + dbUsername + "&password=" + dbPassword);
 
-				Statement s = connect.createStatement();
-				s.executeQuery("SELECT `EHRID` FROM `EHR` WHERE `conceptIDFromConcept` = 4 ORDER BY EHRID DESC LIMIT 1");
-				ResultSet rs = s.getResultSet();
-				rs.next();
-				int EHRID = rs.getInt("EHRID");
-				System.out.println("Latest EHRID read from DB = " + EHRID);
-				
-				statement = (Statement) connect.createStatement();
-				statement.executeUpdate("INSERT INTO " + dbName + ".EHRContent" + 
-										"(EHRContentID, EHRIDFromEHR, parameterIDFromConceptParameters, parameterValue) " + 
-											"VALUES (NULL, " + EHRID + ", 19, " + sQuestionOneAnswer + "),"
-												+ " (NULL, " + EHRID + ", 20, " + sQuestionTwoAnswer + "),"
-												+ " (NULL, " + EHRID + ", 21, " + sQuestionThreeAnswer + "),"
-												+ " (NULL, " + EHRID + ", 22, " + sQuestionFourAnswer + "),"
-												+ " (NULL, " + EHRID + ", 22, " + sQuestionFiveAnswer + "),"
-												+ " (NULL, " + EHRID + ", 24, " + sQuestionSixAnswer + "),"
-												+ " (NULL, " + EHRID + ", 25, " + sQuestionSevenAnswer + ")"
-												+ ";");
-				statement = null;
-				System.out.println("Successfully inserted into EHRContent table");
-						
-			} catch (Exception e) {
-				e.printStackTrace();
-				} finally {
-					closeForEHRContent();
-			}
+			Statement s = connect.createStatement();
+			s.executeQuery("SELECT `EHRID` FROM `EHR` WHERE `conceptIDFromConcept` = 4 ORDER BY EHRID DESC LIMIT 1");
+			ResultSet rs = s.getResultSet();
+			rs.next();
+			int EHRID = rs.getInt("EHRID");
+			System.out.println("Latest EHRID read from DB = " + EHRID);
+
+			statement = (Statement) connect.createStatement();
+			statement
+					.executeUpdate("INSERT INTO "
+							+ dbName
+							+ ".EHRContent"
+							+ "(EHRContentID, EHRIDFromEHR, parameterIDFromConceptParameters, parameterValue) "
+							+ "VALUES (NULL, " + EHRID + ", 19, "
+							+ sQuestionOneAnswer + ")," + " (NULL, " + EHRID
+							+ ", 20, " + sQuestionTwoAnswer + ")," + " (NULL, "
+							+ EHRID + ", 21, " + sQuestionThreeAnswer + "),"
+							+ " (NULL, " + EHRID + ", 22, "
+							+ sQuestionFourAnswer + ")," + " (NULL, " + EHRID
+							+ ", 22, " + sQuestionFiveAnswer + "),"
+							+ " (NULL, " + EHRID + ", 24, "
+							+ sQuestionSixAnswer + ")," + " (NULL, " + EHRID
+							+ ", 25, " + sQuestionSevenAnswer + ")" + ";");
+			statement = null;
+			System.out.println("Successfully inserted into EHRContent table");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeForEHRContent();
 		}
+	}
 
-		// closing
-		      
-		private void closeForEHRContent() {
-			try {
-				if (resultSet != null) {
-					resultSet.close();
-				}
+	// closing
 
-				if (statement != null) {
-					statement.close();
-				}
-
-				if (connect != null) {
-					connect.close();
-				}
-			} catch (Exception e) {
-
+	private void closeForEHRContent() {
+		try {
+			if (resultSet != null) {
+				resultSet.close();
 			}
+
+			if (statement != null) {
+				statement.close();
+			}
+
+			if (connect != null) {
+				connect.close();
+			}
+		} catch (Exception e) {
+
 		}
-			
-	//Print all nodes
-		
+	}
+
+	// Print all nodes
+
 	private static void printAllNodes(Node doc) {
 		// System.out.println("Node: " + doc.getNodeName() + ", Value: " +
 		// doc.getNodeValue());

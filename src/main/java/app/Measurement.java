@@ -24,7 +24,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import vitalsignals.Pulse;
-import bluetooth.PulseConnectionRunnable;
+import bluetooth.PulseConnection;
 import databaseaccess.DBConnection;
 
 public class Measurement extends JDialog {
@@ -177,8 +177,10 @@ public class Measurement extends JDialog {
 										ImageIcon noninImage = new ImageIcon(
 												imageURL);
 
-										String message = currentLanguage.getString("measureInstructions");
-										String title = currentLanguage.getString("measuring");
+										String message = currentLanguage
+												.getString("measureInstructions");
+										String title = currentLanguage
+												.getString("measuring");
 										final JDialog dialog = new JDialog();
 										dialog.setName("TemporaryBTDialog");
 										dialog.setTitle(title);
@@ -187,14 +189,15 @@ public class Measurement extends JDialog {
 										JLabel label = new JLabel(noninImage);
 										JLabel messageLabel = new JLabel(
 												message);
-										messageLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+										messageLabel.setFont(new Font("Tahoma",
+												Font.BOLD, 30));
 										panel.add(label);
 										panel.add(messageLabel);
 										dialog.setLocation(410, 50);
 										dialog.getContentPane().add(panel);
 										dialog.pack();
 										dialog.setVisible(true);
-//										dialog.setLocationRelativeTo(rootPane);
+										// dialog.setLocationRelativeTo(rootPane);
 
 									}
 								});
@@ -204,7 +207,7 @@ public class Measurement extends JDialog {
 								Utilities utilities = new Utilities();
 								utilities.setMainThread(Thread.currentThread());
 								if (Utilities.pulseThread == null) {
-									PulseConnectionRunnable pc = new PulseConnectionRunnable(
+									PulseConnection pc = new PulseConnection(
 											pulseValue, oxigenValue, okButton);
 									thread = new Thread(pc);
 									thread.start();
@@ -325,19 +328,21 @@ public class Measurement extends JDialog {
 									HttpsPostClient httpsPostClient = new HttpsPostClient();
 									Pulse pulse = new Pulse(pulseValue
 											.getText(), oxigenValue.getText());
-									// sendPulse.setText("Sending measurements...");
-									httpsPostClient.SendPulseHttps(pulse);
+									boolean isSent = httpsPostClient
+											.SendPulseHttps(pulse);
 									httpsPostClient.SendOxygen(pulse);
+
 									DBConnection dbConnection = new DBConnection();
-									try {
-										// dbConnection.savePulse(pulse);
-									} catch (Exception e1) {
-										// TODO Auto-generated catch
-										// block
-										e1.printStackTrace();
-									}
-									//TODO insert data change to the main window!
+									dbConnection.savePulseAndOxygen(pulse,
+											isSent);
 									dispose();
+									String message = isSent ? currentLanguage
+											.getString("sentMeasurements")
+											: currentLanguage
+													.getString("notSentMeasurements");
+									dispose();
+									MainPage.showMessageDialog(message, isSent);
+
 								}
 
 							}).start();
