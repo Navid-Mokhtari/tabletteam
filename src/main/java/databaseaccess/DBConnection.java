@@ -15,7 +15,7 @@ import app.HealthProperties;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
-import com.sun.tools.javac.resources.javac;
+//import com.sun.tools.javac.resources.javac;
 
 public class DBConnection {
 	private Connection connect = null;
