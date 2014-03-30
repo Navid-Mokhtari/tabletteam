@@ -33,9 +33,10 @@ public class Pulse extends Measurements {
 	}
 
 	public Boolean ParseMessage() {
-		if (pulseMeasurements.size() == 22) {
-			pulse = pulseMeasurements.get(17);
-			oxigen = pulseMeasurements.get(19);
+		if (pulseMeasurements.size() % 22 == 0 && pulseMeasurements.size() != 0) {
+			int lenght = pulseMeasurements.size();
+			pulse = pulseMeasurements.get(lenght - 5);
+			oxigen = pulseMeasurements.get(lenght - 3);
 			setDate(getCurrentDate());
 			if (pulse == "-1" || oxigen == "-1") {
 				return false;

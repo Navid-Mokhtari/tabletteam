@@ -121,15 +121,29 @@ public class PulseConnection implements Runnable {
 			System.out.println("Opening input stream");
 			is = con.openInputStream();
 			int lenght = 0;
+			boolean isMemory = false;
 			while (lenght < 22) {
 				try {
 					String temp = String.valueOf(is.read());
+					if (lenght % 15 == 0 && lenght != 0) {
+						System.out.println("16th element:" + temp);
+						System.out.println("Memory value!");
+						if (temp.contentEquals("16")
+								|| temp.contentEquals("17")) {
+							System.out.println("This value is from the memory");
+							isMemory = true;
+						}
+					}
 					messageList.add(temp);
 					System.out.println(temp);
 				} catch (IOException e) {
 					System.out.println(e.toString());
 				}
 				lenght++;
+				if (lenght == 22 && isMemory) {
+					lenght = 0;
+					isMemory = false;
+				}
 			}
 			System.out.println(messageList.toString());
 		} catch (IOException e1) {
