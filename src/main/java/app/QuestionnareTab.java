@@ -1467,6 +1467,7 @@ public class QuestionnareTab extends JDialog {
 											170));
 									dialog.setTitle(currentLanguage
 											.getString("sendingAnswers"));
+									dialog.setLocation(410, 50);
 									dialog.setName("TemporarySend");
 									dialog.setUndecorated(false);
 									JPanel panel = new JPanel();
