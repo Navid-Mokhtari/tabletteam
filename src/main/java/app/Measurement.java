@@ -83,22 +83,7 @@ public class Measurement extends JDialog {
 				gbc_label.gridy = 0;
 				panel.add(label, gbc_label);
 			}
-			// {
-			// JLabel lblNewLabel_5 = new JLabel("                     ");
-			// GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
-			// gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 0);
-			// gbc_lblNewLabel_5.gridx = 3;
-			// gbc_lblNewLabel_5.gridy = 0;
-			// panel.add(lblNewLabel_5, gbc_lblNewLabel_5);
-			// }
-			// {
-			// JLabel lblNewLabel_2 = new JLabel("                      ");
-			// GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-			// gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-			// gbc_lblNewLabel_2.gridx = 2;
-			// gbc_lblNewLabel_2.gridy = 1;
-			// panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-			// }
+			
 			{
 				JLabel lblNewLabel = new JLabel(
 						currentLanguage.getString("firstInstruction"));
@@ -121,18 +106,7 @@ public class Measurement extends JDialog {
 				gbc_lblWaitUntil.gridy = 4;
 				panel.add(lblWaitUntil, gbc_lblWaitUntil);
 			}
-			// {
-			// JLabel lblNewLabel_1 = new JLabel(
-			// "                            see the measurments");
-			// lblNewLabel_1.setForeground(Color.WHITE);
-			// lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 30));
-			// GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			// gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-			// gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-			// gbc_lblNewLabel_1.gridx = 1;
-			// gbc_lblNewLabel_1.gridy = 5;
-			// panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-			// }
+			
 			{
 				pulseValue = new JLabel("                       ");
 				pulseValue.setForeground(Color.WHITE);
