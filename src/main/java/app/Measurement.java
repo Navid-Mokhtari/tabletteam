@@ -48,7 +48,7 @@ public class Measurement extends JDialog {
 				currentLanguage.getString("submit"));
 
 		setBounds(0, 0, 1366, 768);
-		setTitle("UiA eHelse v" + HealthProperties.getProperty("appVersion"));
+		setTitle("UiA eHelse v1.21");
 		setResizable(false);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 888, 0 };

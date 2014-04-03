@@ -41,7 +41,7 @@ public class CatQuestionDial extends JDialog {
 	 */
 	public CatQuestionDial() {
 		setBounds(0, 0, 1366, 768);
-		setTitle("UiA eHelse v" + HealthProperties.getProperty("appVersion"));
+		setTitle("UiA eHelse v1.21");
 		setResizable(false);
 		
 		String currentLang = HealthProperties.getProperty("currentLanguage");

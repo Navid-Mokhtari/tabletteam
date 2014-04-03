@@ -215,10 +215,16 @@ public class CatQuestionnaire extends JDialog {
 
 		// Adding intro page
 
+		final JLabel introSub = new JLabel(leftTag800
+				+ currentLanguage.getString("CATInstructionsSub") + rightTag);
+		introSub.setFont(new Font("Tahoma", Font.BOLD, 40));
+		introSub.setBounds(450, -80, 1366, 500);
+		panelIntro.add(introSub);
+		
 		final JLabel intro = new JLabel(leftTag800
 				+ currentLanguage.getString("CATInstructions") + rightTag);
-		intro.setFont(new Font("Tahoma", Font.BOLD, 40));
-		intro.setBounds(150, 10, 1366, 500);
+		intro.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		intro.setBounds(150, 60, 1366, 500);
 		panelIntro.add(intro);
 
 		final JButton toStart = new JButton(
