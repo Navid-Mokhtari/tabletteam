@@ -95,7 +95,7 @@ public class MainPage {
 		// int ySize = ((int) tk.getScreenSize().getWidth()) - 100;
 		// frame.setPreferredSize(new Dimension(xSize, ySize));
 		frmUiaEhelse.setBounds(0, 0, 1366, 768);
-		frmUiaEhelse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmUiaEhelse.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		final Panel panel = new Panel();
 		frmUiaEhelse.getContentPane().add(panel, BorderLayout.NORTH);
@@ -307,6 +307,16 @@ public class MainPage {
 		gbc_lblUiaEhelse.gridx = 1;
 		gbc_lblUiaEhelse.gridy = 4;
 		panel_2.add(lblUiaEhelse, gbc_lblUiaEhelse);
+		
+		JLabel lblUsername = new JLabel("Bruker: " + HealthProperties.getProperty("iipUsername"));
+		lblUsername.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		lblUsername.setFont(new Font("Arial", Font.BOLD, 20));
+		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
+		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
+		gbc_lblUsername.gridx = 2;
+		gbc_lblUsername.gridy = 4;
+		panel_2.add(lblUsername, gbc_lblUsername);
 
 		JLabel lblNewLabel_1 = new JLabel(currentLanguage.getString("connStat"));
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
@@ -376,8 +386,8 @@ public class MainPage {
 			System.out.println("\nSuccessfully read last CAT from DB!");
 
 		} catch (Exception e) {
-			System.out.println("Reading from DB failed");
-			e.printStackTrace();
+			System.out.println("Reading from DB on main page failed");
+//			e.printStackTrace();
 		}
 	}
 
@@ -392,7 +402,7 @@ public class MainPage {
 		if (isSent) {
 			imageURL = cldr.getResource("glad.png");
 		} else {
-			imageURL = cldr.getResource("smile_6.png");
+			imageURL = cldr.getResource("sad.png");
 		}
 		icon = new ImageIcon(imageURL);
 		String title = currentLanguage.getString("sendStatus");
