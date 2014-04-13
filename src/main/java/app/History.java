@@ -47,8 +47,9 @@ public class History extends JFrame {
 	private JLabel pulseValueLabel;
 
 	public History() {
-		setBounds(0, 0, 1366, 768);
+		setBounds(0, 0, 1366, 728);
 		setResizable(false);
+		setUndecorated(true);
 		initialize();
 
 	}

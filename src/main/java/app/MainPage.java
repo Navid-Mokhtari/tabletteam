@@ -94,8 +94,9 @@ public class MainPage {
 		// int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
 		// int ySize = ((int) tk.getScreenSize().getWidth()) - 100;
 		// frame.setPreferredSize(new Dimension(xSize, ySize));
-		frmUiaEhelse.setBounds(0, 0, 1366, 768);
+		frmUiaEhelse.setBounds(0, 0, 1366, 728);
 		frmUiaEhelse.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmUiaEhelse.setUndecorated(true);
 
 		final Panel panel = new Panel();
 		frmUiaEhelse.getContentPane().add(panel, BorderLayout.NORTH);
@@ -298,7 +299,7 @@ public class MainPage {
 		lblNewLabel_5.setFont(new Font("Arial", Font.BOLD, 20));
 		panel_1.add(lblNewLabel_5, "2, 16");
 
-		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2014  \r\n ");
+		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2014, v1.21b  \r\n ");
 		lblUiaEhelse.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		lblUiaEhelse.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 35));
@@ -308,7 +309,7 @@ public class MainPage {
 		gbc_lblUiaEhelse.gridy = 4;
 		panel_2.add(lblUiaEhelse, gbc_lblUiaEhelse);
 		
-		JLabel lblUsername = new JLabel("Bruker: " + HealthProperties.getProperty("iipUsername"));
+		JLabel lblUsername = new JLabel("Tablet ID: " + HealthProperties.getProperty("iipUsername"));
 		lblUsername.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
 		lblUsername.setFont(new Font("Arial", Font.BOLD, 20));

@@ -112,7 +112,7 @@ public class CatQuestionnaire extends JDialog {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		// int xSize = ((int) tk.getScreenSize().getWidth());
 		// int ySize = ((int) tk.getScreenSize().getWidth());
-		questionnare.setPreferredSize(new Dimension(1366, 768));
+		questionnare.setPreferredSize(new Dimension(1366, 728));
 		return questionnare;
 	}
 

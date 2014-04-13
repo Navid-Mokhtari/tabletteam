@@ -47,9 +47,10 @@ public class Measurement extends JDialog {
 		final JButton okButton = new JButton(
 				currentLanguage.getString("submit"));
 
-		setBounds(0, 0, 1366, 768);
+		setBounds(0, 0, 1366, 728);
 		setTitle("UiA eHelse v1.21");
 		setResizable(false);
+		setUndecorated(true);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 888, 0 };
 		gridBagLayout.rowHeights = new int[] { 445, 33, 0 };
@@ -247,7 +248,7 @@ public class Measurement extends JDialog {
 			gbc_buttonPane.gridx = 0;
 			gbc_buttonPane.gridy = 1;
 			getContentPane().add(buttonPane, gbc_buttonPane);
-			{
+			
 				// okButton = new JButton(currentLanguage.getString("submit"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -324,14 +325,17 @@ public class Measurement extends JDialog {
 						}
 					}
 				});
+				JLabel versionNumber = new JLabel("v1.21b");
+				versionNumber.setFont(new Font("Tahoma" , Font.PLAIN, 15));
+				buttonPane.add(versionNumber);
+				
 				okButton.setForeground(new Color(30, 144, 255));
 				okButton.setFont(new Font("Tahoma", Font.BOLD, 40));
 				okButton.setActionCommand("OK");
 				okButton.setEnabled(false);
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
+			
 				JButton cancelButton = new JButton(
 						currentLanguage.getString("cancel"));
 				cancelButton.addActionListener(new ActionListener() {
@@ -343,7 +347,7 @@ public class Measurement extends JDialog {
 				cancelButton.setFont(new Font("Tahoma", Font.BOLD, 40));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-			}
+			
 		}
 	}
 }
