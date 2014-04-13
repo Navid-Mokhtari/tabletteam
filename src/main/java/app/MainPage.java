@@ -88,7 +88,7 @@ public class MainPage {
 		frmUiaEhelse = new JFrame();
 		frmUiaEhelse.setIconImage(Toolkit.getDefaultToolkit().getImage(
 				MainPage.class.getResource("/pic/Doctor-icon2.png")));
-		frmUiaEhelse.setTitle("UiA eHelse v1.21");
+		frmUiaEhelse.setTitle("UiA eHelse v1.21b");
 		frmUiaEhelse.setResizable(false);
 		// Toolkit tk = Toolkit.getDefaultToolkit();
 		// int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
@@ -302,7 +302,7 @@ public class MainPage {
 		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2014, v1.21b  \r\n ");
 		lblUiaEhelse.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-		lblUiaEhelse.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 35));
+		lblUiaEhelse.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
 		GridBagConstraints gbc_lblUiaEhelse = new GridBagConstraints();
 		gbc_lblUiaEhelse.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUiaEhelse.gridx = 1;
@@ -310,8 +310,6 @@ public class MainPage {
 		panel_2.add(lblUiaEhelse, gbc_lblUiaEhelse);
 		
 		JLabel lblUsername = new JLabel("Tablet ID: " + HealthProperties.getProperty("iipUsername"));
-		lblUsername.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
 		lblUsername.setFont(new Font("Arial", Font.BOLD, 20));
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
@@ -320,7 +318,7 @@ public class MainPage {
 		panel_2.add(lblUsername, gbc_lblUsername);
 
 		JLabel lblNewLabel_1 = new JLabel(currentLanguage.getString("connStat"));
-		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
+		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 20));
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 0;
