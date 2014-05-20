@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -227,5 +228,22 @@ public class DBConnection {
 			close();
 		}
 		return daysWithMeasurements;
+	}
+
+	public List<Pulse> getAllMeasurements() {
+		List<Pulse> measurements = new ArrayList<>();
+		for (int month = 0; month <= 11; month++) {
+			List<Integer> days = getDaysWithMeasurements(month);
+			for (Integer d : days) {
+				Calendar calendar = Calendar.getInstance();
+				calendar.set(2014, month, d);
+				Date date = calendar.getTime();
+				Pulse pulse = getMeasurementsForDay(date);
+				if (pulse != null) {
+					measurements.add(pulse);
+				}
+			}
+		}
+		return measurements;
 	}
 }

@@ -1,44 +1,39 @@
 package app;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+
+import org.jfree.ui.RefineryUtilities;
+
+import vitalsignals.Pulse;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JMonthChooser;
 
 import databaseaccess.DBConnection;
-
-import javax.swing.JPanel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.SwingUtilities;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.JLabel;
-
-import vitalsignals.Pulse;
-
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.awt.GridLayout;
-
-import javax.swing.SwingConstants;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Component;
-
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
 
 public class History extends JFrame {
 	/**
@@ -153,6 +148,18 @@ public class History extends JFrame {
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 50));
 		btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		valuesPanel.add(btnNewButton);
+
+		JButton btnNewButton_1 = new JButton("Chart");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Chart chart = new Chart("Measurement time series");
+				chart.pack();
+				RefineryUtilities.centerFrameOnScreen(chart);
+				chart.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 50));
+		valuesPanel.add(btnNewButton_1);
 		getContentPane().setLayout(groupLayout);
 		setColourForEachDayWithValueInMonth(calendar);
 	}
@@ -212,13 +219,14 @@ public class History extends JFrame {
 										// Components are empty cells
 			Calendar cal = Calendar.getInstance();
 			cal.set(year, month, day);
-			cal.set(Calendar.DAY_OF_MONTH,1);
-			Date date = cal.getTime(); 		
-			int firstDayOfMonth = date.getDay()-1;
-		    System.out.println(firstDayOfMonth); 
+			cal.set(Calendar.DAY_OF_MONTH, 1);
+			Date date = cal.getTime();
+			int firstDayOfMonth = date.getDay() - 1;
+			System.out.println(firstDayOfMonth);
 			Component components[] = dayPanel.getComponents();
 			for (int d : daysWithMeasurements) {
-				JButton button = (JButton) components[d + startingPosition + firstDayOfMonth - 1];
+				JButton button = (JButton) components[d + startingPosition
+						+ firstDayOfMonth - 1];
 				button.setBorder(new LineBorder(dayWithValue, 3));
 			}
 		}
