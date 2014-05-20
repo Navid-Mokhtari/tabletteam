@@ -201,7 +201,7 @@ public class MainPage {
 		btnNewButton_3.setIcon(new ImageIcon(MainPage.class
 				.getResource("/pic/Final-History.jpg")));
 		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		btnNewButton_3.setEnabled(false);
+		btnNewButton_3.setEnabled(true);
 		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton_3.gridx = 0;
 		gbc_btnNewButton_3.gridy = 1;
