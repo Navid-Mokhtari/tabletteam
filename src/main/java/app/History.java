@@ -20,6 +20,8 @@ import vitalsignals.Pulse;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -210,7 +212,10 @@ public class History extends JFrame {
 										// Components are empty cells
 			Calendar cal = Calendar.getInstance();
 			cal.set(year, month, day);
-			int firstDayOfMonth = Calendar.DAY_OF_MONTH;
+			cal.set(Calendar.DAY_OF_MONTH,1);
+			Date date = cal.getTime(); 		
+			int firstDayOfMonth = date.getDay()-1;
+		    System.out.println(firstDayOfMonth); 
 			Component components[] = dayPanel.getComponents();
 			for (int d : daysWithMeasurements) {
 				JButton button = (JButton) components[d + startingPosition + firstDayOfMonth - 1];
