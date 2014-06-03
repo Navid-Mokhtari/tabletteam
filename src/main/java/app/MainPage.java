@@ -1,29 +1,18 @@
 package app;
 
-import java.awt.EventQueue;
-import java.awt.GridBagLayout;
-
-import javax.swing.JFrame;
-
 import java.awt.BorderLayout;
-
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.border.TitledBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-
-import java.awt.Panel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Panel;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -31,12 +20,27 @@ import java.sql.Statement;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.media.ControllerAdapter;
+import javax.media.ControllerEvent;
+import javax.media.Manager;
+import javax.media.MediaLocator;
+import javax.media.NoPlayerException;
+import javax.media.Player;
+import javax.media.RealizeCompleteEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class MainPage {
 
@@ -48,6 +52,8 @@ public class MainPage {
 	String lastDaily = "N/A";
 	String lastCAT = "N/A";
 	String lastPulse = "N/A";
+	static Player player;
+	static JFrame myFrame;
 
 	/**
 	 * Launch the application.
@@ -207,7 +213,7 @@ public class MainPage {
 		gbc_btnNewButton_3.gridy = 1;
 		panel_2.add(btnNewButton_3, gbc_btnNewButton_3);
 
-		JButton button_1 = new JButton("");
+		/*JButton button_1 = new JButton("");
 		button_1.setEnabled(false);
 		button_1.setMargin(new Insets(4, 4, 4, 4));
 		button_1.setIcon(new ImageIcon(MainPage.class
@@ -217,6 +223,26 @@ public class MainPage {
 		gbc_button_1.gridx = 1;
 		gbc_button_1.gridy = 1;
 		panel_2.add(button_1, gbc_button_1);
+*/
+		
+		JButton button_1 = new JButton("");
+		// button_1.setEnabled(false);
+		button_1.setMargin(new Insets(4, 4, 4, 4));
+		button_1.setIcon(new ImageIcon(MainPage.class
+				.getResource("/pic/Final-Bruk.jpg")));
+		GridBagConstraints gbc_button_1 = new GridBagConstraints();
+		gbc_button_1.insets = new Insets(0, 0, 5, 5);
+		gbc_button_1.gridx = 1;
+		gbc_button_1.gridy = 1;
+		panel_2.add(button_1, gbc_button_1);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+	         ShowPlayer show  = new ShowPlayer();
+	         show.player.start();
+				
+							}
+		});
 
 		JButton button = new JButton("");
 		button.setEnabled(false);
