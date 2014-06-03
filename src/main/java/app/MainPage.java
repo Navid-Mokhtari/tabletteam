@@ -55,6 +55,7 @@ public class MainPage {
 	static Player player;
 	static JFrame myFrame;
 
+	
 	/**
 	 * Launch the application.
 	 */

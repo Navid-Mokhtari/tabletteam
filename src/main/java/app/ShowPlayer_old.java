@@ -28,6 +28,7 @@ p.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 	
 	public ShowPlayer_old(){
 		
+		
 		setBounds(0, 0, 1366, 768);
 		setTitle("UiA eHelse v1.21");
 		setResizable(false);
