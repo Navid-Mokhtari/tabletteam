@@ -1,40 +1,39 @@
 package app;
 
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
-import com.toedter.calendar.JCalendar;
-import com.toedter.calendar.JDayChooser;
-
-import databaseaccess.DBConnection;
-
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
-import javax.swing.JLabel;
+import org.jfree.ui.RefineryUtilities;
 
 import vitalsignals.Pulse;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.Date;
-import java.awt.GridLayout;
+import com.toedter.calendar.JCalendar;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JMonthChooser;
 
-import javax.swing.SwingConstants;
-
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Component;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
+import databaseaccess.DBConnection;
 
 public class History extends JFrame {
 	/**
@@ -60,8 +59,10 @@ public class History extends JFrame {
 				null, null, null));
 		JPanel valuesPanel = new JPanel();
 		final JCalendar calendar = new JCalendar(Utilities.getCurrentLanguage());
-		calendar.getYearChooser().getSpinner().setFont(new Font("Verdana", Font.PLAIN, 13));
-		calendar.getMonthChooser().getComboBox().setFont(new Font("Tahoma", Font.PLAIN, 11));
+		calendar.getYearChooser().getSpinner()
+				.setFont(new Font("Verdana", Font.PLAIN, 13));
+		calendar.getMonthChooser().getComboBox()
+				.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		calendar.getMonthChooser().setPreferredSize(new Dimension(98, 40));
 		calendar.setTodayButtonVisible(false);
 		calendar.addPropertyChangeListener("calendar",
@@ -69,10 +70,10 @@ public class History extends JFrame {
 					@Override
 					public void propertyChange(PropertyChangeEvent e) {
 						updateLabels(calendar.getDate());
-
+						setColourForEachDayWithValueInMonth(calendar);
 					}
 				});
-//		setColourForEachDayWithValueInMonth(calendar);
+		// setColourForEachDayWithValueInMonth(calendar);
 		updateLabels(calendar.getDate());
 		calendarPanel.setLayout(new GridLayout(0, 1, 0, 0));
 		calendarPanel.add(calendar);
@@ -147,7 +148,20 @@ public class History extends JFrame {
 		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 50));
 		btnNewButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		valuesPanel.add(btnNewButton);
+
+		JButton btnNewButton_1 = new JButton("Chart");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Chart chart = new Chart("Measurement time series");
+				chart.pack();
+				RefineryUtilities.centerFrameOnScreen(chart);
+				chart.setVisible(true);
+			}
+		});
+		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 50));
+		valuesPanel.add(btnNewButton_1);
 		getContentPane().setLayout(groupLayout);
+		setColourForEachDayWithValueInMonth(calendar);
 	}
 
 	private void updateLabels(Date date) {
@@ -184,16 +198,37 @@ public class History extends JFrame {
 
 	}
 
+	/*
+	 * TODO найти первый день каждого месяца. написать запрос к БД, возврающий
+	 * список всех дней, за текущий месяц, в которых есть значения. После этого
+	 * отмечать их другим цветом Начинать думать о том, что делать с графиком
+	 */
 	private void setColourForEachDayWithValueInMonth(JCalendar calendar) {
 		Color dayWithValue = Color.BLACK;
 		JDayChooser dayChooser = calendar.getDayChooser();
 		JPanel dayPanel = dayChooser.getDayPanel();
-		Component components[] = dayPanel.getComponents();
-		JButton button = (JButton) components[29];
-		button.setBorder(new LineBorder(dayWithValue, 3));
-		button = (JButton) components[32];
-		button.setBorder(new LineBorder(dayWithValue, 3));
-		button = (JButton) components[30];
-		button.setBorder(new LineBorder(dayWithValue, 3));
+		JMonthChooser monthChooser = calendar.getMonthChooser();
+		int month = calendar.getMonthChooser().getMonth();
+		int year = calendar.getYearChooser().getYear();
+		int day = 1;
+		DBConnection connection = new DBConnection();
+		List<Integer> daysWithMeasurements = connection
+				.getDaysWithMeasurements(monthChooser.getMonth());
+		if (!daysWithMeasurements.isEmpty()) {
+			int startingPosition = 7;// Because with 7 (from 0 -6 ) in
+										// Components are empty cells
+			Calendar cal = Calendar.getInstance();
+			cal.set(year, month, day);
+			cal.set(Calendar.DAY_OF_MONTH, 1);
+			Date date = cal.getTime();
+			int firstDayOfMonth = date.getDay() - 1;
+			System.out.println(firstDayOfMonth);
+			Component components[] = dayPanel.getComponents();
+			for (int d : daysWithMeasurements) {
+				JButton button = (JButton) components[d + startingPosition
+						+ firstDayOfMonth - 1];
+				button.setBorder(new LineBorder(dayWithValue, 3));
+			}
+		}
 	}
 }

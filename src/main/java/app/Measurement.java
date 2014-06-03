@@ -188,7 +188,8 @@ public class Measurement extends JDialog {
 									thread.start();
 								}
 								try {
-									Thread.sleep(30000);
+									String btTimeout= HealthProperties.getProperty("bt_timeout");
+									Thread.sleep(Integer.valueOf(btTimeout));
 								} catch (InterruptedException e) {
 									System.out
 											.println("Main thread was woken up");

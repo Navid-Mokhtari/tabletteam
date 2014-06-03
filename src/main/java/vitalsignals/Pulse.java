@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class Pulse extends Measurements {
+public class Pulse extends Measurements implements Comparable<Pulse> {
 	public Pulse() {
 	}
 
@@ -59,7 +59,10 @@ public class Pulse extends Measurements {
 		Calendar cal = Calendar.getInstance();
 		return cal.getTime();
 	}
-
+	 @Override
+	  public int compareTo(Pulse o) {
+	    return getDate().compareTo(o.getDate());
+	  }
 	// public Boolean SendValues() {
 	// String urlPulseParameters = "pulse=" + pulse;
 	// String urlOxiParameters = "spo2=" + oxigen;
