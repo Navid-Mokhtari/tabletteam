@@ -124,7 +124,7 @@ public class ShowPlayer extends JDialog {
 				"C:/Program Files (x86)/VideoLAN/VLC");
 		System.out.println(Platform.is64Bit());
 		// final String url = "C:/Users/annadi/Downloads/Bool.avi";
-		final String url = "D:\\Films\\Akademiya.Vampirov.2014.D.HDRip.1400MB.avi";
+		final String url = HealthProperties.getProperty("videoPath");
 		// C:\Users\annadi\Ram\tabletteam
 		// Canvas_Demo d = new Canvas_Demo(url);
 		// String u = d.Canvas_Demo1(url);
