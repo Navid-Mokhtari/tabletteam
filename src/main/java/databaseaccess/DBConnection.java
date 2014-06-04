@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -183,8 +184,7 @@ public class DBConnection {
 						rs = null;
 					}
 				}
-				return new Pulse(pulseValue, oxygenValue,
-						EHRDateTime);
+				return new Pulse(pulseValue, oxygenValue, EHRDateTime);
 			}
 			return null;
 		} catch (SQLException e) {
@@ -198,5 +198,52 @@ public class DBConnection {
 		} finally {
 			close();
 		}
+	}
+
+	public List<Integer> getDaysWithMeasurements(int month) {
+		List<Integer> daysWithMeasurements = new ArrayList<>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			connect = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost/" + dbName
+							+ "?user=" + dbUsername + "&password=" + dbPassword);
+			preparedStatement = (PreparedStatement) connect
+					.prepareStatement("select dayofmonth(e.EHRDateTime) from ehr as e where MONTH(e.EHRDateTime)=? and e.conceptIDFromConcept=1");
+			preparedStatement.setInt(1, month + 1);
+			ResultSet rs = preparedStatement.getResultSet();
+			rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				int day = rs.getInt(1);
+				if (!daysWithMeasurements.contains(day)) {
+					daysWithMeasurements.add(day);
+				}
+			}
+		} catch (SQLException e) {
+			System.out
+					.println("Exception in gettion Pulse from EHR to database"
+							+ e.toString());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return daysWithMeasurements;
+	}
+
+	public List<Pulse> getAllMeasurements() {
+		List<Pulse> measurements = new ArrayList<>();
+		for (int month = 0; month <= 11; month++) {
+			List<Integer> days = getDaysWithMeasurements(month);
+			for (Integer d : days) {
+				Calendar calendar = Calendar.getInstance();
+				calendar.set(2014, month, d);
+				Date date = calendar.getTime();
+				Pulse pulse = getMeasurementsForDay(date);
+				if (pulse != null) {
+					measurements.add(pulse);
+				}
+			}
+		}
+		return measurements;
 	}
 }
