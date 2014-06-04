@@ -20,13 +20,7 @@ import java.sql.Statement;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.media.ControllerAdapter;
-import javax.media.ControllerEvent;
-import javax.media.Manager;
-import javax.media.MediaLocator;
-import javax.media.NoPlayerException;
-import javax.media.Player;
-import javax.media.RealizeCompleteEvent;
+import javax.media.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

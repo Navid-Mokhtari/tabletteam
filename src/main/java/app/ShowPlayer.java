@@ -21,10 +21,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
+import uk.co.caprica.vlcj.runtime.windows.WindowsCanvas;
+
 import com.sun.jna.NativeLibrary;
 import com.sun.jna.Platform;
-
-import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
 
 public class ShowPlayer extends JDialog {
 
@@ -81,10 +82,12 @@ public class ShowPlayer extends JDialog {
 		setTitle("UiA eHelse v1.21");
 		setResizable(false);
 
-		/*String currentLang = HealthProperties.getProperty("currentLanguage");
-		Locale currentLocale = Locale.forLanguageTag(currentLang);
-		final ResourceBundle currentLanguage = ResourceBundle.getBundle("language", currentLocale);
-*/
+		/*
+		 * String currentLang = HealthProperties.getProperty("currentLanguage");
+		 * Locale currentLocale = Locale.forLanguageTag(currentLang); final
+		 * ResourceBundle currentLanguage = ResourceBundle.getBundle("language",
+		 * currentLocale);
+		 */
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -94,13 +97,13 @@ public class ShowPlayer extends JDialog {
 
 		JFrame frame = showVLCPlayer();
 		playerPane.add(frame);
-		//buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-		//playerPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+		// buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+		// playerPane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
 		contentPanel.add(playerPane);
 		getContentPane().add(contentPanel, BorderLayout.NORTH);
 
-		//getContentPane().add(playerPane, BorderLayout.CENTER);
+		// getContentPane().add(playerPane, BorderLayout.CENTER);
 		getContentPane().add(buttonPane, BorderLayout.NORTH);
 
 	}
@@ -115,58 +118,50 @@ public class ShowPlayer extends JDialog {
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		final ResourceBundle currentLanguage = ResourceBundle.getBundle(
 				"language", currentLocale);
-		
-		
-		NativeLibrary.addSearchPath("libvlc","C:/Program Files/VideoLAN/VLC");
-		
-		// NativeLibrary.addSearchPath("libvlc", "C:/Program Files/VLC");
+
+		NativeLibrary.addSearchPath("libvlc", "C:/Program Files/VideoLAN/VLC");
+		NativeLibrary.addSearchPath("libvlc",
+				"C:/Program Files (x86)/VideoLAN/VLC");
 		System.out.println(Platform.is64Bit());
 		// final String url = "C:/Users/annadi/Downloads/Bool.avi";
-		final String url = "C:\\Users\\united4ehealth\\Desktop\\Atharintiki Daaredi.mkv";
+		final String url = "D:\\Films\\Akademiya.Vampirov.2014.D.HDRip.1400MB.avi";
 		// C:\Users\annadi\Ram\tabletteam
-		
-		
 		// Canvas_Demo d = new Canvas_Demo(url);
 		// String u = d.Canvas_Demo1(url);
 		// System.out.println(u);
 
 		System.out.println(url);
 		final EmbeddedMediaPlayerComponent mediaPlayerComponent;
-		//final JFrame frame = new JFrame("vlcj Tutorial");
+		// final JFrame frame = new JFrame("vlcj Tutorial");
 		final JFrame frame = new JFrame();
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 		mediaPlayerComponent.doLayout();
 		mediaPlayerComponent.setPreferredSize(new Dimension(1366, 768));
-		//Canvas canvas = mediaPlayerComponent.getVideoSurface();
-		
-		
+		// Canvas canvas = mediaPlayerComponent.getVideoSurface();
+
 		JMenuBar menubar = new JMenuBar();
-		//Image playImage;
+		// Image playImage;
 		JPanel p = new JPanel(new BorderLayout());
 		JButton b = new JButton();
-        b.setBackground(Color.black);
-        ImageIcon img = new ImageIcon("/pic/play.png");
-        b.setIcon(img);
-		
-		
-		
+		b.setBackground(Color.black);
+		ImageIcon img = new ImageIcon("/pic/play.png");
+		b.setIcon(img);
+
 		ImageIcon playImg = new ImageIcon("/pic/play.png");
-	
+
 		ImageIcon pauseImg = new ImageIcon("/pic/play.png");
 		JButton stop = new JButton("stop");
 		JButton j = new JButton();
 		stop.setFont(new Font("Tahoma", Font.BOLD, 30));
-		//stop.setBackground(Color.BLUE);
-		
-		JButton play = new JButton(playImg );
+		// stop.setBackground(Color.BLUE);
+
+		JButton play = new JButton(playImg);
 		play.setSize(5, 5);
-		//play.setFont(new Font("Tahoma", Font.BOLD, 30));
+		// play.setFont(new Font("Tahoma", Font.BOLD, 30));
 		JButton pause = new JButton(pauseImg);
 		pause.setSize(5, 5);
-		
-		
-		
-		//pause.setFont(new Font("Tahoma", Font.BOLD, 30));
+
+		// pause.setFont(new Font("Tahoma", Font.BOLD, 30));
 		play.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent play) {
 				// frame.setVisible(false);
@@ -206,16 +201,16 @@ public class ShowPlayer extends JDialog {
 		menu.add(pause);
 		menu.add(stop);
 		// mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
-//mediaPlayerComponent.setLayout(mgr)
-		//frame.setLayout(new GridLayout(2, 1));
-		
+		// mediaPlayerComponent.setLayout(mgr)
+		// frame.setLayout(new GridLayout(2, 1));
+
 		frame.add(mediaPlayerComponent, BorderLayout.EAST);
-		frame.add(menu,BorderLayout.SOUTH);
-		//frame.setContentPane(mediaPlayerComponent.getVideoSurface().getParent());
-		
-		//frame.setContentPane(contentPane)
-		//frame.setContentPane(canvas.getParent());
-		//frame.setJMenuBar(menubar);
+		frame.add(menu, BorderLayout.SOUTH);
+		// frame.setContentPane(mediaPlayerComponent.getVideoSurface().getParent());
+
+		// frame.setContentPane(contentPane)
+		// frame.setContentPane(canvas.getParent());
+		// frame.setJMenuBar(menubar);
 		frame.setLocation(0, 0);
 		// frame.setl
 		// frame.setSize(1050, 600);
