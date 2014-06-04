@@ -1379,7 +1379,7 @@ public class QuestionnareTab extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				
 				try {
 
 					if (questionOneSelectionTwo.isSelected()) {

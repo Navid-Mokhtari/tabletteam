@@ -42,12 +42,13 @@ public class MainPage {
 
 	private static JFrame frmUiaEhelse;
 	private JTextField textField_1;
-
-	// Initializing labels for sent status
-
 	String lastDaily = "N/A";
 	String lastCAT = "N/A";
 	String lastPulse = "N/A";
+
+	// Initializing labels for sent status
+
+	SendUnsent data = new SendUnsent();
 
 	/**
 	 * Launch the application.
@@ -72,6 +73,7 @@ public class MainPage {
 		HealthProperties healthProperties = new HealthProperties();
 		healthProperties.loadProperties();
 		readFromDB();
+//		data.sendUnsentValues();
 		initialize();
 	}
 
@@ -332,7 +334,6 @@ public class MainPage {
 		gbc_textField_1.gridy = 6;
 		panel_2.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-
 	}
 
 	public void readFromDB() {
