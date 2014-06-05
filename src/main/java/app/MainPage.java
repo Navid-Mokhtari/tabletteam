@@ -225,7 +225,7 @@ public class MainPage {
 		gbc_button_1.gridy = 1;
 		panel_2.add(button_1, gbc_button_1);
 */
-		
+		//Enabling Video button and ActionListener 
 		JButton button_1 = new JButton("");
 		// button_1.setEnabled(false);
 		button_1.setMargin(new Insets(4, 4, 4, 4));
