@@ -20,13 +20,7 @@ import java.sql.Statement;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.media.ControllerAdapter;
-import javax.media.ControllerEvent;
-import javax.media.Manager;
-import javax.media.MediaLocator;
-import javax.media.NoPlayerException;
-import javax.media.Player;
-import javax.media.RealizeCompleteEvent;
+import javax.media.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,12 +40,13 @@ public class MainPage {
 
 	private static JFrame frmUiaEhelse;
 	private JTextField textField_1;
-
-	// Initializing labels for sent status
-
 	String lastDaily = "N/A";
 	String lastCAT = "N/A";
 	String lastPulse = "N/A";
+
+	// Initializing labels for sent status
+
+	SendUnsent data = new SendUnsent();
 	static Player player;
 	static JFrame myFrame;
 
@@ -79,6 +74,7 @@ public class MainPage {
 		HealthProperties healthProperties = new HealthProperties();
 		healthProperties.loadProperties();
 		readFromDB();
+//		data.sendUnsentValues();
 		initialize();
 	}
 
@@ -359,7 +355,6 @@ public class MainPage {
 		gbc_textField_1.gridy = 6;
 		panel_2.add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
-
 	}
 
 	public void readFromDB() {

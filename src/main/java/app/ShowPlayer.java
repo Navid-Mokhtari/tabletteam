@@ -58,11 +58,12 @@ public class ShowPlayer extends JDialog {
 
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
-		//vlc player location
-		NativeLibrary.addSearchPath("libvlc","C:/Program Files/VideoLAN/VLC");
-//video file location ask default location
-		final String url = "C:\\Users\\united4ehealth\\Desktop\\Atharintiki Daaredi.mkv";
-
+		NativeLibrary.addSearchPath("libvlc", "C:/Program Files/VideoLAN/VLC");
+		NativeLibrary.addSearchPath("libvlc",
+				"C:/Program Files (x86)/VideoLAN/VLC");
+		System.out.println(Platform.is64Bit());
+		// final String url = "C:/Users/annadi/Downloads/Bool.avi";
+		final String url = HealthProperties.getProperty("videoPath");
 		System.out.println(url);
 		final EmbeddedMediaPlayerComponent mediaPlayerComponent;
 		final JFrame frame = new JFrame();
@@ -142,3 +143,4 @@ public class ShowPlayer extends JDialog {
 	}
 
 }
+
