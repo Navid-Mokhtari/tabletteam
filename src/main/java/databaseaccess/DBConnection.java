@@ -3,7 +3,9 @@ package databaseaccess;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +27,8 @@ public class DBConnection {
 	private String dbName = HealthProperties.getProperty("dbName");
 	private String dbUsername = HealthProperties.getProperty("dbUsername");
 	private String dbPassword = HealthProperties.getProperty("dbPassword");
-	private String patientID = HealthProperties.getProperty("patientId");
+	private int patientId = Integer.parseInt(HealthProperties
+			.getProperty("patientId"));
 
 	public void savePulseAndOxygen(Pulse pulse, boolean isSent) {
 		saveEHR(pulse, isSent);
@@ -39,6 +42,7 @@ public class DBConnection {
 			connect = (Connection) DriverManager
 					.getConnection("jdbc:mysql://localhost/" + dbName
 							+ "?user=" + dbUsername + "&password=" + dbPassword);
+			connect.setAutoCommit(false);
 			Statement s = (Statement) connect.createStatement();
 			s.executeQuery("SELECT `EHRID` FROM `EHR` WHERE `conceptIDFromConcept` = 1 ORDER BY EHRID DESC LIMIT 1");
 			ResultSet rs = s.getResultSet();
@@ -55,18 +59,17 @@ public class DBConnection {
 			preparedStatement = (PreparedStatement) connect
 					.prepareStatement("insert into "
 							+ dbName
-							+ ".ehrcontent (EHRContentID,EHRIDFromEHR, parameterIDFromConceptParameters, parameterValue) values (?,?,?,?)");
+							+ ".ehrcontent (EHRIDFromEHR, parameterIDFromConceptParameters, parameterValue) values (?,?,?)");
 			// Insert Pulse
-			preparedStatement.setInt(1, 1);
-			preparedStatement.setInt(2, pulseEHRID);
-			preparedStatement.setInt(3, 1);
-			preparedStatement.setString(4, pulse.getPulse());
+			preparedStatement.setInt(1, pulseEHRID);
+			preparedStatement.setInt(2, 1);
+			preparedStatement.setString(3, pulse.getPulse());
 			preparedStatement.addBatch();
 			// Insert Oxygen(SPO2)
-			preparedStatement.setInt(1, 2);
-			preparedStatement.setInt(2, oxygenEHRID);
-			preparedStatement.setInt(3, 5);
-			preparedStatement.setString(4, pulse.getOxigen());
+			preparedStatement.setInt(1, oxygenEHRID);
+			preparedStatement.setInt(2, 4);
+			preparedStatement.setString(3, pulse.getOxigen());
+			preparedStatement.addBatch();
 			preparedStatement.executeBatch();
 			preparedStatement = null;
 			connect.commit();
@@ -80,33 +83,43 @@ public class DBConnection {
 
 	private void saveEHR(Pulse pulse, boolean isSent) {
 		Integer isSend = isSent ? 1 : 0;
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd'T'HH:mm:ss");
+		String dateAndTime = simpleDateFormat.format(pulse.getDate());
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connect = (Connection) DriverManager
 					.getConnection("jdbc:mysql://localhost/" + dbName
 							+ "?user=" + dbUsername + "&password=" + dbPassword);
+			connect.setAutoCommit(false);
+			System.out.println(connect.toString());
 			preparedStatement = (PreparedStatement) connect
 					.prepareStatement("insert into "
 							+ dbName
-							+ ".ehr (EHRID, pasientID, conceptIDFromConcept, EHRDateTime, EHRSentStatus) values (?,?,?,?,?)");
+							+ ".ehr (pasientID, conceptIDFromConcept, EHRDateTime, EHRSentStatus) values (?,?,?,?)");
 			// For pulse
-			preparedStatement.setNull(1, Types.INTEGER);
-			preparedStatement.setInt(2, Integer.getInteger(patientID));
-			preparedStatement.setInt(3, 1);
-			preparedStatement.setString(4, pulse.getDate().toString());
-			preparedStatement.setInt(5, isSend);
+			preparedStatement.setInt(1, patientId);
+			preparedStatement.setInt(2, 1);
+			preparedStatement.setString(3, dateAndTime);
+			preparedStatement.setInt(4, isSend);
 			preparedStatement.addBatch();
 			// For oxygen
-			preparedStatement.setNull(1, Types.INTEGER);
-			preparedStatement.setInt(2, Integer.getInteger(patientID));
-			preparedStatement.setInt(3, 2);
-			preparedStatement.setString(4, pulse.getDate().toString());
-			preparedStatement.setInt(5, isSend);
+			preparedStatement.setInt(1, patientId);
+			preparedStatement.setInt(2, 2);
+			preparedStatement.setString(3, dateAndTime);
+			preparedStatement.setInt(4, isSend);
+			preparedStatement.addBatch();
 			preparedStatement.executeBatch();
-			preparedStatement = null;
+			System.out.println("Starting commit");
 			connect.commit();
-		} catch (Exception e) {
-			System.out.println("Couldn't save EHR to database" + e.toString());
+		} catch (SQLException e) {
+			System.out.println("Couldn't save EHR to database" + e);
+		} catch (ClassNotFoundException e) {
+			System.out.println("Couldn't find class com.mysql.jdbc.Driver" + e);
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			System.out.println("Got null pointer Exception" + e);
+			e.printStackTrace();
 		} finally {
 			close();
 		}

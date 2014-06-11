@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.rmi.server.UID;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -19,10 +20,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import org.jfree.ui.RefineryUtilities;
@@ -44,7 +47,8 @@ public class History extends JFrame {
 	private JLabel oxygenValueLabel;
 	private JLabel timeValueLabel;
 	private JLabel pulseValueLabel;
-
+	private final Color STANDART_COLOR=Color.BLACK;
+	private final Color dayWithValue = Color.MAGENTA;
 	public History() {
 		setBounds(0, 0, 1366, 728);
 		setResizable(false);
@@ -64,6 +68,11 @@ public class History extends JFrame {
 		calendar.getMonthChooser().getComboBox()
 				.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		calendar.getMonthChooser().setPreferredSize(new Dimension(98, 40));
+		Component[] components = calendar.getDayChooser().getDayPanel().getComponents();
+//		for (Component component : components) {
+//			JButton button = (JButton) component;
+//			button.setBorder(new LineBorder(STANDART_COLOR, 1));
+//		}
 		calendar.setTodayButtonVisible(false);
 		calendar.addPropertyChangeListener("calendar",
 				new PropertyChangeListener() {
@@ -73,9 +82,9 @@ public class History extends JFrame {
 						setColourForEachDayWithValueInMonth(calendar);
 					}
 				});
-		// setColourForEachDayWithValueInMonth(calendar);
 		updateLabels(calendar.getDate());
 		calendarPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		setColourForEachDayWithValueInMonth(calendar);
 		calendarPanel.add(calendar);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(
@@ -153,15 +162,16 @@ public class History extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Chart chart = new Chart("Measurement time series");
-				chart.pack();
-				RefineryUtilities.centerFrameOnScreen(chart);
-				chart.setVisible(true);
+				if (chart.getIsAvailable()) {
+					chart.pack();
+					RefineryUtilities.centerFrameOnScreen(chart);
+					chart.setVisible(true);
+				}
 			}
 		});
 		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 50));
 		valuesPanel.add(btnNewButton_1);
 		getContentPane().setLayout(groupLayout);
-		setColourForEachDayWithValueInMonth(calendar);
 	}
 
 	private void updateLabels(Date date) {
@@ -204,7 +214,6 @@ public class History extends JFrame {
 	 * отмечать их другим цветом Начинать думать о том, что делать с графиком
 	 */
 	private void setColourForEachDayWithValueInMonth(JCalendar calendar) {
-		Color dayWithValue = Color.BLACK;
 		JDayChooser dayChooser = calendar.getDayChooser();
 		JPanel dayPanel = dayChooser.getDayPanel();
 		JMonthChooser monthChooser = calendar.getMonthChooser();
@@ -224,9 +233,13 @@ public class History extends JFrame {
 			int firstDayOfMonth = date.getDay() - 1;
 			System.out.println(firstDayOfMonth);
 			Component components[] = dayPanel.getComponents();
+			for (Component c : components) {
+				JButton button = (JButton) c;
+				button.setBorder(new LineBorder(STANDART_COLOR, 1));
+			}
 			for (int d : daysWithMeasurements) {
 				JButton button = (JButton) components[d + startingPosition
-						+ firstDayOfMonth - 1];
+						+ firstDayOfMonth];
 				button.setBorder(new LineBorder(dayWithValue, 3));
 			}
 		}
