@@ -22,6 +22,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -214,7 +215,24 @@ public class MainPage {
 		panel_2.add(button_1, gbc_button_1);
 
 		JButton button = new JButton("");
-		button.setEnabled(false);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FlashPlayer flashplayer;
+				try {
+					flashplayer = new FlashPlayer();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+			//	flashplayer.setVisible(true);
+			}
+		});
+
+		
+				
+			
+		
 		button.setMargin(new Insets(4, 4, 4, 4));
 		button.setIcon(new ImageIcon(MainPage.class
 				.getResource("/pic/Final-Info.jpg")));
