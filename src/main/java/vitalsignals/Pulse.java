@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base32;
+
 public class Pulse extends Measurements implements Comparable<Pulse> {
 	public Pulse() {
 	}
@@ -59,10 +61,17 @@ public class Pulse extends Measurements implements Comparable<Pulse> {
 		Calendar cal = Calendar.getInstance();
 		return cal.getTime();
 	}
-	 @Override
-	  public int compareTo(Pulse o) {
-	    return getDate().compareTo(o.getDate());
-	  }
+
+	@Override
+	public int compareTo(Pulse o) {
+		return getDate().compareTo(o.getDate());
+	}
+
+	@Override
+	public String toString() {
+		return "Pulse: " + pulse + ", Oxigen: " + oxigen + ", Time: "
+				+ getDate();
+	}
 	// public Boolean SendValues() {
 	// String urlPulseParameters = "pulse=" + pulse;
 	// String urlOxiParameters = "spo2=" + oxigen;

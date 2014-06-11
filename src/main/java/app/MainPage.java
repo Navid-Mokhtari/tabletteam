@@ -408,7 +408,7 @@ public class MainPage {
 
 		} catch (Exception e) {
 			System.out.println("Reading from DB on main page failed");
-//			e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 

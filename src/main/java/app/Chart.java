@@ -1,10 +1,15 @@
 package app;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -12,16 +17,12 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.DateTickUnit;
 import org.jfree.chart.axis.DateTickUnitType;
-import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.time.Day;
-import org.jfree.data.time.Month;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 
 import vitalsignals.Pulse;
 import databaseaccess.DBConnection;
@@ -33,15 +34,31 @@ public class Chart extends JFrame {
 	 * @param title
 	 *            the frame title.
 	 */
+	private boolean isAvailable;
+	private final String NO_MEASUREMENTS = "There are no measurements yet";
+	public boolean getIsAvailable() {
+		return isAvailable;
+	}
+
 	public Chart(final String title) {
 
 		super(title);
 		final XYDataset dataset = createDataset();
-		final JFreeChart chart = createChart(dataset);
-		final ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setPreferredSize(new java.awt.Dimension(1366, 728));
-		setContentPane(chartPanel);
+		if (dataset != null) {
+			isAvailable=true;
+			final JFreeChart chart = createChart(dataset);
+			final ChartPanel chartPanel = new ChartPanel(chart);
+			chartPanel.setPreferredSize(new java.awt.Dimension(1366, 728));
+			setContentPane(chartPanel);
+		} else {
+			isAvailable=false;
+			showDialog();
+		}
 
+	}
+
+	private void showDialog() {
+		JOptionPane.showMessageDialog(this, NO_MEASUREMENTS);
 	}
 
 	/**
@@ -58,11 +75,14 @@ public class Chart extends JFrame {
 			Integer pulseValue = Integer.valueOf(p.getPulse());
 			Integer oxigenValue = Integer.valueOf(p.getOxigen());
 			series1.add(new Day(p.getDate()), pulseValue);
-			series2.add(new Day(p.getDate()), oxigenValue);		
+			series2.add(new Day(p.getDate()), oxigenValue);
 		}
 		final TimeSeriesCollection dataset = new TimeSeriesCollection();
 		dataset.addSeries(series1);
 		dataset.addSeries(series2);
+		if (series1.isEmpty() || series2.isEmpty()) {
+			return null;
+		}
 		return dataset;
 
 	}
@@ -97,21 +117,21 @@ public class Chart extends JFrame {
 		// get a reference to the plot for further customisation...
 		final XYPlot plot = chart.getXYPlot();
 		DateAxis dateaxis = (DateAxis) plot.getDomainAxis();
-		dateaxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 3,
-	            new SimpleDateFormat("dd-MMM")));
+		dateaxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1,
+				new SimpleDateFormat("dd-MM")));
 		plot.setBackgroundPaint(Color.lightGray);
 		// plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));
 		plot.setDomainGridlinePaint(Color.white);
 		plot.setRangeGridlinePaint(Color.white);
 
 		final XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer();
-//		renderer.setSeriesLinesVisible(1, false);
-//		renderer.setSeriesShapesVisible(2, false);
+		// renderer.setSeriesLinesVisible(1, false);
+		// renderer.setSeriesShapesVisible(2, false);
 		plot.setRenderer(renderer);
 
 		// change the auto tick unit selection to integer units only...
-//		final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
-//		rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+		// final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		// rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
 		// OPTIONAL CUSTOMISATION COMPLETED.
 
 		return chart;
