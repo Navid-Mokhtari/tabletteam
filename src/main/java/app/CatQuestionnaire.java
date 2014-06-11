@@ -1634,6 +1634,8 @@ public class CatQuestionnaire extends JDialog {
 									dialog.setVisible(true);
 								}
 							});
+							SendUnsent data = new SendUnsent();
+							data.sendUnsentValues();
 							updateSendGui();
 							System.out.println("\nDaily sent status "
 									+ statusCAT);

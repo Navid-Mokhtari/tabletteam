@@ -301,6 +301,8 @@ public class Measurement extends JDialog {
 											dialog.setVisible(true);
 										}
 									});
+									SendUnsent data = new SendUnsent();
+									data.sendUnsentValues();
 									HttpsPostClient httpsPostClient = new HttpsPostClient();
 									Pulse pulse = new Pulse(pulseValue
 											.getText(), oxigenValue.getText());

@@ -75,13 +75,15 @@ public class SendUnsent {
 					Statement readUnsentContent = connect.createStatement();
 					readUnsentContent
 							.executeQuery("SELECT * FROM eHealthDB.EHRContent where EHRIDFromEHR='" + i + "';");
-					ResultSet unsentContentResult = readUnsentContent.getResultSet();
+					
 					
 					Statement readCorrEHRID = connect.createStatement();
 					readCorrEHRID
 							.executeQuery("SELECT * FROM eHealthDB.EHR WHERE EHRID='" + i + "';");
 					ResultSet readCorrEHRIDResult = readCorrEHRID.getResultSet();
-					readCorrEHRIDResult.next();					
+					readCorrEHRIDResult.next();
+					
+					ResultSet unsentContentResult = readUnsentContent.getResultSet();
 					
 					// New sql statement
 					String patientID = readCorrEHRIDResult.getString("pasientID");
@@ -91,15 +93,15 @@ public class SendUnsent {
 					String unsentID1 = unsentContentResult.getString("parameterIDFromConceptParameters");
 					String unsentPV1 = unsentContentResult.getString("parameterValue");
 					
-					unsentContentResult.next();
-					String unsentID2 = unsentContentResult.getString("parameterIDFromConceptParameters");
-					String unsentPV2 = "0";
-					unsentPV2 = unsentContentResult.getString("parameterValue");
-					
-					unsentContentResult.next();
-					String unsentID3 = unsentContentResult.getString("parameterIDFromConceptParameters");
-					String unsentPV3 = "0";
-					unsentPV3 = unsentContentResult.getString("parameterValue");
+//					unsentContentResult.next();
+//					String unsentID2 = unsentContentResult.getString("parameterIDFromConceptParameters");
+//					String unsentPV2 = "0";
+//					unsentPV2 = unsentContentResult.getString("parameterValue");
+//					
+//					unsentContentResult.next();
+//					String unsentID3 = unsentContentResult.getString("parameterIDFromConceptParameters");
+//					String unsentPV3 = "0";
+//					unsentPV3 = unsentContentResult.getString("parameterValue");
 					
 					readUnsentContent.close();
 					unsentContentResult.close();
@@ -107,11 +109,11 @@ public class SendUnsent {
 					readCorrEHRIDResult.close();
 			
 					System.out.println(unsentID1 + " " + unsentPV1);
-					System.out.println(unsentID2 + " " + unsentPV2);
-					System.out.println(unsentID3 + " " + unsentPV3);
+//					System.out.println(unsentID2 + " " + unsentPV2);
+//					System.out.println(unsentID3 + " " + unsentPV3);
 					
 					// HTTP
-					String username = HealthProperties.getProperty("iipUsernme");
+					String username = HealthProperties.getProperty("iipUsername");
 					String password = HealthProperties.getProperty("iipPassword");
 					String iipUrl = HealthProperties.getProperty("iipUrl");
 					String pulseChannel = HealthProperties
@@ -128,14 +130,14 @@ public class SendUnsent {
 
 					List<NameValuePair> params = new ArrayList<NameValuePair>();
 					params.add(new BasicNameValuePair("pulse", unsentPV1));
-					params.add(new BasicNameValuePair("pmdid", unsentPV2));
-					params.add(new BasicNameValuePair("pmdBatteryLevel", unsentPV3));
+//					params.add(new BasicNameValuePair("pmdid", unsentPV2));
+//					params.add(new BasicNameValuePair("pmdBatteryLevel", unsentPV3));
 					params.add(new BasicNameValuePair("patientId", patientID));
 					params.add(new BasicNameValuePair("dateTime", dateTime));
 					try {
 						httpPost.setEntity(new UrlEncodedFormEntity(params));
 						response = httpclient.execute(httpPost);
-						System.out.println("\nSending the unsent pulse questionnaire with EHRID " + i +": "
+						System.out.println("\nSending the unsent pulse with EHRID " + i +": "
 								+ response.getStatusLine());
 
 						if (response.getStatusLine().getStatusCode() == 200) {
@@ -178,15 +180,15 @@ public class SendUnsent {
 					String unsentID4 = unsentContentResult.getString("parameterIDFromConceptParameters");
 					String unsentPV4 = unsentContentResult.getString("parameterValue");
 					
-					unsentContentResult.next();
-					String unsentID5 = unsentContentResult.getString("parameterIDFromConceptParameters");
-					String unsentPV5 = "0";
-					unsentPV5 = unsentContentResult.getString("parameterValue");
-					
-					unsentContentResult.next();
-					String unsentID6 = unsentContentResult.getString("parameterIDFromConceptParameters");
-					String unsentPV6 = "0";
-					unsentPV6 = unsentContentResult.getString("parameterValue");
+//					unsentContentResult.next();
+//					String unsentID5 = unsentContentResult.getString("parameterIDFromConceptParameters");
+//					String unsentPV5 = "0";
+//					unsentPV5 = unsentContentResult.getString("parameterValue");
+//					
+//					unsentContentResult.next();
+//					String unsentID6 = unsentContentResult.getString("parameterIDFromConceptParameters");
+//					String unsentPV6 = "0";
+//					unsentPV6 = unsentContentResult.getString("parameterValue");
 					
 					readUnsentContent.close();
 					unsentContentResult.close();
@@ -194,11 +196,11 @@ public class SendUnsent {
 					readCorrEHRIDResult.close();
 			
 					System.out.println(unsentID4 + " " + unsentPV4);
-					System.out.println(unsentID5 + " " + unsentPV5);
-					System.out.println(unsentID6 + " " + unsentPV6);
+//					System.out.println(unsentID5 + " " + unsentPV5);
+//					System.out.println(unsentID6 + " " + unsentPV6);
 					
 					// HTTP
-					String username = HealthProperties.getProperty("iipUsernme");
+					String username = HealthProperties.getProperty("iipUsername");
 					String password = HealthProperties.getProperty("iipPassword");
 					String iipUrl = HealthProperties.getProperty("iipUrl");
 					String oxygenChannel = HealthProperties
@@ -215,14 +217,14 @@ public class SendUnsent {
 
 					List<NameValuePair> params = new ArrayList<NameValuePair>();
 					params.add(new BasicNameValuePair("spo2", unsentPV4));
-					params.add(new BasicNameValuePair("pmdid", unsentPV5));
-					params.add(new BasicNameValuePair("pmdBatteryLevel", unsentPV6));
+//					params.add(new BasicNameValuePair("pmdid", unsentPV5));
+//					params.add(new BasicNameValuePair("pmdBatteryLevel", unsentPV6));
 					params.add(new BasicNameValuePair("patientId", patientID));
 					params.add(new BasicNameValuePair("dateTime", dateTime));
 					try {
 						httpPost.setEntity(new UrlEncodedFormEntity(params));
 						response = httpclient.execute(httpPost);
-						System.out.println("\nSending the unsent Spo2 questionnaire with EHRID " + i +": "
+						System.out.println("\nSending the unsent Spo2 with EHRID " + i +": "
 								+ response.getStatusLine());
 
 						if (response.getStatusLine().getStatusCode() == 200) {
@@ -278,7 +280,7 @@ public class SendUnsent {
 					System.out.println(unsentID16 + " " + unsentPV16);
 					
 					// HTTP
-					String username = HealthProperties.getProperty("iipUsernme");
+					String username = HealthProperties.getProperty("iipUsername");
 					String password = HealthProperties.getProperty("iipPassword");
 					String iipUrl = HealthProperties.getProperty("iipUrl");
 					String spirometerChannel = HealthProperties
@@ -321,93 +323,6 @@ public class SendUnsent {
 								.executeUpdate("UPDATE `eHealthDB`.`EHR` SET `EHRSentStatus`='1' WHERE `EHRID`='" + i + "';");
 					}
 					
-					
-				} else if (unsentResult.getInt("conceptIDFromConcept") == 2 && unsentResult.getInt("EHRSentStatus") == 0) {
-					System.out.println("I am sending SpO2");
-					
-					// Getting the EHRIDs for unsent contents
-					Statement readUnsentContent = connect.createStatement();
-					readUnsentContent
-							.executeQuery("SELECT * FROM eHealthDB.EHRContent where EHRIDFromEHR='" + i + "';");
-					ResultSet unsentContentResult = readUnsentContent.getResultSet();
-					
-					Statement readCorrEHRID = connect.createStatement();
-					readCorrEHRID
-							.executeQuery("SELECT * FROM eHealthDB.EHR WHERE EHRID='" + i + "';");
-					ResultSet readCorrEHRIDResult = readCorrEHRID.getResultSet();
-					readCorrEHRIDResult.next();					
-					
-					// New sql statement
-					String patientID = readCorrEHRIDResult.getString("pasientID");
-					String dateTime = readCorrEHRIDResult.getString("EHRDateTime");
-					
-					unsentContentResult.next();
-					String unsentID4 = unsentContentResult.getString("parameterIDFromConceptParameters");
-					String unsentPV4 = unsentContentResult.getString("parameterValue");
-					
-					unsentContentResult.next();
-					String unsentID5 = unsentContentResult.getString("parameterIDFromConceptParameters");
-					String unsentPV5 = "0";
-					unsentPV5 = unsentContentResult.getString("parameterValue");
-					
-					unsentContentResult.next();
-					String unsentID6 = unsentContentResult.getString("parameterIDFromConceptParameters");
-					String unsentPV6 = "0";
-					unsentPV6 = unsentContentResult.getString("parameterValue");
-					
-					readUnsentContent.close();
-					unsentContentResult.close();
-					readCorrEHRID.close();
-					readCorrEHRIDResult.close();
-			
-					System.out.println(unsentID4 + " " + unsentPV4);
-					System.out.println(unsentID5 + " " + unsentPV5);
-					System.out.println(unsentID6 + " " + unsentPV6);
-					
-					// HTTP
-					String username = HealthProperties.getProperty("iipUsernme");
-					String password = HealthProperties.getProperty("iipPassword");
-					String iipUrl = HealthProperties.getProperty("iipUrl");
-					String oxygenChannel = HealthProperties
-							.getProperty("oxygenChannel");
-					String URL = "https://" + username + ":" + password + "@" + iipUrl
-							+ oxygenChannel;
-					Integer statusSent = 0;
-
-					HttpClient httpclient = getNewHttpClient();
-					HttpPost httpPost = new HttpPost(URL);
-					HttpResponse response = null;
-
-					// Array to send to IIP
-
-					List<NameValuePair> params = new ArrayList<NameValuePair>();
-					params.add(new BasicNameValuePair("spo2", unsentPV4));
-					params.add(new BasicNameValuePair("pmdid", unsentPV5));
-					params.add(new BasicNameValuePair("pmdBatteryLevel", unsentPV6));
-					params.add(new BasicNameValuePair("patientId", patientID));
-					params.add(new BasicNameValuePair("dateTime", dateTime));
-					try {
-						httpPost.setEntity(new UrlEncodedFormEntity(params));
-						response = httpclient.execute(httpPost);
-						System.out.println("\nSending the unsent Spo2 questionnaire with EHRID " + i +": "
-								+ response.getStatusLine());
-
-						if (response.getStatusLine().getStatusCode() == 200) {
-							statusSent = 1;
-						} else
-							statusSent = 0;
-
-					} catch (ClientProtocolException e1) {
-						System.out.println(e1.toString());
-					} catch (IOException e1) {
-						System.out.println(e1.toString());
-					}
-					
-					if (statusSent == 1) {
-						Statement updateTable = connect.createStatement();
-						updateTable
-								.executeUpdate("UPDATE `eHealthDB`.`EHR` SET `EHRSentStatus`='1' WHERE `EHRID`='" + i + "';");
-					}
 					
 				} else if (unsentResult.getInt("conceptIDFromConcept") == 4 && unsentResult.getInt("EHRSentStatus") == 0) {
 					System.out.println("I am sending daily");
@@ -642,7 +557,8 @@ public class SendUnsent {
 			
 		} catch (Exception e) {
 			System.out.println("Reading from DB on sending unsent values failed");
-//			e.printStackTrace();
+			System.out.println("SQLException: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	

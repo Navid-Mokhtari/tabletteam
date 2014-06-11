@@ -1488,6 +1488,8 @@ public class QuestionnareTab extends JDialog {
 								}
 							});
 
+							SendUnsent data = new SendUnsent();
+							data.sendUnsentValues();
 							updateSendGui();
 							System.out.println("\nDaily sent status "
 									+ statusDaily);
