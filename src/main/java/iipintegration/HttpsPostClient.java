@@ -24,6 +24,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.conn.ClientConnectionManager;
@@ -68,7 +69,9 @@ public class HttpsPostClient {
 			.getProperty("oxygenChannel");
 	private String patientId = HealthProperties.getProperty("patientId");
 
-	public void SendPulseHttps(Pulse pulse) {
+	@SuppressWarnings("finally")
+	public boolean SendPulseHttps(Pulse pulse) {
+		boolean isSent = false;
 		System.out.println("Trying to send pulse values");
 		String infoId = pulseChannel;
 		String pulseUrl = URL + infoId;
@@ -90,12 +93,14 @@ public class HttpsPostClient {
 					.getDate().toString()));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
-			System.out.println("\nTesting sending Pulse: "
-					+ response.getStatusLine());
+			StatusLine status = response.getStatusLine();
+			System.out.println("\nTesting sending Pulse: " + status);
+			if (status.getStatusCode() == 200) {
+				isSent = true;
+			}
 		} catch (ClientProtocolException e) {
 			System.out.println(e.toString());
 		} catch (IOException e) {
-			System.out.println(e.toString());
 		}
 
 		try {
@@ -107,6 +112,8 @@ public class HttpsPostClient {
 			printAllNodes(root2);
 		} catch (Exception e) {
 			System.out.println(e.toString());
+		} finally {
+			return isSent;
 		}
 	}
 
@@ -177,8 +184,8 @@ public class HttpsPostClient {
 					.getDate().toString()));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
-			System.out.println("Testing sending Oxygen: "
-					+ response.getStatusLine());
+			StatusLine status = response.getStatusLine();
+			System.out.println("\nTesting sending Pulse: " + status);
 		} catch (ClientProtocolException e) {
 			System.out.println(e.toString());
 		} catch (IOException e) {

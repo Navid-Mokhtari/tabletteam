@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -34,6 +35,7 @@ public class QuestionDial extends JDialog {
 			QuestionDial dialog = new QuestionDial();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setTitle("UiA eHelse v1.21");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -43,7 +45,10 @@ public class QuestionDial extends JDialog {
 	 * Create the dialog.
 	 */
 	public QuestionDial() {
-		setBounds(0, 0, 1366, 768);
+		setBounds(0, 0, 1366, 728);
+		setTitle("UiA eHelse v1.21");
+		setResizable(false);
+		setUndecorated(true);
 		
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
@@ -59,6 +64,10 @@ public class QuestionDial extends JDialog {
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+		
+			JLabel versionNumber = new JLabel("v1.21b");
+			versionNumber.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			buttonPane.add(versionNumber);
 			
 			JButton cancelButton = new JButton(currentLanguage.getString("cancel"));
 			cancelButton.setFont(new Font("Tahoma", Font.BOLD, 30));

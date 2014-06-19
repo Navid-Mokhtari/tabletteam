@@ -2,6 +2,8 @@ package bluetooth;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.Thread.State;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,48 +14,96 @@ import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import vitalsignals.Pulse;
+import app.Utilities;
 
-public class PulseConnection {
-	private JLabel pulseLabel, oxigenLabel, timeLabel;
+import com.intel.bluetooth.BlueCoveImpl;
+import com.intel.bluetooth.MicroeditionConnector;
+
+public class PulseConnection implements Runnable {
+	private JLabel pulseValue, oxigenValue, timeLabel;
 	private Pulse pulse;
+	private JButton sendButton;
+	// private JComponent measurementTab;
 	StreamConnectionNotifier service;
 	StreamConnection con;
 	InputStream is;
 
+	public StreamConnection getStreamConnection() {
+		return con;
+	}
+
 	// Pulse
-	public PulseConnection(JLabel pulseValue, JLabel oxigenValue, JLabel time) {
-		this.pulseLabel = pulseValue;
-		this.oxigenLabel = oxigenValue;
-		this.timeLabel = time;
+	public PulseConnection(JLabel pulseValue, JLabel oxigenValue,
+			JButton sendButton) {
+		this.pulseValue = pulseValue;
+		this.oxigenValue = oxigenValue;
+		// this.timeLabel = time;
+		this.sendButton = sendButton;
+		// this.measurementTab = measurementTab;
 	}
 
 	public void run() {
-		System.out.println("1");
-		pulse = startWaitingConnection();
-		System.out.println("Trying to parse message");
-		if (pulse.ParseMessage()) {
-			System.out.println("Message parsed, trying to update GUI");
-			updateGui();
+		try {
+			Utilities.pulseThread = this;
+			pulse = startWaitingConnection();
+			System.out.println("Trying to parse message");
+			if (pulse.ParseMessage()) {
+				System.out.println("Message parsed, trying to update GUI");
+				updateGui();
+
+			} else {
+				System.out.println("Message was not parsed!");
+			}
+		} catch (Exception e) {
+			System.out.println("We are here!" + e.toString());
+		} finally {
+			Utilities.pulseThread = null;
+			Utilities utilities = new Utilities();
+			Thread mainThread = utilities.getMainThread();
+			System.out.println("Test=" + mainThread.getId());
+			if (mainThread != null
+					&& mainThread.getState() == State.TIMED_WAITING) {
+				System.out.println("Trying to interrupt main Thread with ID="
+						+ mainThread.getId());
+				mainThread.interrupt();
+			}
 		}
+
 	}
 
 	private Pulse startWaitingConnection() {
-//		try {
-//			LocalDevice.getLocalDevice().setDiscoverable(DiscoveryAgent.GIAC);
-//		} catch (BluetoothStateException e2) {
-//			System.out.println("Can't make device discoverable");
-//			e2.printStackTrace();
-//		}
+		System.setProperty("bluecove.obex.timeout", "5000");
+		System.setProperty("bluecove.connect.timeout", "5000");
+		BlueCoveImpl.setConfigProperty("bluecove.obex.timeout", "5000");
+		BlueCoveImpl.setConfigProperty("bluecove.connect.timeout", "5000");
+		System.out.println(System.getProperty("bluecove.obex.timeout"));
+		System.out.println(System.getProperty("bluecove.connect.timeout"));
 		try {
-
+			System.out.println("Device discoverable status:"
+					+ LocalDevice.getLocalDevice().getDiscoverable());
+			if (LocalDevice.getLocalDevice().getDiscoverable() != DiscoveryAgent.GIAC) {
+				LocalDevice.getLocalDevice().setDiscoverable(
+						DiscoveryAgent.GIAC);
+			}
+		} catch (BluetoothStateException e2) {
+			System.out.println("Can't make device discoverable");
+			e2.printStackTrace();
+		}
+		try {
+			// service = (StreamConnectionNotifier) Connector
+			// .open("btspp://localhost:"
+			// + new UUID(0x1101).toString()
+			// + ";name=pulseService;authenticate=false;encrypt=false;");
 			service = (StreamConnectionNotifier) Connector
 					.open("btspp://localhost:"
 							+ new UUID(0x1101).toString()
-							+ ";name=pulseService;authenticate=false;encrypt=false;");
+							+ ";name=pulseService;authenticate=false;encrypt=false;",
+							MicroeditionConnector.READ_WRITE, true);
 		} catch (IOException e1) {
 			System.out.println(e1.toString());
 		}
@@ -62,23 +112,38 @@ public class PulseConnection {
 			System.out.println("Accepting and opening Stream Connection");
 			con = (StreamConnection) service.acceptAndOpen();
 			System.out.println(con.toString());
-		} catch (IOException e1) {
-			System.out.println(e1.toString());
+		} catch (Exception e1) {
+			System.out.println("Some strange exeption");
 		}
+		Utilities.setConnection(service, con, is);
 		List<String> messageList = new ArrayList<String>();
 		try {
 			System.out.println("Opening input stream");
 			is = con.openInputStream();
 			int lenght = 0;
+			boolean isMemory = false;
 			while (lenght < 22) {
 				try {
 					String temp = String.valueOf(is.read());
+					if (lenght % 15 == 0 && lenght != 0) {
+						System.out.println("16th element:" + temp);
+						System.out.println("Memory value!");
+						if (temp.contentEquals("16")
+								|| temp.contentEquals("17")) {
+							System.out.println("This value is from the memory");
+							isMemory = true;
+						}
+					}
 					messageList.add(temp);
 					System.out.println(temp);
 				} catch (IOException e) {
 					System.out.println(e.toString());
 				}
 				lenght++;
+				if (lenght == 22 && isMemory) {
+					lenght = 0;
+					isMemory = false;
+				}
 			}
 			System.out.println(messageList.toString());
 		} catch (IOException e1) {
@@ -94,6 +159,7 @@ public class PulseConnection {
 		System.out.println("Trying to open stream connection");
 		// StreamConnection conn = (StreamConnection) Connector
 		// .open("btspp://001C050064D8:1");
+
 		try {
 			con = (StreamConnection) Connector.open("btspp://001C050064D8:1",
 					1, true);
@@ -102,6 +168,7 @@ public class PulseConnection {
 			e2.printStackTrace();
 		}
 		System.out.println("Trying to open input stream");
+
 		try {
 			is = con.openInputStream();
 		} catch (IOException e2) {
@@ -132,12 +199,12 @@ public class PulseConnection {
 		return new Pulse(messageList);
 	}
 
-	private void closeConnection() {
+	public void closeConnection() {
 		try {
 			con.close();
 			is.close();
 			service.close();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			con = null;
 			is = null;
 			service = null;
@@ -146,16 +213,25 @@ public class PulseConnection {
 	}
 
 	public void updateGui() {
-		SwingUtilities.invokeLater(new Runnable() {
+		try {
+			SwingUtilities.invokeAndWait(new Runnable() {
 
-			public void run() {
-				if (pulse.getPulse() != null) {
-					pulseLabel.setText(pulse.getPulse());
-					oxigenLabel.setText(pulse.getOxigen());
-					timeLabel.setText(pulse.getCurrentDate().toString());
+				public void run() {
+					System.out.println("Trying to update GUI");
+					if (pulse.getPulse() != null) {
+						pulseValue.setText(pulse.getPulse());
+						oxigenValue.setText(pulse.getOxigen());
+						sendButton.setEnabled(true);
+						// timeLabel.setText(pulse.getCurrentDate().toString());
+					}
+					pulse = null;
 				}
-				pulse = null;
-			}
-		});
+			});
+		} catch (InvocationTargetException | InterruptedException e) {
+			System.out.println("It was interrupted" + e.toString());
+
+		} finally {
+			closeConnection();
+		}
 	}
 }

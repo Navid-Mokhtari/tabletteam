@@ -1,29 +1,19 @@
 package vitalsignals;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class Pulse extends Measurements {
+import org.apache.commons.codec.binary.Base32;
+
+public class Pulse extends Measurements implements Comparable<Pulse> {
 	public Pulse() {
 	}
 
-	public Pulse(String pulse, String oxigen, String time) {
+	public Pulse(String pulse, String oxigen, Date time) {
 		this.pulse = pulse;
 		this.oxigen = oxigen;
-		Date dateTime;
-		try {
-			dateTime = new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH)
-					.parse(time);
-		} catch (ParseException e) {
-			Calendar cal = Calendar.getInstance();
-			dateTime = cal.getTime();
-			e.printStackTrace();
-		}
-		this.setDate(dateTime);
+		this.setDate(time);
 	}
 
 	public Pulse(String pulse, String oxigen) {
@@ -45,9 +35,10 @@ public class Pulse extends Measurements {
 	}
 
 	public Boolean ParseMessage() {
-		if (pulseMeasurements.size() == 22) {
-			pulse = pulseMeasurements.get(17);
-			oxigen = pulseMeasurements.get(19);
+		if (pulseMeasurements.size() % 22 == 0 && pulseMeasurements.size() != 0) {
+			int lenght = pulseMeasurements.size();
+			pulse = pulseMeasurements.get(lenght - 5);
+			oxigen = pulseMeasurements.get(lenght - 3);
 			setDate(getCurrentDate());
 			if (pulse == "-1" || oxigen == "-1") {
 				return false;
@@ -71,6 +62,16 @@ public class Pulse extends Measurements {
 		return cal.getTime();
 	}
 
+	@Override
+	public int compareTo(Pulse o) {
+		return getDate().compareTo(o.getDate());
+	}
+
+	@Override
+	public String toString() {
+		return "Pulse: " + pulse + ", Oxigen: " + oxigen + ", Time: "
+				+ getDate();
+	}
 	// public Boolean SendValues() {
 	// String urlPulseParameters = "pulse=" + pulse;
 	// String urlOxiParameters = "spo2=" + oxigen;

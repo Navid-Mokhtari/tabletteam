@@ -24,7 +24,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import vitalsignals.Pulse;
-import bluetooth.PulseConnectionRunnable;
+import bluetooth.PulseConnection;
 import databaseaccess.DBConnection;
 
 public class Measurement extends JDialog {
@@ -47,7 +47,10 @@ public class Measurement extends JDialog {
 		final JButton okButton = new JButton(
 				currentLanguage.getString("submit"));
 
-		setBounds(0, 0, 1366, 768);
+		setBounds(0, 0, 1366, 728);
+		setTitle("UiA eHelse v1.21");
+		setResizable(false);
+		setUndecorated(true);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 888, 0 };
 		gridBagLayout.rowHeights = new int[] { 445, 33, 0 };
@@ -81,22 +84,7 @@ public class Measurement extends JDialog {
 				gbc_label.gridy = 0;
 				panel.add(label, gbc_label);
 			}
-			// {
-			// JLabel lblNewLabel_5 = new JLabel("                     ");
-			// GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
-			// gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 0);
-			// gbc_lblNewLabel_5.gridx = 3;
-			// gbc_lblNewLabel_5.gridy = 0;
-			// panel.add(lblNewLabel_5, gbc_lblNewLabel_5);
-			// }
-			// {
-			// JLabel lblNewLabel_2 = new JLabel("                      ");
-			// GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-			// gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-			// gbc_lblNewLabel_2.gridx = 2;
-			// gbc_lblNewLabel_2.gridy = 1;
-			// panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
-			// }
+			
 			{
 				JLabel lblNewLabel = new JLabel(
 						currentLanguage.getString("firstInstruction"));
@@ -119,18 +107,7 @@ public class Measurement extends JDialog {
 				gbc_lblWaitUntil.gridy = 4;
 				panel.add(lblWaitUntil, gbc_lblWaitUntil);
 			}
-			// {
-			// JLabel lblNewLabel_1 = new JLabel(
-			// "                            see the measurments");
-			// lblNewLabel_1.setForeground(Color.WHITE);
-			// lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 30));
-			// GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-			// gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-			// gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-			// gbc_lblNewLabel_1.gridx = 1;
-			// gbc_lblNewLabel_1.gridy = 5;
-			// panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-			// }
+			
 			{
 				pulseValue = new JLabel("                       ");
 				pulseValue.setForeground(Color.WHITE);
@@ -175,8 +152,10 @@ public class Measurement extends JDialog {
 										ImageIcon noninImage = new ImageIcon(
 												imageURL);
 
-										String message = "Trying to get measurements.";
-										String title = "Measure pulse";
+										String message = currentLanguage
+												.getString("measureInstructions");
+										String title = currentLanguage
+												.getString("measuring");
 										final JDialog dialog = new JDialog();
 										dialog.setName("TemporaryBTDialog");
 										dialog.setTitle(title);
@@ -185,12 +164,15 @@ public class Measurement extends JDialog {
 										JLabel label = new JLabel(noninImage);
 										JLabel messageLabel = new JLabel(
 												message);
+										messageLabel.setFont(new Font("Tahoma",
+												Font.BOLD, 30));
 										panel.add(label);
 										panel.add(messageLabel);
+										dialog.setLocation(410, 50);
 										dialog.getContentPane().add(panel);
 										dialog.pack();
 										dialog.setVisible(true);
-										dialog.setLocationRelativeTo(rootPane);
+										// dialog.setLocationRelativeTo(rootPane);
 
 									}
 								});
@@ -200,13 +182,14 @@ public class Measurement extends JDialog {
 								Utilities utilities = new Utilities();
 								utilities.setMainThread(Thread.currentThread());
 								if (Utilities.pulseThread == null) {
-									PulseConnectionRunnable pc = new PulseConnectionRunnable(
+									PulseConnection pc = new PulseConnection(
 											pulseValue, oxigenValue, okButton);
 									thread = new Thread(pc);
 									thread.start();
 								}
 								try {
-									Thread.sleep(30000);
+									String btTimeout= HealthProperties.getProperty("bt_timeout");
+									Thread.sleep(Integer.valueOf(btTimeout));
 								} catch (InterruptedException e) {
 									System.out
 											.println("Main thread was woken up");
@@ -266,7 +249,7 @@ public class Measurement extends JDialog {
 			gbc_buttonPane.gridx = 0;
 			gbc_buttonPane.gridy = 1;
 			getContentPane().add(buttonPane, gbc_buttonPane);
-			{
+			
 				// okButton = new JButton(currentLanguage.getString("submit"));
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -318,22 +301,26 @@ public class Measurement extends JDialog {
 											dialog.setVisible(true);
 										}
 									});
+									SendUnsent data = new SendUnsent();
+									data.sendUnsentValues();
 									HttpsPostClient httpsPostClient = new HttpsPostClient();
 									Pulse pulse = new Pulse(pulseValue
 											.getText(), oxigenValue.getText());
-									// sendPulse.setText("Sending measurements...");
-									httpsPostClient.SendPulseHttps(pulse);
+									boolean isSent = httpsPostClient
+											.SendPulseHttps(pulse);
 									httpsPostClient.SendOxygen(pulse);
+
 									DBConnection dbConnection = new DBConnection();
-									try {
-										// dbConnection.savePulse(pulse);
-									} catch (Exception e1) {
-										// TODO Auto-generated catch
-										// block
-										e1.printStackTrace();
-									}
-									//TODO insert data change to the main window!
+									dbConnection.savePulseAndOxygen(pulse,
+											isSent);
 									dispose();
+									String message = isSent ? currentLanguage
+											.getString("sentMeasurements")
+											: currentLanguage
+													.getString("notSentMeasurements");
+									dispose();
+									MainPage.showMessageDialog(message, isSent);
+
 								}
 
 							}).start();
@@ -341,14 +328,17 @@ public class Measurement extends JDialog {
 						}
 					}
 				});
+				JLabel versionNumber = new JLabel("v1.21b");
+				versionNumber.setFont(new Font("Tahoma" , Font.PLAIN, 15));
+				buttonPane.add(versionNumber);
+				
 				okButton.setForeground(new Color(30, 144, 255));
 				okButton.setFont(new Font("Tahoma", Font.BOLD, 40));
 				okButton.setActionCommand("OK");
 				okButton.setEnabled(false);
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
+			
 				JButton cancelButton = new JButton(
 						currentLanguage.getString("cancel"));
 				cancelButton.addActionListener(new ActionListener() {
@@ -360,7 +350,7 @@ public class Measurement extends JDialog {
 				cancelButton.setFont(new Font("Tahoma", Font.BOLD, 40));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-			}
+			
 		}
 	}
 }
