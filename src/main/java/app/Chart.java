@@ -117,7 +117,7 @@ public class Chart extends JFrame {
 		// get a reference to the plot for further customisation...
 		final XYPlot plot = chart.getXYPlot();
 		DateAxis dateaxis = (DateAxis) plot.getDomainAxis();
-		dateaxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 1,
+		dateaxis.setTickUnit(new DateTickUnit(DateTickUnitType.DAY, 3,
 				new SimpleDateFormat("dd-MM")));
 		plot.setBackgroundPaint(Color.lightGray);
 		// plot.setAxisOffset(new Spacer(Spacer.ABSOLUTE, 5.0, 5.0, 5.0, 5.0));

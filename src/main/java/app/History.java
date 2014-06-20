@@ -239,7 +239,7 @@ public class History extends JFrame {
 			}
 			for (int d : daysWithMeasurements) {
 				JButton button = (JButton) components[d + startingPosition
-						+ firstDayOfMonth];
+						+ firstDayOfMonth-1];
 				button.setBorder(new LineBorder(dayWithValue, 3));
 			}
 		}
