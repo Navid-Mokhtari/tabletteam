@@ -10,9 +10,6 @@ import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -35,6 +32,12 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+
+import javax.swing.SwingUtilities;
+
+import chrriis.common.UIUtils;
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
 
 public class MainPage {
 
@@ -243,6 +246,14 @@ public class MainPage {
 
 		JButton button = new JButton("");
 		button.setEnabled(false);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+			
+						
+	
 		button.setMargin(new Insets(4, 4, 4, 4));
 		button.setIcon(new ImageIcon(MainPage.class
 				.getResource("/pic/Final-Info.jpg")));
@@ -408,7 +419,8 @@ public class MainPage {
 
 		} catch (Exception e) {
 			System.out.println("Reading from DB on main page failed");
-			e.printStackTrace();
+			System.out.println("SQLException: " + e.getMessage());
+//			e.printStackTrace();
 		}
 	}
 
