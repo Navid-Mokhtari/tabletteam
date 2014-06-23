@@ -24,6 +24,10 @@ import com.sun.jna.Platform;
 
 public class ShowPlayer extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static Player player;
 	static JFrame myFrame;
 	static EmbeddedMediaPlayerComponent vlcPlayer;
@@ -59,15 +63,11 @@ public class ShowPlayer extends JDialog {
 		String currentLang = HealthProperties.getProperty("currentLanguage");
 		Locale currentLocale = Locale.forLanguageTag(currentLang);
 		NativeLibrary.addSearchPath("libvlc", "C:/Program Files/VideoLAN/VLC");
-		NativeLibrary.addSearchPath("libvlc",
-				"C:/Program Files (x86)/VideoLAN/VLC");
-		System.out.println(Platform.is64Bit());
-		// final String url = "C:/Users/annadi/Downloads/Bool.avi";
 		final String url = HealthProperties.getProperty("videoPath");
 		System.out.println(url);
 		final EmbeddedMediaPlayerComponent mediaPlayerComponent;
 		final JFrame frame = new JFrame();
-		//frame.setUndecorated(true);
+		frame.setUndecorated(true);
 		
 		mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 		mediaPlayerComponent.doLayout();
@@ -80,6 +80,8 @@ public class ShowPlayer extends JDialog {
 				MainPage.class.getResource("/pic/pause-button-th.png"));
 		ImageIcon stopImg = new ImageIcon(
 				MainPage.class.getResource("/pic/stop-button-th.png"));
+		ImageIcon exitImg = new ImageIcon(
+				MainPage.class.getResource("/pic/exit-button-th.png"));
 
 		final JButton play = new JButton(playImg);
 		play.setSize(5, 5);
@@ -90,6 +92,9 @@ public class ShowPlayer extends JDialog {
 		final JButton stop = new JButton(stopImg);
 		stop.setSize(5, 5);
 		stop.setToolTipText("Stop");
+		final JButton exit = new JButton(exitImg);
+		stop.setSize(5, 5);
+		stop.setToolTipText("Exit");
 		/*-------------Media player Button Creation Ends-------*/
 
 		play.addActionListener(new ActionListener() {
@@ -107,8 +112,9 @@ public class ShowPlayer extends JDialog {
 			public void actionPerformed(ActionEvent stop) {
 
 				mediaPlayerComponent.getMediaPlayer().stop();
-				play.setVisible(true);
 				pause.setVisible(false);
+				play.setVisible(true);
+				//frame.setVisible(false);
 
 			}
 
@@ -123,6 +129,18 @@ public class ShowPlayer extends JDialog {
 
 			}
 		});
+
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent exit) {
+
+				mediaPlayerComponent.getMediaPlayer().stop();
+				//pause.setVisible(false);
+				//play.setVisible(true);
+				frame.setVisible(false);
+
+			}
+
+		});
 		play.setVisible(false);
 
 		/*-----------------Button Menu ---------------------------------*/
@@ -130,6 +148,7 @@ public class ShowPlayer extends JDialog {
 		menu.add(play);
 		menu.add(pause);
 		menu.add(stop);
+		menu.add(exit);
 		frame.add(mediaPlayerComponent, BorderLayout.EAST);
 		frame.add(menu, BorderLayout.SOUTH);
 		frame.setLocation(0, 0);
