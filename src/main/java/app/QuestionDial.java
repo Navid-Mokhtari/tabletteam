@@ -28,24 +28,11 @@ public class QuestionDial extends JDialog {
 	private static final long serialVersionUID = -1718779024013326249L;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			QuestionDial dialog = new QuestionDial();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-			dialog.setTitle("UiA eHelse v1.21");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
+	 * @param mainPage
 	 */
-	public QuestionDial() {
-		setBounds(0, 0, 1366, 728);
+	public QuestionDial(DatabaseUpdateListener dbUpdateListener) {
+		setBounds(MainPage.getWindowSize());
 		setTitle("UiA eHelse v1.21");
 		setResizable(false);
 		setUndecorated(true);
@@ -85,7 +72,7 @@ public class QuestionDial extends JDialog {
 			
 		JPanel panel12 = new JPanel();
 		getContentPane().add(panel12, BorderLayout.CENTER);
-		QuestionnareTab questionnareTab=new QuestionnareTab();
+		QuestionnareTab questionnareTab = new QuestionnareTab(dbUpdateListener);
 			try {
 				panel12 = questionnareTab.createPanel("HHH");
 			} catch (IOException e) {

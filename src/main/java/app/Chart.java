@@ -1,10 +1,15 @@
 package app;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -46,10 +51,26 @@ public class Chart extends JFrame {
 		final XYDataset dataset = createDataset();
 		if (dataset != null) {
 			isAvailable=true;
+
+			setLayout(new BorderLayout(0, 10));
+
 			final JFreeChart chart = createChart(dataset);
 			final ChartPanel chartPanel = new ChartPanel(chart);
-			chartPanel.setPreferredSize(new java.awt.Dimension(1366, 728));
-			setContentPane(chartPanel);
+			setBounds(MainPage.getWindowSize());
+			add(chartPanel, BorderLayout.CENTER);
+
+			JButton btnClose = new JButton("Close");
+			btnClose.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dispose();
+				}
+			});
+			btnClose.setFont(new Font("Verdana", Font.PLAIN, 50));
+			add(btnClose, BorderLayout.SOUTH);
+
+			setResizable(false);
+			setUndecorated(true);
+			//setContentPane(chartPanel);
 		} else {
 			isAvailable=false;
 			showDialog();

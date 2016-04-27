@@ -2,11 +2,12 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Panel;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +18,8 @@ import java.sql.Statement;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import javax.media.*;
+import javax.media.Player;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,29 +27,34 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import org.eclipse.swt.internal.win32.OS;
+
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-public class MainPage {
+public class MainPage implements DatabaseUpdateListener {
 
 	private static JFrame frmUiaEhelse;
-	private JTextField textField_1;
-	String lastDaily = "N/A";
-	String lastCAT = "N/A";
-	String lastPulse = "N/A";
 
 	// Initializing labels for sent status
 
 	SendUnsent data = new SendUnsent();
 	static Player player;
 	static JFrame myFrame;
+	private JLabel lblLastMeasurement;
+	private JLabel lblLastQuestionnaire;
+	private JLabel lblLastCAT;
+	private static Rectangle windowSize;
+	public static Rectangle getWindowSize() { return windowSize; }
 
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -57,6 +64,7 @@ public class MainPage {
 				try {
 					MainPage window = new MainPage();
 					window.frmUiaEhelse.setVisible(true);
+					NativeInterface.open();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,9 +78,19 @@ public class MainPage {
 	public MainPage() {
 		HealthProperties healthProperties = new HealthProperties();
 		healthProperties.loadProperties();
-		readFromDB();
-//		data.sendUnsentValues();
+
+		// Get system DPI (scaling level: 100% ~ 96dpi)
+		int hDC = OS.GetDC(0);
+		int verticalDPI = OS.GetDeviceCaps(hDC, OS.LOGPIXELSY);
+		// SEB Taskbar is 40px on an unscaled display
+		int taskbarHeight = 40*verticalDPI/96;
+
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		windowSize = new Rectangle(0, 0, tk.getScreenSize().width, tk.getScreenSize().height-taskbarHeight);
+
+		//		data.sendUnsentValues();
 		initialize();
+		readFromDB();
 	}
 
 	/**
@@ -90,186 +108,102 @@ public class MainPage {
 				MainPage.class.getResource("/pic/Doctor-icon2.png")));
 		frmUiaEhelse.setTitle("UiA eHelse v1.21b");
 		frmUiaEhelse.setResizable(false);
-		// Toolkit tk = Toolkit.getDefaultToolkit();
-		// int xSize = ((int) tk.getScreenSize().getWidth()) - 100;
-		// int ySize = ((int) tk.getScreenSize().getWidth()) - 100;
-		// frame.setPreferredSize(new Dimension(xSize, ySize));
-		frmUiaEhelse.setBounds(0, 0, 1366, 728);
-		frmUiaEhelse.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmUiaEhelse.setBounds(windowSize);
+		frmUiaEhelse.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmUiaEhelse.setUndecorated(true);
 
-		final Panel panel = new Panel();
-		frmUiaEhelse.getContentPane().add(panel, BorderLayout.NORTH);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 589, 379, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 305, 0 };
-		gbl_panel.columnWeights = new double[] { 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
-				0.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 1.0, Double.MIN_VALUE };
-		panel.setLayout(gbl_panel);
-		
-				JButton btnNewButton_2 = new JButton("");
-				btnNewButton_2.setMargin(new Insets(4, 4, 4, 4));
-				btnNewButton_2.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
+		frmUiaEhelse.setLayout(new BorderLayout(10, 25));
 
-						QuestionDial questiondial = new QuestionDial();
-						questiondial.setVisible(true);
+		final JPanel pnlButtons = new JPanel();
+		pnlButtons.setLayout(new GridLayout(2, 3, 10, 20));
+		pnlButtons.setBorder(new EmptyBorder(30, 10, 10, 0));
+		frmUiaEhelse.getContentPane().add(pnlButtons, BorderLayout.CENTER);
 
-					}
-				});
-				btnNewButton_2.setIcon(new ImageIcon(MainPage.class
-						.getResource("/pic/Question.JPG")));
-				GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
-				gbc_btnNewButton_2.anchor = GridBagConstraints.EAST;
-				gbc_btnNewButton_2.insets = new Insets(0, 0, 0, 5);
-				gbc_btnNewButton_2.gridx = 0;
-				gbc_btnNewButton_2.gridy = 0;
-				panel.add(btnNewButton_2, gbc_btnNewButton_2);
-		
-				JButton btnNewButton = new JButton("");
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-				gbc_btnNewButton.gridx = 1;
-				gbc_btnNewButton.gridy = 0;
-				panel.add(btnNewButton, gbc_btnNewButton);
-				btnNewButton.setMargin(new Insets(4, 4, 2, 4));
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						Measurement dial = new Measurement();
-						dial.setVisible(true);
+		JButton btnQuestions = new JButton("");
+		btnQuestions.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Question.JPG")));
+		btnQuestions.setMargin(new Insets(4, 4, 4, 4));
+		btnQuestions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-					}
-				});
-				btnNewButton.setIcon(new ImageIcon(MainPage.class
-						.getResource("/pic/Final-measurment.jpg")));
+				QuestionDial questiondial = new QuestionDial(MainPage.this);
+				questiondial.setVisible(true);
 
-		JButton btnNewButton_1 = new JButton("");
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton_1.gridx = 2;
-		gbc_btnNewButton_1.gridy = 0;
-		panel.add(btnNewButton_1, gbc_btnNewButton_1);
-		btnNewButton_1.setMargin(new Insets(4, 4, 4, 4));
-		btnNewButton_1.addActionListener(new ActionListener() {
+			}
+		});
+		pnlButtons.add(btnQuestions);
+
+		JButton btnMeasurement = new JButton("");
+		btnMeasurement.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-measurment.jpg")));
+		btnMeasurement.setMargin(new Insets(4, 4, 2, 4));
+		btnMeasurement.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Measurement dial = new Measurement(MainPage.this);
+				dial.setVisible(true);
+
+			}
+		});
+		pnlButtons.add(btnMeasurement);
+
+		JButton btnCat = new JButton("");
+		btnCat.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Cat1.jpg")));
+		btnCat.setMargin(new Insets(4, 4, 4, 4));
+		btnCat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
-				CatQuestionDial catquestiondial = new CatQuestionDial();
+				CatQuestionDial catquestiondial = new CatQuestionDial(MainPage.this);
 				catquestiondial.setVisible(true);
 
 			}
 		});
-		btnNewButton_1.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Cat1.jpg")));
+		pnlButtons.add(btnCat);
 
-		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Doctor-icon2.png")));
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.anchor = GridBagConstraints.EAST;
-		gbc_label.insets = new Insets(0, 0, 0, 5);
-		gbc_label.gridx = 4;
-		gbc_label.gridy = 0;
-		panel.add(label, gbc_label);
-
-		JLabel lblNewLabel_3 = new JLabel("              ");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 0, 5);
-		gbc_lblNewLabel_3.gridx = 5;
-		gbc_lblNewLabel_3.gridy = 0;
-		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
-
-		final Panel panel_2 = new Panel();
-		frmUiaEhelse.getContentPane().add(panel_2, BorderLayout.WEST);
-		GridBagLayout gbl_panel_2 = new GridBagLayout();
-		gbl_panel_2.columnWidths = new int[] { 196, 193, 193, 193, 197, 0 };
-		gbl_panel_2.rowHeights = new int[] { 30, 0, 30, 0, 0, 0, 0, 0 };
-		gbl_panel_2.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0,
-				Double.MIN_VALUE };
-		gbl_panel_2.rowWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, Double.MIN_VALUE };
-		panel_2.setLayout(gbl_panel_2);
-
-		JButton btnNewButton_3 = new JButton("");
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton btnHistory = new JButton("");
+		btnHistory.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-History.jpg")));
+		btnHistory.setMargin(new Insets(4, 12, 4, 4));
+		btnHistory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				History history = new History();
 				history.setVisible(true);
 			}
 		});
-		btnNewButton_3.setMargin(new Insets(4, 12, 4, 4));
-		btnNewButton_3.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Final-History.jpg")));
-		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		btnNewButton_3.setEnabled(true);
-		gbc_btnNewButton_3.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton_3.gridx = 0;
-		gbc_btnNewButton_3.gridy = 1;
-		panel_2.add(btnNewButton_3, gbc_btnNewButton_3);
+		pnlButtons.add(btnHistory);
 
-		/*JButton button_1 = new JButton("");
-		button_1.setEnabled(false);
-		button_1.setMargin(new Insets(4, 4, 4, 4));
-		button_1.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Final-Bruk.jpg")));
-		GridBagConstraints gbc_button_1 = new GridBagConstraints();
-		gbc_button_1.insets = new Insets(0, 0, 5, 5);
-		gbc_button_1.gridx = 1;
-		gbc_button_1.gridy = 1;
-		panel_2.add(button_1, gbc_button_1);
-*/
-		//Enabling Video button and ActionListener 
-		JButton button_1 = new JButton("");
-		// button_1.setEnabled(false);
-		button_1.setMargin(new Insets(4, 4, 4, 4));
-		button_1.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Final-Bruk.jpg")));
-		GridBagConstraints gbc_button_1 = new GridBagConstraints();
-		gbc_button_1.insets = new Insets(0, 0, 5, 5);
-		gbc_button_1.gridx = 1;
-		gbc_button_1.gridy = 1;
-		panel_2.add(button_1, gbc_button_1);
-		button_1.addActionListener(new ActionListener() {
+		JButton btnVideo = new JButton("");
+		btnVideo.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-Bruk.jpg")));
+		btnVideo.setMargin(new Insets(4, 4, 4, 4));
+		btnVideo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-	         ShowPlayer show  = new ShowPlayer();
-	         show.player.start();
-				
-							}
-		});
-
-		JButton button = new JButton("");
-		button.setEnabled(false);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+				ShowPlayer show  = new ShowPlayer();
 			}
 		});
-		
-			
-						
-	
-		button.setMargin(new Insets(4, 4, 4, 4));
-		button.setIcon(new ImageIcon(MainPage.class
-				.getResource("/pic/Final-Info.jpg")));
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.anchor = GridBagConstraints.EAST;
-		gbc_button.insets = new Insets(0, 0, 5, 5);
-		gbc_button.gridx = 2;
-		gbc_button.gridy = 1;
-		panel_2.add(button, gbc_button);
+		pnlButtons.add(btnVideo);
 
-		JPanel panel_1 = new JPanel();
-		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_panel_1.fill = GridBagConstraints.BOTH;
-		gbc_panel_1.gridx = 3;
-		gbc_panel_1.gridy = 1;
-		panel_2.add(panel_1, gbc_panel_1);
-		panel_1.setLayout(new FormLayout(
+		JButton btnInfo = new JButton("");
+		btnInfo.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Final-Info.jpg")));
+		btnInfo.setMargin(new Insets(4, 4, 4, 4));
+		btnInfo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FlashPlayer flash = new FlashPlayer();
+				flash.setVisible(true);
+			}
+		});
+		pnlButtons.add(btnInfo);
+
+
+		Panel pnlSide = new Panel();
+		pnlSide.setLayout(new BoxLayout(pnlSide, BoxLayout.Y_AXIS));
+		frmUiaEhelse.getContentPane().add(pnlSide, BorderLayout.EAST);
+
+		JLabel lblLogo = new JLabel("");
+		lblLogo.setIcon(new ImageIcon(MainPage.class.getResource("/pic/Doctor-icon2.png")));
+		pnlSide.add(lblLogo);
+
+		JPanel pnlInfo = new JPanel();
+		pnlSide.add(pnlInfo);
+		pnlInfo.setLayout(new FormLayout(
 				new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC,
-						FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC, }, new RowSpec[] {
+						FormFactory.GLUE_COLSPEC,
+						FormFactory.RELATED_GAP_COLSPEC, }, new RowSpec[] {
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC,
 						FormFactory.RELATED_GAP_ROWSPEC,
@@ -289,77 +223,63 @@ public class MainPage {
 						FormFactory.RELATED_GAP_ROWSPEC,
 						FormFactory.DEFAULT_ROWSPEC, }));
 
-		JLabel lblNewLabel_4 = new JLabel(
+		JLabel lblLastMeasurementLabel = new JLabel(
 				currentLanguage.getString("lastMeasurement"));
-		lblNewLabel_4.setBorder(new TitledBorder(null, "",
+		lblLastMeasurementLabel.setBorder(new TitledBorder(null, "",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_4, "2, 2");
+		lblLastMeasurementLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		pnlInfo.add(lblLastMeasurementLabel, "2, 2");
 
-		JLabel lblNewLabel_6 = new JLabel(lastPulse);
-		lblNewLabel_6.setBorder(new TitledBorder(null, "",
+		lblLastMeasurement = new JLabel("N/A");
+		lblLastMeasurement.setBorder(new TitledBorder(null, "",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		lblNewLabel_6.setFont(new Font("Arial", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_6, "2, 4");
+		lblLastMeasurement.setFont(new Font("Arial", Font.BOLD, 20));
+		pnlInfo.add(lblLastMeasurement, "2, 4");
 
-		JLabel lblNewLabel_7 = new JLabel(
+		JLabel lblLastQuestionnaireLabel = new JLabel(
 				currentLanguage.getString("lastQuestionnaire"));
-		lblNewLabel_7.setBorder(new TitledBorder(null, "",
+		lblLastQuestionnaireLabel.setBorder(new TitledBorder(null, "",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		lblNewLabel_7.setFont(new Font("Arial", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_7, "2, 8");
+		lblLastQuestionnaireLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		pnlInfo.add(lblLastQuestionnaireLabel, "2, 8");
 
-		JLabel lblNewLabel_8 = new JLabel(lastDaily);
-		lblNewLabel_8.setBorder(new TitledBorder(null, "",
+		lblLastQuestionnaire = new JLabel("N/A");
+		lblLastQuestionnaire.setBorder(new TitledBorder(null, "",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		lblNewLabel_8.setFont(new Font("Arial", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_8, "2, 10");
+		lblLastQuestionnaire.setFont(new Font("Arial", Font.BOLD, 20));
+		pnlInfo.add(lblLastQuestionnaire, "2, 10");
 
-		JLabel lblSisteCat = new JLabel(currentLanguage.getString("lastCAT"));
-		lblSisteCat.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
+		JLabel lblLastCATLabel = new JLabel(currentLanguage.getString("lastCAT"));
+		lblLastCATLabel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
 				TitledBorder.TOP, null, null));
-		lblSisteCat.setFont(new Font("Arial", Font.BOLD, 20));
-		panel_1.add(lblSisteCat, "2, 14");
+		lblLastCATLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		pnlInfo.add(lblLastCATLabel, "2, 14");
 
-		JLabel lblNewLabel_5 = new JLabel(lastCAT);
-		lblNewLabel_5.setBorder(new TitledBorder(null, "",
+		lblLastCAT = new JLabel("N/A");
+		lblLastCAT.setBorder(new TitledBorder(null, "",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		lblNewLabel_5.setFont(new Font("Arial", Font.BOLD, 20));
-		panel_1.add(lblNewLabel_5, "2, 16");
+		lblLastCAT.setFont(new Font("Arial", Font.BOLD, 20));
+		pnlInfo.add(lblLastCAT, "2, 16");
 
-		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2014, v1.21b  \r\n ");
-		lblUiaEhelse.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
-				TitledBorder.TOP, null, null));
-		lblUiaEhelse.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
-		GridBagConstraints gbc_lblUiaEhelse = new GridBagConstraints();
-		gbc_lblUiaEhelse.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUiaEhelse.gridx = 1;
-		gbc_lblUiaEhelse.gridy = 4;
-		panel_2.add(lblUiaEhelse, gbc_lblUiaEhelse);
-		
-		JLabel lblUsername = new JLabel("Tablet ID: " + HealthProperties.getProperty("iipUsername"));
-		lblUsername.setFont(new Font("Arial", Font.BOLD, 20));
-		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
-		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUsername.gridx = 2;
-		gbc_lblUsername.gridy = 4;
-		panel_2.add(lblUsername, gbc_lblUsername);
+
+		JPanel pnlStatus = new JPanel();
+		pnlStatus.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 0));
+		pnlStatus.setBorder(new EmptyBorder(10, 10, 10, 10));
+		frmUiaEhelse.getContentPane().add(pnlStatus, BorderLayout.SOUTH);
 
 		JLabel lblNewLabel_1 = new JLabel(currentLanguage.getString("connStat"));
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 20));
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 4;
-		panel_2.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		pnlStatus.add(lblNewLabel_1);
 
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.anchor = GridBagConstraints.WEST;
-		gbc_textField_1.gridx = 4;
-		gbc_textField_1.gridy = 6;
-		panel_2.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		JLabel lblUiaEhelse = new JLabel("  \u00A9 UiA, eHelse, 2015, v1.7.3  \r\n ");
+		lblUiaEhelse.setBorder(new TitledBorder(null, "", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+		lblUiaEhelse.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 25));
+		pnlStatus.add(lblUiaEhelse);
+
+		JLabel lblUsername = new JLabel("Tablet ID: " + HealthProperties.getProperty("iipUsername"));
+		lblUsername.setFont(new Font("Arial", Font.BOLD, 20));
+		pnlStatus.add(lblUsername);
 	}
 
 	public void readFromDB() {
@@ -376,36 +296,36 @@ public class MainPage {
 			// Getting the time for last daily Q
 			Statement dailyStatement = connect.createStatement();
 			dailyStatement
-					.executeQuery("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 4 ORDER BY EHRID DESC LIMIT 1");
+			.executeQuery("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 4 ORDER BY EHRID DESC LIMIT 1");
 			ResultSet dailyRS = dailyStatement.getResultSet();
-			dailyRS.next();
-			String dailyEHRDateTime = dailyRS.getString("EHRDateTime");
-			lastDaily = dailyEHRDateTime;
+			if (dailyRS.next()) {
+				if (lblLastQuestionnaire != null) lblLastQuestionnaire.setText(dailyRS.getString("EHRDateTime"));
+			}
 
 			dailyStatement.close();
 			dailyRS.close();
 
 			System.out
-					.println("\nSuccessfully read last daily questionnaire from DB!");
+			.println("\nSuccessfully read last daily questionnaire from DB!");
 
 			// Getting the time for last CAT Q
 			Statement CATStatement = connect.createStatement();
 			CATStatement
-					.executeQuery("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 5 ORDER BY EHRID DESC LIMIT 1");
+			.executeQuery("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 5 ORDER BY EHRID DESC LIMIT 1");
 			ResultSet CATRS = CATStatement.getResultSet();
-			CATRS.next();
-			String CATEHRDateTime = CATRS.getString("EHRDateTime");
-			lastCAT = CATEHRDateTime;
+			if (CATRS.next()) {
+				if (lblLastCAT != null) lblLastCAT.setText(CATRS.getString("EHRDateTime"));
+			}
 
 			CATStatement.close();
 			CATRS.close();
 
 			Statement pulseStatement = connect.createStatement();
 			pulseStatement
-					.execute("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 1 ORDER BY EHRID DESC LIMIT 1");
+			.execute("SELECT `EHRDateTime` FROM `EHR` WHERE `conceptIDFromConcept` = 1 ORDER BY EHRID DESC LIMIT 1");
 			ResultSet resultSet = pulseStatement.getResultSet();
 			if (resultSet.next()) {
-				lastPulse = resultSet.getString(1);
+				if (lblLastMeasurement != null) lblLastMeasurement.setText(resultSet.getString(1));
 			}
 			resultSet.close();
 			pulseStatement.close();
@@ -414,7 +334,7 @@ public class MainPage {
 		} catch (Exception e) {
 			System.out.println("Reading from DB on main page failed");
 			System.out.println("SQLException: " + e.getMessage());
-//			e.printStackTrace();
+			//			e.printStackTrace();
 		}
 	}
 
@@ -434,6 +354,11 @@ public class MainPage {
 		icon = new ImageIcon(imageURL);
 		String title = currentLanguage.getString("sendStatus");
 		JOptionPane
-				.showConfirmDialog(frmUiaEhelse, message, title, JOptionPane.PLAIN_MESSAGE, 2, icon);
+		.showConfirmDialog(frmUiaEhelse, message, title, JOptionPane.PLAIN_MESSAGE, 2, icon);
+	}
+
+	@Override
+	public void databaseUpdated() {
+		readFromDB();
 	}
 }

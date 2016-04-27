@@ -69,6 +69,8 @@ public class HttpsPostClient {
 			.getProperty("oxygenChannel");
 	private String patientId = HealthProperties.getProperty("patientId");
 
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
 	@SuppressWarnings("finally")
 	public boolean SendPulseHttps(Pulse pulse) {
 		boolean isSent = false;
@@ -79,18 +81,13 @@ public class HttpsPostClient {
 		HttpPost httppost = new HttpPost(pulseUrl);
 		HttpResponse response = null;
 		try {
-			// Date currentDate = new Date();
-			// SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-			// "yyyy-MM-dd'T'HH:mm:ss");
-
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 					20);
 			nameValuePairs
 					.add(new BasicNameValuePair("pulse", pulse.getPulse()));
 			nameValuePairs.add(new BasicNameValuePair("patientId", patientId));
-			nameValuePairs.add(new BasicNameValuePair("dateTime", pulse
-					.getDate().toString()));
+			nameValuePairs.add(new BasicNameValuePair("dateTime", simpleDateFormat.format(pulse.getDate())));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
 			StatusLine status = response.getStatusLine();
@@ -170,18 +167,13 @@ public class HttpsPostClient {
 		HttpPost httppost = new HttpPost(oxygenUrl);
 		HttpResponse response = null;
 		try {
-			// Date currentDate = new Date();
-			// SimpleDateFormat simpleDateFormat = new SimpleDateFormat(
-			// "yyyy-MM-dd'T'HH:mm:ss");
-
 			// Add your data
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(
 					20);
 			nameValuePairs
 					.add(new BasicNameValuePair("spo2", pulse.getOxigen()));
 			nameValuePairs.add(new BasicNameValuePair("patientId", patientId));
-			nameValuePairs.add(new BasicNameValuePair("dateTime", pulse
-					.getDate().toString()));
+			nameValuePairs.add(new BasicNameValuePair("dateTime", simpleDateFormat.format(pulse.getDate())));
 			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			response = httpclient.execute(httppost);
 			StatusLine status = response.getStatusLine();

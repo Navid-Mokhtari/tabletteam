@@ -25,23 +25,11 @@ public class CatQuestionDial extends JDialog {
 	private static final long serialVersionUID = -1161175344711505174L;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			CatQuestionDial dialog = new CatQuestionDial();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
+	 * @param dbUpdateListener
 	 */
-	public CatQuestionDial() {
-		setBounds(0, 0, 1366, 728);
+	public CatQuestionDial(DatabaseUpdateListener dbUpdateListener) {
+		setBounds(MainPage.getWindowSize());
 		setTitle("UiA eHelse v1.21");
 		setResizable(false);
 		setUndecorated(true);
@@ -80,7 +68,7 @@ public class CatQuestionDial extends JDialog {
 			
 		JPanel panel12 = new JPanel();
 		getContentPane().add(panel12, BorderLayout.CENTER);
-		CatQuestionnaire catquestionnaire=new CatQuestionnaire();
+		CatQuestionnaire catquestionnaire=new CatQuestionnaire(dbUpdateListener);
 			try {
 				panel12 = catquestionnaire.createPanel("HHH");
 			} catch (IOException e) {

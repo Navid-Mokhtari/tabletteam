@@ -68,10 +68,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class QuestionnareTab extends JDialog {
-	public QuestionnareTab() {
+	public QuestionnareTab(DatabaseUpdateListener dbUpdateListener) {
+		this.dbUpdateListener = dbUpdateListener;
 	}
 
 	private static final long serialVersionUID = -7594299439504858239L;
+
+	final private DatabaseUpdateListener dbUpdateListener;
 
 	// Final answers
 
@@ -1497,6 +1500,7 @@ public class QuestionnareTab extends JDialog {
 							try {
 								sendEHRToDB();
 								sendDailyValuesToDB();
+								if (dbUpdateListener != null) dbUpdateListener.databaseUpdated();
 
 							} catch (Exception e) {
 								// TODO Auto-generated catch block

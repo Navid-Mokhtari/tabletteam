@@ -36,8 +36,9 @@ public class Measurement extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param dbUpdateListener
 	 */
-	public Measurement() {
+	public Measurement(final DatabaseUpdateListener dbUpdateListener) {
 		final JLabel pulseValue;
 		final JLabel oxigenValue;
 		String currentLang = HealthProperties.getProperty("currentLanguage");
@@ -47,7 +48,7 @@ public class Measurement extends JDialog {
 		final JButton okButton = new JButton(
 				currentLanguage.getString("submit"));
 
-		setBounds(0, 0, 1366, 728);
+		setBounds(MainPage.getWindowSize());
 		setTitle("UiA eHelse v1.21");
 		setResizable(false);
 		setUndecorated(true);
@@ -313,6 +314,7 @@ public class Measurement extends JDialog {
 									DBConnection dbConnection = new DBConnection();
 									dbConnection.savePulseAndOxygen(pulse,
 											isSent);
+									if (dbUpdateListener != null) dbUpdateListener.databaseUpdated();
 									dispose();
 									String message = isSent ? currentLanguage
 											.getString("sentMeasurements")

@@ -73,6 +73,12 @@ import sun.java2d.Disposer;
 public class CatQuestionnaire extends JDialog {
 	public String Catupdate;
 
+	public CatQuestionnaire(DatabaseUpdateListener dbUpdateListener) {
+		this.dbUpdateListener = dbUpdateListener;
+	}
+
+	private final DatabaseUpdateListener dbUpdateListener;
+
 	/**
 	 * 
 	 */
@@ -1643,6 +1649,7 @@ public class CatQuestionnaire extends JDialog {
 							try {
 								sendEHRToDB();
 								sendCATValuesToDB();
+								if (dbUpdateListener != null) dbUpdateListener.databaseUpdated();
 
 							} catch (Exception e) {
 								// TODO Auto-generated catch block

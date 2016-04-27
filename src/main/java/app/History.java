@@ -47,10 +47,10 @@ public class History extends JFrame {
 	private JLabel oxygenValueLabel;
 	private JLabel timeValueLabel;
 	private JLabel pulseValueLabel;
-	private final Color STANDART_COLOR=Color.BLACK;
+	private final Color STANDARD_COLOR=Color.BLACK;
 	private final Color dayWithValue = Color.MAGENTA;
 	public History() {
-		setBounds(0, 0, 1366, 728);
+		setBounds(MainPage.getWindowSize());
 		setResizable(false);
 		setUndecorated(true);
 		initialize();
@@ -63,16 +63,8 @@ public class History extends JFrame {
 				null, null, null));
 		JPanel valuesPanel = new JPanel();
 		final JCalendar calendar = new JCalendar(Utilities.getCurrentLanguage());
-		calendar.getYearChooser().getSpinner()
-				.setFont(new Font("Verdana", Font.PLAIN, 13));
-		calendar.getMonthChooser().getComboBox()
-				.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		calendar.getMonthChooser().setPreferredSize(new Dimension(98, 40));
-		Component[] components = calendar.getDayChooser().getDayPanel().getComponents();
-//		for (Component component : components) {
-//			JButton button = (JButton) component;
-//			button.setBorder(new LineBorder(STANDART_COLOR, 1));
-//		}
+		calendar.getMonthChooser().setPreferredSize(new Dimension(222, 40));
+		calendar.setFont(new Font("Verdana", Font.PLAIN, 32));
 		calendar.setTodayButtonVisible(false);
 		calendar.addPropertyChangeListener("calendar",
 				new PropertyChangeListener() {
@@ -163,8 +155,8 @@ public class History extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Chart chart = new Chart("Measurement time series");
 				if (chart.getIsAvailable()) {
-					chart.pack();
-					RefineryUtilities.centerFrameOnScreen(chart);
+					//chart.pack();
+					//RefineryUtilities.centerFrameOnScreen(chart);
 					chart.setVisible(true);
 				}
 			}
@@ -194,7 +186,7 @@ public class History extends JFrame {
 								int hours = date.getHours();
 								@SuppressWarnings("deprecation")
 								int minutes = date.getMinutes();
-								timeValueLabel.setText(hours + ":" + minutes);
+								timeValueLabel.setText(String.format("%02d:%02d", hours, minutes));
 							}
 						} else {
 							pulseValueLabel.setText("");
@@ -220,6 +212,11 @@ public class History extends JFrame {
 		int month = calendar.getMonthChooser().getMonth();
 		int year = calendar.getYearChooser().getYear();
 		int day = 1;
+		Component components[] = dayPanel.getComponents();
+		for (Component c : components) {
+			JButton button = (JButton) c;
+			button.setBorder(new LineBorder(STANDARD_COLOR, 1));
+		}
 		DBConnection connection = new DBConnection();
 		List<Integer> daysWithMeasurements = connection
 				.getDaysWithMeasurements(monthChooser.getMonth());
@@ -232,14 +229,9 @@ public class History extends JFrame {
 			Date date = cal.getTime();
 			int firstDayOfMonth = date.getDay() - 1;
 			System.out.println(firstDayOfMonth);
-			Component components[] = dayPanel.getComponents();
-			for (Component c : components) {
-				JButton button = (JButton) c;
-				button.setBorder(new LineBorder(STANDART_COLOR, 1));
-			}
 			for (int d : daysWithMeasurements) {
 				JButton button = (JButton) components[d + startingPosition
-						+ firstDayOfMonth-1];
+						+ firstDayOfMonth];
 				button.setBorder(new LineBorder(dayWithValue, 3));
 			}
 		}
